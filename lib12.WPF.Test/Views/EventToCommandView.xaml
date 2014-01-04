@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="lib12.WPF.Test.Views.EventToCommandView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lib12="http://schemas.kkalinowski.net/lib12"
+             Name="_EventToCommandView">
+    <Grid>
+        <Button Name="button" Width="120" Height="23" Content="Click">
+            <lib12:EventTranscriptions.Transcriptions>
+                <lib12:EventTranscription EventName="Click" Command="{Binding Path=LeftClickCommand}" CommandParameter="{Binding CommandParameter}"/>
+                <lib12:EventTranscription EventName="MouseRightButtonUp" Command="{Binding Path=RightClickCommand}"/>
+            </lib12:EventTranscriptions.Transcriptions>
+        </Button>
+    </Grid>
+</UserControl>
