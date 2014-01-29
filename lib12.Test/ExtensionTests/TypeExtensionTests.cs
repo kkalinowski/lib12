@@ -2,7 +2,7 @@
 using lib12.Extensions;
 using Xunit;
 
-namespace lib12.Test.TypesExtensionTests
+namespace lib12.Test.ExtensionTests
 {
     public class TypeExtensionTests
     {

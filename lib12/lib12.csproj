@@ -55,6 +55,7 @@
     <Compile Include="DependencyInjection\LazyProperty.cs" />
     <Compile Include="Enums\CreateTypeAttribute.cs" />
     <Compile Include="Enums\EnumExtension.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\EventHandlerExtension.cs" />
     <Compile Include="Core\Math2.cs" />
     <Compile Include="Extensions\FieldInfoExtension.cs" />
