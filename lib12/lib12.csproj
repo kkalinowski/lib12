@@ -60,6 +60,7 @@
     <Compile Include="Core\Math2.cs" />
     <Compile Include="Extensions\FieldInfoExtension.cs" />
     <Compile Include="Extensions\NullableBoolExtension.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\PropertyInfoExtension.cs" />
     <Compile Include="Core\TimesLoop.cs" />
     <Compile Include="Extensions\TypeExtension.cs" />

@@ -81,6 +81,7 @@
     <Compile Include="EnumLogicTests\EnumLogicTests.cs" />
     <Compile Include="EnumLogicTests\SampleEnum.cs" />
     <Compile Include="ExtensionTests\DateTimeExtensionTests.cs" />
+    <Compile Include="ExtensionTests\ObjectTests.cs" />
     <Compile Include="IEnumerableExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBuildingTests.cs" />
