@@ -84,9 +84,10 @@
     <Compile Include="ExtensionTests\ObjectTests.cs" />
     <Compile Include="IEnumerableExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBuildingTests.cs" />
+    <Compile Include="QueryBuildingTests\SelectBuildingTests.cs" />
     <Compile Include="ExtensionTests\TypeExtensionTests.cs" />
     <Compile Include="ExtensionTests\TypeWithoutParameterlessConstructor.cs" />
+    <Compile Include="QueryBuildingTests\UpdateBuildingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lib12\lib12.csproj">

@@ -51,6 +51,10 @@
     <Compile Include="Data\Dummy\PropertyGeneratorBase.cs" />
     <Compile Include="Data\Dummy\RandomClassGenerator.cs" />
     <Compile Include="Data\Dummy\StringPropertyGenerator.cs" />
+    <Compile Include="Data\QueryBuilding\Builders\UpdateBuilder.cs" />
+    <Compile Include="Data\QueryBuilding\Builders\UpdateInterfaces.cs" />
+    <Compile Include="Data\QueryBuilding\Structures\Update\SetField.cs" />
+    <Compile Include="Data\QueryBuilding\Structures\Update\UpdateStructure.cs" />
     <Compile Include="DependencyInjection\CircularDependencyException.cs" />
     <Compile Include="DependencyInjection\LazyProperty.cs" />
     <Compile Include="Enums\CreateTypeAttribute.cs" />

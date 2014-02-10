@@ -4,9 +4,9 @@ using lib12.Data.QueryBuilding.Builders;
 using lib12.Data.QueryBuilding.Structures;
 using Xunit;
 
-namespace lib12.Test
+namespace lib12.Test.QueryBuildingTests
 {
-    public class QueryBuildingTests
+    public class SelectBuildingTests
     {
         [Fact]
         public void select_all_from_test()

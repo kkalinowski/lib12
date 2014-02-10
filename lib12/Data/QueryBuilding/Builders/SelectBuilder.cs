@@ -8,10 +8,10 @@ using lib12.Data.QueryBuilding.Structures;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class SelectBuilder : IBuilder<SelectStructure>, IFields, ITop, IFrom, IOpenBracket, ICloseBracket, IWhere, IConcat, IGroupBy, IHaving, IOrderBy, IBuild
+    public class SelectBuilder : IBuilder<SelectStructure>, IFields, IFrom, IOpenBracket, ICloseBracket, IWhere, IConcat, IGroupBy, IHaving, IOrderBy
     {
         #region Fields
-        private int openBrackets = 0;
+        private int openBrackets;
         private Condition parent;
         private Condition lastCnd;
         #endregion
