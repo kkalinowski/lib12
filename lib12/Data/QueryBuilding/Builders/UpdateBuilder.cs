@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Text;
 using lib12.Collections;
+using lib12.Data.QueryBuilding.Structures;
 using lib12.Data.QueryBuilding.Structures.Update;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class UpdateBuilder : IUpdateSet, IBuild
+    public class UpdateBuilder : IUpdateSet, IBracketPossible, IWherePossible, IBuild
     {
         public UpdateStructure Structure { get; set; }
 
@@ -52,5 +53,40 @@ namespace lib12.Data.QueryBuilding.Builders
             sbuilder.Remove(sbuilder.Length - 2, 2);
         }
         #endregion
+
+        public IOpenBracket OpenBracket()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWhere Where(Condition cnd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWhere Where(string field, Compare comparison, object argument)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWhere WhereBetween(string field, object argument1, object argument2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWhere WhereBetween(string field, Tuple<object, object> argument)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWhere WhereIsNull(string field)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IWhere WhereIsNotNull(string field)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
