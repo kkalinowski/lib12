@@ -77,12 +77,13 @@
     <Compile Include="DependencyInjectionTest\InstancesTest.cs" />
     <Compile Include="DummyDataTests\ClassToGenerate.cs" />
     <Compile Include="DummyDataTests\RandomClassGeneratorTests.cs" />
-    <Compile Include="EmptyTests.cs" />
+    <Compile Include="OtherTests\EmptyTests.cs" />
     <Compile Include="EnumLogicTests\EnumLogicTests.cs" />
     <Compile Include="EnumLogicTests\SampleEnum.cs" />
     <Compile Include="ExtensionTests\DateTimeExtensionTests.cs" />
     <Compile Include="ExtensionTests\ObjectTests.cs" />
     <Compile Include="IEnumerableExtensionTests.cs" />
+    <Compile Include="OtherTests\SaltedHashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBuildingTests\SelectBuildingTests.cs" />
     <Compile Include="ExtensionTests\TypeExtensionTests.cs" />

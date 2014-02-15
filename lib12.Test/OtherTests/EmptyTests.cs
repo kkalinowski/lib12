@@ -2,7 +2,7 @@
 using lib12.Core;
 using Xunit;
 
-namespace lib12.Test
+namespace lib12.Test.OtherTests
 {
     public sealed class EmptyTests
     {

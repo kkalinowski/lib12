@@ -46,6 +46,7 @@
     <Compile Include="Collections\IEnumerableExtension.cs" />
     <Compile Include="Collections\ListUtil.cs" />
     <Compile Include="Core\Empty.cs" />
+    <Compile Include="Crypto\SaltedHash.cs" />
     <Compile Include="Data\Dummy\EnumPropertyGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGeneratorBase.cs" />
