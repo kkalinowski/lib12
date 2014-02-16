@@ -13,5 +13,11 @@ namespace lib12.Test.OtherTests
 
             array.Should().NotBeNull().And.BeEmpty();
         }
+
+        [Fact]
+        public void empty_list_returns_empty_list()
+        {
+            Empty.List<int>().Should().NotBeNull().And.BeEmpty();
+        }
     }
 }
