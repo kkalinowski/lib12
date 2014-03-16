@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using lib12.Core;
 using lib12.Data.QueryBuilding;
 using lib12.Data.QueryBuilding.Builders;
 using lib12.Data.QueryBuilding.Structures;
+using lib12.Exceptions;
 using Xunit;
 
 namespace lib12.Test.QueryBuildingTests
@@ -157,6 +159,28 @@ namespace lib12.Test.QueryBuildingTests
             var toBuild = "select * from products where id in ('5', '30', '400')";
             var query = SqlBuilder.Select.AllFields.From("products").Where("id", Compare.In, new List<int>(3) { 5, 30, 400 }).Build();
             Assert.Equal(toBuild.ToLower(), query.ToLower());
+        }
+
+        [Fact]
+        public void in_one_item_test()
+        {
+            var toBuild = "select * from products where id in ('5')";
+            var query = SqlBuilder.Select.AllFields.From("products").Where("id", Compare.In, new List<int>(1) { 5 }).Build();
+            Assert.Equal(toBuild.ToLower(), query.ToLower());
+        }
+
+        [Fact]
+        public void in_empty_collection_test()
+        {
+            var toBuild = "select * from products where 1 = 1";
+            var query = SqlBuilder.Select.AllFields.From("products").Where("id", Compare.In, Empty.List<int>()).Build();
+            Assert.Equal(toBuild.ToLower(), query.ToLower());
+        }
+
+        [Fact]
+        public void throw_exception_when_argument_for_in_statement_is_not_enumerable_test()
+        {
+            Assert.Throws<lib12Exception>(() => SqlBuilder.Select.AllFields.From("products").Where("id", Compare.In, 12).Build());
         }
     }
 }

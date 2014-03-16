@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures;
+using lib12.Exceptions;
+using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
@@ -171,10 +173,20 @@ namespace lib12.Data.QueryBuilding.Builders
             }
             else if (cnd.Comparison == Compare.In || cnd.Comparison == Compare.NotIn)
             {
+                var args = cnd.Argument as IEnumerable;
+                if(args.Null())
+                    throw new lib12Exception("You have to pass IEnumerable to condition with IN statement");
+
+                var argsArray = args.Cast<object>().ToArray();
+                if (argsArray.IsEmpty())
+                {
+                    sbuilder.Append("1 = 1");
+                    return;
+                }
+
                 sbuilder.AppendFormat("{0}{1}(", cnd.Field, BuildComparison(cnd.Comparison));
 
-                var args = (IEnumerable)cnd.Argument;
-                foreach (var arg in args)
+                foreach (var arg in argsArray)
                 {
                     sbuilder.AppendFormat("{0}{1}{0}, ", quote, arg);
                 }
