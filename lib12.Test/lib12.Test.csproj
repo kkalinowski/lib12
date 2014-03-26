@@ -89,6 +89,7 @@
     <Compile Include="QueryBuildingTests\SelectBuildingTests.cs" />
     <Compile Include="ExtensionTests\TypeExtensionTests.cs" />
     <Compile Include="ExtensionTests\TypeWithoutParameterlessConstructor.cs" />
+    <Compile Include="QueryBuildingTests\DeleteBuildingTests.cs" />
     <Compile Include="QueryBuildingTests\UpdateBuildingTests.cs" />
   </ItemGroup>
   <ItemGroup>

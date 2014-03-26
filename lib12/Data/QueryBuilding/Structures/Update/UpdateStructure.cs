@@ -5,7 +5,7 @@ namespace lib12.Data.QueryBuilding.Structures.Update
     /// <summary>
     /// Represents update command that is currently build
     /// </summary>
-    public class UpdateStructure : BaseStructure
+    public class UpdateQueryStructure : BaseQueryStructure
     {
         /// <summary>
         /// Gets or sets the set fields.
@@ -15,7 +15,7 @@ namespace lib12.Data.QueryBuilding.Structures.Update
         /// </value>
         public List<SetField> SetFields { get; set; }
 
-        public UpdateStructure()
+        public UpdateQueryStructure()
         {
             SetFields = new List<SetField>();
         }

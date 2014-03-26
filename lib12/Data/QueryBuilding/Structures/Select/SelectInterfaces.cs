@@ -9,8 +9,8 @@ namespace lib12.Data.QueryBuilding.Structures.Select
 
     public interface ITop
     {
-        IFrom From(string table);
-        IFrom From(string table, string alias);
+        ISelectFrom From(string table);
+        ISelectFrom From(string table, string alias);
     }
 
     #region Possibilites
@@ -50,11 +50,11 @@ namespace lib12.Data.QueryBuilding.Structures.Select
     }
     #endregion
 
-    public interface IFrom : ISelectBracketPossible, ISelectWherePossible, IGroupByPossible, IOrderByPossible, IBuild
+    public interface ISelectFrom : ISelectBracketPossible, ISelectWherePossible, IGroupByPossible, IOrderByPossible, IBuild
     {
-        IFrom Join(Join join);
-        IFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField);
-        IFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type);
+        ISelectFrom Join(Join join);
+        ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField);
+        ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type);
     }
 
     public interface IOpenSelectBracket : ISelectWherePossible

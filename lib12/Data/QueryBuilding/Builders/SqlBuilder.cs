@@ -27,5 +27,16 @@ namespace lib12.Data.QueryBuilding.Builders
                 return new UpdateBuilder();
             }
         }
+
+        /// <summary>
+        /// Builds delete command
+        /// </summary>
+        public static DeleteBuilder Delete
+        {
+            get
+            {
+                return new DeleteBuilder();
+            }
+        }
     }
 }

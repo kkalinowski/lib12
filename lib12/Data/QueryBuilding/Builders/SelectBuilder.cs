@@ -8,7 +8,7 @@ using lib12.Data.QueryBuilding.Structures.Select;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class SelectBuilder : IFields, IFrom, IOpenSelectBracket, ICloseSelectBracket, ISelectWhere, ISelectConcat, IGroupBy, IHaving, IOrderBy
+    public class SelectBuilder : IFields, ISelectFrom, IOpenSelectBracket, ICloseSelectBracket, ISelectWhere, ISelectConcat, IGroupBy, IHaving, IOrderBy
     {
         #region Fields
         private int openBrackets;
@@ -209,13 +209,13 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
-        public IFrom From(string table)
+        public ISelectFrom From(string table)
         {
             Structure.MainTable = table;
             return this;
         }
 
-        public IFrom From(string table, string alias)
+        public ISelectFrom From(string table, string alias)
         {
             Structure.MainTable = table;
             Structure.MainTableAlias = alias;
@@ -224,22 +224,22 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Join
-        public IFrom Join(Join join)
+        public ISelectFrom Join(Join join)
         {
             Structure.Joins.Add(join);
             return this;
         }
 
-        public IFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField)
+        public ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField)
         {
             var join = new Join(rightTable, rightTableAlias, leftField, rightField, JoinType.Standard);
-            return ((IFrom)this).Join(join);
+            return ((ISelectFrom)this).Join(join);
         }
 
-        public IFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type)
+        public ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type)
         {
             var join = new Join(rightTable, rightTableAlias, leftField, rightField, type);
-            return ((IFrom)this).Join(join);
+            return ((ISelectFrom)this).Join(join);
         }
         #endregion
 
@@ -271,31 +271,31 @@ namespace lib12.Data.QueryBuilding.Builders
         public ISelectWhere Where(string field, Compare comparison, object argument)
         {
             var cnd = new Condition(field, comparison, argument);
-            return ((IFrom)this).Where(cnd);
+            return ((ISelectFrom)this).Where(cnd);
         }
 
         public ISelectWhere WhereBetween(string field, object argument1, object argument2)
         {
             var cnd = new Condition(field, Compare.Between, new Tuple<object, object>(argument1, argument2));
-            return ((IFrom)this).Where(cnd);
+            return ((ISelectFrom)this).Where(cnd);
         }
 
         public ISelectWhere WhereBetween(string field, Tuple<object, object> argument)
         {
             var cnd = new Condition(field, Compare.Between, argument);
-            return ((IFrom)this).Where(cnd);
+            return ((ISelectFrom)this).Where(cnd);
         }
 
         public ISelectWhere WhereIsNull(string field)
         {
             var cnd = new Condition(field, Compare.IsNull, null);
-            return ((IFrom)this).Where(cnd);
+            return ((ISelectFrom)this).Where(cnd);
         }
 
         public ISelectWhere WhereIsNotNull(string field)
         {
             var cnd = new Condition(field, Compare.IsNotNull, null);
-            return ((IFrom)this).Where(cnd);
+            return ((ISelectFrom)this).Where(cnd);
         }
 
         public ISelectConcat And

@@ -1,12 +1,11 @@
 using System;
 using lib12.Data.QueryBuilding.Structures;
-using lib12.Data.QueryBuilding.Structures.Update;
 using lib12.Collections;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
     public abstract class QueryBuilderBase<TStructure> : IOpenBracket, ICloseBracket, IWhere, IConcat
-        where TStructure : BaseStructure, new()
+        where TStructure : BaseQueryStructure, new()
     {
         protected int openBrackets;
         protected Condition parent;

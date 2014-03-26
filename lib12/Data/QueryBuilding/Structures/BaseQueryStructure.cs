@@ -1,6 +1,6 @@
 ﻿namespace lib12.Data.QueryBuilding.Structures
 {
-    public abstract class BaseStructure
+    public abstract class BaseQueryStructure
     {
         /// <summary>
         /// Gets or sets the main table.
@@ -18,7 +18,7 @@
         /// </value>
         public Condition MainCondition { get; set; }
 
-        protected BaseStructure()
+        protected BaseQueryStructure()
         {
             MainCondition = new Condition();
         }
