@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures;
+using lib12.Data.QueryBuilding.Structures.Select;
 using lib12.Exceptions;
 using lib12.Extensions;
 

@@ -1,13 +1,7 @@
 ﻿using System;
-using lib12.Data.QueryBuilding.Structures;
 
-namespace lib12.Data.QueryBuilding.Builders
+namespace lib12.Data.QueryBuilding.Structures.Select
 {
-    public interface IBuild
-    {
-        string Build();
-    }
-
     public interface IFields : ITop
     {
         ITop Top(int count);
@@ -20,15 +14,7 @@ namespace lib12.Data.QueryBuilding.Builders
     }
 
     #region Possibilites
-    public interface IWherePossible
-    {
-        IWhere Where(Condition cnd);
-        IWhere Where(string field, Compare comparison, object argument);
-        IWhere WhereBetween(string field, object argument1, object argument2);
-        IWhere WhereBetween(string field, Tuple<object, object> argument);
-        IWhere WhereIsNull(string field);
-        IWhere WhereIsNotNull(string field);
-    }
+
 
     public interface ISelectWherePossible
     {
@@ -40,20 +26,9 @@ namespace lib12.Data.QueryBuilding.Builders
         ISelectWhere WhereIsNotNull(string field);
     }
 
-    public interface IBracketPossible
-    {
-        IOpenBracket OpenBracket();
-    }
-
     public interface ISelectBracketPossible
     {
         IOpenSelectBracket OpenBracket();
-    }
-
-    public interface IConcatPossible
-    {
-        IConcat And { get; }
-        IConcat Or { get; }
     }
 
     public interface ISelectConcatPossible
@@ -82,17 +57,7 @@ namespace lib12.Data.QueryBuilding.Builders
         IFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type);
     }
 
-    public interface IOpenBracket : IWherePossible
-    {
-
-    }
-
     public interface IOpenSelectBracket : ISelectWherePossible
-    {
-
-    }
-
-    public interface ICloseBracket : IConcatPossible, IGroupByPossible, IOrderByPossible, IBuild
     {
 
     }
@@ -102,19 +67,9 @@ namespace lib12.Data.QueryBuilding.Builders
 
     }
 
-    public interface IConcat : IBracketPossible, IWherePossible
-    {
-
-    }
-
     public interface ISelectConcat : ISelectBracketPossible, ISelectWherePossible
     {
 
-    }
-
-    public interface IWhere : IConcatPossible, IGroupByPossible, IOrderByPossible, IBuild
-    {
-        ICloseBracket CloseBracket();
     }
 
     public interface ISelectWhere : ISelectConcatPossible, IGroupByPossible, IOrderByPossible, IBuild

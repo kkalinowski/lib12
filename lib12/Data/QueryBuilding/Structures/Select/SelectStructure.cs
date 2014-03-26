@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace lib12.Data.QueryBuilding.Structures
+namespace lib12.Data.QueryBuilding.Structures.Select
 {
     public class SelectStructure
     {

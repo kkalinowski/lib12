@@ -1,4 +1,4 @@
-﻿namespace lib12.Data.QueryBuilding.Structures
+﻿namespace lib12.Data.QueryBuilding.Structures.Select
 {
     public class OrderBy
     {

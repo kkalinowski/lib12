@@ -3,6 +3,7 @@ using lib12.Core;
 using lib12.Data.QueryBuilding;
 using lib12.Data.QueryBuilding.Builders;
 using lib12.Data.QueryBuilding.Structures;
+using lib12.Data.QueryBuilding.Structures.Select;
 using lib12.Exceptions;
 using Xunit;
 
