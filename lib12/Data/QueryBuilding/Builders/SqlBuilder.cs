@@ -38,5 +38,17 @@ namespace lib12.Data.QueryBuilding.Builders
                 return new DeleteBuilder();
             }
         }
+
+
+        /// <summary>
+        /// Builds insert command
+        /// </summary>
+        public static InsertBuilder Insert
+        {
+            get
+            {
+                return new InsertBuilder();
+            }
+        }
     }
 }
