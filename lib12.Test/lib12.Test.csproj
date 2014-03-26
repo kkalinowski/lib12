@@ -78,8 +78,8 @@
     <Compile Include="DummyDataTests\ClassToGenerate.cs" />
     <Compile Include="DummyDataTests\RandomClassGeneratorTests.cs" />
     <Compile Include="OtherTests\EmptyTests.cs" />
-    <Compile Include="EnumLogicTests\EnumLogicTests.cs" />
-    <Compile Include="EnumLogicTests\SampleEnum.cs" />
+    <Compile Include="ReflectionTests\CreateTypeFromEnumTests\EnumLogicTests.cs" />
+    <Compile Include="ReflectionTests\CreateTypeFromEnumTests\SampleEnum.cs" />
     <Compile Include="ExtensionTests\DateTimeExtensionTests.cs" />
     <Compile Include="ExtensionTests\ObjectTests.cs" />
     <Compile Include="IEnumerableExtensionTests.cs" />
@@ -92,6 +92,7 @@
     <Compile Include="ExtensionTests\TypeWithoutParameterlessConstructor.cs" />
     <Compile Include="QueryBuildingTests\DeleteBuildingTests.cs" />
     <Compile Include="QueryBuildingTests\UpdateBuildingTests.cs" />
+    <Compile Include="ReflectionTests\ExpressionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lib12\lib12.csproj">

@@ -1,6 +1,6 @@
 ﻿using lib12.Reflection;
 
-namespace lib12.Test.EnumLogicTests
+namespace lib12.Test.ReflectionTests.CreateTypeFromEnumTests
 {
     public enum SampleEnum
     {

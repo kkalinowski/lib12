@@ -3,7 +3,7 @@ using lib12.Exceptions;
 using lib12.Reflection;
 using Xunit;
 
-namespace lib12.Test.EnumLogicTests
+namespace lib12.Test.ReflectionTests.CreateTypeFromEnumTests
 {
     public sealed class EnumLogicTests
     {
