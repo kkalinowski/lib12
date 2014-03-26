@@ -10,12 +10,13 @@ using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class SelectBuilder : IBuilder<SelectStructure>, IFields, IFrom, IOpenBracket, ICloseBracket, IWhere, IConcat, IGroupBy, IHaving, IOrderBy
+    public class SelectBuilder : IFields, IFrom, IOpenSelectBracket, ICloseSelectBracket, ISelectWhere, ISelectConcat, IGroupBy, IHaving, IOrderBy
     {
         #region Fields
         private int openBrackets;
         private Condition parent;
         private Condition lastCnd;
+        private readonly WhereBuilder whereBuilder;
         #endregion
 
         #region Props
@@ -28,6 +29,7 @@ namespace lib12.Data.QueryBuilding.Builders
         {
             DBType = DBType.MsSql;
             Structure = new SelectStructure();
+            whereBuilder = new WhereBuilder();
             parent = Structure.MainCondition;
             lastCnd = parent;
         }
@@ -71,8 +73,7 @@ namespace lib12.Data.QueryBuilding.Builders
             //where
             if (Structure.MainCondition.IsValid)
             {
-                sbuilder.Append(" WHERE ");
-                BuildConditionWithChildren(sbuilder, Structure.MainCondition);
+                whereBuilder.Build(sbuilder, Structure.MainCondition);
             }
 
             //group by
@@ -124,111 +125,6 @@ namespace lib12.Data.QueryBuilding.Builders
                 }
 
                 sbuilder.AppendFormat(" {0} {1} ON {2}={3}", join.RightTable, join.RightTableAlias, join.LeftField, join.RightField);
-            }
-        }
-
-        private void BuildConditionWithChildren(StringBuilder sbuilder, Condition cnd)
-        {
-            if (cnd.Children.Count == 1)
-                BuildCondition(sbuilder, cnd.Children.First());
-            else
-            {
-                if (cnd != Structure.MainCondition)
-                    sbuilder.Append("(");
-
-                for (int i = 0; i < cnd.Children.Count; i++)
-                {
-                    if (cnd.Children[i].HasChildren)
-                        BuildConditionWithChildren(sbuilder, cnd.Children[i]);
-                    else
-                        BuildCondition(sbuilder, cnd.Children[i]);
-                    if (i != cnd.Children.Count - 1)
-                        sbuilder.AppendFormat(" {0} ", cnd.Children[i].Concat == LogicOperator.And ? "AND" : "OR");
-                }
-
-                if (cnd != Structure.MainCondition)
-                    sbuilder.Append(")");
-            }
-        }
-
-        private void BuildCondition(StringBuilder sbuilder, Condition cnd)
-        {
-            var quote = cnd.Argument.ToString().StartsWith("@") ? string.Empty : "'";
-            if (cnd.Comparison == Compare.IsNull || cnd.Comparison == Compare.IsNotNull)
-            {
-                sbuilder.AppendFormat("{0}{1}", cnd.Field, BuildComparison(cnd.Comparison));
-            }
-            else if (cnd.Comparison == Compare.StartsWith)
-            {
-                sbuilder.AppendFormat("{0} LIKE {1}{2}%{1}", cnd.Field, quote, cnd.Argument);
-            }
-            else if (cnd.Comparison == Compare.EndsWith)
-            {
-                sbuilder.AppendFormat("{0} LIKE {1}%{2}{1}", cnd.Field, quote, cnd.Argument);
-            }
-            else if (cnd.Comparison == Compare.Between)
-            {
-                var tuple = (Tuple<object, object>)cnd.Argument;
-                sbuilder.AppendFormat("{0}{1}{2}{3}{2} AND {2}{4}{2}", cnd.Field, BuildComparison(cnd.Comparison), quote, tuple.Item1, tuple.Item2);
-            }
-            else if (cnd.Comparison == Compare.In || cnd.Comparison == Compare.NotIn)
-            {
-                var args = cnd.Argument as IEnumerable;
-                if(args.Null())
-                    throw new lib12Exception("You have to pass IEnumerable to condition with IN statement");
-
-                var argsArray = args.Cast<object>().ToArray();
-                if (argsArray.IsEmpty())
-                {
-                    sbuilder.Append("1 = 1");
-                    return;
-                }
-
-                sbuilder.AppendFormat("{0}{1}(", cnd.Field, BuildComparison(cnd.Comparison));
-
-                foreach (var arg in argsArray)
-                {
-                    sbuilder.AppendFormat("{0}{1}{0}, ", quote, arg);
-                }
-                sbuilder.Remove(sbuilder.Length - 2, 2);
-                sbuilder.Append(")");
-            }
-            else
-                sbuilder.AppendFormat("{0}{1}{2}{3}{2}", cnd.Field, BuildComparison(cnd.Comparison), quote, cnd.Argument);
-        }
-
-        private string BuildComparison(Compare comparison)
-        {
-            switch (comparison)
-            {
-                case Compare.Equals:
-                    return "=";
-                case Compare.NotEquals:
-                    return "!=";
-                case Compare.Like:
-                    return " LIKE ";
-                case Compare.NotLike:
-                    return " NOT LIKE ";
-                case Compare.GreaterThan:
-                    return ">";
-                case Compare.GreaterOrEquals:
-                    return ">=";
-                case Compare.LessThan:
-                    return "<";
-                case Compare.LessOrEquals:
-                    return "<=";
-                case Compare.In:
-                    return " IN ";
-                case Compare.NotIn:
-                    return " NOT IN ";
-                case Compare.Between:
-                    return " BETWEEN ";
-                case Compare.IsNull:
-                    return " IS NULL";
-                case Compare.IsNotNull:
-                    return " IS NOT NULL";
-                default:
-                    throw new QueryBuilderException("Unknown comparison");
             }
         }
 
@@ -350,7 +246,7 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Where
-        public IOpenBracket OpenBracket()
+        public IOpenSelectBracket OpenBracket()
         {
             openBrackets++;
             var cnd = new Condition();
@@ -359,7 +255,7 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
-        public ICloseBracket CloseBracket()
+        public ICloseSelectBracket CloseBracket()
         {
             openBrackets--;
             lastCnd = parent.Parent != Structure.MainCondition ? parent.Parent : parent;
@@ -367,44 +263,44 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
-        public IWhere Where(Condition cnd)
+        public ISelectWhere Where(Condition cnd)
         {
             parent.AddChild(cnd);
             lastCnd = cnd;
             return this;
         }
 
-        public IWhere Where(string field, Compare comparison, object argument)
+        public ISelectWhere Where(string field, Compare comparison, object argument)
         {
             var cnd = new Condition(field, comparison, argument);
             return ((IFrom)this).Where(cnd);
         }
 
-        public IWhere WhereBetween(string field, object argument1, object argument2)
+        public ISelectWhere WhereBetween(string field, object argument1, object argument2)
         {
             var cnd = new Condition(field, Compare.Between, new Tuple<object, object>(argument1, argument2));
             return ((IFrom)this).Where(cnd);
         }
 
-        public IWhere WhereBetween(string field, Tuple<object, object> argument)
+        public ISelectWhere WhereBetween(string field, Tuple<object, object> argument)
         {
             var cnd = new Condition(field, Compare.Between, argument);
             return ((IFrom)this).Where(cnd);
         }
 
-        public IWhere WhereIsNull(string field)
+        public ISelectWhere WhereIsNull(string field)
         {
             var cnd = new Condition(field, Compare.IsNull, null);
             return ((IFrom)this).Where(cnd);
         }
 
-        public IWhere WhereIsNotNull(string field)
+        public ISelectWhere WhereIsNotNull(string field)
         {
             var cnd = new Condition(field, Compare.IsNotNull, null);
             return ((IFrom)this).Where(cnd);
         }
 
-        public IConcat And
+        public ISelectConcat And
         {
             get
             {
@@ -413,7 +309,7 @@ namespace lib12.Data.QueryBuilding.Builders
             }
         }
 
-        public IConcat Or
+        public ISelectConcat Or
         {
             get
             {

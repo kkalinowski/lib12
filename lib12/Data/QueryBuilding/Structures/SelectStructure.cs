@@ -2,7 +2,7 @@
 
 namespace lib12.Data.QueryBuilding.Structures
 {
-    public class SelectStructure : IStructure
+    public class SelectStructure
     {
         #region Props
         public bool Distinct { get; set; }

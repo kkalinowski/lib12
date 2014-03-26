@@ -23,9 +23,18 @@ namespace lib12.Data.QueryBuilding.Structures.Update
         /// </value>
         public List<SetField> SetFields { get; set; }
 
+        /// <summary>
+        /// Gets or sets the main WHERE condition.
+        /// </summary>
+        /// <value>
+        /// The main condition.
+        /// </value>
+        public Condition MainCondition { get; set; }
+
         public UpdateStructure()
         {
-            SetFields=new List<SetField>();
+            SetFields = new List<SetField>();
+            MainCondition = new Condition();
         }
     }
 }
