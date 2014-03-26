@@ -1,6 +1,6 @@
 ﻿using System;
-using lib12.Enums;
 using lib12.Exceptions;
+using lib12.Reflection;
 using Xunit;
 
 namespace lib12.Test.EnumLogicTests

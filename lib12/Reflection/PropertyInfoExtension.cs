@@ -2,18 +2,18 @@
 using System.Linq;
 using System.Reflection;
 
-namespace lib12.Extensions
+namespace lib12.Reflection
 {
-    public static class FieldInfoExtension
+    public static class PropertyInfoExtension
     {
         /// <summary>
         /// Gets the attribute decorating given property
         /// </summary>
         /// <param name="propertyinfo">The property to check</param>
         /// <returns></returns>
-        public static T GetAttribute<T>(this FieldInfo field) where T : Attribute
+        public static T GetAttribute<T>(this PropertyInfo property) where T : Attribute
         {
-            var attribute = field.GetCustomAttributes(typeof(T), false).SingleOrDefault();
+            var attribute = property.GetCustomAttributes(typeof(T), false).SingleOrDefault();
             return attribute != null ? (T)attribute : default(T);
         }
     }

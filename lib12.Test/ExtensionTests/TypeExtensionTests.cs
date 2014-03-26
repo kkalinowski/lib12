@@ -1,5 +1,6 @@
 ﻿using System;
 using lib12.Extensions;
+using lib12.Reflection;
 using Xunit;
 
 namespace lib12.Test.ExtensionTests

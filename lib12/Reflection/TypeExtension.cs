@@ -1,9 +1,9 @@
-﻿using lib12.Collections;
-using System;
+﻿using System;
 using System.Linq;
+using lib12.Collections;
 using lib12.Exceptions;
 
-namespace lib12.Extensions
+namespace lib12.Reflection
 {
     public static class TypeExtension
     {

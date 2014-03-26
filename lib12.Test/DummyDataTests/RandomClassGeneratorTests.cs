@@ -10,7 +10,7 @@ namespace lib12.Test.DummyDataTests
         #endregion
 
         #region Fields
-        private RandomClassGenerator generator; 
+        private readonly RandomClassGenerator generator; 
         #endregion
 
         #region ctor

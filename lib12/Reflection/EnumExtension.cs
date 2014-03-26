@@ -1,8 +1,7 @@
 ﻿using System;
 using lib12.Exceptions;
-using lib12.Extensions;
 
-namespace lib12.Enums
+namespace lib12.Reflection
 {
     public static class EnumExtension
     {

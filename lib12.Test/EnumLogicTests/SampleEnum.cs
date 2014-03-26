@@ -1,4 +1,4 @@
-﻿using lib12.Enums;
+﻿using lib12.Reflection;
 
 namespace lib12.Test.EnumLogicTests
 {
