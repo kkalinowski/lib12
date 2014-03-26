@@ -56,6 +56,7 @@
     <Compile Include="Data\QueryBuilding\Builders\QueryBuilderBase.cs" />
     <Compile Include="Data\QueryBuilding\Builders\UpdateBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Builders\WhereBuilder.cs" />
+    <Compile Include="Data\QueryBuilding\Structures\BaseStructure.cs" />
     <Compile Include="Data\QueryBuilding\Structures\IBuild.cs" />
     <Compile Include="Data\QueryBuilding\Structures\Update\UpdateInterfaces.cs" />
     <Compile Include="Data\QueryBuilding\Structures\Update\SetField.cs" />

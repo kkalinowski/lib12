@@ -1,6 +1,4 @@
 ﻿using System;
-using lib12.Data.QueryBuilding.Builders;
-using lib12.Data.QueryBuilding.Structures.Select;
 
 namespace lib12.Data.QueryBuilding.Structures.Update
 {
@@ -35,7 +33,7 @@ namespace lib12.Data.QueryBuilding.Structures.Update
 
     }
 
-    public interface ICloseBracket : IConcatPossible, IGroupByPossible, IOrderByPossible, IBuild
+    public interface ICloseBracket : IConcatPossible, IBuild
     {
 
     }
@@ -45,7 +43,7 @@ namespace lib12.Data.QueryBuilding.Structures.Update
 
     }
 
-    public interface IWhere : IConcatPossible, IGroupByPossible, IOrderByPossible, IBuild
+    public interface IWhere : IConcatPossible, IBuild
     {
         ICloseBracket CloseBracket();
     }

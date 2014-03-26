@@ -30,5 +30,16 @@ namespace lib12.Test.QueryBuildingTests
             SqlBuilder.Update.Table("product").Set("price", 5).Set("name", "test").Where("price", Compare.Equals, 1).Build()
                 .Should().Be(toBuild);
         }
+
+        [Fact]
+        public void update_with_where_and_brackets()
+        {
+            const string toBuild = "UPDATE product SET price='5', name='test' WHERE (price='1' AND type='3') OR type!='3'";
+            SqlBuilder.Update.Table("product").Set("price", 5).Set("name", "test").OpenBracket()
+                .Where("price", Compare.Equals, 1).And.Where("type", Compare.Equals, 3).CloseBracket()
+                .Or.Where("type", Compare.NotEquals, 3)
+                .Build()
+                .Should().Be(toBuild);
+        }
     }
 }
