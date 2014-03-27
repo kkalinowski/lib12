@@ -14,8 +14,8 @@ namespace lib12.WPF.Test.Views
         {
             var generator = new RandomClassGenerator();
             return generator.Generate<Item>(count,
-                new StringPropertyGenerator<Item>(x => x.Text, 4, 9),
-                new EnumPropertyGenerator<Item, SampleEnum>(x => x.EnumProp));
+                new StringGenerator<Item>(x => x.Text, 4, 9),
+                new EnumGenerator<Item, SampleEnum>(x => x.EnumProp));
         }
 
         public override string ToString()

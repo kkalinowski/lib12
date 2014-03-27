@@ -12,6 +12,11 @@ namespace lib12.Test.ReflectionTests
         {
             public string Text { get; set; }
 
+            public ExpressionTestsSource()
+            {
+                
+            }
+
             public ExpressionTestsSource(string text)
             {
                 Text = text;
@@ -34,6 +39,16 @@ namespace lib12.Test.ReflectionTests
             Expression<Func<ExpressionTestsSource, string>> expression = x => x.Text;
 
             expression.GetValue(source).Should().Be(text);
+        }
+
+        public void set_value_works()
+        {
+            const string text = "Winter is coming...";
+            var source = new ExpressionTestsSource();
+            Expression<Func<ExpressionTestsSource, string>> expression = x => x.Text;
+
+            expression.SetValue(source, text);
+            source.Text.Should().Be(text);
         }
     }
 }

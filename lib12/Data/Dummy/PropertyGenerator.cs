@@ -7,7 +7,7 @@ namespace lib12.Data.Dummy
     {
         public Expression<Func<T, T2>> Selector { get; set; }
 
-        public PropertyGenerator(Expression<Func<T, T2>> selector)
+        protected PropertyGenerator(Expression<Func<T, T2>> selector)
         {
             Selector = selector;
         }

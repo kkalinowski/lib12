@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace lib12.Reflection
 {
@@ -39,6 +40,20 @@ namespace lib12.Reflection
         public static TValue GetValue<TSource, TValue>(this Expression<Func<TSource, TValue>> expression, TSource source)
         {
             return expression.Compile()(source);
+        }
+
+        /// <summary>
+        /// Sets the value for given expression
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="value">The value.</param>
+        public static void SetValue<TSource, TValue>(this Expression<Func<TSource, TValue>> expression, TSource source, TValue value)
+        {
+            var prop = (PropertyInfo)((MemberExpression)expression.Body).Member;
+            prop.SetValue(source, value, null);
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Reflection;
 
 namespace lib12.Data.Dummy
 {
-    public class StringPropertyGenerator<T> : PropertyGenerator<T, string>
+    public class StringGenerator<T> : PropertyGenerator<T, string>
     {
         public int MinLength { get; set; }
         public int MaxLength { get; set; }
 
-        public StringPropertyGenerator(Expression<Func<T, string>> selector, int minLength, int maxLength)
+        public StringGenerator(Expression<Func<T, string>> selector, int minLength, int maxLength)
             : base(selector)
         {
             MinLength = minLength;

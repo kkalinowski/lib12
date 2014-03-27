@@ -5,14 +5,14 @@ using System.Reflection;
 
 namespace lib12.Data.Dummy
 {
-    public class EnumPropertyGenerator<T, TEnum> : PropertyGenerator<T, TEnum>
+    public class EnumGenerator<T, TEnum> : PropertyGenerator<T, TEnum>
     {
         #region Fields
         private TEnum[] enumValues;
         #endregion
 
         #region ctor
-        public EnumPropertyGenerator(Expression<Func<T, TEnum>> selector)
+        public EnumGenerator(Expression<Func<T, TEnum>> selector)
             : base(selector)
         {
             enumValues = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToArray();

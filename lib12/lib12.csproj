@@ -48,11 +48,14 @@
     <Compile Include="Core\Empty.cs" />
     <Compile Include="Core\PropertyComparer.cs" />
     <Compile Include="Crypto\SaltedHash.cs" />
-    <Compile Include="Data\Dummy\EnumPropertyGenerator.cs" />
+    <Compile Include="Data\Dummy\BoolGenerator.cs" />
+    <Compile Include="Data\Dummy\DoubleGenerator.cs" />
+    <Compile Include="Data\Dummy\EnumGenerator.cs" />
+    <Compile Include="Data\Dummy\IntGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGeneratorBase.cs" />
     <Compile Include="Data\Dummy\RandomClassGenerator.cs" />
-    <Compile Include="Data\Dummy\StringPropertyGenerator.cs" />
+    <Compile Include="Data\Dummy\StringGenerator.cs" />
     <Compile Include="Data\QueryBuilding\Builders\InsertBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Builders\QueryBuilderBase.cs" />
     <Compile Include="Data\QueryBuilding\Builders\DeleteBuilder.cs" />
