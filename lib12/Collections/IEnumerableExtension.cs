@@ -222,5 +222,10 @@ namespace lib12.Collections
 
             return default(T);
         }
+
+        public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> enumerable, int count)
+        {
+            return enumerable.Skip(Math.Max(0, enumerable.Count() - count));
+        }
     }
 }

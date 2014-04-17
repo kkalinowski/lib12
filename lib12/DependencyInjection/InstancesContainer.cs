@@ -31,12 +31,22 @@ namespace lib12.DependencyInjection
             RegisterTypeManual(typeof(T), true, false, key);
         }
 
+        public void RegisterSingleton<TContract, TService>(string key = null)
+        {
+            RegisterTypeManual(typeof(TContract), true, false, key, typeof(TService));
+        }
+
         public void RegisterTransient<T>(string key = null)
         {
             RegisterTypeManual(typeof(T), false, false, key);
         }
 
-        private void RegisterTypeManual(Type type, bool isSingleton, bool wireUpAllProperties, string key = null)
+        public void RegisterTransient<TContract, TService>(string key = null)
+        {
+            RegisterTypeManual(typeof(TContract), true, false, key, typeof(TService));
+        }
+
+        private void RegisterTypeManual(Type type, bool isSingleton, bool wireUpAllProperties, string key = null, Type withService = null)
         {
             var typeDecoration = AttributesHelper.GetTypeDecoration(type);
             if(typeDecoration.IsSingleton || typeDecoration.IsTransient)
@@ -46,7 +56,7 @@ namespace lib12.DependencyInjection
             if (RegisteredTypes.ContainsKey(registrationKey))
                 throw new DependencyInjectionException(string.Format("Type {0} is already registered with key {1}", type.AssemblyQualifiedName, registrationKey));
 
-            var registration = new TypeRegistration(type, isSingleton, wireUpAllProperties);
+            var registration = new TypeRegistration(type, isSingleton, wireUpAllProperties, withService);
             RegisteredTypes.Add(registrationKey, registration);
         }
         #endregion

@@ -28,12 +28,13 @@ namespace lib12.DependencyInjection
         #region Create instance
         public object CreateInstance(TypeRegistration registration)
         {
-            if (creationStack.Contains(registration.Type))
-                throw new CircularDependencyException(registration.Type, creationStack.Peek());
+            var typeToCreate = registration.WithService ?? registration.Type;
+            if (creationStack.Contains(typeToCreate))
+                throw new CircularDependencyException(typeToCreate, creationStack.Peek());
             else
-                creationStack.Push(registration.Type);
+                creationStack.Push(typeToCreate);
 
-            var instance = CreateInstanceOfType(registration.Type);
+            var instance = CreateInstanceOfType(typeToCreate);
             if (registration.WireUpAllProperties)
             {
                 var propertiesToResolve = instance.GetType().GetProperties().Where(x => x.GetAttribute<DoNotWireUpAttribute>() == null);

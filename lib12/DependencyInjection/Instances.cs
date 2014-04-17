@@ -39,9 +39,19 @@ namespace lib12.DependencyInjection
             Container.RegisterSingleton<T>(key);
         }
 
+        public static void RegisterSingleton<TContract, TService>(string key = null)
+        {
+            Container.RegisterSingleton<TContract, TService>(key);
+        }
+
         public static void RegisterTransient<T>(string key = null)
         {
             Container.RegisterTransient<T>(key);
+        }
+
+        public static void RegisterTransient<TContract, TService>(string key = null)
+        {
+            Container.RegisterTransient<TContract, TService>(key);
         }
         #endregion
     }

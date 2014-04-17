@@ -1,4 +1,5 @@
-﻿using lib12.DependencyInjection;
+﻿using FluentAssertions;
+using lib12.DependencyInjection;
 using lib12.Test.DependencyInjectionTest.Classes;
 using Xunit;
 
@@ -168,8 +169,9 @@ namespace lib12.Test.DependencyInjectionTest
         [Fact]
         public void resolve_circular_dependency_with_property_injection()
         {
+            var container = new InstancesContainer();
             CircularDependency1 instance = null;
-            Assert.DoesNotThrow(() => instance = Instances.Get<CircularDependency1>());
+            Assert.DoesNotThrow(() => instance = container.Get<CircularDependency1>());
             Assert.NotNull(instance);
             Assert.NotNull(instance.CircularDependency2);
             Assert.NotNull(instance.CircularDependency2.CircularDependency1);
@@ -180,6 +182,20 @@ namespace lib12.Test.DependencyInjectionTest
         {
             var container = new InstancesContainer();
             Assert.Throws<CircularDependencyException>(() => container.Get<CircularCtorDependency1>());
+        }
+
+        [Fact]
+        public void resolve_singleton_by_service()
+        {
+            Instances.RegisterSingleton<ISingletonContract, SingletonService>();
+            Instances.Get<ISingletonContract>().Should().NotBeNull().And.BeOfType<SingletonService>();
+        }
+
+        [Fact]
+        public void resolve_transient_by_service()
+        {
+            Instances.RegisterTransient<ITransientContract, TransientService>();
+            Instances.Get<ITransientContract>().Should().NotBeNull().And.BeOfType<TransientService>();
         }
     }
 }

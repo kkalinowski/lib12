@@ -57,6 +57,8 @@
     <Compile Include="DependencyInjectionTest\Classes\CircularCtorDependency1.cs" />
     <Compile Include="DependencyInjectionTest\Classes\CircularCtorDependency2.cs" />
     <Compile Include="DependencyInjectionTest\Classes\DoNotWirePropertyWithDoNotWireAttributeAndWithoutWireUpAllProperties.cs" />
+    <Compile Include="DependencyInjectionTest\Classes\ISingletonContract.cs" />
+    <Compile Include="DependencyInjectionTest\Classes\ITransientContract.cs" />
     <Compile Include="DependencyInjectionTest\Classes\SingletonClass.cs" />
     <Compile Include="DependencyInjectionTest\Classes\SingletonClassThatChangeProperty.cs" />
     <Compile Include="DependencyInjectionTest\Classes\InjectInCtor.cs" />
@@ -68,7 +70,9 @@
     <Compile Include="DependencyInjectionTest\Classes\RegisterByAttributeAsSingletonAndTransientClass.cs" />
     <Compile Include="DependencyInjectionTest\Classes\SingletonClassRegisteredByAttribute.cs" />
     <Compile Include="DependencyInjectionTest\Classes\SingletonClassRegisteredByKey.cs" />
+    <Compile Include="DependencyInjectionTest\Classes\SingletonService.cs" />
     <Compile Include="DependencyInjectionTest\Classes\TransientClass.cs" />
+    <Compile Include="DependencyInjectionTest\Classes\TransientService.cs" />
     <Compile Include="DependencyInjectionTest\Classes\WireAllPropertiesSingleton.cs" />
     <Compile Include="DependencyInjectionTest\Classes\WireAllPropertiesSingletonWithNotRegisteredProperties.cs" />
     <Compile Include="DependencyInjectionTest\Classes\WireChoosenProperties.cs" />
