@@ -26,5 +26,16 @@ namespace lib12.Core
         {
             return new List<T>(0);
         }
+
+        /// <summary>
+        /// Returns empty dictionary of given type
+        /// </summary>
+        /// <typeparam name="TKey">Type of key</typeparam>
+        /// <typeparam name="TValue">Type of value</typeparam>
+        /// <returns></returns>
+        public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>()
+        {
+            return new Dictionary<TKey, TValue>(0);
+        }
     }
 }

@@ -2,6 +2,9 @@
 
 namespace lib12.Core
 {
+    /// <summary>
+    /// Times loop - calls given function X times
+    /// </summary>
     public static class TimesLoop
     {
         public static void Do(int times, Action action)

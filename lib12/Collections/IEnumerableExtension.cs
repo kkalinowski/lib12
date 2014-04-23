@@ -192,6 +192,13 @@ namespace lib12.Collections
             return enumerable != null && enumerable.Skip(1).IsNotEmpty();
         }
 
+        /// <summary>
+        /// Gets the next element after given or default
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable">The enumerable to search</param>
+        /// <param name="currentElement">The current element</param>
+        /// <returns></returns>
         public static T GetNextElementOrDefault<T>(this IEnumerable<T> enumerable, T currentElement)
         {
             var returnNextElement = false;
@@ -211,6 +218,13 @@ namespace lib12.Collections
             return default(T);
         }
 
+        /// <summary>
+        /// Gets the previous element before given or default
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable">The enumerable to search</param>
+        /// <param name="currentElement">The current element</param>
+        /// <returns></returns>
         public static T GetPreviousElementOrDefault<T>(this IEnumerable<T> enumerable, T currentElement)
         {
             var prevoiusElement = default(T);
@@ -223,6 +237,13 @@ namespace lib12.Collections
             return default(T);
         }
 
+        /// <summary>
+        /// Takes last X elements
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable">The enumerable to take elements from</param>
+        /// <param name="count">The count to take</param>
+        /// <returns></returns>
         public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> enumerable, int count)
         {
             return enumerable.Skip(Math.Max(0, enumerable.Count() - count));
