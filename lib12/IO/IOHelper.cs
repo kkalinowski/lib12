@@ -6,11 +6,19 @@ namespace lib12.IO
 {
     public static class IOHelper
     {
+        /// <summary>
+        /// Gets the application data path.
+        /// </summary>
+        /// <returns></returns>
         public static string GetAppDataPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         }
 
+        /// <summary>
+        /// Creates the directory if not exist.
+        /// </summary>
+        /// <param name="path">The path to directory to check</param>
         public static void CreateDirectoryIfNotExist(string path)
         {
             if (!Directory.Exists(path))
