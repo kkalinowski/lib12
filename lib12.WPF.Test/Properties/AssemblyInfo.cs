@@ -8,9 +8,9 @@ using System.Windows;
 [assembly: AssemblyTitle("lib12.WPF.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Krzysztof Kalinowski")]
 [assembly: AssemblyProduct("lib12.WPF.Test")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright © Krzysztof Kalinowski 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
