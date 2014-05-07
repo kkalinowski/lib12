@@ -73,6 +73,9 @@
     <Compile Include="Data\QueryBuilding\Structures\Update\UpdateStructure.cs" />
     <Compile Include="DependencyInjection\CircularDependencyException.cs" />
     <Compile Include="DependencyInjection\LazyProperty.cs" />
+    <Compile Include="Mathematics\MathException.cs" />
+    <Compile Include="Mathematics\QuadraticEquation.cs" />
+    <Compile Include="Mathematics\QuadraticEquationResultType.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />

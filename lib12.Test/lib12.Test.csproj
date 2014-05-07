@@ -81,6 +81,7 @@
     <Compile Include="DependencyInjectionTest\InstancesTest.cs" />
     <Compile Include="DummyDataTests\ClassToGenerate.cs" />
     <Compile Include="DummyDataTests\RandomClassGeneratorTests.cs" />
+    <Compile Include="MathematicsTests\QuadraticEquationTests.cs" />
     <Compile Include="OtherTests\EmptyTests.cs" />
     <Compile Include="ReflectionTests\CreateTypeFromEnumTests\EnumLogicTests.cs" />
     <Compile Include="ReflectionTests\CreateTypeFromEnumTests\SampleEnum.cs" />
