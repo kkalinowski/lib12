@@ -82,6 +82,7 @@
     <Compile Include="DummyDataTests\ClassToGenerate.cs" />
     <Compile Include="DummyDataTests\RandomClassGeneratorTests.cs" />
     <Compile Include="ExtensionTests\EnumExtensionTests.cs" />
+    <Compile Include="MathematicsTests\MathExtTests.cs" />
     <Compile Include="MathematicsTests\QuadraticEquationTests.cs" />
     <Compile Include="OtherTests\EmptyTests.cs" />
     <Compile Include="ReflectionTests\CreateTypeFromEnumTests\EnumLogicTests.cs" />
