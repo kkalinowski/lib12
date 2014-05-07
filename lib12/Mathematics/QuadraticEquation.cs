@@ -22,7 +22,7 @@ namespace lib12.Mathematics
         public double C { get; private set; }
 
         /// <summary>
-        /// The delta coefficent
+        /// The delta coefficient
         /// </summary>
         public double Delta { get; private set; }
         /// <summary>
