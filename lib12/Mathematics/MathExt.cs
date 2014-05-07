@@ -1,7 +1,10 @@
 ﻿
-namespace lib12.Core
+namespace lib12.Mathematics
 {
-    public static class Math2
+    /// <summary>
+    /// Set of various math functions
+    /// </summary>
+    public static class MathExt
     {
         /// <summary>
         /// Returns next number from specified set

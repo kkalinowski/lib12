@@ -77,7 +77,7 @@
     <Compile Include="Reflection\EnumExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\EventHandlerExtension.cs" />
-    <Compile Include="Core\Math2.cs" />
+    <Compile Include="Mathematics\MathExt.cs" />
     <Compile Include="Reflection\ExpressionExtension.cs" />
     <Compile Include="Reflection\FieldInfoExtension.cs" />
     <Compile Include="Extensions\NullableBoolExtension.cs" />
