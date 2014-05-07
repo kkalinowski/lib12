@@ -1,4 +1,5 @@
 ﻿using System;
+using lib12.Extensions;
 
 namespace lib12.Mathematics
 {
@@ -36,9 +37,9 @@ namespace lib12.Mathematics
         {
             get
             {
-                if (ResultType == QuadraticEquationResultType.NoResults)
+                if (ResultType.Is(QuadraticEquationResultType.NoResults))
                     throw new MathException("This equation has no results");
-                else if (ResultType == QuadraticEquationResultType.OneResult)
+                else if (ResultType.Is(QuadraticEquationResultType.OneResult))
                     return -B / (2 * A);
                 else
                     return (-B + Math.Sqrt(B * B - 4 * A * C)) / (2 * A);
@@ -52,9 +53,9 @@ namespace lib12.Mathematics
         {
             get
             {
-                if (ResultType == QuadraticEquationResultType.NoResults)
+                if (ResultType.Is(QuadraticEquationResultType.NoResults))
                     throw new MathException("This equation has no results");
-                else if (ResultType == QuadraticEquationResultType.OneResult)
+                else if (ResultType.Is(QuadraticEquationResultType.OneResult))
                     throw new MathException("This equation has only one result");
                 else
                     return (-B - Math.Sqrt(B * B - 4 * A * C)) / (2 * A);
