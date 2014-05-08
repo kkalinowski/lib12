@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using lib12.Collections;
@@ -183,16 +185,21 @@ namespace lib12.Mathematics
         /// <summary>
         /// Evaluates formula
         /// </summary>
+        /// <param name="argument">The argument to take variables values from</param>
         /// <returns></returns>
         /// <exception cref="MathException">Formula is not valid, cannot evaluate it</exception>
         /// <exception cref="UnknownEnumException{TokenType}"></exception>
-        public double Evaluate()
+        public double Evaluate(object argument = null)
         {
             if (!IsValid)
                 throw new MathException("Formula is not valid, cannot evaluate it");
 
+            if (argument.Null() && Tokens.Any(x => x.Type.Is(TokenType.Variable)))
+                throw new MathException("Encountered variable, yet argument is empty");
+
             var stack = new Stack<double>();
-            bool negateNextStatement = false;
+            var negateNextStatement = false;
+            var argumentProperties = argument.NotNull() ? argument.GetType().GetProperties() : null;
 
             foreach (var token in Tokens)
             {
@@ -209,15 +216,9 @@ namespace lib12.Mathematics
                         negateNextStatement = true;
                         break;
                     case TokenType.Variable:
-                        //if (Adapter == null)
-                        //{
-                        //    //throw new FormulaParserException("No adapter given");
-                        //    stack.Push(1.0);
-                        //}
-                        //else
-                        //{
-                        //    stack.Push(Adapter.GetValueForVariable(((VariableToken)token).Variable));
-                        //}
+                        var value = GetValueForVariable((VariableToken)token, argument, argumentProperties);
+                        stack.Push(negateNextStatement ? -value : value);
+                        negateNextStatement = false;
                         break;
                     default:
                         throw new UnknownEnumException<TokenType>(token.Type);
@@ -225,6 +226,24 @@ namespace lib12.Mathematics
             }
 
             return stack.Pop();
+        }
+
+        /// <summary>
+        /// Gets the value for variable from given argument
+        /// </summary>
+        /// <param name="token">The token with variable</param>
+        /// <param name="argument">The argument - source of value</param>
+        /// <param name="argumentProperties">The argument properties.</param>
+        /// <returns></returns>
+        /// <exception cref="MathException">Given argument doesn't have property with name -  + token.Variable</exception>
+        /// <exception cref="System.NotImplementedException"></exception>
+        private double GetValueForVariable(VariableToken token, object argument, IEnumerable<PropertyInfo> argumentProperties)
+        {
+            var prop = argumentProperties.FirstOrDefault(x => x.Name == token.Variable);
+            if (prop.Null())
+                throw new MathException("Given argument doesn't have property with name - " + token.Variable);
+
+            return Convert.ToDouble(prop.GetValue(argument, null));
         }
 
         /// <summary>

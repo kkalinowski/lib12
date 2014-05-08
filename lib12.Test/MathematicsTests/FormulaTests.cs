@@ -17,7 +17,7 @@ namespace lib12.Test.MathematicsTests
         public void simple_addition()
         {
             var formula = new Formula("5 + 7");
-                
+
             formula.IsValid.Should().BeTrue();
             formula.Evaluate().Should().Be(12);
         }
@@ -102,6 +102,42 @@ namespace lib12.Test.MathematicsTests
 
             formula.IsValid.Should().BeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
+        }
+
+        [Fact]
+        public void equation_with_variable()
+        {
+            var formula = new Formula("a+5");
+
+            formula.IsValid.Should().BeTrue();
+            formula.Evaluate(new { a = 7 }).Should().Be(12);
+        }
+
+        [Fact]
+        public void equation_with_two_variables()
+        {
+            var formula = new Formula("a*(5-b)");
+
+            formula.IsValid.Should().BeTrue();
+            formula.Evaluate(new { a = 10, b = 3 }).Should().Be(20);
+        }
+
+        [Fact]
+        public void equation_with_variable_and_null_argument()
+        {
+            var formula = new Formula("a+5");
+
+            formula.IsValid.Should().BeTrue();
+            Assert.Throws<MathException>(() => formula.Evaluate());
+        }
+
+        [Fact]
+        public void equation_with_two_variables_and_argument_with_one_value()
+        {
+            var formula = new Formula("a*(5-b)");
+
+            formula.IsValid.Should().BeTrue();
+            Assert.Throws<MathException>(() => formula.Evaluate(new { a = 7 }));
         }
     }
 }
