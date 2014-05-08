@@ -76,8 +76,15 @@
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Mathematics\Formula.cs" />
     <Compile Include="Mathematics\MathException.cs" />
+    <Compile Include="Mathematics\NegationToken.cs" />
+    <Compile Include="Mathematics\NumberToken.cs" />
+    <Compile Include="Mathematics\OperatorToken.cs" />
+    <Compile Include="Mathematics\OperatorType.cs" />
     <Compile Include="Mathematics\QuadraticEquation.cs" />
     <Compile Include="Mathematics\QuadraticEquationResultType.cs" />
+    <Compile Include="Mathematics\Token.cs" />
+    <Compile Include="Mathematics\TokenType.cs" />
+    <Compile Include="Mathematics\VariableToken.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumReflectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
