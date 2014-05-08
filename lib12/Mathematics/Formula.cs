@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using lib12.Collections;
 using lib12.Exceptions;
+using lib12.Extensions;
 
 namespace lib12.Mathematics
 {
@@ -104,7 +106,20 @@ namespace lib12.Mathematics
             //clear stack from operators
             while (stack.Count > 0)
             {
+                //if (stack.Peek().Type.Is(output.Last().Type))
+                //{
+                //    IsValid = false;
+                //    return null;
+                //}
+
                 output.Add(stack.Pop());
+            }
+
+            var brackets = output.Where(x => x.Type.Is(TokenType.Operator)).Cast<OperatorToken>().ToArray();
+            if (brackets.Count(x => x.Operator.Is(OperatorType.LeftBraket)) != brackets.Count(x => x.Operator.Is(OperatorType.RightBraket)))
+            {
+                IsValid = false;
+                return null;
             }
 
             IsValid = true;
