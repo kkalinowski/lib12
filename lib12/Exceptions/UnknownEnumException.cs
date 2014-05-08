@@ -1,10 +1,15 @@
-﻿using System;
-
+﻿
 namespace lib12.Exceptions
 {
-    public class UnknownEnumException : lib12Exception
+    public class UnknownEnumException<TEnum> : lib12Exception
     {
-        public UnknownEnumException(Type enumType) : base(string.Format("Unknown enum value in type {0}", enumType.Name))
+        public UnknownEnumException(TEnum value)
+            : base(string.Format("Unknown enum value {0} of type {1}", value.ToString(), value.GetType().Name))
+        {
+        }
+
+        public UnknownEnumException()
+            : base(string.Format("Unknown enum value of type {0}", typeof(TEnum).Name))
         {
         }
     }
