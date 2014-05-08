@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -8,18 +9,46 @@ using lib12.Extensions;
 
 namespace lib12.Mathematics
 {
+    /// <summary>
+    /// Mathematics formulas parser and calculator using reverse polish notation
+    /// </summary>
     public class Formula
     {
+        /// <summary>
+        /// Gets the formula's text.
+        /// </summary>
         public string Text { get; private set; }
-        public List<Token> Tokens { get; private set; }
+
+        /// <summary>
+        /// Gets the reverse polish notation tokens.
+        /// </summary>
+        public ReadOnlyCollection<Token> Tokens { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether formula is vali
+        /// </summary>
         public bool IsValid { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Formula"/> class.
+        /// </summary>
+        /// <param name="text">The formula's text.</param>
         public Formula(string text)
         {
             Text = text;
-            Tokens = Parse(Text);
+            var tokens = Parse(Text);
+            if (tokens.NotNull())
+            {
+                Tokens = new ReadOnlyCollection<Token>(tokens);
+                IsValid = true;
+            }
         }
 
+        /// <summary>
+        /// Parses formula
+        /// </summary>
+        /// <param name="text">The formula's text.</param>
+        /// <returns></returns>
         private List<Token> Parse(string text)
         {
             var token = new StringBuilder();
@@ -53,7 +82,7 @@ namespace lib12.Mathematics
                 {
                     if (negationPossible)
                     {
-                        output.Add(Token.CreateNegationToken());
+                        output.Add(new NegationToken());
                         negationPossible = false;
                     }
                     else
@@ -113,10 +142,15 @@ namespace lib12.Mathematics
             if (operators.Count(x => x.Operator.IsNot(OperatorType.LeftBraket, OperatorType.RightBraket)) != output.Count(x => x.Type.Is(TokenType.Number, TokenType.Variable)) - 1)
                 return null;
 
-            IsValid = true;
             return output;
         }
 
+        /// <summary>
+        /// Adds the RPN operator to stack.
+        /// </summary>
+        /// <param name="stack">The stack.</param>
+        /// <param name="output">The output.</param>
+        /// <param name="op">The operator</param>
         private static void AddOperatorToStack(Stack<OperatorToken> stack, ICollection<Token> output, OperatorToken op)
         {
             if (op.Operator == OperatorType.RightBraket)//move from stack to output until left braket occurs
@@ -146,6 +180,12 @@ namespace lib12.Mathematics
                 stack.Push(op);
         }
 
+        /// <summary>
+        /// Evaluates formula
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="MathException">Formula is not valid, cannot evaluate it</exception>
+        /// <exception cref="UnknownEnumException{TokenType}"></exception>
         public double Evaluate()
         {
             if (!IsValid)
@@ -187,6 +227,14 @@ namespace lib12.Mathematics
             return stack.Pop();
         }
 
+        /// <summary>
+        /// Computes single RPN operation
+        /// </summary>
+        /// <param name="a">The first parameter</param>
+        /// <param name="b">The second parameter</param>
+        /// <param name="operatorType">Type of the operator.</param>
+        /// <returns></returns>
+        /// <exception cref="UnknownEnumException{OperatorType}"></exception>
         private double Compute(double a, double b, OperatorType operatorType)
         {
             switch (operatorType)
@@ -206,36 +254,79 @@ namespace lib12.Mathematics
     }
 
     #region Enums
+    /// <summary>
+    /// Type of reverse polish notation token
+    /// </summary>
     public enum TokenType
     {
+        /// <summary>
+        /// The number token
+        /// </summary>
         Number,
+        /// <summary>
+        /// The operator token
+        /// </summary>
         Operator,
+        /// <summary>
+        /// The negation token
+        /// </summary>
         Negation,
+        /// <summary>
+        /// The variable token
+        /// </summary>
         Variable
     }
 
+    /// <summary>
+    /// Type of operator
+    /// </summary>
     public enum OperatorType
     {
+        /// <summary>
+        /// The plus
+        /// </summary>
         Plus,
+        /// <summary>
+        /// The minus
+        /// </summary>
         Minus,
+        /// <summary>
+        /// The multiplication
+        /// </summary>
         Mult,
+        /// <summary>
+        /// The division
+        /// </summary>
         Div,
+        /// <summary>
+        /// The left braket
+        /// </summary>
         LeftBraket,
+        /// <summary>
+        /// The right braket
+        /// </summary>
         RightBraket
     }
     #endregion
 
     #region PrivateClasses
-    public class Token
+    /// <summary>
+    /// The reverse polish notation token
+    /// </summary>
+    public abstract class Token
     {
-        public TokenType Type { get; set; }
+        /// <summary>
+        /// Gets the token type.
+        /// </summary>
+        public TokenType Type { get; protected set; }
 
-        public static Token CreateNegationToken()
-        {
-            return new Token() { Type = TokenType.Negation };
-        }
-
-        // override object.Equals
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" }, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             var b = obj as Token;
@@ -243,24 +334,59 @@ namespace lib12.Mathematics
             return b != null && this.Type == b.Type;
         }
 
-        // override object.GetHashCode
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return (int)Type;
         }
     }
 
+    /// <summary>
+    /// Negation token
+    /// </summary>
+    public class NegationToken : Token
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NegationToken"/> class.
+        /// </summary>
+        public NegationToken()
+        {
+            Type = TokenType.Negation;
+        }
+    }
+
+    /// <summary>
+    /// Number token
+    /// </summary>
     public class NumberToken : Token
     {
-        public double Number { get; set; }
+        /// <summary>
+        /// Gets or sets the number.
+        /// </summary>
+        public double Number { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NumberToken"/> class.
+        /// </summary>
+        /// <param name="number">The number.</param>
         public NumberToken(double number)
         {
             Number = number;
             Type = TokenType.Number;
         }
 
-        // override object.Equals
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" }, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             var b = obj as NumberToken;
@@ -268,18 +394,37 @@ namespace lib12.Mathematics
             return b != null && this.Number == b.Number;
         }
 
-        // override object.GetHashCode
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return (int)Number + (int)Type;
         }
     }
 
+    /// <summary>
+    /// Operator token
+    /// </summary>
     public class OperatorToken : Token
     {
-        public OperatorType Operator { get; set; }
+        /// <summary>
+        /// Gets the operator type.
+        /// </summary>
+        public OperatorType Operator { get; private set; }
+
+        /// <summary>
+        /// Gets the operator priority.
+        /// </summary>
         public int Priority { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperatorToken"/> class.
+        /// </summary>
+        /// <param name="op">The operator</param>
         public OperatorToken(OperatorType op)
         {
             Operator = op;
@@ -309,7 +454,13 @@ namespace lib12.Mathematics
             }
         }
 
-        // override object.Equals
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" }, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             var b = obj as OperatorToken;
@@ -317,24 +468,45 @@ namespace lib12.Mathematics
             return b != null && this.Operator == b.Operator;
         }
 
-        // override object.GetHashCode
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return (int)Operator + (int)Type;
         }
     }
 
+    /// <summary>
+    /// Variable token
+    /// </summary>
     public class VariableToken : Token
     {
-        public string Variable { get; set; }
+        /// <summary>
+        /// Gets the variable.
+        /// </summary>
+        public string Variable { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VariableToken"/> class.
+        /// </summary>
+        /// <param name="variable">The variable.</param>
         public VariableToken(string variable)
         {
             Variable = variable;
             Type = TokenType.Variable;
         }
 
-        // override object.Equals
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" }, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             var b = obj as VariableToken;
@@ -342,7 +514,12 @@ namespace lib12.Mathematics
             return b != null && this.Variable == b.Variable;
         }
 
-        // override object.GetHashCode
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return Variable.GetHashCode() + (int)Type;
