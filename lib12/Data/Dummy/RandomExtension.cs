@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using lib12.Core;
+using lib12.Misc;
 
 namespace lib12.Data.Dummy
 {

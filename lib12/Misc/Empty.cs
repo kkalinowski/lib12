@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace lib12.Core
+namespace lib12.Misc
 {
     /// <summary>
     /// Handles empty objects creation

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lib12.Core
+namespace lib12.Misc
 {
     /// <summary>
     /// Compares two objects based on property value
@@ -11,6 +11,10 @@ namespace lib12.Core
     {
         private readonly Func<T, object> keyExtractor;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyComparer{T}"/> class.
+        /// </summary>
+        /// <param name="keyExtractor">The key extractor.</param>
         public PropertyComparer(Func<T, object> keyExtractor)
         {
             this.keyExtractor = keyExtractor;

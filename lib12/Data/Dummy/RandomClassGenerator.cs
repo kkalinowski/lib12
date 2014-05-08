@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using lib12.Collections;
-using lib12.Core;
+using lib12.Misc;
 
 namespace lib12.Data.Dummy
 {

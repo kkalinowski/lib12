@@ -1,4 +1,4 @@
-﻿using lib12.Core;
+﻿using lib12.Misc;
 using Xunit;
 
 namespace lib12.Test.OtherTests

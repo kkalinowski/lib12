@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lib12.Core
+namespace lib12.Misc
 {
     /// <summary>
     /// Times loop - calls given function X times

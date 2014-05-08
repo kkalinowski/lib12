@@ -2,9 +2,12 @@
 using System.IO;
 using System.Linq;
 
-namespace lib12.IO
+namespace lib12.Misc
 {
-    public static class IOHelper
+    /// <summary>
+    /// Helper functions for IO
+    /// </summary>
+    public static class IoHelper
     {
         /// <summary>
         /// Gets the application data path.

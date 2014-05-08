@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using lib12.Core;
+using lib12.Misc;
 
 namespace lib12.WPF.Controls.FluidGrid
 {
