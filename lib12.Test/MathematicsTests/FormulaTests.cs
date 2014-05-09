@@ -105,6 +105,15 @@ namespace lib12.Test.MathematicsTests
         }
 
         [Fact]
+        public void invalid_formula_bracket_closed_before_opened()
+        {
+            var formula = new Formula(")5 + 7(*5");
+
+            formula.IsValid.Should().BeFalse();
+            Assert.Throws<MathException>(() => formula.Evaluate());
+        } 
+
+        [Fact]
         public void equation_with_variable()
         {
             var formula = new Formula("a+5");

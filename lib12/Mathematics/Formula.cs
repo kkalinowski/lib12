@@ -57,6 +57,7 @@ namespace lib12.Mathematics
             var stack = new Stack<OperatorToken>();
             var output = new List<Token>();
             var negationPossible = true;//true if next minus means negation
+            var openedBrackets = 0;
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -106,9 +107,14 @@ namespace lib12.Mathematics
                 {
                     AddOperatorToStack(stack, output, new OperatorToken(OperatorType.LeftBraket));
                     negationPossible = true;
+                    openedBrackets++;
                 }
                 else if (text[i] == ')')
                 {
+                    openedBrackets--;
+                    if (openedBrackets < 0)
+                        return null;
+
                     AddOperatorToStack(stack, output, new OperatorToken(OperatorType.RightBraket));
                     negationPossible = false;
                 }
@@ -136,11 +142,11 @@ namespace lib12.Mathematics
                 output.Add(stack.Pop());
 
             //left and right brackets count must be equal
-            var operators = output.Where(x => x.Type.Is(TokenType.Operator)).Cast<OperatorToken>().ToArray();
-            if (operators.Count(x => x.Operator.Is(OperatorType.LeftBraket)) != operators.Count(x => x.Operator.Is(OperatorType.RightBraket)))
+            if (openedBrackets != 0)
                 return null;
 
             //in order to evaluate reverse polish notation it must be exactly one more literal than operator
+            var operators = output.Where(x => x.Type.Is(TokenType.Operator)).Cast<OperatorToken>().ToArray();
             if (operators.Count(x => x.Operator.IsNot(OperatorType.LeftBraket, OperatorType.RightBraket)) != output.Count(x => x.Type.Is(TokenType.Number, TokenType.Variable)) - 1)
                 return null;
 
