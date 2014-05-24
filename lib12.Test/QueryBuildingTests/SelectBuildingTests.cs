@@ -76,7 +76,7 @@ namespace lib12.Test.QueryBuildingTests
         }
 
         [Fact]
-        public void throw_exception_when_notopened_bracket()
+        public void throw_exception_when_not_opened_bracket()
         {
             Assert.Throws<QueryBuilderException>(() => SqlBuilder.Select.AllFields.From("products").Where("price", Compare.GreaterThan, 100).CloseBracket().Build());
         }

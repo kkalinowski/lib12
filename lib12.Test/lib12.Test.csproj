@@ -52,6 +52,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionsTests\Branch.cs" />
+    <Compile Include="CollectionsTests\TreeTests.cs" />
     <Compile Include="DependencyInjectionTest\Classes\CircularDependency1.cs" />
     <Compile Include="DependencyInjectionTest\Classes\CircularDependency2.cs" />
     <Compile Include="DependencyInjectionTest\Classes\CircularCtorDependency1.cs" />
@@ -90,7 +92,7 @@
     <Compile Include="ReflectionTests\CreateTypeFromEnumTests\SampleEnum.cs" />
     <Compile Include="ExtensionTests\DateTimeExtensionTests.cs" />
     <Compile Include="ExtensionTests\ObjectTests.cs" />
-    <Compile Include="IEnumerableExtensionTests.cs" />
+    <Compile Include="CollectionsTests\IEnumerableExtensionTests.cs" />
     <Compile Include="OtherTests\PropertyComparerTests.cs" />
     <Compile Include="OtherTests\SaltedHashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

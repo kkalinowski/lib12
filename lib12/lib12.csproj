@@ -45,6 +45,8 @@
     <Compile Include="Collections\IEnumerableDefaultExtension.cs" />
     <Compile Include="Collections\IListExtension.cs" />
     <Compile Include="Collections\IEnumerableExtension.cs" />
+    <Compile Include="Collections\ITreeBranch.cs" />
+    <Compile Include="Collections\TreeHelper.cs" />
     <Compile Include="Misc\Empty.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
     <Compile Include="Crypto\SaltedHash.cs" />
