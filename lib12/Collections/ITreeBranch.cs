@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace lib12.Collections
 {
@@ -9,7 +8,5 @@ namespace lib12.Collections
         TId? ParentId { get; }
         IList<ITreeBranch<TId>> Children { get; }
         int Level { get; set; }
-        bool IsRoot { get; set; }
-        bool IsLeaf { get; set; }
     }
 }

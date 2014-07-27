@@ -36,6 +36,9 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.2.0.0\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Should">
+      <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

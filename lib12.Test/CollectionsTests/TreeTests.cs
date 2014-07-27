@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using lib12.Collections;
+using Should;
 using Xunit;
 
 namespace lib12.Test.CollectionsTests
@@ -161,6 +162,22 @@ namespace lib12.Test.CollectionsTests
             hierarchy.Should().HaveCount(2);
             list[0].Children.Should().BeEmpty();
             list[1].Children.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void is_root_test()
+        {
+            var tree = TreeHelper.BuildTree(MakeThreeLevelList());
+            tree[0].IsRoot().ShouldBeTrue();
+            tree[0].Children[0].IsRoot().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void is_leaf_test()
+        {
+            var tree = TreeHelper.BuildTree(MakeThreeLevelList());
+            tree[0].IsLeaf().ShouldBeFalse();
+            tree[0].Children[0].IsLeaf().ShouldBeTrue();
         }
     }
 }

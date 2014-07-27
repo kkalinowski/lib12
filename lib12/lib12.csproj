@@ -46,6 +46,7 @@
     <Compile Include="Collections\IListExtension.cs" />
     <Compile Include="Collections\IEnumerableExtension.cs" />
     <Compile Include="Collections\ITreeBranch.cs" />
+    <Compile Include="Collections\ITreeBranchExtension.cs" />
     <Compile Include="Collections\TreeHelper.cs" />
     <Compile Include="Misc\Empty.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
@@ -138,7 +139,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy lib12.dll "D:\lib12" /y /r</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
