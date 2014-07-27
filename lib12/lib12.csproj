@@ -101,7 +101,7 @@
     <Compile Include="Misc\TimesLoop.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
     <Compile Include="Exceptions\UnknownEnumException.cs" />
-    <Compile Include="Data\Dummy\LoremIpsum.cs" />
+    <Compile Include="Data\Dummy\DummyData.cs" />
     <Compile Include="Data\Dummy\RandomExtension.cs" />
     <Compile Include="Data\Dummy\RandomIEnumerableExtension.cs" />
     <Compile Include="Data\QueryBuilding\Builders\SelectBuilder.cs" />
