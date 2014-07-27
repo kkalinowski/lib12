@@ -34,13 +34,34 @@ namespace lib12.Test.ExtensionTests
         [Fact]
         public void throw_exception_throws_exception_if_object_is_null()
         {
-            nullObject.Invoking(x => x.Null().ThrowException()).ShouldThrow<NullReferenceException>();
+            nullObject.Invoking(x => x.ThrowExceptionIfNull()).ShouldThrow<NullReferenceException>();
+        }
+
+        [Fact]
+        public void throw_given_exception_throws_exception_if_object_is_null()
+        {
+            var exceptionToThrow = new Exception("test_exception");
+            try
+            {
+                nullObject.ThrowExceptionIfNull(exceptionToThrow);
+            }
+            catch (Exception exception)
+            {
+                exception.ShouldBeEquivalentTo(exceptionToThrow);
+            }
         }
 
         [Fact]
         public void throw_exception_doesnt_throws_exception_if_object_is_not_null()
         {
-            notNullObject.Invoking(x => x.Null().ThrowException()).ShouldNotThrow<NullReferenceException>();
+            notNullObject.Invoking(x => x.ThrowExceptionIfNull()).ShouldNotThrow<NullReferenceException>();
+        }
+
+        [Fact]
+        public void throw_given_exception_doesnt_throws_exception_if_object_is_not_null()
+        {
+            var exceptionToThrow = new Exception("test_exception");
+            notNullObject.Invoking(x => x.ThrowExceptionIfNull(exceptionToThrow)).ShouldNotThrow<Exception>();
         }
 
         [Fact]
@@ -58,20 +79,20 @@ namespace lib12.Test.ExtensionTests
         [Fact]
         public void get_value_or_default_returns_value_if_object_is_not_null()
         {
-            notNullComplexObject.NotNull().Get(x => x.StringProp).Should().Be(StringPropValue);
+            notNullComplexObject.SafeGet(x => x.StringProp).Should().Be(StringPropValue);
         }
 
         [Fact]
         public void get_value_or_default_returns_default_if_object_is_null()
         {
-            var result = nullComplexObject.NotNull().Get(x => x.IntProp).Should().Be(default(int));
+            nullComplexObject.SafeGet(x => x.IntProp).Should().Be(default(int));
         }
 
         [Fact]
         public void get_value_or_default_returns_given_default_if_object_is_null()
         {
             const string defaultString = "default_string";
-            nullComplexObject.NotNull().Get(x => x.StringProp, defaultString).Should().Be(defaultString);
+            nullComplexObject.SafeGet(x => x.StringProp, defaultString).Should().Be(defaultString);
         }
     }
 }

@@ -5,73 +5,61 @@ namespace lib12.Extensions
 {
     public static class ObjectExtension
     {
-        public class NullResult
-        {
-            private readonly bool result;
-
-            public NullResult(bool result)
-            {
-                this.result = result;
-            }
-
-            public static implicit operator bool(NullResult nullResult)
-            {
-                return nullResult.result;
-            }
-
-            /// <summary>
-            /// Throw exception if checked object is null
-            /// </summary>
-            public void ThrowException()
-            {
-                if (result)
-                    throw new NullReferenceException();
-            }
-        }
-
-        public class NotNullResult<TObject> where TObject : class
-        {
-            private readonly bool result;
-            private readonly TObject self;
-
-            public NotNullResult(TObject self)
-            {
-                this.self = self;
-                result = self != null;
-            }
-
-            public static implicit operator bool(NotNullResult<TObject> notNullResult)
-            {
-                return notNullResult.result;
-            }
-
-            public TValue Get<TValue>(Expression<Func<TObject, TValue>> expression, TValue defaultValue = default(TValue))
-            {
-                if (result)
-                    return expression.Compile().Invoke(self);
-                else
-                    return defaultValue;
-            }
-        }
-
         /// <summary>
         /// Check if given object is null
         /// </summary>
-        /// <param name="self"></param>
+        /// <param name="object">Object to check</param>
         /// <returns></returns>
-        public static NullResult Null(this object self)
+        public static bool Null<TObject>(this TObject @object) where TObject : class
         {
-            return new NullResult(self == null);
+            return @object == null;
+        }
+
+        ///// <summary>
+        ///// Check if given object is not null
+        ///// </summary>
+        ///// <param name="@object"></param>
+        ///// <returns></returns>
+        public static bool NotNull<TObject>(this TObject @object) where TObject : class
+        {
+            return @object != null;
         }
 
         /// <summary>
-        /// Check if given object is not null
+        /// Safely get value from object
         /// </summary>
-        /// <param name="self"></param>
+        /// <typeparam name="TObject">The type of the object.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="object">The object.</param>
+        /// <param name="expression">The expression.</param>
+        /// <param name="defaultValue">The default value.</param>
         /// <returns></returns>
-        public static NotNullResult<TObject> NotNull<TObject>(this TObject self) where TObject : class
+        public static TValue SafeGet<TObject, TValue>(this TObject @object, Expression<Func<TObject, TValue>> expression, TValue defaultValue = default(TValue)) where TObject : class
         {
-            return new NotNullResult<TObject>(self);
+            if (@object.NotNull())
+                return expression.Compile().Invoke(@object);
+            else
+                return defaultValue;
+        }
+
+        /// <summary>
+        /// Throw exception if checked object is null
+        /// </summary>
+        public static void ThrowExceptionIfNull<TObject>(this TObject @object) where @TObject : class
+        {
+            if (@object.Null())
+                throw new NullReferenceException();
+        }
+
+        /// <summary>
+        /// Throw exception if checked object is null
+        /// </summary>
+        /// <param name="object">Object to check</param>
+        /// <param name="ex">Exception to throw</param>
+        public static void ThrowExceptionIfNull<TObject>(this TObject @object, Exception ex) where @TObject : class
+        {
+            if (@object.Null())
+                throw ex;
         }
     }
 }

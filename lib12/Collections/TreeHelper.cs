@@ -8,7 +8,7 @@ namespace lib12.Collections
     {
         public static List<ITreeBranch<TId>> BuildTree<TId>(IEnumerable<ITreeBranch<TId>> items) where TId : struct
         {
-            var roots = items.Where(x => x.ParentId.Null()).ToList();
+            var roots = items.Where(x => !x.ParentId.HasValue).ToList();
 
             var dict = items.ToDictionary(x => x.Id, x => x);
             foreach (var item in dict.Where(x => x.Value.ParentId.HasValue))
