@@ -48,6 +48,7 @@
     <Compile Include="Collections\ITreeBranch.cs" />
     <Compile Include="Collections\ITreeBranchExtension.cs" />
     <Compile Include="Collections\TreeHelper.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Misc\Empty.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
     <Compile Include="Crypto\SaltedHash.cs" />

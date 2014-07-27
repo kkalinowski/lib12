@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using lib12.Collections;
+using Should;
 using Xunit;
 
 namespace lib12.Test.CollectionsTests
@@ -10,7 +12,7 @@ namespace lib12.Test.CollectionsTests
         public void formatting_collection_with_one_item()
         {
             var expected = "test";
-            var result = new string[] { "test" }.ToDelimitedString("_");
+            var result = new[] { "test" }.ToDelimitedString("_");
 
             Assert.Equal(expected, result);
         }
@@ -19,7 +21,7 @@ namespace lib12.Test.CollectionsTests
         public void formatting_collection_with_two_item()
         {
             var expected = "test_test2";
-            var result = new string[] { "test", "test2" }.ToDelimitedString("_");
+            var result = new[] { "test", "test2" }.ToDelimitedString("_");
 
             Assert.Equal(expected, result);
         }
@@ -43,7 +45,7 @@ namespace lib12.Test.CollectionsTests
         [Fact]
         public void contains_one_element_returns_true_when_passing_enumerable_with_one_item()
         {
-            var oneItemArray = new int[] { 1 };
+            var oneItemArray = new[] { 1 };
 
             Assert.True(oneItemArray.ContainsOneElement());
         }
@@ -51,9 +53,23 @@ namespace lib12.Test.CollectionsTests
         [Fact]
         public void contains_one_element_returns_false_when_passing_enumerable_with_two_items()
         {
-            var twoItemsArray = new int[] {1, 2};
+            var twoItemsArray = new[] {1, 2};
 
             Assert.False(twoItemsArray.ContainsOneElement());
+        }
+
+        [Fact]
+        public void to_null_pattern_object_test_on_null_collection()
+        {
+            List<int> list = null;
+            list.ToNullPatternObject().Count().ShouldEqual(0);
+        }
+
+        [Fact]
+        public void to_null_pattern_object_test_on_not_null_collection()
+        {
+            var list = new List<int> {3, 4, 12};
+            list.ToNullPatternObject().Count().ShouldEqual(3);
         }
     }
 }

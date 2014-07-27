@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using lib12.Extensions;
 
 namespace lib12.Collections
 {
@@ -247,6 +248,21 @@ namespace lib12.Collections
         public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> enumerable, int count)
         {
             return enumerable.Skip(Math.Max(0, enumerable.Count() - count));
+        }
+
+        /// <summary>
+        /// If enumerable is null convert it into empty collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <returns></returns>
+        public static IEnumerable<T> ToNullPatternObject<T>(this IEnumerable<T> enumerable)
+        {
+            if (enumerable.Null())
+                yield break;
+
+            foreach (var item in enumerable)
+                yield return item;
         }
     }
 }
