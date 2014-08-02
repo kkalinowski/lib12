@@ -59,7 +59,7 @@ Fluent SQL query builder - lib12.Data.QueryBuilding
 In spite of overwhelming popularity of various ORMs you still have to write some SQL query from time to time. Maintaining and storing those queries can be tricky. To help with that I created fluent SQL query builder. It supports most important SQL keywords for select, insert, update and delete. Using it is quite simple:
 
 ```csharp
-var selectQuery = SqlBuilder.Select.Fields(fields).From("products", "p")
+var select = SqlBuilder.Select.Fields(fields).From("products", "p")
 	.Join("groups", "g", "p.group_id", "g.id")
 	.Join("stores", "s", "g.id", "s.group_id", JoinType.Left)
 	.OpenBracket()
@@ -69,14 +69,24 @@ var selectQuery = SqlBuilder.Select.Fields(fields).From("products", "p")
 	.GroupBy("product_group").Having("avg(price)>100")
 	.OrderByDesc("price").Build();
 	
-var insertQuery = SqlBuilder.Insert.Into("product").Columns("type", "price", "name").Values(4, 5, "test").Build();
+var insert = SqlBuilder.Insert.Into("product").Columns("type", "price", "name").Values(4, 5, "test").Build();
 
-var updateQuery = SqlBuilder.Update.Table("product").Set("price", 5).Set("name", "test").OpenBracket()
+var batchInsertQuery = SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").Batch(
+    new[]{
+		new Values{Prop1 = "test", Prop2 = 21},
+		new Values{Prop1 = "test2", Prop2 = 8}
+    }).Build();
+    
+var insertIntoSelect = SqlBuilder.Insert.Into("product").Columns("name","price")
+	.Select(SqlBuilder.Select.AllFields.From("product_test").Build())
+    .Build();
+
+var update = SqlBuilder.Update.Table("product").Set("price", 5).Set("name", "test").OpenBracket()
 	.Where("price", Compare.Equals, 1).And.Where("type", Compare.Equals, 3).CloseBracket()
 	.Or.Where("type", Compare.NotEquals, 3)
 	.Build();
 	
-var deleteQuery = SqlBuilder.Delete.From("product").OpenBracket()
+var delete = SqlBuilder.Delete.From("product").OpenBracket()
 	.Where("price", Compare.Equals, 1).And.Where("type", Compare.Equals, 3).CloseBracket()
 	.Or.Where("type", Compare.NotEquals, 3)
 	.Build()
@@ -94,13 +104,25 @@ var generated = generator.Generate<ClassToGenerate>(CollectionSize,
 	new IntGenerator<ClassToGenerate>(x => x.Int, 50, 100),
 	new DoubleGenerator<ClassToGenerate>(x => x.Double, 70, 120));
 ```
-
 lib12 contains also extensions for System.Random class for generating bool, char, string and DateTime.
+
+Mathematics functions - lib12.Mathematics
+--------------------
+Formula class use Reverse Polish Notation to parse and compute mathematical expressions:
+```csharp
+var formula = new Formula("-12*3 + (5-3)*6 + 9/(4-1)");
+var result = formula.Evaluate();
+```
+This class understands variables, so you can compile it once and use for many computations:
+```csharp
+var formula = new Formula("a*(5-b)");
+formula.Evaluate(new { a = 10, b = 3 });
+```
+Mathematics namespace contains also QuadraticEquation and MathExt classes which contains many helper functions for less standard mathematical operations like Iverson operator, Factorial or BinomialCoefficent
 
 Other classes
 ---
 - lib12.Core.Empty - returns empty array, list and dictionary
-- lib12.Core.Math2 - additional math functions
 - lib12.Core.PropertyComparer - implements IEqualityComparer using lambda expressions
 - lib12.Core.TimesLoop - do given function X times
 - lib12.Crypto.SaltedHash - implemention of salted hash mechanism for password storing
