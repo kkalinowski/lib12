@@ -1,4 +1,5 @@
-﻿
+﻿using lib12.Data.QueryBuilding.Structures.Insert;
+
 namespace lib12.Data.QueryBuilding.Builders
 {
     /// <summary>
@@ -43,7 +44,7 @@ namespace lib12.Data.QueryBuilding.Builders
         /// <summary>
         /// Builds insert command
         /// </summary>
-        public static InsertBuilder Insert
+        public static IInto Insert
         {
             get
             {
