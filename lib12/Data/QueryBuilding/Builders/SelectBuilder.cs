@@ -8,7 +8,7 @@ using lib12.Data.QueryBuilding.Structures.Select;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class SelectBuilder : IFields, ISelectFrom, IOpenSelectBracket, ICloseSelectBracket, ISelectWhere, ISelectConcat, IGroupBy, IHaving, IOrderBy
+    public class SelectBuilder : ISelect, IFields, ISelectFrom, IOpenSelectBracket, ICloseSelectBracket, ISelectWhere, ISelectConcat, IGroupBy, IHaving, IOrderBy
     {
         #region Fields
         private int openBrackets;

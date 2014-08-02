@@ -1,7 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace lib12.Data.QueryBuilding.Structures.Select
 {
+    public interface ISelect
+    {
+        IFields AllFields { get; }
+
+        IFields Fields(IEnumerable<SelectField> fields);
+
+        IFields Fields(bool withAlias, params string[] fields);
+    }
+
     public interface IFields : ITop
     {
         ITop Top(int count);

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class DeleteBuilder : QueryBuilderBase<DeleteQueryStructure>, IDeleteFrom
+    public class DeleteBuilder : QueryBuilderBase<DeleteQueryStructure>, IDelete, IDeleteFrom
     {
         public IDeleteFrom From(string table)
         {

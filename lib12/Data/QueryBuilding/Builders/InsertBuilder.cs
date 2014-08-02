@@ -9,7 +9,7 @@ using System.Text;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class InsertBuilder : QueryBuilderBase<InsertStructure>, IInto, IColumns, IValues
+    public class InsertBuilder : QueryBuilderBase<InsertStructure>, IInsert, IColumns, IValues
     {
         public IColumns Into(string table)
         {

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
-    public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdateSet
+    public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdate, IUpdateSet
     {
         public IUpdateSet Table(string table)
         {

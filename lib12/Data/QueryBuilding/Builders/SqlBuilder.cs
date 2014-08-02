@@ -1,4 +1,7 @@
-﻿using lib12.Data.QueryBuilding.Structures.Insert;
+﻿using lib12.Data.QueryBuilding.Structures.Delete;
+using lib12.Data.QueryBuilding.Structures.Insert;
+using lib12.Data.QueryBuilding.Structures.Select;
+using lib12.Data.QueryBuilding.Structures.Update;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
@@ -10,7 +13,7 @@ namespace lib12.Data.QueryBuilding.Builders
         /// <summary>
         /// Builds select query
         /// </summary>
-        public static SelectBuilder Select
+        public static ISelect Select
         {
             get
             {
@@ -21,7 +24,7 @@ namespace lib12.Data.QueryBuilding.Builders
         /// <summary>
         /// Builds update command
         /// </summary>
-        public static UpdateBuilder Update
+        public static IUpdate Update
         {
             get
             {
@@ -32,7 +35,7 @@ namespace lib12.Data.QueryBuilding.Builders
         /// <summary>
         /// Builds delete command
         /// </summary>
-        public static DeleteBuilder Delete
+        public static IDelete Delete
         {
             get
             {
@@ -44,7 +47,7 @@ namespace lib12.Data.QueryBuilding.Builders
         /// <summary>
         /// Builds insert command
         /// </summary>
-        public static IInto Insert
+        public static IInsert Insert
         {
             get
             {

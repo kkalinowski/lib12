@@ -2,7 +2,7 @@
 
 namespace lib12.Data.QueryBuilding.Structures.Insert
 {
-    public interface IInto
+    public interface IInsert
     {
         IColumns Into(string table);
     }
