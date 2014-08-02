@@ -52,6 +52,17 @@ namespace lib12.Test.QueryBuildingTests
         }
 
         [Fact]
+        public void batch_insert_test_using_anonymous_object()
+        {
+            const string expected = "INSERT INTO product(Prop1, Prop2) VALUES('test', '21'), ('test2', '8')";
+            SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").Batch(
+                new[]{
+                    new {Prop1 = "test", Prop2 = 21},
+                    new {Prop1 = "test2", Prop2 = 8}
+                }).Build().Should().Be(expected);
+        }
+
+        [Fact]
         public void throw_exception_if_given_collection_for_batch_insert_is_null()
         {
             List<Values> list = null;
