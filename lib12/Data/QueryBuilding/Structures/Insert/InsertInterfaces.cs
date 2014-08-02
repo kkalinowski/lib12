@@ -1,4 +1,6 @@
-﻿namespace lib12.Data.QueryBuilding.Structures.Insert
+﻿using System.Collections.Generic;
+
+namespace lib12.Data.QueryBuilding.Structures.Insert
 {
     public interface IInto
     {
@@ -13,5 +15,6 @@
     public interface IValues
     {
         IBuild Values(params object[] values);
+        IBuild Batch(IEnumerable<object> values);
     }
 }
