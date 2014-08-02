@@ -82,5 +82,33 @@ namespace lib12.Test.QueryBuildingTests
             var collection = new[] { new Values { Prop1 = "test", Prop2 = 21 } };
             Assert.Throws<lib12Exception>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2", "Prop3").Batch(collection).Build());
         }
+
+        [Fact]
+        public void insert_into_select_test()
+        {
+            const string expected = "INSERT INTO product SELECT * FROM product_test";
+            SqlBuilder.Insert.Into("product").Select(SqlBuilder.Select.AllFields.From("product_test").Build())
+                .Build().Should().Be(expected);
+        }
+
+        [Fact]
+        public void insert_into_select_test_with_columns()
+        {
+            const string expected = "INSERT INTO product(name, price) SELECT * FROM product_test";
+            SqlBuilder.Insert.Into("product").Columns("name", "price").Select(SqlBuilder.Select.AllFields.From("product_test").Build())
+                .Build().Should().Be(expected);
+        }
+
+        [Fact]
+        public void insert_into_select_throws_exception_if_select_is_null()
+        {
+            Assert.Throws<QueryBuilderException>(() => SqlBuilder.Insert.Into("product").Select(null).Build());
+        }
+
+        [Fact]
+        public void insert_into_select_throws_exception_if_select_is_empty()
+        {
+            Assert.Throws<QueryBuilderException>(() => SqlBuilder.Insert.Into("product").Select(string.Empty).Build());
+        }
     }
 }

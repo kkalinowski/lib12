@@ -1,4 +1,5 @@
-﻿using lib12.Collections;
+﻿using System;
+using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures;
 using lib12.Data.QueryBuilding.Structures.Insert;
 using lib12.Extensions;
@@ -22,6 +23,15 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        public IBuild Select(string select)
+        {
+            if (select.IsNullOrEmpty())
+                throw new QueryBuilderException("Select statement cannot be null or empty");
+
+            Structure.Select = select;
+            return this;
+        }
+
         public IBuild Values(params object[] values)
         {
             Structure.Values = values;
@@ -41,6 +51,11 @@ namespace lib12.Data.QueryBuilding.Builders
 
         public override string BuildQuery()
         {
+            if (Structure.Select.IsNotNullAndNotEmpty() && Structure.Columns.IsNullOrEmpty())
+                return "INSERT INTO {0} {1}".FormatWith(Structure.Table, Structure.Select);
+            else if (Structure.Select.IsNotNullAndNotEmpty())
+                return "INSERT INTO {0}({1}) {2}".FormatWith(Structure.Table, BuildColumns(), Structure.Select);
+
             if (!Structure.IsBatchInsert && Structure.Columns.Length != Structure.Values.Length)
                 throw new QueryBuilderException("Columns count differs from values count");
 

@@ -11,6 +11,8 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
 
         public IEnumerable<object> BatchValues { get; set; }
 
+        public string Select { get; set; }
+
         public bool IsBatchInsert
         {
             get { return BatchValues.IsNotNullAndNotEmpty(); }
