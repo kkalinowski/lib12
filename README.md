@@ -106,8 +106,8 @@ var generated = generator.Generate<ClassToGenerate>(CollectionSize,
 ```
 lib12 contains also extensions for System.Random class for generating bool, char, string and DateTime.
 
-Mathematics functions - lib12.Mathematics
---------------------
+Mathematical functions - lib12.Mathematics
+---
 Formula class use Reverse Polish Notation to parse and compute mathematical expressions:
 ```csharp
 var formula = new Formula("-12*3 + (5-3)*6 + 9/(4-1)");
@@ -120,6 +120,12 @@ formula.Evaluate(new { a = 10, b = 3 });
 ```
 Mathematics namespace contains also QuadraticEquation and MathExt classes which contains many helper functions for less standard mathematical operations like Iverson operator, Factorial or BinomialCoefficent
 
+Collections - lib12.Collections
+---
+- TreeHelper class easier working with hierarchical data structures. It works on top of the ITreeBranch interface providing methods for manipulation of this hierarchy like Organazing list into hierarchy, flattening hierarchy, checking position of given element in tree
+- IEnumerableExtension contains methods that easier working with standard collections like Foreach, IsNullOrEmpty, ToNullPatternObject, ToDelimitedString, etc.
+- lib12.Collections namespace contains also extensions for List and Dictionary classes
+
 Other classes
 ---
 - lib12.Core.Empty - returns empty array, list and dictionary
@@ -131,7 +137,6 @@ Other classes
 
 Set of extensions for standard classes
 --------------------
-- IEnumerable
 - DateTime
 - EventHandler
 - Nullable
