@@ -128,11 +128,11 @@ Collections - lib12.Collections
 
 Other classes
 ---
-- lib12.Core.Empty - returns empty array, list and dictionary
-- lib12.Core.PropertyComparer - implements IEqualityComparer using lambda expressions
-- lib12.Core.TimesLoop - do given function X times
+- lib12.Misc.Empty - returns empty array, list and dictionary
+- lib12.Misc.PropertyComparer - implements IEqualityComparer using lambda expressions
+- lib12.Misc.TimesLoop - do given function X times
+- lib12.Misc.IoHelper - additional methods for IO
 - lib12.Crypto.SaltedHash - implemention of salted hash mechanism for password storing
-- lib12.IO.IOHelper - additional methods for IO
 - lib12.Serialization - namespace contains classes that simplifying implementation of serialization
 
 Set of extensions for standard classes
@@ -147,7 +147,7 @@ lib12.WPF
 FluidTextBox control
 --------------------
 It is extension of TextBox control that adds:
-- watermark
+- Watermark
 - IntOnly, DoubleOnly enter mode
 - Build in label
 
