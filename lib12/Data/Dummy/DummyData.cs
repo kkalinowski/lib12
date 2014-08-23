@@ -33,6 +33,30 @@ namespace lib12.Data.Dummy
         /// The country codes.
         /// </value>
         public static string[] CountryCodes { get; private set; }
+
+        /// <summary>
+        /// List of male names
+        /// </summary>
+        /// <value>
+        /// The male names.
+        /// </value>
+        public static string[] MaleNames { get; set; }
+
+        /// <summary>
+        /// List of female names
+        /// </summary>
+        /// <value>
+        /// The male names.
+        /// </value>
+        public static string[] FemaleNames { get; set; }
+
+        /// <summary>
+        /// List of surnames
+        /// </summary>
+        /// <value>
+        /// The male names.
+        /// </value>
+        public static string[] Surnames { get; set; }
         #endregion
 
         #region sctor
@@ -529,6 +553,29 @@ namespace lib12.Data.Dummy
                 "YE",
                 "ZM",
                 "ZW"
+            };
+            #endregion
+
+            #region Names
+            MaleNames = new[]
+            {
+                "John", "Michael", "Jack", "Sebastian", "Christopher", "Hugh", "James", "Harry",
+                "Albert", "Adam", "Andrew", "Arthur", "Benjamin", "Daniel", "Emmanuel", "Harrison",
+                "Jarvis", "Keith", "Leon", "Manuel", "Oscar", "Phillip", "Robert", "Samuel", "Thomas"
+            };
+
+            FemaleNames = new[]
+            {
+                "Ann", "Catherine", "Jennifer", "Emma", "Monique", "Marie", "Beth", "Nancy",
+                "Camilla", "Caroline", "Collette", "Debbie", "Eileen", "Gwyneth", "Isabelle",
+                "Jackie", "Jacqualine", "Lelah", "Lindsey", "Lorilee", "Luise", "Natalie", "Paulene"
+            };
+
+            Surnames = new[]
+            {
+                "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez",
+                "Wilson", "House", "Potter", "Anderson", "Taylor", "Moore", "Jackson", "White", "Black", "Walker",
+                "Allen", "King", "Wright", "Scott", "Green", "Baker", "Murphy", "Edwards", "Steward", "Collins", "Evans"
             };
             #endregion
         }
