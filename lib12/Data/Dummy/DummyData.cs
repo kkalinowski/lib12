@@ -11,14 +11,17 @@ namespace lib12.Data.Dummy
         /// Gets one paragraph of Lorem ipsum text
         /// </summary>
         public static string Paragraph { get; private set; }
+
         /// <summary>
         /// Gets two paragraphs of Lorem ipsum text
         /// </summary>
         public static string TwoParagraphs { get; private set; }
+
         /// <summary>
         /// Gets five paragraphs of Lorem ipsum text
         /// </summary>
         public static string FiveParagraphs { get; private set; }
+
         /// <summary>
         /// List of countries
         /// </summary>
@@ -26,6 +29,7 @@ namespace lib12.Data.Dummy
         /// The countries.
         /// </value>
         public static string[] Countries { get; private set; }
+
         /// <summary>
         /// List of country codes.
         /// </summary>
@@ -33,6 +37,22 @@ namespace lib12.Data.Dummy
         /// The country codes.
         /// </value>
         public static string[] CountryCodes { get; private set; }
+
+        /// <summary>
+        /// List of cities
+        /// </summary>
+        /// <value>
+        /// The cities.
+        /// </value>
+        public static string[] Cities { get; set; }
+
+        /// <summary>
+        /// List of streets
+        /// </summary>
+        /// <value>
+        /// The streets.
+        /// </value>
+        public static string[] Streets { get; set; }
 
         /// <summary>
         /// List of male names
@@ -46,7 +66,7 @@ namespace lib12.Data.Dummy
         /// List of female names
         /// </summary>
         /// <value>
-        /// The male names.
+        /// The female names.
         /// </value>
         public static string[] FemaleNames { get; set; }
 
@@ -54,9 +74,17 @@ namespace lib12.Data.Dummy
         /// List of surnames
         /// </summary>
         /// <value>
-        /// The male names.
+        /// The surnames.
         /// </value>
         public static string[] Surnames { get; set; }
+
+        /// <summary>
+        /// List of companies
+        /// </summary>
+        /// <value>
+        /// The companies.
+        /// </value>
+        public static string[] Companies { get; set; }
         #endregion
 
         #region sctor
@@ -556,6 +584,20 @@ namespace lib12.Data.Dummy
             };
             #endregion
 
+            #region Cities and streets
+            Cities = new[]
+            {
+                "New York", "Lisbon", "San Fransisco", "Boston", "Los Angeles", "Madrid", "Cracow",
+                "Hong Kong", "London", "Paris", "Tokio", "Sao Paolo", "Rome", "Buenos Aires"
+            };
+
+            Streets = new[]
+            {
+                "First", "Second", "Third", "Forth", "Five", "Main", "Oak", "Pine",
+                "Elm", "View", "Lake", "Hill", "Church", "Park Avenue", "Prospect"
+            };
+            #endregion
+
             #region Names
             MaleNames = new[]
             {
@@ -576,6 +618,14 @@ namespace lib12.Data.Dummy
                 "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez",
                 "Wilson", "House", "Potter", "Anderson", "Taylor", "Moore", "Jackson", "White", "Black", "Walker",
                 "Allen", "King", "Wright", "Scott", "Green", "Baker", "Murphy", "Edwards", "Steward", "Collins", "Evans"
+            };
+            #endregion
+
+            #region Companies
+            Companies = new[]
+            {
+                "Acme", "Macrohard", "Pear", "Gogles", "Tanmung", "Intellico", "Specific Motors", "Testral",
+                "Philip", "Tony"
             };
             #endregion
         }
