@@ -89,6 +89,7 @@
     <Compile Include="Mathematics\Token.cs" />
     <Compile Include="Mathematics\TokenType.cs" />
     <Compile Include="Mathematics\VariableToken.cs" />
+    <Compile Include="Misc\Range.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumReflectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
