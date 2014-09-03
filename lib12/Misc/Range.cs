@@ -57,5 +57,15 @@ namespace lib12.Misc
         {
             return !InRange(item, inclusiveStartAndEnd);
         }
+
+        public bool LessThanStart(T item)
+        {
+            return LocateInRange(item).Is(LocationInRange.LessThanStart);
+        }
+
+        public bool GreaterThanEnd(T item)
+        {
+            return LocateInRange(item).Is(LocationInRange.GreaterThanEnd);
+        }
     }
 }
