@@ -185,6 +185,11 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        public IFields Fields(params string[] fields)
+        {
+            return Fields(false, fields);
+        }
+
         public IFields Fields(bool withAlias, params string[] fields)
         {
             if (withAlias && fields.Length % 2 != 0)

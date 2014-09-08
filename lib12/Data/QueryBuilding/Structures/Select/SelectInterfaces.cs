@@ -9,6 +9,8 @@ namespace lib12.Data.QueryBuilding.Structures.Select
 
         IFields Fields(IEnumerable<SelectField> fields);
 
+        IFields Fields(params string[] fields);
+
         IFields Fields(bool withAlias, params string[] fields);
     }
 
