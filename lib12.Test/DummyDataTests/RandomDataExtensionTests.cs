@@ -38,19 +38,37 @@ namespace lib12.Test.DummyDataTests
         }
 
         [Fact]
-        public void NextCompany_test()
-        {
-            var result = random.NextCompany();
-            result.ShouldNotBeEmpty();
-            DummyData.Companies.ShouldContain(result);
-        }
-
-        [Fact]
         public void NextZipCode_test()
         {
             var result = random.NextZipCode();
             var regex = new Regex("[0-9]{2}-[0-9]{3}");
             regex.IsMatch(result).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void NextStreet_test()
+        {
+            var result = random.NextStreet();
+            result.ShouldNotBeEmpty();
+            DummyData.Streets.ShouldContain(result);
+        }
+
+        [Fact]
+        public void NextAddress_test()
+        {
+            var result = random.NextAddress();
+            result.ShouldNotBeEmpty();
+            var parts = result.Split(' ');
+            DummyData.Streets.ShouldContain(parts[0]);
+            Assert.DoesNotThrow(() => int.Parse(parts.Last()));
+        }
+
+        [Fact]
+        public void NextCompany_test()
+        {
+            var result = random.NextCompany();
+            result.ShouldNotBeEmpty();
+            DummyData.Companies.ShouldContain(result);
         }
     }
 }

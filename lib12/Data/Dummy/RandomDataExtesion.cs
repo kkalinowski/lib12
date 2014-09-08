@@ -41,14 +41,24 @@ namespace lib12.Data.Dummy
             return DummyData.Cities.GetRandomItem(random);
         }
 
-        public static string NextCompany(this Random random)
-        {
-            return DummyData.Companies.GetRandomItem(random);
-        }
-
         public static string NextZipCode(this Random random)
         {
             return "{0:00}-{1:000}".FormatWith(random.Next(), random.Next());
+        }
+
+        public static string NextStreet(this Random random)
+        {
+            return DummyData.Streets.GetRandomItem(random);
+        }
+
+        public static string NextAddress(this Random random)
+        {
+            return "{0} {1}".FormatWith(random.NextStreet(), random.Next(1, 125));
+        }
+
+        public static string NextCompany(this Random random)
+        {
+            return DummyData.Companies.GetRandomItem(random);
         }
     }
 }
