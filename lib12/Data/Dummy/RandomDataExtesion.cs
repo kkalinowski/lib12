@@ -45,5 +45,10 @@ namespace lib12.Data.Dummy
         {
             return DummyData.Companies.GetRandomItem(random);
         }
+
+        public static string NextZipCode(this Random random)
+        {
+            return "{0:00}-{1:000}".FormatWith(random.Next(), random.Next());
+        }
     }
 }

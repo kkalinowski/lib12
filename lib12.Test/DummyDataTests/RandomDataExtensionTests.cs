@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using lib12.Data.Dummy;
 using Should;
 using Xunit;
@@ -42,6 +43,14 @@ namespace lib12.Test.DummyDataTests
             var result = random.NextCompany();
             result.ShouldNotBeEmpty();
             DummyData.Companies.ShouldContain(result);
+        }
+
+        [Fact]
+        public void NextZipCode_test()
+        {
+            var result = random.NextZipCode();
+            var regex = new Regex("[0-9]{2}-[0-9]{3}");
+            regex.IsMatch(result).ShouldBeTrue();
         }
     }
 }
