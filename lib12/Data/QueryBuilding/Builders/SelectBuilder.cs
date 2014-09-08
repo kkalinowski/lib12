@@ -279,6 +279,12 @@ namespace lib12.Data.QueryBuilding.Builders
             return ((ISelectFrom)this).Where(cnd);
         }
 
+        public ISelectWhere Where(string condition)
+        {
+            var cnd = new Condition { ExplicitCondition = condition };
+            return ((ISelectFrom)this).Where(cnd);
+        }
+
         public ISelectWhere WhereBetween(string field, object argument1, object argument2)
         {
             var cnd = new Condition(field, Compare.Between, new Tuple<object, object>(argument1, argument2));

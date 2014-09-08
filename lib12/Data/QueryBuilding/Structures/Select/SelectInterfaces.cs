@@ -32,6 +32,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
     {
         ISelectWhere Where(Condition cnd);
         ISelectWhere Where(string field, Compare comparison, object argument);
+        ISelectWhere Where(string condition);
         ISelectWhere WhereBetween(string field, object argument1, object argument2);
         ISelectWhere WhereBetween(string field, Tuple<object, object> argument);
         ISelectWhere WhereIsNull(string field);

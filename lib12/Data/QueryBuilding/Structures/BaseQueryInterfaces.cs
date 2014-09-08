@@ -6,6 +6,7 @@ namespace lib12.Data.QueryBuilding.Structures
     {
         IWhere Where(Condition cnd);
         IWhere Where(string field, Compare comparison, object argument);
+        IWhere Where(string condition);
         IWhere WhereBetween(string field, object argument1, object argument2);
         IWhere WhereBetween(string field, Tuple<object, object> argument);
         IWhere WhereIsNull(string field);

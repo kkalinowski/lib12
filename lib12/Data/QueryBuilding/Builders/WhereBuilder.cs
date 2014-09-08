@@ -45,6 +45,12 @@ namespace lib12.Data.QueryBuilding.Builders
 
         private void BuildCondition(StringBuilder sbuilder, Condition cnd)
         {
+            if (cnd.ExplicitCondition.IsNotNullAndNotEmpty())
+            {
+                sbuilder.AppendFormat(cnd.ExplicitCondition);
+                return;
+            }
+
             var quote = cnd.Argument.ToString().StartsWith("@") ? string.Empty : "'";
             if (cnd.Comparison == Compare.IsNull || cnd.Comparison == Compare.IsNotNull)
             {

@@ -64,6 +64,12 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        public IWhere Where(string condition)
+        {
+            var cnd = new Condition { ExplicitCondition = condition };
+            return Where(cnd);
+        }
+
         public IWhere Where(string field, Compare comparison, object argument)
         {
             var cnd = new Condition(field, comparison, argument);
