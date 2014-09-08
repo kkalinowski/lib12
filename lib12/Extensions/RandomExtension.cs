@@ -2,7 +2,7 @@
 using System.Text;
 using lib12.Misc;
 
-namespace lib12.Data.Dummy
+namespace lib12.Extensions
 {
     public static class RandomExtension
     {
