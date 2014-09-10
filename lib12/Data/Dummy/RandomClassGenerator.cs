@@ -38,7 +38,7 @@ namespace lib12.Data.Dummy
                 if (explicitGenerator != null)
                     propsGenerators.Add(explicitGenerator);
                 else
-                    propsGenerators.Add(new GenericPropertyGenerator<T>(prop.Name, prop.PropertyType, random));
+                    propsGenerators.Add(new GenericPropertyGenerator<T>(prop.Name, prop.PropertyType));
             }
 
             return propsGenerators;

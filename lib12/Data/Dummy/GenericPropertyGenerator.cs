@@ -8,27 +8,25 @@ namespace lib12.Data.Dummy
     {
         private readonly string propertyName;
         private readonly Type propertyType;
-        private readonly Random random;
 
         public override string PropertyName { get { return propertyName; } }
 
-        public GenericPropertyGenerator(string propertyName, Type propertyType, Random random)
+        public GenericPropertyGenerator(string propertyName, Type propertyType)
         {
             this.propertyName = propertyName;
             this.propertyType = propertyType;
-            this.random = random;
         }
 
         public override void GenerateProperty(T item, Random random)
         {
-            var value = GenerateValue();
+            var value = GenerateValue(random);
             item.SetProperty(PropertyName, value);
         }
 
-        private object GenerateValue()
+        private object GenerateValue(Random random)
         {
             if (propertyType == typeof(string))
-                return GenerateStringProperty();
+                return GenerateStringProperty(random);
             else if (propertyType == typeof(int))
                 return random.Next(1, 1000);
             else if (propertyType == typeof(double))
@@ -39,7 +37,7 @@ namespace lib12.Data.Dummy
                 return propertyType.GetDefault();
         }
 
-        private string GenerateStringProperty()
+        private string GenerateStringProperty(Random random)
         {
             if (propertyName.EqualsUnCased("Name"))
                 return random.NextName();

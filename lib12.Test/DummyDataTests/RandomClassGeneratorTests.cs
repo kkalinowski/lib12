@@ -114,5 +114,17 @@ namespace lib12.Test.DummyDataTests
 
             generated.Any(x => Math.Abs(x.Number) > double.Epsilon).ShouldBeTrue();
         }
+
+        [Fact]
+        public void available_values_generator()
+        {
+            var names = new[] { "name1", "name2", "name3" };
+            var generated = generator.Generate(CollectionSize, new AvailableValuesGenerator<Account, string>(x => x.Name, names));
+
+            foreach (var item in generated)
+            {
+                names.ShouldContain(item.Name);
+            }
+        }
     }
 }
