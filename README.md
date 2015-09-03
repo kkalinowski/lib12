@@ -1,6 +1,9 @@
 ![alt tag](https://raw.github.com/kkalinowski/lib12/master/lib12.png)
 
 lib12 is set of useful classes and extension created for .net 4 core and WPF. During my work with .net and WPF I created many classes and function that can be reused across different projects.
+
+Current version 1.2 available on nuget - https://www.nuget.org/packages/lib12
+
 Dependency injection - lib12.DependencyInjection
 --------------------
 I wanted to create as simple as possible dependency injection container. To register class you have to only decorate it with Singleton or Transient attribute:
@@ -128,6 +131,7 @@ Collections - lib12.Collections
 
 Other classes
 ---
+- lib12.Misc.Range - generic class for dealing with ranges
 - lib12.Misc.Empty - returns empty array, list and dictionary
 - lib12.Misc.PropertyComparer - implements IEqualityComparer using lambda expressions
 - lib12.Misc.TimesLoop - do given function X times
