@@ -53,6 +53,14 @@ namespace lib12.Test.QueryBuildingTests
         }
 
         [Fact]
+        public void explicit_where_test()
+        {
+            var toBuild = "select * from products where price>'100' and type is not null";
+            var query = SqlBuilder.Select.AllFields.From("products").Where("price", Compare.GreaterThan, 100).And.Where("type is not null").Build();
+            Assert.Equal(toBuild.ToLower(), query.ToLower());
+        }
+
+        [Fact]
         public void two_wheres_test()
         {
             var toBuild = "select * from products where price>'100' and price<='1000'";

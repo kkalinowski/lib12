@@ -48,6 +48,9 @@
     <Compile Include="Collections\ITreeBranch.cs" />
     <Compile Include="Collections\ITreeBranchExtension.cs" />
     <Compile Include="Collections\TreeHelper.cs" />
+    <Compile Include="Data\Dummy\AvailableValuesGenerator.cs" />
+    <Compile Include="Data\Dummy\GenericPropertyGenerator.cs" />
+    <Compile Include="Data\Dummy\RandomDataExtesion.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Misc\Empty.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
@@ -101,10 +104,11 @@
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Reflection\PropertyInfoExtension.cs" />
     <Compile Include="Misc\TimesLoop.cs" />
+    <Compile Include="Reflection\ReflectionObjectExtension.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
     <Compile Include="Exceptions\UnknownEnumException.cs" />
     <Compile Include="Data\Dummy\DummyData.cs" />
-    <Compile Include="Data\Dummy\RandomExtension.cs" />
+    <Compile Include="Extensions\RandomExtension.cs" />
     <Compile Include="Data\Dummy\RandomIEnumerableExtension.cs" />
     <Compile Include="Data\QueryBuilding\Builders\SelectBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Structures\Compare.cs" />

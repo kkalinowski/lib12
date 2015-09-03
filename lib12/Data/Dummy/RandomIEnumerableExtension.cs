@@ -1,31 +1,32 @@
-﻿using System;
+﻿using lib12.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using lib12.Collections;
 
 namespace lib12.Data.Dummy
 {
     public static class RandomIEnumerableExtension
     {
         #region Fields
-        private static Random random;
+        private static readonly Random instanceRandom;
         #endregion
 
         #region sctor
         static RandomIEnumerableExtension()
         {
-            random = new Random();
+            instanceRandom = new Random();
         }
         #endregion
 
         #region Logic
-        public static T GetRandomItem<T>(this IEnumerable<T> enumerable)
+        public static T GetRandomItem<T>(this IEnumerable<T> enumerable, Random random = null)
         {
-            if (enumerable.IsEmpty())
+            if (enumerable.IsNullOrEmpty())
                 return default(T);
 
-            return enumerable.ElementAt(random.Next(enumerable.Count()));
-        } 
+            var usedRandom = random ?? instanceRandom;
+            return enumerable.ElementAt(usedRandom.Next(enumerable.Count()));
+        }
         #endregion
     }
 }

@@ -86,6 +86,7 @@
     <Compile Include="DependencyInjectionTest\InstancesTest.cs" />
     <Compile Include="DummyDataTests\ClassToGenerate.cs" />
     <Compile Include="DummyDataTests\RandomClassGeneratorTests.cs" />
+    <Compile Include="DummyDataTests\RandomDataExtensionTests.cs" />
     <Compile Include="ExtensionTests\EnumExtensionTests.cs" />
     <Compile Include="ExtensionTests\StringExtensionTests.cs" />
     <Compile Include="MathematicsTests\FormulaTests.cs" />

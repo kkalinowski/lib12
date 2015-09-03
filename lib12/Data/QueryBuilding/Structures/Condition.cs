@@ -12,7 +12,7 @@ namespace lib12.Data.QueryBuilding.Structures
         public IList<Condition> Children { get; set; }
         public Condition Parent { get; set; }
         public LogicOperator Concat { get; set; }
-
+        public string ExplicitCondition { get; set; }
         public bool HasChildren
         {
             get

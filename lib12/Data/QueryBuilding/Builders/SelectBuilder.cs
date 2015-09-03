@@ -185,6 +185,11 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        public IFields Fields(params string[] fields)
+        {
+            return Fields(false, fields);
+        }
+
         public IFields Fields(bool withAlias, params string[] fields)
         {
             if (withAlias && fields.Length % 2 != 0)
@@ -271,6 +276,12 @@ namespace lib12.Data.QueryBuilding.Builders
         public ISelectWhere Where(string field, Compare comparison, object argument)
         {
             var cnd = new Condition(field, comparison, argument);
+            return ((ISelectFrom)this).Where(cnd);
+        }
+
+        public ISelectWhere Where(string condition)
+        {
+            var cnd = new Condition { ExplicitCondition = condition };
             return ((ISelectFrom)this).Where(cnd);
         }
 

@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Linq.Expressions;
+using lib12.Reflection;
 
 namespace lib12.Data.Dummy
 {
-    public abstract class PropertyGenerator<T, T2> : PropertyGeneratorBase<T>
+    public abstract class PropertyGenerator<T, TProp> : PropertyGeneratorBase<T>
     {
-        public Expression<Func<T, T2>> Selector { get; set; }
+        public Expression<Func<T, TProp>> Selector { get; set; }
 
-        protected PropertyGenerator(Expression<Func<T, T2>> selector)
+        public override string PropertyName
+        {
+            get { return Selector.GetName(); }
+        }
+
+        protected PropertyGenerator(Expression<Func<T, TProp>> selector)
         {
             Selector = selector;
         }
