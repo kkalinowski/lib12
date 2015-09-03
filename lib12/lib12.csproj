@@ -53,7 +53,7 @@
     <Compile Include="Data\Dummy\RandomDataExtesion.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Misc\Empty.cs" />
-    <Compile Include="Misc\PerformanceCounter.cs" />
+    <Compile Include="Misc\PerformanceCheck.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
     <Compile Include="Crypto\SaltedHash.cs" />
     <Compile Include="Data\Dummy\BoolGenerator.cs" />

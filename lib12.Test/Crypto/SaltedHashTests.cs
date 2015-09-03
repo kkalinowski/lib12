@@ -2,7 +2,7 @@
 using lib12.Crypto;
 using Xunit;
 
-namespace lib12.Test.OtherTests
+namespace lib12.Test.Crypto
 {
     public class SaltedHashTests
     {

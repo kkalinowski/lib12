@@ -1,7 +1,7 @@
 ﻿using lib12.Misc;
 using Xunit;
 
-namespace lib12.Test.OtherTests
+namespace lib12.Test.Misc
 {
     public class PropertyComparerTests
     {
