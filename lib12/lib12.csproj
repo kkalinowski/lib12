@@ -54,6 +54,7 @@
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Misc\CachedObject.cs" />
     <Compile Include="Misc\Empty.cs" />
+    <Compile Include="Misc\Logger.cs" />
     <Compile Include="Misc\PerformanceCheck.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
     <Compile Include="Crypto\SaltedHash.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Mathematics\TokenType.cs" />
     <Compile Include="Mathematics\VariableToken.cs" />
     <Compile Include="Misc\Range.cs" />
+    <Compile Include="Monoids\MonoidExtension.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumReflectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
