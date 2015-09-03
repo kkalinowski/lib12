@@ -92,6 +92,7 @@
     <Compile Include="Mathematics\FormulaTests.cs" />
     <Compile Include="Mathematics\MathExtTests.cs" />
     <Compile Include="Mathematics\QuadraticEquationTests.cs" />
+    <Compile Include="Misc\CachedObjectTests.cs" />
     <Compile Include="Misc\EmptyTests.cs" />
     <Compile Include="Misc\PerformanceCheckTests.cs" />
     <Compile Include="Misc\RangeTests.cs" />
