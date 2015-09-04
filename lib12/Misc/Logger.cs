@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using lib12.Extensions;
 
 namespace lib12.Misc
 {
@@ -27,6 +28,21 @@ namespace lib12.Misc
         public static void Error(string text)
         {
             file.WriteLine(Format, DateTime.UtcNow, "ERROR", text);
+        }
+
+        /// <summary>
+        /// Log exception
+        /// </summary>
+        public static void Error(Exception ex)
+        {
+            file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
+
+            var inner = ex.InnerException;
+            while (inner.NotNull())
+            {
+                file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
+                inner = inner.InnerException;
+            }
         }
     }
 }
