@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace lib12.Monoids
+namespace lib12.FunctionalFlow
 {
-    public class MonoidResult
+    public class MaybeResult
     {
         public bool Result { get; private set; }
 
-        public static MonoidResult Create(bool result)
+        public static MaybeResult Create(bool result)
         {
-            return new MonoidResult {Result = result};
+            return new MaybeResult {Result = result};
         }
 
         public void Do(Action action)
@@ -17,7 +17,7 @@ namespace lib12.Monoids
                 action();
         }
 
-        public static implicit operator bool(MonoidResult result)
+        public static implicit operator bool(MaybeResult result)
         {
             return result.Result;
         }

@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace lib12.Monoids
+namespace lib12.FunctionalFlow
 {
-    public static class MonoidExtension
+    public static class MaybeExtension
     {
         /// <summary>
         /// Check if given object is null
         /// </summary>
         /// <param name="object">Object to check</param>
         /// <returns></returns>
-        public static MonoidResult Null<TObject>(this TObject @object) where TObject : class
+        public static MaybeResult Null<TObject>(this TObject @object) where TObject : class
         {
-            return MonoidResult.Create(@object == null);
+            return MaybeResult.Create(@object == null);
         }
 
         ///// <summary>
@@ -19,9 +19,9 @@ namespace lib12.Monoids
         ///// </summary>
         ///// <param name="@object"></param>
         ///// <returns></returns>
-        public static MonoidResult NotNull<TObject>(this TObject @object) where TObject : class
+        public static MaybeResult NotNull<TObject>(this TObject @object) where TObject : class
         {
-            return MonoidResult.Create(@object != null);
+            return MaybeResult.Create(@object != null);
         }
 
         ///// <summary>
