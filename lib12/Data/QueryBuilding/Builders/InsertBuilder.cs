@@ -1,11 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Text;
 using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures;
 using lib12.Data.QueryBuilding.Structures.Insert;
 using lib12.Extensions;
+using lib12.FunctionalFlow;
 using lib12.Reflection;
-using System.Collections.Generic;
-using System.Text;
 
 namespace lib12.Data.QueryBuilding.Builders
 {

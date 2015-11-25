@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using lib12.Extensions;
+using lib12.FunctionalFlow;
 
 namespace lib12.Collections
 {
@@ -256,7 +256,7 @@ namespace lib12.Collections
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable">The enumerable.</param>
         /// <returns></returns>
-        public static IEnumerable<T> ToNullPatternObject<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> Recover<T>(this IEnumerable<T> enumerable)
         {
             if (enumerable.Null())
                 yield break;

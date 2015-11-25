@@ -60,5 +60,10 @@ namespace lib12.Data.Dummy
         {
             return DummyData.Companies.GetRandomItem(random);
         }
+
+        public static string NextEmail(this Random random)
+        {
+            return "{0}@{1}.com".FormatWith(random.NextName(), random.NextCompany());
+        }
     }
 }

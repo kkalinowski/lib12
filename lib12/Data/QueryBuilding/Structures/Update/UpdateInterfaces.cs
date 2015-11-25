@@ -1,6 +1,4 @@
-﻿using lib12.Data.QueryBuilding.Structures.Delete;
-
-namespace lib12.Data.QueryBuilding.Structures.Update
+﻿namespace lib12.Data.QueryBuilding.Structures.Update
 {
     public interface IUpdate
     {

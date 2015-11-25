@@ -52,7 +52,12 @@
     <Compile Include="Data\Dummy\GenericPropertyGenerator.cs" />
     <Compile Include="Data\Dummy\RandomDataExtesion.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="FunctionalFlow\CollectionObjectCheckExtension.cs" />
+    <Compile Include="FunctionalFlow\MaybeExtension.cs" />
+    <Compile Include="Misc\CachedObject.cs" />
     <Compile Include="Misc\Empty.cs" />
+    <Compile Include="Misc\Logger.cs" />
+    <Compile Include="Misc\PerformanceCheck.cs" />
     <Compile Include="Misc\PropertyComparer.cs" />
     <Compile Include="Crypto\SaltedHash.cs" />
     <Compile Include="Data\Dummy\BoolGenerator.cs" />
@@ -61,7 +66,7 @@
     <Compile Include="Data\Dummy\IntGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGeneratorBase.cs" />
-    <Compile Include="Data\Dummy\RandomClassGenerator.cs" />
+    <Compile Include="Data\Dummy\DummyClass.cs" />
     <Compile Include="Data\Dummy\StringGenerator.cs" />
     <Compile Include="Data\QueryBuilding\Builders\InsertBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Builders\QueryBuilderBase.cs" />
@@ -80,7 +85,6 @@
     <Compile Include="Data\QueryBuilding\Structures\Update\UpdateStructure.cs" />
     <Compile Include="DependencyInjection\CircularDependencyException.cs" />
     <Compile Include="DependencyInjection\LazyProperty.cs" />
-    <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Mathematics\Formula.cs" />
     <Compile Include="Mathematics\MathException.cs" />
     <Compile Include="Mathematics\NegationToken.cs" />
@@ -93,6 +97,7 @@
     <Compile Include="Mathematics\TokenType.cs" />
     <Compile Include="Mathematics\VariableToken.cs" />
     <Compile Include="Misc\Range.cs" />
+    <Compile Include="FunctionalFlow\ParamsObjectCheckExtension.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumReflectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
@@ -101,12 +106,12 @@
     <Compile Include="Reflection\ExpressionExtension.cs" />
     <Compile Include="Reflection\FieldInfoExtension.cs" />
     <Compile Include="Extensions\NullableBoolExtension.cs" />
-    <Compile Include="Extensions\ObjectExtension.cs" />
+    <Compile Include="FunctionalFlow\SimpleObjectCheckExtension.cs" />
     <Compile Include="Reflection\PropertyInfoExtension.cs" />
     <Compile Include="Misc\TimesLoop.cs" />
     <Compile Include="Reflection\ReflectionObjectExtension.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
-    <Compile Include="Exceptions\UnknownEnumException.cs" />
+    <Compile Include="Misc\UnknownEnumException.cs" />
     <Compile Include="Data\Dummy\DummyData.cs" />
     <Compile Include="Extensions\RandomExtension.cs" />
     <Compile Include="Data\Dummy\RandomIEnumerableExtension.cs" />
@@ -136,7 +141,7 @@
     <Compile Include="DependencyInjection\TypeRegistration.cs" />
     <Compile Include="DependencyInjection\WireUpAllPropertiesAttribute.cs" />
     <Compile Include="DependencyInjection\WireUpAttribute.cs" />
-    <Compile Include="Exceptions\lib12Exception.cs" />
+    <Compile Include="lib12Exception.cs" />
     <Compile Include="Misc\IoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />

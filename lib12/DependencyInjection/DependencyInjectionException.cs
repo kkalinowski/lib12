@@ -1,6 +1,4 @@
-﻿using lib12.Exceptions;
-
-namespace lib12.DependencyInjection
+﻿namespace lib12.DependencyInjection
 {
     public class DependencyInjectionException : lib12Exception
     {

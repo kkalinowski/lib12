@@ -1,6 +1,4 @@
-﻿using lib12.Exceptions;
-
-namespace lib12.Data.QueryBuilding
+﻿namespace lib12.Data.QueryBuilding
 {
     public class QueryBuilderException : lib12Exception
     {

@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.2.2.0.0\lib\net40\FluentAssertions.dll</HintPath>
-    </Reference>
     <Reference Include="Should">
       <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
     </Reference>
@@ -55,60 +52,64 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollectionsTests\Branch.cs" />
-    <Compile Include="CollectionsTests\TreeTests.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\CircularDependency1.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\CircularDependency2.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\CircularCtorDependency1.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\CircularCtorDependency2.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\DoNotWirePropertyWithDoNotWireAttributeAndWithoutWireUpAllProperties.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\ISingletonContract.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\ITransientContract.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\SingletonClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\SingletonClassThatChangeProperty.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\InjectInCtor.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\InjectInCtor2Ctors.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\InjectInCtorNotRegisteredClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\RegisteredByAttributeAndManualClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\RegisterManualTwoTimesClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\NotRegisteredClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\RegisterByAttributeAsSingletonAndTransientClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\SingletonClassRegisteredByAttribute.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\SingletonClassRegisteredByKey.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\SingletonService.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\TransientClass.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\TransientService.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\WireAllPropertiesSingleton.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\WireAllPropertiesSingletonWithNotRegisteredProperties.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\WireChoosenProperties.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\WireUpAllPropertiesWithoutIgnored.cs" />
-    <Compile Include="DependencyInjectionTest\Classes\WireUpAllPropertiesWithWireUpAttribute.cs" />
-    <Compile Include="DependencyInjectionTest\InstancesTest.cs" />
-    <Compile Include="DummyDataTests\ClassToGenerate.cs" />
-    <Compile Include="DummyDataTests\RandomClassGeneratorTests.cs" />
-    <Compile Include="DummyDataTests\RandomDataExtensionTests.cs" />
-    <Compile Include="ExtensionTests\EnumExtensionTests.cs" />
-    <Compile Include="ExtensionTests\StringExtensionTests.cs" />
-    <Compile Include="MathematicsTests\FormulaTests.cs" />
-    <Compile Include="MathematicsTests\MathExtTests.cs" />
-    <Compile Include="MathematicsTests\QuadraticEquationTests.cs" />
-    <Compile Include="OtherTests\EmptyTests.cs" />
-    <Compile Include="OtherTests\RangeTests.cs" />
-    <Compile Include="ReflectionTests\CreateTypeFromEnumTests\EnumLogicTests.cs" />
-    <Compile Include="ReflectionTests\CreateTypeFromEnumTests\SampleEnum.cs" />
-    <Compile Include="ExtensionTests\DateTimeExtensionTests.cs" />
-    <Compile Include="ExtensionTests\ObjectTests.cs" />
-    <Compile Include="CollectionsTests\IEnumerableExtensionTests.cs" />
-    <Compile Include="OtherTests\PropertyComparerTests.cs" />
-    <Compile Include="OtherTests\SaltedHashTests.cs" />
+    <Compile Include="Collections\Branch.cs" />
+    <Compile Include="Collections\TreeTests.cs" />
+    <Compile Include="DependencyInjection\Classes\CircularDependency1.cs" />
+    <Compile Include="DependencyInjection\Classes\CircularDependency2.cs" />
+    <Compile Include="DependencyInjection\Classes\CircularCtorDependency1.cs" />
+    <Compile Include="DependencyInjection\Classes\CircularCtorDependency2.cs" />
+    <Compile Include="DependencyInjection\Classes\DoNotWirePropertyWithDoNotWireAttributeAndWithoutWireUpAllProperties.cs" />
+    <Compile Include="DependencyInjection\Classes\ISingletonContract.cs" />
+    <Compile Include="DependencyInjection\Classes\ITransientContract.cs" />
+    <Compile Include="DependencyInjection\Classes\SingletonClass.cs" />
+    <Compile Include="DependencyInjection\Classes\SingletonClassThatChangeProperty.cs" />
+    <Compile Include="DependencyInjection\Classes\InjectInCtor.cs" />
+    <Compile Include="DependencyInjection\Classes\InjectInCtor2Ctors.cs" />
+    <Compile Include="DependencyInjection\Classes\InjectInCtorNotRegisteredClass.cs" />
+    <Compile Include="DependencyInjection\Classes\RegisteredByAttributeAndManualClass.cs" />
+    <Compile Include="DependencyInjection\Classes\RegisterManualTwoTimesClass.cs" />
+    <Compile Include="DependencyInjection\Classes\NotRegisteredClass.cs" />
+    <Compile Include="DependencyInjection\Classes\RegisterByAttributeAsSingletonAndTransientClass.cs" />
+    <Compile Include="DependencyInjection\Classes\SingletonClassRegisteredByAttribute.cs" />
+    <Compile Include="DependencyInjection\Classes\SingletonClassRegisteredByKey.cs" />
+    <Compile Include="DependencyInjection\Classes\SingletonService.cs" />
+    <Compile Include="DependencyInjection\Classes\TransientClass.cs" />
+    <Compile Include="DependencyInjection\Classes\TransientService.cs" />
+    <Compile Include="DependencyInjection\Classes\WireAllPropertiesSingleton.cs" />
+    <Compile Include="DependencyInjection\Classes\WireAllPropertiesSingletonWithNotRegisteredProperties.cs" />
+    <Compile Include="DependencyInjection\Classes\WireChoosenProperties.cs" />
+    <Compile Include="DependencyInjection\Classes\WireUpAllPropertiesWithoutIgnored.cs" />
+    <Compile Include="DependencyInjection\Classes\WireUpAllPropertiesWithWireUpAttribute.cs" />
+    <Compile Include="DependencyInjection\InstancesTest.cs" />
+    <Compile Include="DummyData\ClassToGenerate.cs" />
+    <Compile Include="DummyData\RandomClassGeneratorTests.cs" />
+    <Compile Include="DummyData\RandomDataExtensionTests.cs" />
+    <Compile Include="FunctionalFlow\ParamsObjectCheckExtensionTests.cs" />
+    <Compile Include="Extensions\StringExtensionTests.cs" />
+    <Compile Include="FunctionalFlow\CollectionObjectCheckExtensionTest.cs" />
+    <Compile Include="FunctionalFlow\SimpleObjectCheckExtensionTests.cs" />
+    <Compile Include="Mathematics\FormulaTests.cs" />
+    <Compile Include="Mathematics\MathExtTests.cs" />
+    <Compile Include="Mathematics\QuadraticEquationTests.cs" />
+    <Compile Include="Misc\CachedObjectTests.cs" />
+    <Compile Include="Misc\EmptyTests.cs" />
+    <Compile Include="Misc\PerformanceCheckTests.cs" />
+    <Compile Include="Misc\RangeTests.cs" />
+    <Compile Include="Reflection\CreateTypeFromEnumTests\EnumLogicTests.cs" />
+    <Compile Include="Reflection\CreateTypeFromEnumTests\SampleEnum.cs" />
+    <Compile Include="Extensions\DateTimeExtensionTests.cs" />
+    <Compile Include="FunctionalFlow\MaybeObjectExtensionTests.cs" />
+    <Compile Include="Collections\IEnumerableExtensionTests.cs" />
+    <Compile Include="Misc\PropertyComparerTests.cs" />
+    <Compile Include="Crypto\SaltedHashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBuildingTests\InsertBuildingTests.cs" />
-    <Compile Include="QueryBuildingTests\SelectBuildingTests.cs" />
-    <Compile Include="ExtensionTests\TypeExtensionTests.cs" />
-    <Compile Include="ExtensionTests\TypeWithoutParameterlessConstructor.cs" />
-    <Compile Include="QueryBuildingTests\DeleteBuildingTests.cs" />
-    <Compile Include="QueryBuildingTests\UpdateBuildingTests.cs" />
-    <Compile Include="ReflectionTests\ExpressionTests.cs" />
+    <Compile Include="QueryBuilding\InsertBuildingTests.cs" />
+    <Compile Include="QueryBuilding\SelectBuildingTests.cs" />
+    <Compile Include="Extensions\TypeExtensionTests.cs" />
+    <Compile Include="Extensions\TypeWithoutParameterlessConstructor.cs" />
+    <Compile Include="QueryBuilding\DeleteBuildingTests.cs" />
+    <Compile Include="QueryBuilding\UpdateBuildingTests.cs" />
+    <Compile Include="Reflection\ExpressionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lib12\lib12.csproj">

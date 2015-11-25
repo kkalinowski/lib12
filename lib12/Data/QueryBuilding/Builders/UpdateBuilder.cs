@@ -1,8 +1,8 @@
-﻿using lib12.Collections;
-using lib12.Data.QueryBuilding.Structures.Update;
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
+using lib12.Collections;
+using lib12.Data.QueryBuilding.Structures.Update;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
