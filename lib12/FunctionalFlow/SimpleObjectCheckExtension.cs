@@ -1,74 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace lib12.FunctionalFlow
+﻿namespace lib12.FunctionalFlow
 {
     public static class SimpleObjectCheckExtension
     {
         /// <summary>
         /// Check if given object is null
         /// </summary>
-        /// <param name="object">Object to check</param>
         /// <returns></returns>
-        public static bool Null<TObject>(this TObject @object) where TObject : class
+        public static bool Null<TSource>(this TSource source) where TSource : class
         {
-            return @object == null;
+            return source == null;
         }
 
         ///// <summary>
         ///// Check if given object is not null
         ///// </summary>
-        ///// <param name="@object"></param>
+        ///// <param name="source"></param>
         ///// <returns></returns>
-        public static bool NotNull<TObject>(this TObject @object) where TObject : class
+        public static bool NotNull<TSource>(this TSource source) where TSource : class
         {
-            return @object != null;
-        }
-
-        /// <summary>
-        /// Packs given object into array.
-        /// </summary>
-        /// <typeparam name="TObject">The type of the object.</typeparam>
-        /// <param name="object">The object.</param>
-        /// <returns></returns>
-        public static TObject[] PackIntoArray<TObject>(this TObject @object)
-        {
-            return new[] { @object };
-        }
-
-        /// <summary>
-        /// Packs given object into array.
-        /// </summary>
-        /// <typeparam name="TObject">The type of the object.</typeparam>
-        /// <param name="object">The object.</param>
-        /// <returns></returns>
-        public static List<TObject> PackIntoList<TObject>(this TObject @object)
-        {
-            return new List<TObject> { @object };
-        }
-
-        /// <summary>
-        /// Checks if given collection contains this object
-        /// </summary>
-        /// <typeparam name="TObject">The type of the object.</typeparam>
-        /// <param name="object">The object.</param>
-        /// <param name="collection">The collection to check</param>
-        /// <returns></returns>
-        public static bool In<TObject>(this TObject @object, IEnumerable<TObject> collection)
-        {
-            return collection.Contains(@object);
-        }
-
-        /// <summary>
-        /// Checks if given collection does not contains this object
-        /// </summary>
-        /// <typeparam name="TObject">The type of the object.</typeparam>
-        /// <param name="object">The object.</param>
-        /// <param name="collection">The collection to check</param>
-        /// <returns></returns>
-        public static bool NotIn<TObject>(this TObject @object, IEnumerable<TObject> collection)
-        {
-            return !collection.Contains(@object);
+            return source != null;
         }
     }
 }

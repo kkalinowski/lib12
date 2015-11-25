@@ -90,6 +90,7 @@
     <Compile Include="Extensions\EnumExtensionTests.cs" />
     <Compile Include="Extensions\ObjectExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />
+    <Compile Include="FunctionalFlow\CollectionObjectCheckExtensionTest.cs" />
     <Compile Include="FunctionalFlow\SimpleObjectCheckExtensionTests.cs" />
     <Compile Include="Mathematics\FormulaTests.cs" />
     <Compile Include="Mathematics\MathExtTests.cs" />
