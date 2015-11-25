@@ -111,7 +111,7 @@
     <Compile Include="Misc\TimesLoop.cs" />
     <Compile Include="Reflection\ReflectionObjectExtension.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
-    <Compile Include="Exceptions\UnknownEnumException.cs" />
+    <Compile Include="Misc\UnknownEnumException.cs" />
     <Compile Include="Data\Dummy\DummyData.cs" />
     <Compile Include="Extensions\RandomExtension.cs" />
     <Compile Include="Data\Dummy\RandomIEnumerableExtension.cs" />
@@ -141,7 +141,7 @@
     <Compile Include="DependencyInjection\TypeRegistration.cs" />
     <Compile Include="DependencyInjection\WireUpAllPropertiesAttribute.cs" />
     <Compile Include="DependencyInjection\WireUpAttribute.cs" />
-    <Compile Include="Exceptions\lib12Exception.cs" />
+    <Compile Include="lib12Exception.cs" />
     <Compile Include="Misc\IoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />

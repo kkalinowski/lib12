@@ -1,6 +1,5 @@
 ﻿using lib12.Data.QueryBuilding;
 using lib12.Data.QueryBuilding.Builders;
-using lib12.Exceptions;
 using Should;
 using System;
 using System.Collections.Generic;

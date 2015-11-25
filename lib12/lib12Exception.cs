@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lib12.Exceptions
+namespace lib12
 {
     public class lib12Exception : Exception
     {

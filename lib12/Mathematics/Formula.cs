@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using lib12.Collections;
-using lib12.Exceptions;
 using lib12.Extensions;
 using lib12.FunctionalFlow;
+using lib12.Misc;
 
 namespace lib12.Mathematics
 {
