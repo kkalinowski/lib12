@@ -1,8 +1,8 @@
-﻿using lib12.Data.QueryBuilding;
+﻿using System;
+using System.Collections.Generic;
+using lib12.Data.QueryBuilding;
 using lib12.Data.QueryBuilding.Builders;
 using Should;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace lib12.Test.QueryBuilding

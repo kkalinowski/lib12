@@ -1,7 +1,7 @@
-﻿using lib12.Mathematics;
-using Should;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Threading;
+using lib12.Mathematics;
+using Should;
 using Xunit;
 
 namespace lib12.Test.Mathematics

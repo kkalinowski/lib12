@@ -1,5 +1,5 @@
-﻿using lib12.Data.QueryBuilding.Structures.Delete;
-using System.Text;
+﻿using System.Text;
+using lib12.Data.QueryBuilding.Structures.Delete;
 
 namespace lib12.Data.QueryBuilding.Builders
 {

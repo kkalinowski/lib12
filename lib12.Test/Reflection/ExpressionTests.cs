@@ -1,7 +1,7 @@
-﻿using lib12.Reflection;
-using Should;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using lib12.Reflection;
+using Should;
 using Xunit;
 
 namespace lib12.Test.Reflection

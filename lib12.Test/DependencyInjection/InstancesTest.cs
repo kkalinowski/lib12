@@ -31,7 +31,7 @@ namespace lib12.Test.DependencyInjection
             var instance2 = Instances.Get<SingletonClassThatChangeProperty>();
 
             Assert.Equal(newPropValue, instance2.IntProp);
-            Assert.True(object.ReferenceEquals(instance1, instance2));
+            Assert.True(ReferenceEquals(instance1, instance2));
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace lib12.Test.DependencyInjection
             var instance2 = Instances.Get<TransientClass>();
 
             Assert.NotEqual(newPropValue, instance2.IntProp);
-            Assert.False(object.ReferenceEquals(instance1, instance2));
+            Assert.False(ReferenceEquals(instance1, instance2));
         }
 
         [Fact]

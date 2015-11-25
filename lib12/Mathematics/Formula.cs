@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using lib12.Collections;
-using lib12.Extensions;
 using lib12.FunctionalFlow;
 using lib12.Misc;
 
@@ -195,7 +194,7 @@ namespace lib12.Mathematics
         /// <param name="argument">The argument to take variables values from</param>
         /// <returns></returns>
         /// <exception cref="MathException">Formula is not valid, cannot evaluate it</exception>
-        /// <exception cref="UnknownEnumException{TokenType}"></exception>
+        /// <exception cref="UnknownEnumException{TEnum}"></exception>
         public double Evaluate(object argument = null)
         {
             if (!IsValid)

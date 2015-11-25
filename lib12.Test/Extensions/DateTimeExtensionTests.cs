@@ -1,6 +1,6 @@
-﻿using lib12.Extensions;
+﻿using System;
+using lib12.Extensions;
 using Should;
-using System;
 using Xunit;
 
 namespace lib12.Test.Extensions

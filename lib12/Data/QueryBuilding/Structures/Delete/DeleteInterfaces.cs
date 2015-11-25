@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace lib12.Data.QueryBuilding.Structures.Delete
+﻿namespace lib12.Data.QueryBuilding.Structures.Delete
 {
     public interface IDelete
     {

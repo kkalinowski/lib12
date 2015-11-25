@@ -1,6 +1,6 @@
-﻿using lib12.Collections;
+﻿using System.Collections.Generic;
+using lib12.Collections;
 using Should;
-using System.Collections.Generic;
 using Xunit;
 
 namespace lib12.Test.Collections
