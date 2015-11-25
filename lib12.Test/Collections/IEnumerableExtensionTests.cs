@@ -59,17 +59,17 @@ namespace lib12.Test.Collections
         }
 
         [Fact]
-        public void to_null_pattern_object_test_on_null_collection()
+        public void recover_test_on_null_collection()
         {
             List<int> list = null;
-            list.ToNullPatternObject().Count().ShouldEqual(0);
+            list.Recover().Count().ShouldEqual(0);
         }
 
         [Fact]
-        public void to_null_pattern_object_test_on_not_null_collection()
+        public void recover_on_not_null_collection()
         {
             var list = new List<int> {3, 4, 12};
-            list.ToNullPatternObject().Count().ShouldEqual(3);
+            list.Recover().Count().ShouldEqual(3);
         }
     }
 }
