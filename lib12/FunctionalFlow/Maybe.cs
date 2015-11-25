@@ -1,27 +1,31 @@
-﻿using System.Linq;
+﻿using System;
 
 namespace lib12.FunctionalFlow
 {
-    public static class Maybe
+    public class Maybe
     {
-        public static MaybeResult AllNull(params object[] toCheck)
+        public bool Result { get; private set; }
+
+        public static Maybe Create(bool result)
         {
-            return MaybeResult.Create(toCheck.All(x => x.Null()));
+            return new Maybe {Result = result};
         }
 
-        public static MaybeResult AllNotNull(params object[] toCheck)
+        public void Do(Action action)
         {
-            return MaybeResult.Create(toCheck.All(x => x.NotNull()));
+            if (Result)
+                action();
         }
 
-        public static MaybeResult AnyNull(params object[] toCheck)
+        public void ThrowIfFailure(Exception ex)
         {
-            return MaybeResult.Create(toCheck.Any(x => x.Null()));
+            if (!Result)
+                throw ex;
         }
 
-        public static MaybeResult AnyNotNull(params object[] toCheck)
+        public static implicit operator bool(Maybe result)
         {
-            return MaybeResult.Create(toCheck.Any(x => x.NotNull()));
+            return result.Result;
         }
     }
 }

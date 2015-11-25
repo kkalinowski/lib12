@@ -4,24 +4,24 @@ namespace lib12.FunctionalFlow
 {
     public static class BooleanExtension
     {
-        public static MaybeResult And(this bool @bool, bool secondArg)
+        public static Maybe And(this bool @bool, bool secondArg)
         {
-            return MaybeResult.Create(@bool && secondArg);
+            return Maybe.Create(@bool && secondArg);
         }
 
-        public static MaybeResult AndNot(this bool @bool, bool secondArg)
+        public static Maybe AndNot(this bool @bool, bool secondArg)
         {
-            return MaybeResult.Create(@bool && !secondArg);
+            return Maybe.Create(@bool && !secondArg);
         }
 
-        public static MaybeResult Or(this bool @bool, bool secondArg)
+        public static Maybe Or(this bool @bool, bool secondArg)
         {
-            return MaybeResult.Create(@bool || secondArg);
+            return Maybe.Create(@bool || secondArg);
         }
 
-        public static MaybeResult OrNot(this bool @bool, bool secondArg)
+        public static Maybe OrNot(this bool @bool, bool secondArg)
         {
-            return MaybeResult.Create(@bool || !secondArg);
+            return Maybe.Create(@bool || !secondArg);
         }
 
         public static void Do(this bool @bool, Action action)

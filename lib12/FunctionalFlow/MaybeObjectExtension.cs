@@ -9,9 +9,9 @@ namespace lib12.FunctionalFlow
         /// </summary>
         /// <param name="object">Object to check</param>
         /// <returns></returns>
-        public static MaybeResult Null<TObject>(this TObject @object) where TObject : class
+        public static Maybe Null<TObject>(this TObject @object) where TObject : class
         {
-            return MaybeResult.Create(@object == null);
+            return Maybe.Create(@object == null);
         }
 
         ///// <summary>
@@ -19,9 +19,9 @@ namespace lib12.FunctionalFlow
         ///// </summary>
         ///// <param name="@object"></param>
         ///// <returns></returns>
-        public static MaybeResult NotNull<TObject>(this TObject @object) where TObject : class
+        public static Maybe NotNull<TObject>(this TObject @object) where TObject : class
         {
-            return MaybeResult.Create(@object != null);
+            return Maybe.Create(@object != null);
         }
 
         ///// <summary>
