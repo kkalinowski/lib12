@@ -4,7 +4,7 @@ namespace lib12.FunctionalFlow
 {
     //based on http://devtalk.net/2010/09/12/chained-null-checks-and-the-maybe-monad/
 
-    public static class ResultObjectExtension
+    public static class MaybeExtension
     {
         /// <summary>
         /// If object is null recover to function flow with given object

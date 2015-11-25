@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using lib12.Extensions;
 
 namespace lib12.FunctionalFlow
 {
-    public static class MaybeObjectParamsExtension
+    public static class ParamsObjectCheckExtension
     {
         public static bool AllNull(params object[] toCheck)
         {
