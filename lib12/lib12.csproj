@@ -98,8 +98,8 @@
     <Compile Include="Misc\Range.cs" />
     <Compile Include="FunctionalFlow\BooleanExtension.cs" />
     <Compile Include="FunctionalFlow\Maybe.cs" />
-    <Compile Include="FunctionalFlow\MonoidExtension.cs" />
-    <Compile Include="FunctionalFlow\MonoidResult.cs" />
+    <Compile Include="FunctionalFlow\MaybeExtension.cs" />
+    <Compile Include="FunctionalFlow\MaybeResult.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumReflectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
