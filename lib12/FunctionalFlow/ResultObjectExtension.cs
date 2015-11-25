@@ -29,5 +29,24 @@ namespace lib12.FunctionalFlow
 
             return predicate(source) ? null : source;
         }
+
+        public static TSource Do<TSource>(this TSource source, Action<TSource> action)
+            where TSource : class
+        {
+            if (source == null)
+                return null;
+
+            action(source);
+            return source;
+        }
+
+        public static TSource DoIfFailure<TSource>(this TSource source, Action action)
+            where TSource : class
+        {
+            if (source == null)
+                action();
+
+            return source;
+        }
     }
 }
