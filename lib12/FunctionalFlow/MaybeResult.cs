@@ -17,6 +17,12 @@ namespace lib12.FunctionalFlow
                 action();
         }
 
+        public void ThrowIfFailure(Exception ex)
+        {
+            if (!Result)
+                throw ex;
+        }
+
         public static implicit operator bool(MaybeResult result)
         {
             return result.Result;

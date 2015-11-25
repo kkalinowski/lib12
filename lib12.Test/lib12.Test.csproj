@@ -88,6 +88,7 @@
     <Compile Include="DummyData\RandomClassGeneratorTests.cs" />
     <Compile Include="DummyData\RandomDataExtensionTests.cs" />
     <Compile Include="Extensions\EnumExtensionTests.cs" />
+    <Compile Include="Extensions\ObjectExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="Mathematics\FormulaTests.cs" />
     <Compile Include="Mathematics\MathExtTests.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Reflection\CreateTypeFromEnumTests\EnumLogicTests.cs" />
     <Compile Include="Reflection\CreateTypeFromEnumTests\SampleEnum.cs" />
     <Compile Include="Extensions\DateTimeExtensionTests.cs" />
-    <Compile Include="Extensions\ObjectTests.cs" />
+    <Compile Include="FunctionalFlow\MaybeObjectExtensionTests.cs" />
     <Compile Include="Collections\IEnumerableExtensionTests.cs" />
     <Compile Include="Misc\PropertyComparerTests.cs" />
     <Compile Include="Crypto\SaltedHashTests.cs" />

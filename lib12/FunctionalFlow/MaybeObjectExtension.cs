@@ -2,7 +2,7 @@
 
 namespace lib12.FunctionalFlow
 {
-    public static class MaybeExtension
+    public static class MaybeObjectExtension
     {
         /// <summary>
         /// Check if given object is null
