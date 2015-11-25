@@ -85,7 +85,6 @@
     <Compile Include="Data\QueryBuilding\Structures\Update\UpdateStructure.cs" />
     <Compile Include="DependencyInjection\CircularDependencyException.cs" />
     <Compile Include="DependencyInjection\LazyProperty.cs" />
-    <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Mathematics\Formula.cs" />
     <Compile Include="Mathematics\MathException.cs" />
     <Compile Include="Mathematics\NegationToken.cs" />

@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using lib12.Extensions;
+using lib12.FunctionalFlow;
+using Should;
 using Xunit;
 
-namespace lib12.Test.Extensions
+namespace lib12.Test.FunctionalFlow
 {
     enum TestEnum
     {
@@ -13,7 +15,7 @@ namespace lib12.Test.Extensions
         Fifth
     }
 
-    public class EnumExtensionTests
+    public class ParamsObjectCheckExtensionTests
     {
         [Fact]
         public void is_one_element_true()
@@ -77,6 +79,12 @@ namespace lib12.Test.Extensions
             var value = TestEnum.First;
 
             value.IsNot(TestEnum.First, TestEnum.Second, TestEnum.Fifth).Should().BeFalse();
+        }
+
+        [Fact]
+        public void is_int_test()
+        {
+            4.IsNot(5, 6, 6).ShouldBeTrue();
         }
     }
 }
