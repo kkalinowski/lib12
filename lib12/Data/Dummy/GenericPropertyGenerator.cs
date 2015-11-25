@@ -47,6 +47,8 @@ namespace lib12.Data.Dummy
                 return random.NextFemaleName();
             else if (propertyName.EqualsUnCased("Surname"))
                 return random.NextSurname();
+            else if (propertyName.EqualsUnCased("Email"))
+                return random.NextEmail();
             else if (propertyName.EqualsUnCased("FullName"))
                 return random.NextFullName();
             else if (propertyName.EqualsUnCased("Country"))

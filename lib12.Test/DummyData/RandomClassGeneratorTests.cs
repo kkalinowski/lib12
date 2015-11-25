@@ -93,6 +93,7 @@ namespace lib12.Test.DummyData
             foreach (var item in generated)
             {
                 item.Name.ShouldNotBeEmpty();
+                item.Email.ShouldContain("@");
                 Data.Dummy.DummyData.Surnames.ShouldContain(item.Surname);
                 item.Address.ShouldNotBeEmpty();
                 Data.Dummy.DummyData.Countries.ShouldContain(item.Country);
