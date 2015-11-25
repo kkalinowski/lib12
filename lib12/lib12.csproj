@@ -66,7 +66,7 @@
     <Compile Include="Data\Dummy\IntGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGenerator.cs" />
     <Compile Include="Data\Dummy\PropertyGeneratorBase.cs" />
-    <Compile Include="Data\Dummy\RandomClassGenerator.cs" />
+    <Compile Include="Data\Dummy\DummyClass.cs" />
     <Compile Include="Data\Dummy\StringGenerator.cs" />
     <Compile Include="Data\QueryBuilding\Builders\InsertBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Builders\QueryBuilderBase.cs" />
