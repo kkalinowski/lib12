@@ -28,26 +28,6 @@ namespace lib12.Extensions
         }
 
         /// <summary>
-        /// Throw exception if checked object is null
-        /// </summary>
-        public static void ThrowExceptionIfNull<TObject>(this TObject @object) where @TObject : class
-        {
-            if (@object.Null())
-                throw new NullReferenceException();
-        }
-
-        /// <summary>
-        /// Throw exception if checked object is null
-        /// </summary>
-        /// <param name="object">Object to check</param>
-        /// <param name="ex">Exception to throw</param>
-        public static void ThrowExceptionIfNull<TObject>(this TObject @object, Exception ex) where @TObject : class
-        {
-            if (@object.Null())
-                throw ex;
-        }
-
-        /// <summary>
         /// Packs given object into array.
         /// </summary>
         /// <typeparam name="TObject">The type of the object.</typeparam>

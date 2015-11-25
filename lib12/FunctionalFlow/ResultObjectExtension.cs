@@ -48,5 +48,25 @@ namespace lib12.FunctionalFlow
 
             return source;
         }
+
+        /// <summary>
+        /// Throw exception if checked object is null
+        /// </summary>
+        public static void ThrowExceptionIfNull<TSource>(this TSource source) 
+            where TSource : class
+        {
+            if (source == null)
+                throw new NullReferenceException();
+        }
+
+        /// <summary>
+        /// Throw exception if checked object is null
+        /// </summary>
+        public static void ThrowExceptionIfNull<TSource>(this TSource source, Exception ex) 
+            where TSource : class
+        {
+            if (source == null)
+                throw ex;
+        }
     }
 }
