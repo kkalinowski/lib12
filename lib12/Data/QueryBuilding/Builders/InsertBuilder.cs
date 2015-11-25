@@ -6,6 +6,7 @@ using lib12.Extensions;
 using lib12.Reflection;
 using System.Collections.Generic;
 using System.Text;
+using lib12.FunctionalFlow;
 
 namespace lib12.Data.QueryBuilding.Builders
 {

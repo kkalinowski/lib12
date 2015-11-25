@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
-namespace lib12.Extensions
+namespace lib12.FunctionalFlow
 {
-    public static class ObjectExtension
+    public static class SimpleObjectCheckExtension
     {
         /// <summary>
         /// Check if given object is null

@@ -8,6 +8,7 @@ using System.Threading;
 using lib12.Collections;
 using lib12.Exceptions;
 using lib12.Extensions;
+using lib12.FunctionalFlow;
 
 namespace lib12.Mathematics
 {

@@ -106,7 +106,7 @@
     <Compile Include="Reflection\ExpressionExtension.cs" />
     <Compile Include="Reflection\FieldInfoExtension.cs" />
     <Compile Include="Extensions\NullableBoolExtension.cs" />
-    <Compile Include="Extensions\ObjectExtension.cs" />
+    <Compile Include="FunctionalFlow\SimpleObjectCheckExtension.cs" />
     <Compile Include="Reflection\PropertyInfoExtension.cs" />
     <Compile Include="Misc\TimesLoop.cs" />
     <Compile Include="Reflection\ReflectionObjectExtension.cs" />
