@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using lib12.Data.QueryBuilding;
+﻿using lib12.Data.QueryBuilding;
 using lib12.Data.QueryBuilding.Builders;
 using lib12.Exceptions;
+using Should;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace lib12.Test.QueryBuilding
@@ -21,7 +21,7 @@ namespace lib12.Test.QueryBuilding
         {
             const string toBuild = "INSERT INTO product(type) VALUES('4')";
             SqlBuilder.Insert.Into("product").Columns("type").Values(4).Build()
-                .Should().Be(toBuild);
+                .ShouldEqual(toBuild);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace lib12.Test.QueryBuilding
         {
             const string toBuild = "INSERT INTO product(type, price, name) VALUES('4', '5', 'test')";
             SqlBuilder.Insert.Into("product").Columns("type", "price", "name").Values(4, 5, "test").Build()
-                .Should().Be(toBuild);
+                .ShouldEqual(toBuild);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace lib12.Test.QueryBuilding
                 new[]{
                     new Values{Prop1 = "test", Prop2 = 21},
                     new Values{Prop1 = "test2", Prop2 = 8}
-                }).Build().Should().Be(expected);
+                }).Build().ShouldEqual(expected);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace lib12.Test.QueryBuilding
                 new[]{
                     new {Prop1 = "test", Prop2 = 21},
                     new {Prop1 = "test2", Prop2 = 8}
-                }).Build().Should().Be(expected);
+                }).Build().ShouldEqual(expected);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace lib12.Test.QueryBuilding
         {
             const string expected = "INSERT INTO product SELECT * FROM product_test";
             SqlBuilder.Insert.Into("product").Select(SqlBuilder.Select.AllFields.From("product_test").Build())
-                .Build().Should().Be(expected);
+                .Build().ShouldEqual(expected);
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace lib12.Test.QueryBuilding
         {
             const string expected = "INSERT INTO product(name, price) SELECT * FROM product_test";
             SqlBuilder.Insert.Into("product").Columns("name", "price").Select(SqlBuilder.Select.AllFields.From("product_test").Build())
-                .Build().Should().Be(expected);
+                .Build().ShouldEqual(expected);
         }
 
         [Fact]

@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
-using lib12.Data.QueryBuilding.Builders;
+﻿using lib12.Data.QueryBuilding.Builders;
 using lib12.Data.QueryBuilding.Structures;
+using Should;
 using Xunit;
 
 namespace lib12.Test.QueryBuilding
@@ -12,7 +12,7 @@ namespace lib12.Test.QueryBuilding
         {
             const string toBuild = "DELETE FROM product";
             SqlBuilder.Delete.From("product").Build()
-                .Should().Be(toBuild);
+                .ShouldEqual(toBuild);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace lib12.Test.QueryBuilding
         {
             const string toBuild = "DELETE FROM product WHERE price='1'";
             SqlBuilder.Delete.From("product").Where("price", Compare.Equals, 1).Build()
-                .Should().Be(toBuild);
+                .ShouldEqual(toBuild);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace lib12.Test.QueryBuilding
                 .Where("price", Compare.Equals, 1).And.Where("type", Compare.Equals, 3).CloseBracket()
                 .Or.Where("type", Compare.NotEquals, 3)
                 .Build()
-                .Should().Be(toBuild);
+                .ShouldEqual(toBuild);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
-using lib12.DependencyInjection;
+﻿using lib12.DependencyInjection;
 using lib12.Test.DependencyInjection.Classes;
+using Should;
 using Xunit;
 
 namespace lib12.Test.DependencyInjection
@@ -188,14 +188,14 @@ namespace lib12.Test.DependencyInjection
         public void resolve_singleton_by_service()
         {
             Instances.RegisterSingleton<ISingletonContract, SingletonService>();
-            Instances.Get<ISingletonContract>().Should().NotBeNull().And.BeOfType<SingletonService>();
+            Instances.Get<ISingletonContract>().ShouldNotBeNull().ShouldBeType<SingletonService>();
         }
 
         [Fact]
         public void resolve_transient_by_service()
         {
             Instances.RegisterTransient<ITransientContract, TransientService>();
-            Instances.Get<ITransientContract>().Should().NotBeNull().And.BeOfType<TransientService>();
+            Instances.Get<ITransientContract>().ShouldNotBeNull().ShouldBeType<TransientService>();
         }
     }
 }

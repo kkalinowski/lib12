@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using lib12.Extensions;
-using lib12.FunctionalFlow;
+﻿using lib12.FunctionalFlow;
 using Should;
 using Xunit;
 
@@ -22,7 +20,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.First).Should().BeTrue();
+            value.Is(TestEnum.First).ShouldBeTrue();
         }
 
         [Fact]
@@ -30,7 +28,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.Second).Should().BeFalse();
+            value.Is(TestEnum.Second).ShouldBeFalse();
         }
 
         [Fact]
@@ -38,7 +36,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.First, TestEnum.Second, TestEnum.Fifth).Should().BeTrue();
+            value.Is(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
         }
 
         [Fact]
@@ -46,7 +44,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.Fourth, TestEnum.Second, TestEnum.Fifth).Should().BeFalse();
+            value.Is(TestEnum.Fourth, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
         }
 
         [Fact]
@@ -54,7 +52,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.Second).Should().BeTrue();
+            value.IsNot(TestEnum.Second).ShouldBeTrue();
         }
 
         [Fact]
@@ -62,7 +60,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.First).Should().BeFalse();
+            value.IsNot(TestEnum.First).ShouldBeFalse();
         }
 
         [Fact]
@@ -70,7 +68,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.Third, TestEnum.Second, TestEnum.Fifth).Should().BeTrue();
+            value.IsNot(TestEnum.Third, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
         }
 
         [Fact]
@@ -78,7 +76,7 @@ namespace lib12.Test.FunctionalFlow
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.First, TestEnum.Second, TestEnum.Fifth).Should().BeFalse();
+            value.IsNot(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
         }
 
         [Fact]

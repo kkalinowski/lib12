@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using lib12.Crypto;
+﻿using lib12.Crypto;
+using Should;
 using Xunit;
 
 namespace lib12.Test.Crypto
@@ -13,7 +13,7 @@ namespace lib12.Test.Crypto
             var salt = SaltedHash.GenerateSalt();
             var hash = SaltedHash.ComputeHash(salt, password);
 
-            SaltedHash.Verify(salt, hash, password).Should().BeTrue();
+            SaltedHash.Verify(salt, hash, password).ShouldBeTrue();
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
-using lib12.Collections;
+﻿using lib12.Collections;
 using Should;
+using System.Collections.Generic;
 using Xunit;
 
 namespace lib12.Test.Collections
@@ -141,13 +140,13 @@ namespace lib12.Test.Collections
 
 
             Assert.DoesNotThrow(() => { hierarchy = TreeHelper.BuildTree(list); });
-            hierarchy.Should().HaveCount(3);
-            list[0].Children.Should().HaveCount(1);
-            list[1].Children.Should().BeEmpty();
-            list[2].Children.Should().BeEmpty();
-            list[3].Children.Should().HaveCount(1);
-            list[4].Children.Should().HaveCount(1);
-            list[5].Children.Should().BeEmpty();
+            hierarchy.Count.ShouldEqual(3);
+            list[0].Children.Count.ShouldEqual(1);
+            list[1].Children.ShouldBeEmpty();
+            list[2].Children.ShouldBeEmpty();
+            list[3].Children.Count.ShouldEqual(1);
+            list[4].Children.Count.ShouldEqual(1);
+            list[5].Children.ShouldBeEmpty();
         }
 
         [Fact]
@@ -159,9 +158,9 @@ namespace lib12.Test.Collections
             list.Add(new Branch(1));//1
 
             Assert.DoesNotThrow(() => { hierarchy = TreeHelper.BuildTree(list); });
-            hierarchy.Should().HaveCount(2);
-            list[0].Children.Should().BeEmpty();
-            list[1].Children.Should().BeEmpty();
+            hierarchy.Count.ShouldEqual(2);
+            list[0].Children.ShouldBeEmpty();
+            list[1].Children.ShouldBeEmpty();
         }
 
         [Fact]

@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using lib12.Misc;
+﻿using lib12.Misc;
+using Should;
 using Xunit;
 
 namespace lib12.Test.Misc
@@ -11,13 +11,13 @@ namespace lib12.Test.Misc
         {
             var array = Empty.Array<int>();
 
-            array.Should().NotBeNull().And.BeEmpty();
+            array.ShouldNotBeNull().ShouldBeEmpty();
         }
 
         [Fact]
         public void empty_list_returns_empty_list()
         {
-            Empty.List<int>().Should().NotBeNull().And.BeEmpty();
+            Empty.List<int>().ShouldNotBeNull().ShouldBeEmpty();
         }
     }
 }

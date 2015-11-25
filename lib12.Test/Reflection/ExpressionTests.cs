@@ -1,7 +1,7 @@
-﻿using System;
+﻿using lib12.Reflection;
+using Should;
+using System;
 using System.Linq.Expressions;
-using FluentAssertions;
-using lib12.Reflection;
 using Xunit;
 
 namespace lib12.Test.Reflection
@@ -28,7 +28,7 @@ namespace lib12.Test.Reflection
         {
             Expression<Func<ExpressionTestsSource, string>> expression = x => x.Text;
 
-            expression.GetName().Should().Be("Text");
+            expression.GetName().ShouldEqual("Text");
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace lib12.Test.Reflection
             var source = new ExpressionTestsSource(text);
             Expression<Func<ExpressionTestsSource, string>> expression = x => x.Text;
 
-            expression.GetValue(source).Should().Be(text);
+            expression.GetValue(source).ShouldEqual(text);
         }
 
         public void set_value_works()
@@ -48,7 +48,7 @@ namespace lib12.Test.Reflection
             Expression<Func<ExpressionTestsSource, string>> expression = x => x.Text;
 
             expression.SetValue(source, text);
-            source.Text.Should().Be(text);
+            source.Text.ShouldEqual(text);
         }
     }
 }

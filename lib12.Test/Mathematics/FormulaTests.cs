@@ -1,7 +1,7 @@
-﻿using System.Globalization;
+﻿using lib12.Mathematics;
+using Should;
+using System.Globalization;
 using System.Threading;
-using FluentAssertions;
-using lib12.Mathematics;
 using Xunit;
 
 namespace lib12.Test.Mathematics
@@ -18,8 +18,8 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 + 7");
 
-            formula.IsValid.Should().BeTrue();
-            formula.Evaluate().Should().Be(12);
+            formula.IsValid.ShouldBeTrue();
+            formula.Evaluate().ShouldEqual(12);
         }
 
         [Fact]
@@ -27,8 +27,8 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 * 5 + 7 * 3");
 
-            formula.IsValid.Should().BeTrue();
-            formula.Evaluate().Should().Be(46);
+            formula.IsValid.ShouldBeTrue();
+            formula.Evaluate().ShouldEqual(46);
         }
 
         [Fact]
@@ -36,8 +36,8 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("-12*3 + (5-3)*6 + 9/(4-1)");
 
-            formula.IsValid.Should().BeTrue();
-            formula.Evaluate().Should().Be(-21);
+            formula.IsValid.ShouldBeTrue();
+            formula.Evaluate().ShouldEqual(-21);
         }
 
         [Fact]
@@ -45,8 +45,8 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("-5.5*2 + 24 - 0.25*4");
 
-            formula.IsValid.Should().BeTrue();
-            formula.Evaluate().Should().Be(12);
+            formula.IsValid.ShouldBeTrue();
+            formula.Evaluate().ShouldEqual(12);
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 + 7 +");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -63,7 +63,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 + 7 + () + 3");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -72,7 +72,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 + 7 + ( (3*5) + 2");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -82,7 +82,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 + 7 + (+2 - 3)");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -91,7 +91,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("5 + 7 ++ 5");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -100,7 +100,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("--5 + 7");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -109,7 +109,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula(")5 + 7(*5");
 
-            formula.IsValid.Should().BeFalse();
+            formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
         } 
 
@@ -118,8 +118,8 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("a+5");
 
-            formula.IsValid.Should().BeTrue();
-            formula.Evaluate(new { a = 7 }).Should().Be(12);
+            formula.IsValid.ShouldBeTrue();
+            formula.Evaluate(new { a = 7 }).ShouldEqual(12);
         }
 
         [Fact]
@@ -127,8 +127,8 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("a*(5-b)");
 
-            formula.IsValid.Should().BeTrue();
-            formula.Evaluate(new { a = 10, b = 3 }).Should().Be(20);
+            formula.IsValid.ShouldBeTrue();
+            formula.Evaluate(new { a = 10, b = 3 }).ShouldEqual(20);
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("a+5");
 
-            formula.IsValid.Should().BeTrue();
+            formula.IsValid.ShouldBeTrue();
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
@@ -145,7 +145,7 @@ namespace lib12.Test.Mathematics
         {
             var formula = new Formula("a*(5-b)");
 
-            formula.IsValid.Should().BeTrue();
+            formula.IsValid.ShouldBeTrue();
             Assert.Throws<MathException>(() => formula.Evaluate(new { a = 7 }));
         }
     }
