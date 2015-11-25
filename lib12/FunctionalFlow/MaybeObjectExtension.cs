@@ -23,25 +23,5 @@ namespace lib12.FunctionalFlow
         {
             return Maybe.Create(@object != null);
         }
-
-        ///// <summary>
-        ///// If object is null recover to function flow with given object
-        ///// </summary>
-        ///// <param name="@object"></param>
-        ///// <returns></returns>
-        public static TObject Recover<TObject>(this TObject @object, TObject recoverWith) where TObject : class
-        {
-            return @object.NotNull() ? @object : recoverWith;
-        }
-
-        ///// <summary>
-        ///// If object is null recover to function flow with default newly created object
-        ///// </summary>
-        ///// <param name="@object"></param>
-        ///// <returns></returns>
-        public static TObject RecoverWithDefault<TObject>(this TObject @object) where TObject : class
-        {
-            return @object.NotNull() ? @object : (TObject)Activator.CreateInstance(typeof(TObject));
-        }
     }
 }

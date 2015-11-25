@@ -6,6 +6,22 @@ namespace lib12.FunctionalFlow
 
     public static class ResultObjectExtension
     {
+        /// <summary>
+        /// If object is null recover to function flow with given object
+        /// </summary>
+        public static TSource Recover<TSource>(this TSource source, TSource recoverWith) where TSource : class
+        {
+            return source ?? recoverWith;
+        }
+
+        ///// <summary>
+        ///// If object is null recover to function flow with Activator created object
+        ///// </summary>
+        public static TSource RecoverWithActivator<TSource>(this TSource source) where TSource : class
+        {
+            return source ?? (TSource)Activator.CreateInstance(typeof(TSource));
+        }
+
         public static TResult With<TSource, TResult>(this TSource source, Func<TSource, TResult> evaluator, TResult defaultValue = default (TResult))
             where TSource : class
         {
