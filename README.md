@@ -2,7 +2,7 @@
 
 lib12 is set of useful classes and extension created for .net 4 core and WPF. During my work with .net and WPF I created many classes and function that can be reused across different projects.
 
-Current version 1.2 available on nuget - https://www.nuget.org/packages/lib12
+Current version 1.3 available on nuget - https://www.nuget.org/packages/lib12
 
 Dependency injection - lib12.DependencyInjection
 --------------------
@@ -99,8 +99,7 @@ Dummy and random data - lib12.Data.Dummy
 --------------------
 Sometimes when you start developing new project you don't have data to test your solution. lib12 contains classes that will help you to quickly solve this problem. RandomClassGenerator contains methods to quickly generate collection of random data, using property generators to describe how to generate data for class's properties:
 ```csharp
-var generator = new RandomClassGenerator();
-var generated = generator.Generate<ClassToGenerate>(CollectionSize,
+var generated = DummyClass.Generate<ClassToGenerate>(CollectionSize,
 	new StringGenerator<ClassToGenerate>(x => x.Text, 3, 7),
 	new EnumGenerator<ClassToGenerate, ClassToGenerate.EnumToGenerate>(x => x.Enum),
 	new BoolGenerator<ClassToGenerate>(x => x.Bool),
@@ -136,8 +135,12 @@ Other classes
 - lib12.Misc.PropertyComparer - implements IEqualityComparer using lambda expressions
 - lib12.Misc.TimesLoop - do given function X times
 - lib12.Misc.IoHelper - additional methods for IO
+- lib12.Misc.Logger - simple logger, that doesn't need additional configuration
+- lib12.Misc.CachedObject - shortcut for cached data
+- lib12.Misc.PerformanceCheck - shortcut for performance checking
 - lib12.Crypto.SaltedHash - implemention of salted hash mechanism for password storing
 - lib12.Serialization - namespace contains classes that simplifying implementation of serialization
+- lib12.FunctionalFlow - example of Maybe monad for functional flow
 
 Set of extensions for standard classes
 --------------------
