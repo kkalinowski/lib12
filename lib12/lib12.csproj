@@ -52,7 +52,6 @@
     <Compile Include="Data\Dummy\GenericPropertyGenerator.cs" />
     <Compile Include="Data\Dummy\RandomDataExtesion.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="FunctionalFlow\Result.cs" />
     <Compile Include="FunctionalFlow\ResultObjectExtension.cs" />
     <Compile Include="Misc\CachedObject.cs" />
     <Compile Include="Misc\Empty.cs" />
@@ -98,10 +97,7 @@
     <Compile Include="Mathematics\TokenType.cs" />
     <Compile Include="Mathematics\VariableToken.cs" />
     <Compile Include="Misc\Range.cs" />
-    <Compile Include="FunctionalFlow\BooleanExtension.cs" />
     <Compile Include="FunctionalFlow\MaybeObjectParamsExtension.cs" />
-    <Compile Include="FunctionalFlow\MaybeObjectExtension.cs" />
-    <Compile Include="FunctionalFlow\Maybe.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
     <Compile Include="Reflection\EnumReflectionExtension.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
