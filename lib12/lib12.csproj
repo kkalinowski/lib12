@@ -52,6 +52,8 @@
     <Compile Include="Data\Dummy\GenericPropertyGenerator.cs" />
     <Compile Include="Data\Dummy\RandomDataExtesion.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="FunctionalFlow\Result.cs" />
+    <Compile Include="FunctionalFlow\ResultObjectExtension.cs" />
     <Compile Include="Misc\CachedObject.cs" />
     <Compile Include="Misc\Empty.cs" />
     <Compile Include="Misc\Logger.cs" />
