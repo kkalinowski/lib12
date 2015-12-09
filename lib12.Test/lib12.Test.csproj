@@ -84,6 +84,7 @@
     <Compile Include="DummyData\ClassToGenerate.cs" />
     <Compile Include="DummyData\RandomClassGeneratorTests.cs" />
     <Compile Include="DummyData\RandomDataExtensionTests.cs" />
+    <Compile Include="DummyData\XmlExtensionsTest.cs" />
     <Compile Include="FunctionalFlow\ParamsObjectCheckExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="FunctionalFlow\CollectionObjectCheckExtensionTest.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Reflection\CreateTypeFromEnumTests\EnumLogicTests.cs" />
     <Compile Include="Reflection\CreateTypeFromEnumTests\SampleEnum.cs" />
     <Compile Include="Extensions\DateTimeExtensionTests.cs" />
-    <Compile Include="FunctionalFlow\MaybeObjectExtensionTests.cs" />
     <Compile Include="Collections\IEnumerableExtensionTests.cs" />
     <Compile Include="Misc\PropertyComparerTests.cs" />
     <Compile Include="Crypto\SaltedHashTests.cs" />
@@ -120,7 +120,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="_Files\Sample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

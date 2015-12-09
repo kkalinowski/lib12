@@ -51,6 +51,7 @@
     <Compile Include="Data\Dummy\AvailableValuesGenerator.cs" />
     <Compile Include="Data\Dummy\GenericPropertyGenerator.cs" />
     <Compile Include="Data\Dummy\RandomDataExtesion.cs" />
+    <Compile Include="Data\Xml\XmlExtensions.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="FunctionalFlow\CollectionObjectCheckExtension.cs" />
     <Compile Include="FunctionalFlow\MaybeExtension.cs" />
