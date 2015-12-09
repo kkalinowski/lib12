@@ -19,5 +19,17 @@ namespace lib12.Test.Misc
         {
             Empty.List<int>().ShouldNotBeNull().ShouldBeEmpty();
         }
+
+        [Fact]
+        public void empty_dictionary_returns_empty_dictionary()
+        {
+            Empty.Dictionary<int, string>().ShouldNotBeNull().ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void empty_enumerable_returns_empty_enumerable()
+        {
+            Empty.Enumerable<int>().ShouldNotBeNull().ShouldBeEmpty();
+        }
     }
 }

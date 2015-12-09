@@ -37,5 +37,14 @@ namespace lib12.Misc
         {
             return new Dictionary<TKey, TValue>(0);
         }
+
+        /// <summary>
+        /// Returns empty enumerable of given type
+        /// </summary>
+        public static IEnumerable<T> Enumerable<T>()
+        {
+            return System.Linq.Enumerable.Empty<T>();
+        }
+
     }
 }
