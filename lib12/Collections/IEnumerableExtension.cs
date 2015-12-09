@@ -258,11 +258,7 @@ namespace lib12.Collections
         /// <returns></returns>
         public static IEnumerable<T> Recover<T>(this IEnumerable<T> enumerable)
         {
-            if (enumerable.Null())
-                yield break;
-
-            foreach (var item in enumerable)
-                yield return item;
+            return enumerable ?? Enumerable.Empty<T>();
         }
     }
 }
