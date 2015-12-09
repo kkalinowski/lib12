@@ -5,7 +5,7 @@ using lib12.Data.Dummy;
 using Should;
 using Xunit;
 
-namespace lib12.Test.DummyData
+namespace lib12.Test.Data.Dummy
 {
     public class RandomDataExtensionTests
     {
@@ -17,8 +17,8 @@ namespace lib12.Test.DummyData
             var result = random.NextFullName();
             result.ShouldNotBeEmpty();
             var names = result.Split(' ');
-            Data.Dummy.DummyData.MaleNames.Concat(Data.Dummy.DummyData.FemaleNames).ShouldContain(names[0]);
-            Data.Dummy.DummyData.Surnames.ShouldContain(names[1]);
+            lib12.Data.Dummy.DummyData.MaleNames.Concat(lib12.Data.Dummy.DummyData.FemaleNames).ShouldContain(names[0]);
+            lib12.Data.Dummy.DummyData.Surnames.ShouldContain(names[1]);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace lib12.Test.DummyData
         {
             var result = random.NextCountry();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Countries.ShouldContain(result);
+            lib12.Data.Dummy.DummyData.Countries.ShouldContain(result);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace lib12.Test.DummyData
         {
             var result = random.NextCity();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Cities.ShouldContain(result);
+            lib12.Data.Dummy.DummyData.Cities.ShouldContain(result);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace lib12.Test.DummyData
         {
             var result = random.NextStreet();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Streets.ShouldContain(result);
+            lib12.Data.Dummy.DummyData.Streets.ShouldContain(result);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace lib12.Test.DummyData
             var result = random.NextAddress();
             result.ShouldNotBeEmpty();
             var parts = result.Split(' ');
-            Data.Dummy.DummyData.Streets.ShouldContain(parts[0]);
+            lib12.Data.Dummy.DummyData.Streets.ShouldContain(parts[0]);
             Assert.DoesNotThrow(() => int.Parse(parts.Last()));
         }
 
@@ -68,7 +68,7 @@ namespace lib12.Test.DummyData
         {
             var result = random.NextCompany();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Companies.ShouldContain(result);
+            lib12.Data.Dummy.DummyData.Companies.ShouldContain(result);
         }
     }
 }

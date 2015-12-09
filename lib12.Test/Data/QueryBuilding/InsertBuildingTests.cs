@@ -5,7 +5,7 @@ using lib12.Data.QueryBuilding.Builders;
 using Should;
 using Xunit;
 
-namespace lib12.Test.QueryBuilding
+namespace lib12.Test.Data.QueryBuilding
 {
     public class InsertBuildingTests
     {

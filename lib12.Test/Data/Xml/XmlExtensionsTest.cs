@@ -6,7 +6,7 @@ using lib12.Data.Xml;
 using Should;
 using Xunit;
 
-namespace lib12.Test.DummyData
+namespace lib12.Test.Data.Xml
 {
     public class XmlExtensionsTests
     {

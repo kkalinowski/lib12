@@ -4,7 +4,7 @@ using lib12.Data.Dummy;
 using Should;
 using Xunit;
 
-namespace lib12.Test.DummyData
+namespace lib12.Test.Data.Dummy
 {
     public class RandomClassGeneratorTests
     {
@@ -94,10 +94,10 @@ namespace lib12.Test.DummyData
             {
                 item.Name.ShouldNotBeEmpty();
                 item.Email.ShouldContain("@");
-                Data.Dummy.DummyData.Surnames.ShouldContain(item.Surname);
+                lib12.Data.Dummy.DummyData.Surnames.ShouldContain(item.Surname);
                 item.Address.ShouldNotBeEmpty();
-                Data.Dummy.DummyData.Countries.ShouldContain(item.Country);
-                Data.Dummy.DummyData.Companies.ShouldContain(item.Company);
+                lib12.Data.Dummy.DummyData.Countries.ShouldContain(item.Country);
+                lib12.Data.Dummy.DummyData.Companies.ShouldContain(item.Company);
                 item.Info.ShouldNotBeEmpty();
                 item.Created.ShouldNotEqual(new DateTime());
             }

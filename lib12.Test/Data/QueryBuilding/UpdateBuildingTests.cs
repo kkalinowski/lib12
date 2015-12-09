@@ -3,7 +3,7 @@ using lib12.Data.QueryBuilding.Structures;
 using Should;
 using Xunit;
 
-namespace lib12.Test.QueryBuilding
+namespace lib12.Test.Data.QueryBuilding
 {
     public class UpdateBuildingTests
     {
