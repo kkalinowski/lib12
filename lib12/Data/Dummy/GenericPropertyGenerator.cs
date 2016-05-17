@@ -39,27 +39,27 @@ namespace lib12.Data.Dummy
 
         private string GenerateStringProperty(Random random)
         {
-            if (propertyName.EqualsUnCased("Name"))
+            if (propertyName.EqualsIgnoreCase("Name"))
                 return random.NextName();
-            else if (propertyName.EqualsUnCased("MaleName"))
+            else if (propertyName.EqualsIgnoreCase("MaleName"))
                 return random.NextMaleName();
-            else if (propertyName.EqualsUnCased("FemaleName"))
+            else if (propertyName.EqualsIgnoreCase("FemaleName"))
                 return random.NextFemaleName();
-            else if (propertyName.EqualsUnCased("Surname"))
+            else if (propertyName.EqualsIgnoreCase("Surname"))
                 return random.NextSurname();
-            else if (propertyName.EqualsUnCased("Email"))
+            else if (propertyName.EqualsIgnoreCase("Email"))
                 return random.NextEmail();
-            else if (propertyName.EqualsUnCased("FullName"))
+            else if (propertyName.EqualsIgnoreCase("FullName"))
                 return random.NextFullName();
-            else if (propertyName.EqualsUnCased("Country"))
+            else if (propertyName.EqualsIgnoreCase("Country"))
                 return random.NextCountry();
-            else if (propertyName.EqualsUnCased("City"))
+            else if (propertyName.EqualsIgnoreCase("City"))
                 return random.NextCity();
-            else if (propertyName.EqualsUnCased("Address"))
+            else if (propertyName.EqualsIgnoreCase("Address"))
                 return random.NextAddress();
-            else if (propertyName.EqualsUnCased("ZipCode"))
+            else if (propertyName.EqualsIgnoreCase("ZipCode"))
                 return random.NextZipCode();
-            else if (propertyName.EqualsUnCased("Company"))
+            else if (propertyName.EqualsIgnoreCase("Company"))
                 return random.NextCompany();
             else
                 return random.NextString();
