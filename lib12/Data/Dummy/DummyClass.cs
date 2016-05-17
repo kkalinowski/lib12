@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using lib12.Collections;
+using lib12.FunctionalFlow;
 using lib12.Misc;
 
 namespace lib12.Data.Dummy
@@ -32,10 +34,14 @@ namespace lib12.Data.Dummy
         private static List<PropertyGeneratorBase<T>> SetupGeneratorsForType<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules)
         {
             var generatorDict = propertyGenerationRules.ToDictionary(x => x.PropertyName, x => x);
-            var props = typeof(T).GetProperties();
+            var props = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
             var propsGenerators = new List<PropertyGeneratorBase<T>>();
             foreach (var prop in props)
             {
+                var setMethod = prop.GetSetMethod();
+                if (setMethod == null || setMethod.IsPrivate)
+                    continue;
+
                 var explicitGenerator = generatorDict.GetValueOrDefault(prop.Name);
                 if (explicitGenerator != null)
                     propsGenerators.Add(explicitGenerator);

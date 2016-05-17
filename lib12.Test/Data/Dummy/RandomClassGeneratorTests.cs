@@ -116,5 +116,12 @@ namespace lib12.Test.Data.Dummy
                 names.ShouldContain(item.Name);
             }
         }
+
+        [Fact]
+        public void private_properties_arent_override()
+        {
+            var generated = DummyClass.Generate<ClassToGenerate>();
+            generated.NumberThatShouldntBeSet.ShouldEqual(12);
+        }
     }
 }
