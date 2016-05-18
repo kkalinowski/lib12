@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace lib12.Test.Data.Dummy
+namespace lib12.Test.Data.Fake
 {
     internal class ClassToGenerate
     {

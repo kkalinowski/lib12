@@ -8,22 +8,22 @@ namespace lib12.Data.Dummy
     {
         public static string NextMaleName(this Random random)
         {
-            return DummyData.MaleNames.GetRandomItem(random);
+            return FakeData.MaleNames.GetRandomItem(random);
         }
 
         public static string NextFemaleName(this Random random)
         {
-            return DummyData.FemaleNames.GetRandomItem(random);
+            return FakeData.FemaleNames.GetRandomItem(random);
         }
 
         public static string NextName(this Random random)
         {
-            return DummyData.MaleNames.Concat(DummyData.FemaleNames).GetRandomItem(random);
+            return FakeData.MaleNames.Concat(FakeData.FemaleNames).GetRandomItem(random);
         }
 
         public static string NextSurname(this Random random)
         {
-            return DummyData.Surnames.GetRandomItem(random);
+            return FakeData.Surnames.GetRandomItem(random);
         }
 
         public static string NextFullName(this Random random)
@@ -33,12 +33,12 @@ namespace lib12.Data.Dummy
 
         public static string NextCountry(this Random random)
         {
-            return DummyData.Countries.GetRandomItem(random);
+            return FakeData.Countries.GetRandomItem(random);
         }
 
         public static string NextCity(this Random random)
         {
-            return DummyData.Cities.GetRandomItem(random);
+            return FakeData.Cities.GetRandomItem(random);
         }
 
         public static string NextZipCode(this Random random)
@@ -48,7 +48,7 @@ namespace lib12.Data.Dummy
 
         public static string NextStreet(this Random random)
         {
-            return DummyData.Streets.GetRandomItem(random);
+            return FakeData.Streets.GetRandomItem(random);
         }
 
         public static string NextAddress(this Random random)
@@ -58,7 +58,7 @@ namespace lib12.Data.Dummy
 
         public static string NextCompany(this Random random)
         {
-            return DummyData.Companies.GetRandomItem(random);
+            return FakeData.Companies.GetRandomItem(random);
         }
 
         public static string NextEmail(this Random random)
