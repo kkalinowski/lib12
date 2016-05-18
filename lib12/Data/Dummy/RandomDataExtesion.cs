@@ -63,7 +63,7 @@ namespace lib12.Data.Dummy
 
         public static string NextEmail(this Random random)
         {
-            return "{0}@{1}.com".FormatWith(random.NextName(), random.NextCompany());
+            return "{0}@{1}.com".FormatWith(random.NextName(), random.NextCompany().Replace(" ", "_"));
         }
     }
 }
