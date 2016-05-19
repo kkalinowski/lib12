@@ -6,14 +6,12 @@ using Xunit;
 
 namespace lib12.Test.Data.Random
 {
-    public class RandomDataExtensionTests
+    public class RandTests
     {
-        private readonly System.Random random = new System.Random();
-
         [Fact]
         public void NextFullName_test()
         {
-            var result = random.NextFullName();
+            var result = Rand.NextFullName();
             result.ShouldNotBeEmpty();
             var names = result.Split(' ');
             FakeData.MaleNames.Concat(FakeData.FemaleNames).ShouldContain(names[0]);
@@ -23,7 +21,7 @@ namespace lib12.Test.Data.Random
         [Fact]
         public void NextCountry_test()
         {
-            var result = random.NextCountry();
+            var result = Rand.NextCountry();
             result.ShouldNotBeEmpty();
             FakeData.Countries.ShouldContain(result);
         }
@@ -31,7 +29,7 @@ namespace lib12.Test.Data.Random
         [Fact]
         public void NextCity_test()
         {
-            var result = random.NextCity();
+            var result = Rand.NextCity();
             result.ShouldNotBeEmpty();
             FakeData.Cities.ShouldContain(result);
         }
@@ -39,7 +37,7 @@ namespace lib12.Test.Data.Random
         [Fact]
         public void NextZipCode_test()
         {
-            var result = random.NextZipCode();
+            var result = Rand.NextZipCode();
             var regex = new Regex("[0-9]{2}-[0-9]{3}");
             regex.IsMatch(result).ShouldBeTrue();
         }
@@ -47,7 +45,7 @@ namespace lib12.Test.Data.Random
         [Fact]
         public void NextStreet_test()
         {
-            var result = random.NextStreet();
+            var result = Rand.NextStreet();
             result.ShouldNotBeEmpty();
             FakeData.Streets.ShouldContain(result);
         }
@@ -55,7 +53,7 @@ namespace lib12.Test.Data.Random
         [Fact]
         public void NextAddress_test()
         {
-            var result = random.NextAddress();
+            var result = Rand.NextAddress();
             result.ShouldNotBeEmpty();
             var parts = result.Split(' ');
             FakeData.Streets.ShouldContain(parts[0]);
@@ -65,7 +63,7 @@ namespace lib12.Test.Data.Random
         [Fact]
         public void NextCompany_test()
         {
-            var result = random.NextCompany();
+            var result = Rand.NextCompany();
             result.ShouldNotBeEmpty();
             FakeData.Companies.ShouldContain(result);
         }

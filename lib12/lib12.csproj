@@ -50,7 +50,6 @@
     <Compile Include="Collections\TreeHelper.cs" />
     <Compile Include="Data\Random\AvailableValuesGenerator.cs" />
     <Compile Include="Data\Random\GenericPropertyGenerator.cs" />
-    <Compile Include="Data\Random\RandomDataExtesion.cs" />
     <Compile Include="Data\Xml\XmlExtensions.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="FunctionalFlow\CollectionObjectCheckExtension.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Reflection\TypeExtension.cs" />
     <Compile Include="Misc\UnknownEnumException.cs" />
     <Compile Include="Data\Random\FakeData.cs" />
-    <Compile Include="Extensions\RandomExtension.cs" />
     <Compile Include="Data\Random\RandomIEnumerableExtension.cs" />
     <Compile Include="Data\QueryBuilding\Builders\SelectBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Structures\Compare.cs" />

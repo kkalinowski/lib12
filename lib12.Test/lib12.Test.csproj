@@ -83,7 +83,7 @@
     <Compile Include="DependencyInjection\InstancesTest.cs" />
     <Compile Include="Data\Random\ClassToGenerate.cs" />
     <Compile Include="Data\Random\RandomClassGeneratorTests.cs" />
-    <Compile Include="Data\Random\RandomDataExtensionTests.cs" />
+    <Compile Include="Data\Random\RandTests.cs" />
     <Compile Include="Data\Xml\XmlExtensionsTest.cs" />
     <Compile Include="FunctionalFlow\ParamsObjectCheckExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />

@@ -6,26 +6,12 @@ namespace lib12.Data.Random
 {
     public static class RandomIEnumerableExtension
     {
-        #region Fields
-        private static readonly System.Random instanceRandom;
-        #endregion
-
-        #region sctor
-        static RandomIEnumerableExtension()
-        {
-            instanceRandom = new System.Random();
-        }
-        #endregion
-
-        #region Logic
-        public static T GetRandomItem<T>(this IEnumerable<T> enumerable, System.Random random = null)
+        public static T GetRandomItem<T>(this IEnumerable<T> enumerable)
         {
             if (enumerable.IsNullOrEmpty())
                 return default(T);
 
-            var usedRandom = random ?? instanceRandom;
-            return enumerable.ElementAt(usedRandom.Next(enumerable.Count()));
+            return enumerable.ElementAt(Rand.NextInt(enumerable.Count()));
         }
-        #endregion
     }
 }

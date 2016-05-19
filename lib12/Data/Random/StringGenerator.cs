@@ -20,7 +20,7 @@ namespace lib12.Data.Random
         public override void GenerateProperty(T item, System.Random random)
         {
             var prop = (PropertyInfo)((MemberExpression)Selector.Body).Member;
-            var stringToSet = random.NextString(random.Next(MinLength, MaxLength));
+            var stringToSet = Rand.NextString(random.Next(MinLength, MaxLength));
             prop.SetValue(item, stringToSet, null);
         }
     }

@@ -19,50 +19,50 @@ namespace lib12.Data.Random
 
         public override void GenerateProperty(T item, System.Random random)
         {
-            var value = GenerateValue(random);
+            var value = GenerateValue();
             item.SetProperty(PropertyName, value);
         }
 
-        private object GenerateValue(System.Random random)
+        private object GenerateValue()
         {
             if (propertyType == typeof(string))
-                return GenerateStringProperty(random);
+                return GenerateStringProperty();
             else if (propertyType == typeof(int))
-                return random.Next(1, 1000);
+                return Rand.NextInt(1, 1000);
             else if (propertyType == typeof(double))
-                return random.NextDouble();
+                return Rand.NextDouble(-1000, 1000);
             else if (propertyType == typeof(DateTime))
-                return random.NextDateTime(DateTime.Now.AddYears(-10), DateTime.Now);
+                return Rand.NextDateTime(DateTime.Now.AddYears(-10), DateTime.Now);
             else
                 return propertyType.GetDefault();
         }
 
-        private string GenerateStringProperty(System.Random random)
+        private string GenerateStringProperty()
         {
             if (propertyName.EqualsIgnoreCase("Name"))
-                return random.NextName();
+                return Rand.NextName();
             else if (propertyName.EqualsIgnoreCase("MaleName"))
-                return random.NextMaleName();
+                return Rand.NextMaleName();
             else if (propertyName.EqualsIgnoreCase("FemaleName"))
-                return random.NextFemaleName();
+                return Rand.NextFemaleName();
             else if (propertyName.EqualsIgnoreCase("Surname"))
-                return random.NextSurname();
+                return Rand.NextSurname();
             else if (propertyName.EqualsIgnoreCase("Email"))
-                return random.NextEmail();
+                return Rand.NextEmail();
             else if (propertyName.EqualsIgnoreCase("FullName"))
-                return random.NextFullName();
+                return Rand.NextFullName();
             else if (propertyName.EqualsIgnoreCase("Country"))
-                return random.NextCountry();
+                return Rand.NextCountry();
             else if (propertyName.EqualsIgnoreCase("City"))
-                return random.NextCity();
+                return Rand.NextCity();
             else if (propertyName.EqualsIgnoreCase("Address"))
-                return random.NextAddress();
+                return Rand.NextAddress();
             else if (propertyName.EqualsIgnoreCase("ZipCode"))
-                return random.NextZipCode();
+                return Rand.NextZipCode();
             else if (propertyName.EqualsIgnoreCase("Company"))
-                return random.NextCompany();
+                return Rand.NextCompany();
             else
-                return random.NextString();
+                return Rand.NextString();
         }
     }
 }
