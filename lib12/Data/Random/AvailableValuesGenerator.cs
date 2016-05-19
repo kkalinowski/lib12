@@ -14,7 +14,7 @@ namespace lib12.Data.Random
             this.availableValues = availableValues;
         }
 
-        public override void GenerateProperty(T item, System.Random random)
+        public override void GenerateProperty(T item)
         {
             Selector.SetValue(item, availableValues.GetRandomItem());
         }

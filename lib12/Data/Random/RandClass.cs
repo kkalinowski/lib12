@@ -46,7 +46,7 @@ namespace lib12.Data.Random
         private static T GenerateValueUsingPropertyGenerators<T>(List<PropertyGeneratorBase<T>> propsGenerators)
         {
             var item = Activator.CreateInstance<T>();
-            propsGenerators.ForEach(x => x.GenerateProperty(item, new System.Random()));
+            propsGenerators.ForEach(x => x.GenerateProperty(item));
             return item;
         }
     }

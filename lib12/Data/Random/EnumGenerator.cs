@@ -20,10 +20,10 @@ namespace lib12.Data.Random
         #endregion
 
         #region Generate
-        public override void GenerateProperty(T item, System.Random random)
+        public override void GenerateProperty(T item)
         {
             var prop = (PropertyInfo)((MemberExpression)Selector.Body).Member;
-            var enumToSet = enumValues[random.Next(enumValues.Length)];
+            var enumToSet = enumValues[Rand.NextInt(enumValues.Length)];
             prop.SetValue(item, enumToSet, null);
         } 
         #endregion

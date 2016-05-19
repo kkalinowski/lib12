@@ -17,7 +17,7 @@ namespace lib12.Data.Random
             this.propertyType = propertyType;
         }
 
-        public override void GenerateProperty(T item, System.Random random)
+        public override void GenerateProperty(T item)
         {
             var value = GenerateValue();
             item.SetProperty(PropertyName, value);

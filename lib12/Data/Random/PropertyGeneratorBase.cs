@@ -3,6 +3,6 @@
     public abstract class PropertyGeneratorBase<T>
     {
         public abstract string PropertyName { get; }
-        public abstract void GenerateProperty(T item, System.Random random);
+        public abstract void GenerateProperty(T item);
     }
 }

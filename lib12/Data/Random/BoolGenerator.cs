@@ -14,7 +14,7 @@ namespace lib12.Data.Random
 
         }
 
-        public override void GenerateProperty(T item, System.Random random)
+        public override void GenerateProperty(T item)
         {
             Selector.SetValue(item, Rand.NextBool());
         }

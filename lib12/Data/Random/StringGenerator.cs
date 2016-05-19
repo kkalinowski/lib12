@@ -17,10 +17,10 @@ namespace lib12.Data.Random
             MaxLength = maxLength;
         }
 
-        public override void GenerateProperty(T item, System.Random random)
+        public override void GenerateProperty(T item)
         {
             var prop = (PropertyInfo)((MemberExpression)Selector.Body).Member;
-            var stringToSet = Rand.NextString(random.Next(MinLength, MaxLength));
+            var stringToSet = Rand.NextString(Rand.NextInt(MinLength, MaxLength));
             prop.SetValue(item, stringToSet, null);
         }
     }

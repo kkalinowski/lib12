@@ -17,9 +17,9 @@ namespace lib12.Data.Random
             Max = max;
         }
 
-        public override void GenerateProperty(T item, System.Random random)
+        public override void GenerateProperty(T item)
         {
-            Selector.SetValue(item, random.Next(Min, Max));
+            Selector.SetValue(item, Rand.NextInt(Min, Max));
         }
     }
 }
