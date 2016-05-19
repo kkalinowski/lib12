@@ -8,13 +8,13 @@ namespace lib12.Data.Random
 {
     public static partial class Rand
     {
-        public static T Next<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules)
+        public static T Next<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules) where T : class 
         {
             var propsGenerators = SetupGeneratorsForType(propertyGenerationRules);
             return GenerateValueUsingPropertyGenerators(propsGenerators);
         }
 
-        public static T[] NextArrayOf<T>(int count, params PropertyGeneratorBase<T>[] propertyGenerationRules)
+        public static T[] NextArrayOf<T>(int count, params PropertyGeneratorBase<T>[] propertyGenerationRules) where T : class
         {
             return Enumerable
                 .Range(0, count)
@@ -22,7 +22,7 @@ namespace lib12.Data.Random
                 .ToArray();
         }
 
-        private static List<PropertyGeneratorBase<T>> SetupGeneratorsForType<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules)
+        private static List<PropertyGeneratorBase<T>> SetupGeneratorsForType<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules) where T : class
         {
             var generatorDict = propertyGenerationRules.ToDictionary(x => x.PropertyName, x => x);
             var props = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
@@ -43,7 +43,7 @@ namespace lib12.Data.Random
             return propsGenerators;
         }
 
-        private static T GenerateValueUsingPropertyGenerators<T>(List<PropertyGeneratorBase<T>> propsGenerators)
+        private static T GenerateValueUsingPropertyGenerators<T>(List<PropertyGeneratorBase<T>> propsGenerators) where T : class
         {
             var item = Activator.CreateInstance<T>();
             propsGenerators.ForEach(x => x.GenerateProperty(item));
