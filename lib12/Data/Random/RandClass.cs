@@ -6,26 +6,19 @@ using lib12.Collections;
 
 namespace lib12.Data.Random
 {
-    public static class DummyClass
+    public static partial class Rand
     {
-        public static System.Random Random { get; set; }
-
-        static DummyClass()
-        {
-            Random = new System.Random();
-        }
-
-        public static T Generate<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules)
+        public static T Next<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules)
         {
             var propsGenerators = SetupGeneratorsForType(propertyGenerationRules);
             return GenerateValueUsingPropertyGenerators(propsGenerators);
         }
 
-        public static T[] Generate<T>(int count, params PropertyGeneratorBase<T>[] propertyGenerationRules)
+        public static T[] NextArrayOf<T>(int count, params PropertyGeneratorBase<T>[] propertyGenerationRules)
         {
             return Enumerable
                 .Range(0, count)
-                .Select(x => Generate(propertyGenerationRules))
+                .Select(x => Next(propertyGenerationRules))
                 .ToArray();
         }
 
@@ -53,7 +46,7 @@ namespace lib12.Data.Random
         private static T GenerateValueUsingPropertyGenerators<T>(List<PropertyGeneratorBase<T>> propsGenerators)
         {
             var item = Activator.CreateInstance<T>();
-            propsGenerators.ForEach(x => x.GenerateProperty(item, Random));
+            propsGenerators.ForEach(x => x.GenerateProperty(item, new System.Random()));
             return item;
         }
     }

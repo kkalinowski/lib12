@@ -6,7 +6,7 @@ using lib12.Extensions;
 
 namespace lib12.Data.Random
 {
-    public static class Rand
+    public static partial class Rand
     {
         private static readonly System.Random random;
 

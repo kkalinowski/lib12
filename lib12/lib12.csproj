@@ -66,7 +66,10 @@
     <Compile Include="Data\Random\IntGenerator.cs" />
     <Compile Include="Data\Random\PropertyGenerator.cs" />
     <Compile Include="Data\Random\PropertyGeneratorBase.cs" />
-    <Compile Include="Data\Random\DummyClass.cs" />
+    <Compile Include="Data\Random\Rand.cs" />
+    <Compile Include="Data\Random\RandClass.cs" >
+    	<DependentUpon>Rand.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Random\StringGenerator.cs" />
     <Compile Include="Data\QueryBuilding\Builders\InsertBuilder.cs" />
     <Compile Include="Data\QueryBuilding\Builders\QueryBuilderBase.cs" />
@@ -96,7 +99,6 @@
     <Compile Include="Mathematics\Token.cs" />
     <Compile Include="Mathematics\TokenType.cs" />
     <Compile Include="Mathematics\VariableToken.cs" />
-    <Compile Include="Data\Random\Rand.cs" />
     <Compile Include="Misc\Range.cs" />
     <Compile Include="FunctionalFlow\ParamsObjectCheckExtension.cs" />
     <Compile Include="Reflection\CreateTypeAttribute.cs" />
