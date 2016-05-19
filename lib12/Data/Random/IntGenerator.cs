@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using lib12.Reflection;
 
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     public class IntGenerator<T> : PropertyGenerator<T, int>
     {
@@ -17,7 +17,7 @@ namespace lib12.Data.Dummy
             Max = max;
         }
 
-        public override void GenerateProperty(T item, Random random)
+        public override void GenerateProperty(T item, System.Random random)
         {
             Selector.SetValue(item, random.Next(Min, Max));
         }

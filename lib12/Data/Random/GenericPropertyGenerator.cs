@@ -2,7 +2,7 @@
 using lib12.Extensions;
 using lib12.Reflection;
 
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     public class GenericPropertyGenerator<T> : PropertyGeneratorBase<T>
     {
@@ -17,13 +17,13 @@ namespace lib12.Data.Dummy
             this.propertyType = propertyType;
         }
 
-        public override void GenerateProperty(T item, Random random)
+        public override void GenerateProperty(T item, System.Random random)
         {
             var value = GenerateValue(random);
             item.SetProperty(PropertyName, value);
         }
 
-        private object GenerateValue(Random random)
+        private object GenerateValue(System.Random random)
         {
             if (propertyType == typeof(string))
                 return GenerateStringProperty(random);
@@ -37,7 +37,7 @@ namespace lib12.Data.Dummy
                 return propertyType.GetDefault();
         }
 
-        private string GenerateStringProperty(Random random)
+        private string GenerateStringProperty(System.Random random)
         {
             if (propertyName.EqualsIgnoreCase("Name"))
                 return random.NextName();

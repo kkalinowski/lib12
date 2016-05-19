@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using lib12.Data.Dummy;
+using lib12.Data.Random;
 using Should;
 using Xunit;
 
-namespace lib12.Test.Data.Fake
+namespace lib12.Test.Data.Random
 {
     public class RandomClassGeneratorTests
     {
@@ -94,10 +94,10 @@ namespace lib12.Test.Data.Fake
             {
                 item.Name.ShouldNotBeEmpty();
                 item.Email.ShouldContain("@");
-                lib12.Data.Dummy.FakeData.Surnames.ShouldContain(item.Surname);
+                FakeData.Surnames.ShouldContain(item.Surname);
                 item.Address.ShouldNotBeEmpty();
-                lib12.Data.Dummy.FakeData.Countries.ShouldContain(item.Country);
-                lib12.Data.Dummy.FakeData.Companies.ShouldContain(item.Company);
+                FakeData.Countries.ShouldContain(item.Country);
+                FakeData.Companies.ShouldContain(item.Company);
                 item.Info.ShouldNotBeEmpty();
                 item.Created.ShouldNotEqual(new DateTime());
             }

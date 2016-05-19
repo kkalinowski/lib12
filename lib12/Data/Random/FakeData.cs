@@ -1,5 +1,5 @@
 ﻿
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     /// <summary>
     /// Lorem ipsum text

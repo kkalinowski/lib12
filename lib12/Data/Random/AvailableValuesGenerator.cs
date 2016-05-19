@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using lib12.Reflection;
 
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     public class AvailableValuesGenerator<T, TProp> : PropertyGenerator<T, TProp>
     {
@@ -14,7 +14,7 @@ namespace lib12.Data.Dummy
             this.availableValues = availableValues;
         }
 
-        public override void GenerateProperty(T item, Random random)
+        public override void GenerateProperty(T item, System.Random random)
         {
             Selector.SetValue(item, availableValues.GetRandomItem(random));
         }

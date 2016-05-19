@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace lib12.Test.Data.Fake
+namespace lib12.Test.Data.Random
 {
     internal class ClassToGenerate
     {

@@ -81,9 +81,9 @@
     <Compile Include="DependencyInjection\Classes\WireUpAllPropertiesWithoutIgnored.cs" />
     <Compile Include="DependencyInjection\Classes\WireUpAllPropertiesWithWireUpAttribute.cs" />
     <Compile Include="DependencyInjection\InstancesTest.cs" />
-    <Compile Include="Data\Fake\ClassToGenerate.cs" />
-    <Compile Include="Data\Fake\RandomClassGeneratorTests.cs" />
-    <Compile Include="Data\Fake\RandomDataExtensionTests.cs" />
+    <Compile Include="Data\Random\ClassToGenerate.cs" />
+    <Compile Include="Data\Random\RandomClassGeneratorTests.cs" />
+    <Compile Include="Data\Random\RandomDataExtensionTests.cs" />
     <Compile Include="Data\Xml\XmlExtensionsTest.cs" />
     <Compile Include="FunctionalFlow\ParamsObjectCheckExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />

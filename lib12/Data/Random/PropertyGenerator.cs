@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using lib12.Reflection;
 
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     public abstract class PropertyGenerator<T, TProp> : PropertyGeneratorBase<T>
     {

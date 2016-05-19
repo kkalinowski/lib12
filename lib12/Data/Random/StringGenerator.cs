@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using lib12.Extensions;
 
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     public class StringGenerator<T> : PropertyGenerator<T, string>
     {
@@ -17,7 +17,7 @@ namespace lib12.Data.Dummy
             MaxLength = maxLength;
         }
 
-        public override void GenerateProperty(T item, Random random)
+        public override void GenerateProperty(T item, System.Random random)
         {
             var prop = (PropertyInfo)((MemberExpression)Selector.Body).Member;
             var stringToSet = random.NextString(random.Next(MinLength, MaxLength));

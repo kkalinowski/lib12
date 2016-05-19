@@ -1,15 +1,14 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
-using lib12.Data.Dummy;
+using lib12.Data.Random;
 using Should;
 using Xunit;
 
-namespace lib12.Test.Data.Fake
+namespace lib12.Test.Data.Random
 {
     public class RandomDataExtensionTests
     {
-        private readonly Random random = new Random();
+        private readonly System.Random random = new System.Random();
 
         [Fact]
         public void NextFullName_test()
@@ -17,8 +16,8 @@ namespace lib12.Test.Data.Fake
             var result = random.NextFullName();
             result.ShouldNotBeEmpty();
             var names = result.Split(' ');
-            lib12.Data.Dummy.FakeData.MaleNames.Concat(lib12.Data.Dummy.FakeData.FemaleNames).ShouldContain(names[0]);
-            lib12.Data.Dummy.FakeData.Surnames.ShouldContain(names[1]);
+            FakeData.MaleNames.Concat(FakeData.FemaleNames).ShouldContain(names[0]);
+            FakeData.Surnames.ShouldContain(names[1]);
         }
 
         [Fact]
@@ -26,7 +25,7 @@ namespace lib12.Test.Data.Fake
         {
             var result = random.NextCountry();
             result.ShouldNotBeEmpty();
-            lib12.Data.Dummy.FakeData.Countries.ShouldContain(result);
+            FakeData.Countries.ShouldContain(result);
         }
 
         [Fact]
@@ -34,7 +33,7 @@ namespace lib12.Test.Data.Fake
         {
             var result = random.NextCity();
             result.ShouldNotBeEmpty();
-            lib12.Data.Dummy.FakeData.Cities.ShouldContain(result);
+            FakeData.Cities.ShouldContain(result);
         }
 
         [Fact]
@@ -50,7 +49,7 @@ namespace lib12.Test.Data.Fake
         {
             var result = random.NextStreet();
             result.ShouldNotBeEmpty();
-            lib12.Data.Dummy.FakeData.Streets.ShouldContain(result);
+            FakeData.Streets.ShouldContain(result);
         }
 
         [Fact]
@@ -59,7 +58,7 @@ namespace lib12.Test.Data.Fake
             var result = random.NextAddress();
             result.ShouldNotBeEmpty();
             var parts = result.Split(' ');
-            lib12.Data.Dummy.FakeData.Streets.ShouldContain(parts[0]);
+            FakeData.Streets.ShouldContain(parts[0]);
             Assert.DoesNotThrow(() => int.Parse(parts.Last()));
         }
 
@@ -68,7 +67,7 @@ namespace lib12.Test.Data.Fake
         {
             var result = random.NextCompany();
             result.ShouldNotBeEmpty();
-            lib12.Data.Dummy.FakeData.Companies.ShouldContain(result);
+            FakeData.Companies.ShouldContain(result);
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace lib12.Data.Dummy
+﻿namespace lib12.Data.Random
 {
     public abstract class PropertyGeneratorBase<T>
     {
         public abstract string PropertyName { get; }
-        public abstract void GenerateProperty(T item, Random random);
+        public abstract void GenerateProperty(T item, System.Random random);
     }
 }

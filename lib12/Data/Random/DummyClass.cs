@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using lib12.Collections;
-using lib12.FunctionalFlow;
-using lib12.Misc;
 
-namespace lib12.Data.Dummy
+namespace lib12.Data.Random
 {
     public static class DummyClass
     {
-        public static Random Random { get; set; }
+        public static System.Random Random { get; set; }
 
         static DummyClass()
         {
-            Random = new Random();
+            Random = new System.Random();
         }
 
         public static T Generate<T>(params PropertyGeneratorBase<T>[] propertyGenerationRules)
