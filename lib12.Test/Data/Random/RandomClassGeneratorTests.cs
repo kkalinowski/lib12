@@ -123,5 +123,13 @@ namespace lib12.Test.Data.Random
             var generated = Rand.Next<ClassToGenerate>();
             generated.NumberThatShouldntBeSet.ShouldEqual(12);
         }
+
+        [Fact]
+        public void nested_classes_are_generated_properly()
+        {
+            var generated = Rand.Next<ClassToGenerate>();
+            generated.NestedClass.ShouldNotBeNull();
+            generated.NestedClass.NestedText.ShouldNotBeEmpty();
+        }
     }
 }
