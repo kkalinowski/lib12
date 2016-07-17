@@ -48,16 +48,18 @@ namespace lib12.Data.Random
 
         private static object GenerateValue(Type propertyType, string propertyName)
         {
-            if (propertyType == typeof(string))
+            if (propertyType.IsEnum)
+                return NextEnum(propertyType);
+            else if (propertyType == typeof (string))
                 return GenerateStringProperty(propertyName);
-            else if (propertyType == typeof(int))
+            else if (propertyType == typeof (int))
                 return NextInt(1, 1000);
-            else if (propertyType == typeof(double))
+            else if (propertyType == typeof (double))
                 return NextDouble(-1000, 1000);
-            else if (propertyType == typeof(DateTime))
+            else if (propertyType == typeof (DateTime))
                 return NextDateTime(DateTime.Now.AddYears(-10), DateTime.Now);
             else if (propertyType.IsClass)
-                return Rand.Next(propertyType);
+                return Next(propertyType);
             else
                 return propertyType.GetDefault();
         }

@@ -152,5 +152,18 @@ namespace lib12.Data.Random
         {
             return "{0}@{1}.com".FormatWith(NextName(), NextCompany().Replace(" ", "_"));
         }
+
+        public static object NextEnum(Type enumType)
+        {
+            var values = Enum.GetValues(enumType);
+            return values
+                .Cast<object>()
+                .GetRandomItem();
+        }
+
+        public static TEnum NextEnum<TEnum>()
+        {
+            return (TEnum) NextEnum(typeof (TEnum));
+        }
     }
 }
