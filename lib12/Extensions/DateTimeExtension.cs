@@ -28,5 +28,15 @@ namespace lib12.Extensions
             dateTime = dateTime.AddSeconds(timestamp);
             return dateTime;
         }
+
+        /// <summary>
+        /// Check if given DateTime is empty
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static bool IsEmpty(this DateTime target)
+        {
+            return target == default(DateTime);
+        }
     }
 }

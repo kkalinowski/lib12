@@ -81,9 +81,10 @@
     <Compile Include="DependencyInjection\Classes\WireUpAllPropertiesWithoutIgnored.cs" />
     <Compile Include="DependencyInjection\Classes\WireUpAllPropertiesWithWireUpAttribute.cs" />
     <Compile Include="DependencyInjection\InstancesTest.cs" />
-    <Compile Include="DummyData\ClassToGenerate.cs" />
-    <Compile Include="DummyData\RandomClassGeneratorTests.cs" />
-    <Compile Include="DummyData\RandomDataExtensionTests.cs" />
+    <Compile Include="Data\Random\ClassToGenerate.cs" />
+    <Compile Include="Data\Random\RandomClassGeneratorTests.cs" />
+    <Compile Include="Data\Random\RandTests.cs" />
+    <Compile Include="Data\Xml\XmlExtensionsTest.cs" />
     <Compile Include="FunctionalFlow\ParamsObjectCheckExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="FunctionalFlow\CollectionObjectCheckExtensionTest.cs" />
@@ -98,17 +99,16 @@
     <Compile Include="Reflection\CreateTypeFromEnumTests\EnumLogicTests.cs" />
     <Compile Include="Reflection\CreateTypeFromEnumTests\SampleEnum.cs" />
     <Compile Include="Extensions\DateTimeExtensionTests.cs" />
-    <Compile Include="FunctionalFlow\MaybeObjectExtensionTests.cs" />
     <Compile Include="Collections\IEnumerableExtensionTests.cs" />
     <Compile Include="Misc\PropertyComparerTests.cs" />
     <Compile Include="Crypto\SaltedHashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBuilding\InsertBuildingTests.cs" />
-    <Compile Include="QueryBuilding\SelectBuildingTests.cs" />
+    <Compile Include="Data\QueryBuilding\InsertBuildingTests.cs" />
+    <Compile Include="Data\QueryBuilding\SelectBuildingTests.cs" />
     <Compile Include="Extensions\TypeExtensionTests.cs" />
     <Compile Include="Extensions\TypeWithoutParameterlessConstructor.cs" />
-    <Compile Include="QueryBuilding\DeleteBuildingTests.cs" />
-    <Compile Include="QueryBuilding\UpdateBuildingTests.cs" />
+    <Compile Include="Data\QueryBuilding\DeleteBuildingTests.cs" />
+    <Compile Include="Data\QueryBuilding\UpdateBuildingTests.cs" />
     <Compile Include="Reflection\ExpressionTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_Files\Sample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

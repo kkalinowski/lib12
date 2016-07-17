@@ -15,9 +15,25 @@ namespace lib12.Extensions
             return string.Format(formatString, args);
         }
 
-        public static bool EqualsUnCased(this string @string, string toCompare)
+        /// <summary>
+        /// Check if strings are equal with ignore case
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="toCompare"></param>
+        /// <returns></returns>
+        public static bool EqualsIgnoreCase(this string target, string toCompare)
         {
-            return @string.Equals(toCompare, StringComparison.OrdinalIgnoreCase);
+            return target.Equals(toCompare, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Returns empty string if given string is null
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static string Recover(this string target)
+        {
+            return target ?? string.Empty;
         }
     }
 }

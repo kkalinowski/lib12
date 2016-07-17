@@ -1,46 +1,43 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
-using lib12.Data.Dummy;
+using lib12.Data.Random;
 using Should;
 using Xunit;
 
-namespace lib12.Test.DummyData
+namespace lib12.Test.Data.Random
 {
-    public class RandomDataExtensionTests
+    public class RandTests
     {
-        private readonly Random random = new Random();
-
         [Fact]
         public void NextFullName_test()
         {
-            var result = random.NextFullName();
+            var result = Rand.NextFullName();
             result.ShouldNotBeEmpty();
             var names = result.Split(' ');
-            Data.Dummy.DummyData.MaleNames.Concat(Data.Dummy.DummyData.FemaleNames).ShouldContain(names[0]);
-            Data.Dummy.DummyData.Surnames.ShouldContain(names[1]);
+            FakeData.MaleNames.Concat(FakeData.FemaleNames).ShouldContain(names[0]);
+            FakeData.Surnames.ShouldContain(names[1]);
         }
 
         [Fact]
         public void NextCountry_test()
         {
-            var result = random.NextCountry();
+            var result = Rand.NextCountry();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Countries.ShouldContain(result);
+            FakeData.Countries.ShouldContain(result);
         }
 
         [Fact]
         public void NextCity_test()
         {
-            var result = random.NextCity();
+            var result = Rand.NextCity();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Cities.ShouldContain(result);
+            FakeData.Cities.ShouldContain(result);
         }
 
         [Fact]
         public void NextZipCode_test()
         {
-            var result = random.NextZipCode();
+            var result = Rand.NextZipCode();
             var regex = new Regex("[0-9]{2}-[0-9]{3}");
             regex.IsMatch(result).ShouldBeTrue();
         }
@@ -48,27 +45,27 @@ namespace lib12.Test.DummyData
         [Fact]
         public void NextStreet_test()
         {
-            var result = random.NextStreet();
+            var result = Rand.NextStreet();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Streets.ShouldContain(result);
+            FakeData.Streets.ShouldContain(result);
         }
 
         [Fact]
         public void NextAddress_test()
         {
-            var result = random.NextAddress();
+            var result = Rand.NextAddress();
             result.ShouldNotBeEmpty();
             var parts = result.Split(' ');
-            Data.Dummy.DummyData.Streets.ShouldContain(parts[0]);
+            FakeData.Streets.ShouldContain(parts[0]);
             Assert.DoesNotThrow(() => int.Parse(parts.Last()));
         }
 
         [Fact]
         public void NextCompany_test()
         {
-            var result = random.NextCompany();
+            var result = Rand.NextCompany();
             result.ShouldNotBeEmpty();
-            Data.Dummy.DummyData.Companies.ShouldContain(result);
+            FakeData.Companies.ShouldContain(result);
         }
     }
 }

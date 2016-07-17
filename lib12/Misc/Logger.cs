@@ -9,9 +9,12 @@ namespace lib12.Misc
     /// </summary>
     public static class Logger
     {
-        private const string FileName = "log.txt";
         private const string Format = "{0} {1} => {2}";
-        private static readonly StreamWriter file = File.CreateText(FileName);
+
+        /// <summary>
+        /// File name of log file
+        /// </summary>
+        public static string FileName { get; set; } = "log.txt";
 
         /// <summary>
         /// Log info message
@@ -19,7 +22,10 @@ namespace lib12.Misc
         /// <param name="text"></param>
         public static void Info(string text)
         {
-            file.WriteLine(Format, DateTime.UtcNow, "INFO", text);
+            using (var file = File.AppendText(FileName))
+            {
+                file.WriteLine(Format, DateTime.UtcNow, "INFO", text);
+            }
         }
 
         /// <summary>
@@ -27,7 +33,10 @@ namespace lib12.Misc
         /// </summary>
         public static void Error(string text)
         {
-            file.WriteLine(Format, DateTime.UtcNow, "ERROR", text);
+            using (var file = File.AppendText(FileName))
+            {
+                file.WriteLine(Format, DateTime.UtcNow, "ERROR", text);
+            }
         }
 
         /// <summary>
@@ -35,13 +44,16 @@ namespace lib12.Misc
         /// </summary>
         public static void Error(Exception ex)
         {
-            file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
-
-            var inner = ex.InnerException;
-            while (inner.NotNull())
+            using (var file = File.AppendText(FileName))
             {
-                file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
-                inner = inner.InnerException;
+                file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
+
+                var inner = ex.InnerException;
+                while (inner.NotNull())
+                {
+                    file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
+                    inner = inner.InnerException;
+                }
             }
         }
     }

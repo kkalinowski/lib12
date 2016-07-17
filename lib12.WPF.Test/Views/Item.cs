@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using lib12.Data.Dummy;
+using System.Linq;
+using lib12.Data.Random;
 
 namespace lib12.WPF.Test.Views
 {
@@ -12,10 +13,7 @@ namespace lib12.WPF.Test.Views
 
         public static List<Item> GenerateItems(int count = 100)
         {
-            var generator = new RandomClassGenerator();
-            return generator.Generate<Item>(count,
-                new StringGenerator<Item>(x => x.Text, 4, 9),
-                new EnumGenerator<Item, SampleEnum>(x => x.EnumProp));
+            return Rand.NextArrayOf<Item>(count).ToList();
         }
 
         public override string ToString()
