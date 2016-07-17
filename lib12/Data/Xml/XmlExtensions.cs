@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using lib12.FunctionalFlow;
 
 namespace lib12.Data.Xml
 {
@@ -18,6 +19,21 @@ namespace lib12.Data.Xml
             element.Add(attribute);
 
             return element;
+        }
+
+        public static XElement SetAttributeValue(this XElement element, string name, object value)
+        {
+            var attribute = element.Attribute(name);
+            attribute.ThrowExceptionIfNull();
+
+            attribute.SetValue(value);
+            return element;
+        }
+
+        public static XElement RemoveAllChildren(this XElement parent)
+        {
+            parent.RemoveAll();
+            return parent;
         }
     }
 }
