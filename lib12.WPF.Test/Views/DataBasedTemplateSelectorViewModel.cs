@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using lib12.WPF.Core;
 
 namespace lib12.WPF.Test.Views

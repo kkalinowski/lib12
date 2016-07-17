@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using lib12.Exceptions;
 
 namespace lib12.WPF.TemplateSelectors
 {
