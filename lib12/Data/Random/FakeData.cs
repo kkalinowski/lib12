@@ -594,7 +594,7 @@ namespace lib12.Data.Random
             Streets = new[]
             {
                 "First", "Second", "Third", "Forth", "Five", "Main", "Oak", "Pine",
-                "Elm", "View", "Lake", "Hill", "Church", "Park Avenue", "Prospect"
+                "Elm", "View", "Lake", "Hill", "Church", "Prospect"
             };
             #endregion
 
