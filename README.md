@@ -1,8 +1,8 @@
 ![alt tag](https://raw.github.com/kkalinowski/lib12/master/lib12.png)
 
-lib12 is set of useful classes and extension created for .net 4 core and WPF. During my work with .net and WPF I created many classes and function that can be reused across different projects.
+lib12 is set of useful classes and extension created for .net 4 and WPF. During my work with .net and WPF I created many classes and function that can be reused across different projects.
 
-Current version 1.3 available on nuget - https://www.nuget.org/packages/lib12
+Current version 1.4 available on nuget - https://www.nuget.org/packages/lib12
 
 Dependency injection - lib12.DependencyInjection
 --------------------
@@ -95,18 +95,13 @@ var delete = SqlBuilder.Delete.From("product").OpenBracket()
 	.Build()
 ```
 
-Dummy and random data - lib12.Data.Dummy
+Dummy and random data - lib12.Data.Random
 --------------------
-Sometimes when you start developing new project you don't have data to test your solution. lib12 contains classes that will help you to quickly solve this problem. RandomClassGenerator contains methods to quickly generate collection of random data, using property generators to describe how to generate data for class's properties:
+Sometimes when you start developing new project you don't have data to test your solution. lib12 contains classes that will help you to quickly solve this problem. Rand contains methods to quickly generate collection of random data:
 ```csharp
-var generated = DummyClass.Generate<ClassToGenerate>(CollectionSize,
-	new StringGenerator<ClassToGenerate>(x => x.Text, 3, 7),
-	new EnumGenerator<ClassToGenerate, ClassToGenerate.EnumToGenerate>(x => x.Enum),
-	new BoolGenerator<ClassToGenerate>(x => x.Bool),
-	new IntGenerator<ClassToGenerate>(x => x.Int, 50, 100),
-	new DoubleGenerator<ClassToGenerate>(x => x.Double, 70, 120));
+var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 ```
-lib12 contains also extensions for System.Random class for generating bool, char, string and DateTime.
+lib12.Data.Random contains also methods from System.Random class and additional methods for generating bool, char, string, enums and DateTime in one easy to use static class
 
 Mathematical functions - lib12.Mathematics
 ---
@@ -141,6 +136,7 @@ Other classes
 - lib12.Crypto.SaltedHash - implemention of salted hash mechanism for password storing
 - lib12.Serialization - namespace contains classes that simplifying implementation of serialization
 - lib12.FunctionalFlow - example of Maybe monad for functional flow
+- lib12.Data.Xml - set of extentions methods to linq-to-xml which simplifies edition of xml files by allowing to use easy to read fluent style
 
 Set of extensions for standard classes
 --------------------
