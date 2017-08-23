@@ -11,7 +11,7 @@ namespace lib12.Test.Collections
         [Fact]
         public void formatting_collection_with_one_item()
         {
-            var expected = "test";
+            const string expected = "test";
             var result = new[] { "test" }.ToDelimitedString("_");
 
             Assert.Equal(expected, result);
@@ -20,7 +20,7 @@ namespace lib12.Test.Collections
         [Fact]
         public void formatting_collection_with_two_item()
         {
-            var expected = "test_test2";
+            const string expected = "test_test2";
             var result = new[] { "test", "test2" }.ToDelimitedString("_");
 
             Assert.Equal(expected, result);
