@@ -23,7 +23,7 @@ namespace lib12.Collections
         /// </summary>
         /// <param name="list">List of items</param>
         /// <param name="condition">Condition to remove item</param>
-        public static void RemoveRange<T>(this IList<T> list, Predicate<T> condition)
+        public static void RemoveBy<T>(this IList<T> list, Predicate<T> condition)
         {
             foreach (var item in list.ToArray())
             {

@@ -2,7 +2,7 @@
 
 namespace lib12.Collections
 {
-    public static class DictionaryExtension
+    public static class IDictionaryExtension
     {
         /// <summary>
         /// Gets the value for given key or default if key doesn't exist in dictionary

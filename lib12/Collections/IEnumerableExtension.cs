@@ -63,16 +63,6 @@ namespace lib12.Collections
         }
 
         /// <summary>
-        /// Converts enumerable to observable collection.
-        /// </summary>
-        /// <param name="enumeration">The enumeration to convert</param>
-        /// <returns>Converted observable collection</returns>
-        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumeration)
-        {
-            return new ObservableCollection<T>(enumeration);
-        }
-
-        /// <summary>
         /// Converterts enumerable to delimited string
         /// </summary>
         /// <param name="enumerable">The enumerable to convert</param>
