@@ -625,7 +625,8 @@ namespace lib12.Data.Random
             Companies = new[]
             {
                 "Acme", "Macrohard", "Pear", "Gogles", "Tanmung", "Intellico", "Specific Motors", "Testral",
-                "Philip", "Tony"
+                "SpaceZ", "TonyX", "Cantuso", "DealMan", "Shoping Co", "United Motors", "Express Deliveries",
+                "Valid Info", "Investment Searcher", "Banking Unlimited","Gruthorp","Watch Maker"
             };
             #endregion
         }
