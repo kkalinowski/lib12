@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using lib12.Collections;
 using lib12.Misc;
 using lib12.Extensions;
 
@@ -76,9 +77,9 @@ namespace lib12.Data.Random
         /// <returns>Random string with provided length</returns>
         public static string NextString(int length)
         {
-            var sbuilder = new StringBuilder();
-            TimesLoop.Do(length, () => sbuilder.Append(NextLowercaseLetter()));
-            return sbuilder.ToString();
+            return new string(CollectionFactory
+                .CreateEnumerable(i => NextLowercaseLetter(), i => i++, 0)
+                .Take(length).ToArray());
         }
 
         /// <summary>
@@ -163,7 +164,7 @@ namespace lib12.Data.Random
 
         public static TEnum NextEnum<TEnum>()
         {
-            return (TEnum) NextEnum(typeof (TEnum));
+            return (TEnum)NextEnum(typeof(TEnum));
         }
     }
 }
