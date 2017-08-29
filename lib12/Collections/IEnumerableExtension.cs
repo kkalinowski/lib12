@@ -288,5 +288,46 @@ namespace lib12.Collections
                 return maxKey;
             }
         }
+
+        /// <summary>
+        /// Get item with minimum value of given property
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="selector">The selector to get value by which minimum is searched</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// enumerable
+        /// or
+        /// selector
+        /// </exception>
+        /// <exception cref="InvalidOperationException">Sequence contains no elements</exception>
+        public static TItem MinBy<TItem, TKey>(this IEnumerable<TItem> enumerable, Func<TItem, TKey> selector) where TKey : IComparable
+        {
+            if (enumerable == null)
+                throw new ArgumentNullException(nameof(enumerable));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                if (!enumerator.MoveNext())
+                    throw new InvalidOperationException("Sequence contains no elements");
+
+                var minKey = enumerator.Current;
+                var minValue = selector(minKey);
+                while (enumerator.MoveNext())
+                {
+                    var currentValue = selector(enumerator.Current);
+                    if (minValue.CompareTo(currentValue) > 0)
+                    {
+                        minValue = currentValue;
+                        minKey = enumerator.Current;
+                    }
+                }
+                return minKey;
+            }
+        }
     }
 }

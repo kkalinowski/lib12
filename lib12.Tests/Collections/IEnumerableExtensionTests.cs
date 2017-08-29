@@ -110,5 +110,43 @@ namespace lib12.Test.Collections
 
             Assert.Throws<InvalidOperationException>(() => list.MaxBy(x => x.Value));
         }
+
+        [Fact]
+        public void minby_happy_path()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.MinBy(x => x.Value).ShouldBe(list[0]);
+        }
+
+        [Fact]
+        public void minby_throws_argument_null_exception_if_enumerable_is_null()
+        {
+            List<Item> list = null;
+
+            Assert.Throws<ArgumentNullException>(() => list.MinBy(x => x.Value));
+        }
+
+        [Fact]
+        public void minby_throws_argument_null_exception_if_selector_is_null()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            Assert.Throws<ArgumentNullException>(() => list.MinBy((Func<Item, int>)null));
+        }
+
+        [Fact]
+        public void minby_throws_invalid_operation_exception_if_collection_is_empty()
+        {
+            var list = new List<Item>();
+
+            Assert.Throws<InvalidOperationException>(() => list.MinBy(x => x.Value));
+        }
     }
 }
