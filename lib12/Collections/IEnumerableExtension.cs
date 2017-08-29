@@ -119,7 +119,7 @@ namespace lib12.Collections
                 // You may want to override ".Equals" to define what it means for
                 // two "T" objects to be equal
                 var key = keys.Find(
-                    delegate(T listKey)
+                    delegate (T listKey)
                     {
                         return listKey.Equals(item);
                     });
@@ -246,6 +246,47 @@ namespace lib12.Collections
         public static IEnumerable<T> Recover<T>(this IEnumerable<T> enumerable)
         {
             return enumerable ?? Enumerable.Empty<T>();
+        }
+
+        /// <summary>
+        /// Get item with maximum value of given property
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="selector">The selector to get value by which maximum is searched</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// enumerable
+        /// or
+        /// selector
+        /// </exception>
+        /// <exception cref="InvalidOperationException">Sequence contains no elements</exception>
+        public static TItem MaxBy<TItem, TKey>(this IEnumerable<TItem> enumerable, Func<TItem, TKey> selector) where TKey : IComparable
+        {
+            if (enumerable == null)
+                throw new ArgumentNullException(nameof(enumerable));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+
+            using (var enumerator = enumerable.GetEnumerator())
+            {
+                if (!enumerator.MoveNext())
+                    throw new InvalidOperationException("Sequence contains no elements");
+
+                var maxKey = enumerator.Current;
+                var maxValue = selector(maxKey);
+                while (enumerator.MoveNext())
+                {
+                    var currentValue = selector(enumerator.Current);
+                    if (maxValue.CompareTo(currentValue) < 0)
+                    {
+                        maxValue = currentValue;
+                        maxKey = enumerator.Current;
+                    }
+                }
+                return maxKey;
+            }
         }
     }
 }

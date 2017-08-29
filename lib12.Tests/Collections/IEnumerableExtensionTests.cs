@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using lib12.Collections;
 using Shouldly;
@@ -53,7 +54,7 @@ namespace lib12.Test.Collections
         [Fact]
         public void contains_one_element_returns_false_when_passing_enumerable_with_two_items()
         {
-            var twoItemsArray = new[] {1, 2};
+            var twoItemsArray = new[] { 1, 2 };
 
             Assert.False(twoItemsArray.ContainsOneElement());
         }
@@ -68,8 +69,46 @@ namespace lib12.Test.Collections
         [Fact]
         public void recover_on_not_null_collection()
         {
-            var list = new List<int> {3, 4, 12};
+            var list = new List<int> { 3, 4, 12 };
             list.Recover().Count().ShouldBe(3);
+        }
+
+        [Fact]
+        public void maxby_happy_path()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.MaxBy(x => x.Value).ShouldBe(list[2]);
+        }
+
+        [Fact]
+        public void maxby_throws_argument_null_exception_if_enumerable_is_null()
+        {
+            List<Item> list = null;
+
+            Assert.Throws<ArgumentNullException>(() => list.MaxBy(x => x.Value));
+        }
+
+        [Fact]
+        public void maxby_throws_argument_null_exception_if_selector_is_null()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            Assert.Throws<ArgumentNullException>(() => list.MaxBy((Func<Item, int>)null));
+        }
+
+        [Fact]
+        public void maxby_throws_invalid_operation_exception_if_collection_is_empty()
+        {
+            var list = new List<Item>();
+
+            Assert.Throws<InvalidOperationException>(() => list.MaxBy(x => x.Value));
         }
     }
 }
