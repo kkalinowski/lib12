@@ -3,7 +3,7 @@ using lib12.Extensions;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Extensions
+namespace lib12.Tests.Extensions
 {
     public class DateTimeExtensionTests
     {

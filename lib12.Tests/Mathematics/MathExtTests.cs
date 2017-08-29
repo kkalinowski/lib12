@@ -1,8 +1,4 @@
-﻿using lib12.Mathematics;
-using Shouldly;
-using Xunit;
-
-namespace lib12.Test.Mathematics
+﻿namespace lib12.Tests.Mathematics
 {
     public class MathExtTests
     {

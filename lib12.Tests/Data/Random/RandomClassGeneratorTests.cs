@@ -4,7 +4,7 @@ using lib12.Data.Random;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Data.Random
+namespace lib12.Tests.Data.Random
 {
     public class RandomClassGeneratorTests
     {

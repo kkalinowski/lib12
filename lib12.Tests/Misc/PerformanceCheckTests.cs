@@ -3,7 +3,7 @@ using lib12.Misc;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Misc
+namespace lib12.Tests.Misc
 {
     public class PerformanceCheckTests
     {

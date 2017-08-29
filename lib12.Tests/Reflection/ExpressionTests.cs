@@ -4,7 +4,7 @@ using lib12.Reflection;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Reflection
+namespace lib12.Tests.Reflection
 {
     public class ExpressionTests
     {

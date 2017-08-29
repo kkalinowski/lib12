@@ -1,4 +1,4 @@
-﻿namespace lib12.Test.Collections
+﻿namespace lib12.Tests.Collections
 {
     public class Item
     {

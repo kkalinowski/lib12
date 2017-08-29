@@ -1,4 +1,4 @@
-namespace lib12.Mathematics
+namespace lib12.Mathematics.Formulas
 {
     /// <summary>
     /// Negation token

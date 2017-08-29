@@ -6,7 +6,7 @@ using lib12.Data.QueryBuilding.Structures.Select;
 using lib12.Misc;
 using Xunit;
 
-namespace lib12.Test.Data.QueryBuilding
+namespace lib12.Tests.Data.QueryBuilding
 {
     public class SelectBuildingTests
     {

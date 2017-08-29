@@ -2,7 +2,7 @@
 using lib12.Reflection;
 using Xunit;
 
-namespace lib12.Test.Reflection.CreateTypeFromEnumTests
+namespace lib12.Tests.Reflection.CreateTypeFromEnumTests
 {
     public sealed class EnumLogicTests
     {

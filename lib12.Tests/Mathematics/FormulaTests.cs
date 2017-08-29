@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using System.Threading;
 using lib12.Mathematics;
+using lib12.Mathematics.Formulas;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Mathematics
+namespace lib12.Tests.Mathematics
 {
     public class FormulaTests
     {

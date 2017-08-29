@@ -1,5 +1,5 @@
 ﻿
-namespace lib12.Test.Extensions
+namespace lib12.Tests.Extensions
 {
     class TypeWithoutParameterlessConstructor
     {

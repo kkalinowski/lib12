@@ -5,7 +5,7 @@ using lib12.Collections;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Collections
+namespace lib12.Tests.Collections
 {
     public class IEnumerableExtensionTests
     {

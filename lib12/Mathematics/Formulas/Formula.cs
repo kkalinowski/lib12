@@ -5,12 +5,11 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using lib12.Collections;
 using lib12.FunctionalFlow;
 using lib12.Misc;
 
-namespace lib12.Mathematics
+namespace lib12.Mathematics.Formulas
 {
     /// <summary>
     /// Mathematics formulas parser and calculator using reverse polish notation

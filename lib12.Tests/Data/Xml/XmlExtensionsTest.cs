@@ -1,12 +1,7 @@
 ﻿using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using lib12.Data.Xml;
-using Shouldly;
 using Xunit;
 
-namespace lib12.Test.Data.Xml
+namespace lib12.Tests.Data.Xml
 {
     public class XmlExtensionsTests
     {

@@ -2,7 +2,7 @@
 using Shouldly;
 using Xunit;
 
-namespace lib12.Test.FunctionalFlow
+namespace lib12.Tests.FunctionalFlow
 {
     public class CollectionObjectCheckExtensionTest
     {
