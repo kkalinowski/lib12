@@ -148,5 +148,45 @@ namespace lib12.Tests.Collections
 
             Assert.Throws<InvalidOperationException>(() => list.MinBy(x => x.Value));
         }
+
+        [Fact]
+        public void distinctby_happy_path()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 3 },
+                new Item { Value = 12 } };
+
+            var result = list.DistinctBy(x => x.Value);
+            result.Count().ShouldBe(2);
+            result.ElementAt(0).Value.ShouldBe(3);
+            result.ElementAt(1).Value.ShouldBe(12);
+        }
+
+        [Fact]
+        public void distinctby_throws_argument_null_exception_if_selector_is_null()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 3 },
+                new Item { Value = 12 } };
+
+            var result = list.DistinctBy((Func<Item, int>) null);
+            Assert.Throws<ArgumentNullException>(() => list.DistinctBy((Func<Item, int>)null).ToArray());
+        }
+
+        [Fact]
+        public void distinctby_returns_empty_collection_if_enumerable_is_null()
+        {
+            List<Item> list = null;
+            list.DistinctBy(x => x.Value).ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void distinctby_returns_empty_collectionn_if_enumerable_is_empty()
+        {
+            var list = new List<Item>();
+            list.DistinctBy(x => x.Value).ShouldBeEmpty();
+        }
     }
 }

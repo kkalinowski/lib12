@@ -329,5 +329,32 @@ namespace lib12.Collections
                 return minKey;
             }
         }
+
+        /// <summary>
+        /// Computes the collection of distinct elements by specific property
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="selector">The selector.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// enumerable
+        /// or
+        /// selector
+        /// </exception>
+        public static IEnumerable<TItem> DistinctBy<TItem, TKey>(this IEnumerable<TItem> enumerable, Func<TItem, TKey> selector)
+        {
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+
+            var set = new HashSet<TKey>();
+            foreach (var item in enumerable.Recover())
+            {
+                var value = selector(item);
+                if (set.Add(value))
+                    yield return item;
+            }
+        }
     }
 }
