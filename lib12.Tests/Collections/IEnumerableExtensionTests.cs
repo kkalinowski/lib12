@@ -171,7 +171,6 @@ namespace lib12.Tests.Collections
                 new Item { Value = 3 },
                 new Item { Value = 12 } };
 
-            var result = list.DistinctBy((Func<Item, int>) null);
             Assert.Throws<ArgumentNullException>(() => list.DistinctBy((Func<Item, int>)null).ToArray());
         }
 
@@ -187,6 +186,89 @@ namespace lib12.Tests.Collections
         {
             var list = new List<Item>();
             list.DistinctBy(x => x.Value).ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void findindex_happy_path()
+        {
+            var list = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.Select(x => x)
+                .FindIndex(x => x.Value == 4)
+                .ShouldBe(1);
+        }
+
+        [Fact]
+        public void findindex_throws_argument_null_exception_if_selector_is_null()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            Assert.Throws<ArgumentNullException>(() => list.Select(x => x).FindIndex(null));
+        }
+
+        [Fact]
+        public void findindex_finds_first_element()
+        {
+            var list = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.Select(x => x)
+                .FindIndex(x => x.Value == 3)
+                .ShouldBe(0);
+        }
+
+        [Fact]
+        public void findindex_finds_last_element()
+        {
+            var list = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.Select(x => x)
+                .FindIndex(x => x.Value == 12)
+                .ShouldBe(2);
+        }
+
+        [Fact]
+        public void findindex_returns_negative_one_if_cant_find_element()
+        {
+            var list = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.Select(x => x)
+                .FindIndex(x => x.Value == 99)
+                .ShouldBe(-1);
+        }
+
+        [Fact]
+        public void findindex_returns_negative_one_if_collection_is_null()
+        {
+            IEnumerable<Item> list = null;
+
+            list
+                .FindIndex(x => x.Value == 12)
+                .ShouldBe(-1);
+        }
+
+        [Fact]
+        public void findindex_returns_negative_one_if_collection_is_empty()
+        {
+            List<Item> list = new List<Item>();
+
+            list.Select(x => x)
+                .FindIndex(x => x.Value == 12)
+                .ShouldBe(-1);
         }
     }
 }
