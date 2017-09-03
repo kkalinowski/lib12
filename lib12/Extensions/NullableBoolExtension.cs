@@ -19,7 +19,7 @@ namespace lib12.Extensions
         /// <param name="nullable">The nullable to check</param>
         public static bool IsTrueOrNull(this Nullable<bool> nullable)
         {
-            return !nullable.HasValue || (nullable.HasValue && nullable.Value);
+            return !nullable.HasValue || nullable.HasValue && nullable.Value;
         }
 
         /// <summary>

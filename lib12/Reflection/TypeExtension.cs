@@ -15,7 +15,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static bool IsTypeNumericOrNullableNumeric(this Type type)
         {
-            return type.IsTypeNumeric() || (type.IsNullable() && Nullable.GetUnderlyingType(type).IsTypeNumeric());
+            return type.IsTypeNumeric() || type.IsNullable() && Nullable.GetUnderlyingType(type).IsTypeNumeric();
         }
 
         /// <summary>

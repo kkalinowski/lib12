@@ -11,9 +11,9 @@ namespace lib12.Tests.Extensions
         {
             Assert.True(typeof(int).IsTypeNumeric());
             Assert.True((-0.9).GetType().IsTypeNumeric());
-            Assert.True((6.7m).GetType().IsTypeNumeric());
+            Assert.True(6.7m.GetType().IsTypeNumeric());
             Assert.False(typeof(string).IsTypeNumeric());
-            Assert.False(("string").GetType().IsTypeNumeric());
+            Assert.False("string".GetType().IsTypeNumeric());
         }
 
         [Fact]
@@ -31,9 +31,9 @@ namespace lib12.Tests.Extensions
         {
             Assert.True(typeof(int).IsTypeNumericOrNullableNumeric());
             Assert.True((-0.9).GetType().IsTypeNumericOrNullableNumeric());
-            Assert.True((6.7m).GetType().IsTypeNumeric());
+            Assert.True(6.7m.GetType().IsTypeNumeric());
             Assert.False(typeof(string).IsTypeNumericOrNullableNumeric());
-            Assert.False(("string").GetType().IsTypeNumericOrNullableNumeric());
+            Assert.False("string".GetType().IsTypeNumericOrNullableNumeric());
 
             Assert.True(typeof(int?).IsTypeNumericOrNullableNumeric());
             Assert.True(typeof(Nullable<decimal>).IsTypeNumericOrNullableNumeric());
