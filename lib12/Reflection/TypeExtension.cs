@@ -25,7 +25,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static bool IsTypeNumeric(this Type type)
         {
-            return type.GetTypeInfo().IsPrimitive;// || Type.GetTypeCode(type) == TypeCode.Decimal;
+            return type.GetTypeInfo().IsPrimitive || type.FullName == "System.Decimal";
         }
 
         /// <summary>
