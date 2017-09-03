@@ -391,5 +391,40 @@ namespace lib12.Collections
                 return -1;
             }
         }
+
+        ///// <summary>
+        ///// Finds the index using predicate
+        ///// </summary>
+        ///// <typeparam name="TItem">The type of the item.</typeparam>
+        ///// <param name="enumerable">The enumerable.</param>
+        ///// <param name="predicate">The predicate.</param>
+        ///// <returns></returns>
+        ///// <exception cref="ArgumentNullException">
+        ///// enumerable
+        ///// or
+        ///// predicate
+        ///// </exception>
+        //public static (List<TItem> True, List<TItem> False) Partition<TItem>(this IEnumerable<TItem> enumerable, Predicate<TItem> predicate)
+        //{
+        //    if (predicate == null)
+        //        throw new ArgumentNullException(nameof(predicate));
+
+        //    var index = 0;
+        //    using (var enumerator = enumerable.Recover().GetEnumerator())
+        //    {
+        //        if (!enumerator.MoveNext())
+        //            return -1;
+
+        //        do
+        //        {
+        //            if (predicate(enumerator.Current))
+        //                return index;
+        //            else
+        //                index++;
+        //        } while (enumerator.MoveNext());
+
+        //        return -1;
+        //    }
+        //}
     }
 }
