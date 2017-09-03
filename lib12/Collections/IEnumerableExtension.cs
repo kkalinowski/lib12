@@ -84,17 +84,17 @@ namespace lib12.Collections
         }
 
         /// <summary>
-        /// Compares the content of two collections for equality.
+        /// Determines if two collections have the same content, but not necessary in the same order
         /// http://stackoverflow.com/questions/50098/comparing-two-collections-for-equality
         /// </summary>
         /// <param name="first">The first collection.</param>
         /// <param name="second">The second collection.</param>
         /// <returns>True if both collections have the same content, false otherwise.</returns>
-        public static bool CollectionCompare<T>(this IEnumerable<T> first, IEnumerable<T> second)
+        public static bool SequenceContentEqual<T>(this IEnumerable<T> first, IEnumerable<T> second)
         {
             // Declare a dictionary to count the occurence of the items in the collection
             var itemCounts = new Dictionary<T, int>();
-
+            
             // Increase the count for each occurence of the item in the first collection
             foreach (T item in first)
             {
