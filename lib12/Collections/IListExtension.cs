@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace lib12.Collections
 {
@@ -15,21 +13,6 @@ namespace lib12.Collections
         public static void RemoveRange<T>(this IList<T> list, IEnumerable<T> toRemove)
         {
             toRemove.ForEach(x => list.Remove(x));
-        }
-
-
-        /// <summary>
-        /// Removes items by condition
-        /// </summary>
-        /// <param name="list">List of items</param>
-        /// <param name="condition">Condition to remove item</param>
-        public static void RemoveBy<T>(this IList<T> list, Predicate<T> condition)
-        {
-            foreach (var item in list.ToArray())
-            {
-                if (condition(item))
-                    list.Remove(item);
-            }
         }
     }
 }
