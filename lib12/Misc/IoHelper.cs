@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-
-namespace lib12.Misc
+﻿namespace lib12.Misc
 {
     /// <summary>
     /// Helper functions for IO

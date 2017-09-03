@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace lib12.Extensions
+﻿namespace lib12.Extensions
 {
     public static class NullableBoolExtension
     {
