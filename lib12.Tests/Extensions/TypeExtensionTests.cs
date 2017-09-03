@@ -20,8 +20,8 @@ namespace lib12.Tests.Extensions
         public void is_nullable_test()
         {
             Assert.True(typeof(int?).IsNullable());
-            Assert.True(typeof(Nullable<decimal>).IsNullable());
-            Assert.True(typeof(Nullable<DateTime>).IsNullable());
+            Assert.True(typeof(decimal?).IsNullable());
+            Assert.True(typeof(DateTime?).IsNullable());
             Assert.False(typeof(int).IsNullable());
             Assert.False(typeof(string).IsNullable());
         }
@@ -36,8 +36,8 @@ namespace lib12.Tests.Extensions
             Assert.False("string".GetType().IsTypeNumericOrNullableNumeric());
 
             Assert.True(typeof(int?).IsTypeNumericOrNullableNumeric());
-            Assert.True(typeof(Nullable<decimal>).IsTypeNumericOrNullableNumeric());
-            Assert.False(typeof(Nullable<DateTime>).IsTypeNumericOrNullableNumeric());
+            Assert.True(typeof(decimal?).IsTypeNumericOrNullableNumeric());
+            Assert.False(typeof(DateTime?).IsTypeNumericOrNullableNumeric());
         }
 
         [Fact]
