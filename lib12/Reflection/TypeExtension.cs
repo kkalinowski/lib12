@@ -63,13 +63,13 @@ namespace lib12.Reflection
         }
 
         /// <summary>
-        /// Gets the default, parameterless constructor of given type or null if this not exist
+        /// Gets the default, parameterless constructor of given type or null if this not exists
         /// </summary>
         /// <param name="type">The type to operate</param>
         /// <returns></returns>
         public static object GetDefaultConstructor(this Type type)
         {
-            return type.GetTypeInfo().DeclaredConstructors.FirstOrDefault();// GetConstructor(Type.EmptyTypes);
+            return type.GetTypeInfo().GetConstructor(Type.EmptyTypes);
         }
 
         public static object GetPropertyValue(this Type type, object source, string propertyName)
