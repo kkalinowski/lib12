@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using lib12.FunctionalFlow;
 
 namespace lib12.Collections
 {
@@ -421,6 +422,43 @@ namespace lib12.Collections
                 } while (enumerator.MoveNext());
 
                 return (trueList, falseList);
+            }
+        }
+
+        /// <summary>
+        /// Returns items from enumerable batched in arrays with given size
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="size">The size of batch</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException">size - The batch must have at least 1 length</exception>
+        public static IEnumerable<TItem[]> Batch<TItem>(this IEnumerable<TItem> enumerable, int size)
+        {
+            if (size <= 0)
+                throw new ArgumentOutOfRangeException(nameof(size), "The batch must have at least 1 length");
+
+            var count = 0;
+            TItem[] batch = null;
+            foreach (var item in enumerable.Recover())
+            {
+                if (batch == null)
+                    batch = new TItem[size];
+
+                batch[count++] = item;
+                if (count == size)
+                {
+                    yield return batch;
+
+                    batch = null;
+                    count = 0;
+                }
+            }
+
+            if (batch.NotNull() && count > 0)
+            {
+                Array.Resize(ref batch, count);
+                yield return batch;
             }
         }
     }

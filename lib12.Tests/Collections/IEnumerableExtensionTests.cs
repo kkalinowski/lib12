@@ -317,5 +317,57 @@ namespace lib12.Tests.Collections
             result.True.ShouldBeEmpty();
             result.False.ShouldBeEmpty();
         }
+
+        [Fact]
+        public void batch_happy_path()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            var result = list.Batch(2);
+            result.Count().ShouldBe(2);
+
+            var batch1 = result.ElementAt(0);
+            batch1.Length.ShouldBe(2);
+            batch1[0].ShouldBe(list[0]);
+            batch1[1].ShouldBe(list[1]);
+
+            var batch2 = result.ElementAt(1);
+            batch2.Length.ShouldBe(1);
+            batch2[0].ShouldBe(list[2]);
+        }
+
+        [Fact]
+        public void batch_throws_argument_out_of_range_if_size_is_equal_or_less_than_zero()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 3 },
+                new Item { Value = 12 } };
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.Batch(0).ToArray());
+        }
+
+        [Fact]
+        public void batch_returns_empty_collection_if_enumerable_is_null()
+        {
+            List<Item> list = null;
+            var result = list.Batch(12);
+
+            result.ShouldNotBeNull();
+            result.ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void batch_returns_empty_collectionn_if_enumerable_is_empty()
+        {
+            var list = new List<Item>();
+            var result = list.Batch(12);
+
+            result.ShouldNotBeNull();
+            result.ShouldBeEmpty();
+        }
     }
 }
