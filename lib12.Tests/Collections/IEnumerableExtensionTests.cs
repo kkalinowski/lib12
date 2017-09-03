@@ -270,5 +270,52 @@ namespace lib12.Tests.Collections
                 .FindIndex(x => x.Value == 12)
                 .ShouldBe(-1);
         }
+
+        [Fact]
+        public void partition_happy_path()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            var result = list.Partition(x => x.Value < 6);
+            result.True.Count.ShouldBe(2);
+            result.False.Count.ShouldBe(1);
+            result.True[0].ShouldBe(list[0]);
+            result.True[1].ShouldBe(list[1]);
+            result.False[0].ShouldBe(list[2]);
+        }
+
+        [Fact]
+        public void partition_throws_argument_null_exception_if_selector_is_null()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 3 },
+                new Item { Value = 12 } };
+
+            Assert.Throws<ArgumentNullException>(() => list.Partition(null));
+        }
+
+        [Fact]
+        public void partition_returns_empty_collection_if_enumerable_is_null()
+        {
+            List<Item> list = null;
+            var result = list.Partition(x => x.Value < 6);
+            
+            result.True.ShouldBeEmpty();
+            result.False.ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void partition_returns_empty_collectionn_if_enumerable_is_empty()
+        {
+            var list = new List<Item>();
+            var result = list.Partition(x => x.Value < 6);
+
+            result.True.ShouldBeEmpty();
+            result.False.ShouldBeEmpty();
+        }
     }
 }

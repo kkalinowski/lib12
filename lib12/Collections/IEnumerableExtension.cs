@@ -392,39 +392,36 @@ namespace lib12.Collections
             }
         }
 
-        ///// <summary>
-        ///// Finds the index using predicate
-        ///// </summary>
-        ///// <typeparam name="TItem">The type of the item.</typeparam>
-        ///// <param name="enumerable">The enumerable.</param>
-        ///// <param name="predicate">The predicate.</param>
-        ///// <returns></returns>
-        ///// <exception cref="ArgumentNullException">
-        ///// enumerable
-        ///// or
-        ///// predicate
-        ///// </exception>
-        //public static (List<TItem> True, List<TItem> False) Partition<TItem>(this IEnumerable<TItem> enumerable, Predicate<TItem> predicate)
-        //{
-        //    if (predicate == null)
-        //        throw new ArgumentNullException(nameof(predicate));
+        /// <summary>
+        /// Splits collection into two collections based on whether or not they pass the condition provided
+        /// </summary>
+        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="predicate">The predicate.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">predicate</exception>
+        public static (List<TItem> True, List<TItem> False) Partition<TItem>(this IEnumerable<TItem> enumerable, Predicate<TItem> predicate)
+        {
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
 
-        //    var index = 0;
-        //    using (var enumerator = enumerable.Recover().GetEnumerator())
-        //    {
-        //        if (!enumerator.MoveNext())
-        //            return -1;
+            var trueList = new List<TItem>();
+            var falseList = new List<TItem>();
+            using (var enumerator = enumerable.Recover().GetEnumerator())
+            {
+                if (!enumerator.MoveNext())
+                    return (trueList, falseList);
 
-        //        do
-        //        {
-        //            if (predicate(enumerator.Current))
-        //                return index;
-        //            else
-        //                index++;
-        //        } while (enumerator.MoveNext());
+                do
+                {
+                    if (predicate(enumerator.Current))
+                        trueList.Add(enumerator.Current);
+                    else
+                        falseList.Add(enumerator.Current);
+                } while (enumerator.MoveNext());
 
-        //        return -1;
-        //    }
-        //}
+                return (trueList, falseList);
+            }
+        }
     }
 }
