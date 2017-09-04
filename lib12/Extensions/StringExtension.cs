@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
 namespace lib12.Extensions
 {
@@ -81,6 +83,27 @@ namespace lib12.Extensions
         public static bool ContainsIgnoreCase(this string text, string toCheck)
         {
             return text.Recover().IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        /// <summary>
+        /// Remove diacritics from given text
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns></returns>
+        public static string RemoveDiacritics(this string text)
+        {
+            //based on https://stackoverflow.com/a/249126
+            var normalizedString = text.Recover().Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var sign in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(sign);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                    stringBuilder.Append(sign);
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
     }
 }
