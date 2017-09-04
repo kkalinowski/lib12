@@ -108,5 +108,20 @@ namespace lib12.Tests.Extensions
             const string text = "text5";
             text.Truncate(2).ShouldBe("te");
         }
+
+        [Theory]
+        [InlineData(null, null, false)]
+        [InlineData("", null, false)]
+        [InlineData(null, "", false)]
+        [InlineData("", "", true)]
+        [InlineData("text", "", true)]
+        [InlineData("", "text", false)]
+        [InlineData("sample text", "text", true)]
+        [InlineData("sample Text", "text", true)]
+        public void contains_ignore_case_theory(string source, string toCheck, bool expectedResult)
+        {
+            const string text = "text5";
+            text.Truncate(2).ShouldBe("te");
+        }
     }
 }

@@ -71,5 +71,16 @@ namespace lib12.Extensions
             var toTruncate = text.Recover();
             return toTruncate.Length <= maxLength ? toTruncate : toTruncate.Substring(0, maxLength);
         }
+
+        /// <summary>
+        /// Check if given string contains another using OrdinalIgnoreCase comparison
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="toCheck">Text to search</param>
+        /// <returns></returns>
+        public static bool ContainsIgnoreCase(this string text, string toCheck)
+        {
+            return text.Recover().IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
     }
 }
