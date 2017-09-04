@@ -23,15 +23,21 @@ namespace lib12.Tests.Extensions
         }
 
         [Fact]
-        public void isempty_returns_true_on_empty_datetime()
+        public void isdefault_returns_true_on_datetime_created_with_default_keyword()
         {
-            new DateTime().IsEmpty().ShouldBeTrue();
+            default(DateTime).IsDefault().ShouldBeTrue();
         }
 
         [Fact]
-        public void isempty_returns_false_on_non_empty_datetime()
+        public void isdefault_returns_true_on_datetime_created_with_default_parameterless_ctor()
         {
-            new DateTime(1900, 3, 25).IsEmpty().ShouldBeFalse();
+            new DateTime().IsDefault().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void isdefault_returns_false_on_datetime_with_non_default_date()
+        {
+            new DateTime(1900, 3, 25).IsDefault().ShouldBeFalse();
         }
     }
 }

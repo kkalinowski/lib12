@@ -30,11 +30,11 @@ namespace lib12.Extensions
         }
 
         /// <summary>
-        /// Check if given DateTime is empty
+        /// Check if given DateTime has default, empty value
         /// </summary>
-        /// <param name="dateTime"></param>
+        /// <param name="target"></param>
         /// <returns></returns>
-        public static bool IsEmpty(this DateTime target)
+        public static bool IsDefault(this DateTime target)
         {
             return target == default(DateTime);
         }
