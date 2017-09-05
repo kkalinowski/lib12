@@ -7,6 +7,25 @@ namespace lib12.Extensions
     public static class ObjectExtension
     {
         /// <summary>
+        /// Check if given object is null
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsNull<TSource>(this TSource source) where TSource : class
+        {
+            return source == null;
+        }
+
+        ///// <summary>
+        ///// Check if given object is not null
+        ///// </summary>
+        ///// <param name="source"></param>
+        ///// <returns></returns>
+        public static bool IsNotNull<TSource>(this TSource source) where TSource : class
+        {
+            return source != null;
+        }
+
+        /// <summary>
         /// Determines whether given source equals another
         /// </summary>
         /// <typeparam name="TSource">The type of the source.</typeparam>
