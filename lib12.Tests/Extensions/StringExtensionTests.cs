@@ -91,8 +91,7 @@ namespace lib12.Tests.Extensions
         [Fact]
         public void truncate_on_empty_string_returns_empty_string()
         {
-            var text = string.Empty;
-            text.Truncate(12).ShouldBeEmpty();
+            string.Empty.Truncate(12).ShouldBeEmpty();
         }
 
         [Fact]
@@ -122,6 +121,28 @@ namespace lib12.Tests.Extensions
         {
             const string text = "text5";
             text.Truncate(2).ShouldBe("te");
+        }
+
+        [Fact]
+        public void remove_diacritics_on_null_string_returns_empty_string()
+        {
+            string text = null;
+            text.RemoveDiacritics().ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void remove_diacritics_on_empty_string_returns_empty_string()
+        {
+            string.Empty.RemoveDiacritics().ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void remove_diacritics_happy_path()
+        {
+            const string withDiacritics = "crème brûlée";
+            const string withoutDiacritics = "creme brulee";
+
+            withDiacritics.RemoveDiacritics().ShouldBe(withoutDiacritics);
         }
     }
 }

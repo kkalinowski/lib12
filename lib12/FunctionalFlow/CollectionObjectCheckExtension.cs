@@ -7,7 +7,7 @@ namespace lib12.FunctionalFlow
     public static class CollectionObjectCheckExtension
     {
         /// <summary>
-        /// Packs given object into array.
+        /// Packs given object into array
         /// </summary>
         /// <typeparam name="TSource">The type of the object.</typeparam>
         /// <returns></returns>
@@ -17,13 +17,25 @@ namespace lib12.FunctionalFlow
         }
 
         /// <summary>
-        /// Packs given object into array.
+        /// Packs given object into list
         /// </summary>
         /// <typeparam name="TSource">The type of the object.</typeparam>
         /// <returns></returns>
         public static List<TSource> PackIntoList<TSource>(this TSource source)
         {
             return source != null ? new List<TSource> { source } : Empty.List<TSource>();
+        }
+
+        /// <summary>
+        /// Packs given object into enumerable
+        /// </summary>
+        /// <typeparam name="TSource">The type of the object.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> PackIntoEnumerable<TSource>(this TSource source)
+        {
+            if (source != null)
+                yield return source;
         }
 
         /// <summary>

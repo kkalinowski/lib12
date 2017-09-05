@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using lib12.FunctionalFlow;
 
 namespace lib12.Misc
 {
@@ -20,10 +22,10 @@ namespace lib12.Misc
         /// <param name="text"></param>
         public static void Info(string text)
         {
-            //using (var file = File.AppendText(FileName))
-            //{
-            //    file.WriteLine(Format, DateTime.UtcNow, "INFO", text);
-            //}
+            using (var file = File.AppendText(FileName))
+            {
+                file.WriteLine(Format, DateTime.UtcNow, "INFO", text);
+            }
         }
 
         /// <summary>
@@ -31,10 +33,10 @@ namespace lib12.Misc
         /// </summary>
         public static void Error(string text)
         {
-            //using (var file = File.AppendText(FileName))
-            //{
-            //    file.WriteLine(Format, DateTime.UtcNow, "ERROR", text);
-            //}
+            using (var file = File.AppendText(FileName))
+            {
+                file.WriteLine(Format, DateTime.UtcNow, "ERROR", text);
+            }
         }
 
         /// <summary>
@@ -42,17 +44,17 @@ namespace lib12.Misc
         /// </summary>
         public static void Error(Exception ex)
         {
-            //using (var file = File.AppendText(FileName))
-            //{
-            //    file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
+            using (var file = File.AppendText(FileName))
+            {
+                file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
 
-            //    var inner = ex.InnerException;
-            //    while (inner.NotNull())
-            //    {
-            //        file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
-            //        inner = inner.InnerException;
-            //    }
-            //}
+                var inner = ex.InnerException;
+                while (inner.NotNull())
+                {
+                    file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
+                    inner = inner.InnerException;
+                }
+            }
         }
     }
 }
