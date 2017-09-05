@@ -369,5 +369,37 @@ namespace lib12.Tests.Collections
             result.ShouldNotBeNull();
             result.ShouldBeEmpty();
         }
+
+        [Fact]
+        public void sequence_content_equals_on_two_same_collections_returns_true()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            var list2 = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            list.SequenceContentEqual(list2).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void sequence_content_equals_on_two_collections_with_same_content_but_different_order_true()
+        {
+            var list = new List<Item> {
+                new Item{ Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+
+            var list2 = new List<Item> {
+                new Item{ Value = 12 },
+                new Item { Value = 4 },
+                new Item { Value = 3 } };
+
+            list.SequenceContentEqual(list2).ShouldBeTrue();
+        }
     }
 }
