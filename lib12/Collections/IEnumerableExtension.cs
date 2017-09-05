@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,69 +11,69 @@ namespace lib12.Collections
         /// <summary>
         /// Determines whether the specified enumerable is empty.
         /// </summary>
-        /// <param name="enumerable">The enumerable to check</param>
+        /// <param name="source">The source to check</param>
         /// <returns>True if enumerable is empty</returns>
-        public static bool IsEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
-            return !enumerable.Any();
+            return !source.Any();
         }
 
         /// <summary>
         /// Determines whether enumerable is null or empty
         /// </summary>
-        /// <param name="enumerable">The enumerable to check</param>
+        /// <param name="source">The source to check</param>
         /// <returns>True if enumerable is null or empty</returns>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsNullOrEmpty<TSource>(this IEnumerable<TSource> source)
         {
-            return enumerable == null || !enumerable.Any();
+            return source == null || !source.Any();
         }
 
         /// <summary>
         /// Determines whether enumerable is not empty
         /// </summary>
-        /// <param name="enumerable">The enumerable to check</param>
+        /// <param name="source">The source to check</param>
         /// <returns>True if enumerable is not empty</returns>
-        public static bool IsNotEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsNotEmpty<TSource>(this IEnumerable<TSource> source)
         {
-            return enumerable.Any();
+            return source.Any();
         }
 
         /// <summary>
         /// Determines whether enumerable is not null and not empty
         /// </summary>
-        /// <param name="enumerable">The enumerable to check</param>
+        /// <param name="source">The source to check</param>
         /// <returns>True if enumerable is not null and not empty</returns>
-        public static bool IsNotNullAndNotEmpty<T>(this IEnumerable<T> enumerable)
+        public static bool IsNotNullAndNotEmpty<TSource>(this IEnumerable<TSource> source)
         {
-            return enumerable != null && enumerable.Any();
+            return source != null && source.Any();
         }
 
         /// <summary>
         /// Invoke action for each element in enumerable
         /// </summary>
-        /// <param name="enumeration">The enumeration of items to invoke action on</param>
+        /// <param name="source">The enumeration of items to invoke action on</param>
         /// <param name="action">The action to invoke</param>
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
+        public static IEnumerable<TSource> ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
         {
-            foreach (T item in enumeration)
+            foreach (TSource item in source)
                 action(item);
 
-            return enumeration;
+            return source;
         }
 
         /// <summary>
         /// Converterts enumerable to delimited string
         /// </summary>
-        /// <param name="enumerable">The enumerable to convert</param>
+        /// <param name="source">The enumerable to convert</param>
         /// <param name="delimiter">The delimiter to use</param>
         /// <returns>Delimited string</returns>
-        public static string ToDelimitedString<T>(this IEnumerable<T> enumerable, string delimiter)
+        public static string ToDelimitedString<TSource>(this IEnumerable<TSource> source, string delimiter)
         {
-            if (enumerable.IsEmpty())
+            if (source.IsEmpty())
                 return string.Empty;
 
             var sbuilder = new StringBuilder();
-            foreach (var item in enumerable)
+            foreach (var item in source)
             {
                 sbuilder.AppendFormat("{0}{1}", item, delimiter);
             }
@@ -85,18 +84,19 @@ namespace lib12.Collections
 
         /// <summary>
         /// Determines if two collections have the same content, but not necessary in the same order
-        /// http://stackoverflow.com/questions/50098/comparing-two-collections-for-equality
         /// </summary>
         /// <param name="first">The first collection.</param>
         /// <param name="second">The second collection.</param>
         /// <returns>True if both collections have the same content, false otherwise.</returns>
-        public static bool SequenceContentEqual<T>(this IEnumerable<T> first, IEnumerable<T> second)
+        public static bool SequenceContentEqual<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
         {
+            //based on http://stackoverflow.com/questions/50098/comparing-two-collections-for-equality
+
             // Declare a dictionary to count the occurence of the items in the collection
-            var itemCounts = new Dictionary<T, int>();
+            var itemCounts = new Dictionary<TSource, int>();
             
             // Increase the count for each occurence of the item in the first collection
-            foreach (T item in first)
+            foreach (TSource item in first)
             {
                 if (itemCounts.ContainsKey(item))
                 {
@@ -109,7 +109,7 @@ namespace lib12.Collections
             }
 
             // Wrap the keys in a searchable list
-            var keys = new List<T>(itemCounts.Keys);
+            var keys = new List<TSource>(itemCounts.Keys);
 
             // Decrease the count for each occurence of the item in the second collection
             foreach (var item in second)
@@ -120,7 +120,7 @@ namespace lib12.Collections
                 // You may want to override ".Equals" to define what it means for
                 // two "T" objects to be equal
                 var key = keys.Find(
-                    delegate (T listKey)
+                    delegate (TSource listKey)
                     {
                         return listKey.Equals(item);
                     });
@@ -151,47 +151,34 @@ namespace lib12.Collections
         }
 
         /// <summary>
-        /// Casts object to generic IEnumerable
-        /// </summary>
-        /// <param name="toCast">Object to cast</param>
-        /// <returns>Generic IEnumerable or null if it's possible</returns>
-        public static IEnumerable<T> CastToEnumerable<T>(object toCast)
-        {
-            if (toCast is IEnumerable enumerable)
-                return enumerable.Cast<T>();
-            else
-                return null;
-        }
-
-        /// <summary>
         /// Determines whether collection contains exactly one element
         /// </summary>
-        /// <param name="enumerable">Collection to check</param>
-        public static bool ContainsOneElement<T>(this IEnumerable<T> enumerable)
+        /// <param name="source">Collection to check</param>
+        public static bool ContainsOneElement<TSource>(this IEnumerable<TSource> source)
         {
-            return enumerable.IsNotNullAndNotEmpty() && enumerable.Skip(1).IsEmpty();
+            return source.IsNotNullAndNotEmpty() && source.Recover().Skip(1).IsEmpty();
         }
 
         /// <summary>
-        /// Determines whether collection contains exactly more than one element
+        /// Determines whether collection contains more than one element
         /// </summary>
-        /// <param name="enumerable">Collection to check</param>
-        public static bool ContainsMultipleElements<T>(this IEnumerable<T> enumerable)
+        /// <param name="source">Collection to check</param>
+        public static bool ContainsMultipleElements<TSource>(this IEnumerable<TSource> source)
         {
-            return enumerable != null && enumerable.Skip(1).IsNotEmpty();
+            return source != null && source.Skip(1).IsNotEmpty();
         }
 
         /// <summary>
         /// Gets the next element after given or default
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="enumerable">The enumerable to search</param>
+        /// <param name="source">The enumerable to search</param>
         /// <param name="currentElement">The current element</param>
         /// <returns></returns>
-        public static T GetNextElementOrDefault<T>(this IEnumerable<T> enumerable, T currentElement)
+        public static TSource GetNextElementOrDefault<TSource>(this IEnumerable<TSource> source, TSource currentElement)
         {
             var returnNextElement = false;
-            foreach (var item in enumerable)
+            foreach (var item in source)
             {
                 if (item.Equals(currentElement))
                 {
@@ -204,73 +191,73 @@ namespace lib12.Collections
                 }
             }
 
-            return default(T);
+            return default(TSource);
         }
 
         /// <summary>
         /// Gets the previous element before given or default
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="enumerable">The enumerable to search</param>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source">The enumerable to search</param>
         /// <param name="currentElement">The current element</param>
         /// <returns></returns>
-        public static T GetPreviousElementOrDefault<T>(this IEnumerable<T> enumerable, T currentElement)
+        public static TSource GetPreviousElementOrDefault<TSource>(this IEnumerable<TSource> source, TSource currentElement)
         {
-            var prevoiusElement = default(T);
-            foreach (var item in enumerable)
+            var prevoiusElement = default(TSource);
+            foreach (var item in source)
             {
                 if (item.Equals(currentElement))
                     return prevoiusElement;
             }
 
-            return default(T);
+            return default(TSource);
         }
 
         /// <summary>
         /// Takes last X elements
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="enumerable">The enumerable to take elements from</param>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source">The enumerable to take elements from</param>
         /// <param name="count">The count to take</param>
         /// <returns></returns>
-        public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> enumerable, int count)
+        public static IEnumerable<TSource> TakeLast<TSource>(this IEnumerable<TSource> source, int count)
         {
-            return enumerable.Skip(Math.Max(0, enumerable.Count() - count));
+            return source.Recover().Skip(Math.Max(0, source.Count() - count));
         }
 
         /// <summary>
         /// If enumerable is null convert it into empty collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="source">The enumerable to recover</param>
         /// <returns></returns>
-        public static IEnumerable<T> Recover<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<TSource> Recover<TSource>(this IEnumerable<TSource> source)
         {
-            return enumerable ?? Enumerable.Empty<T>();
+            return source ?? Enumerable.Empty<TSource>();
         }
 
         /// <summary>
         /// Get item with maximum value of given property
         /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
         /// <typeparam name="TKey">The type of the key.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="source">The source.</param>
         /// <param name="selector">The selector to get value by which maximum is searched</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">
-        /// enumerable
+        /// source
         /// or
         /// selector
         /// </exception>
         /// <exception cref="InvalidOperationException">Sequence contains no elements</exception>
-        public static TItem MaxBy<TItem, TKey>(this IEnumerable<TItem> enumerable, Func<TItem, TKey> selector) where TKey : IComparable
+        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector) where TKey : IComparable
         {
-            if (enumerable == null)
-                throw new ArgumentNullException(nameof(enumerable));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (selector == null)
                 throw new ArgumentNullException(nameof(selector));
 
-            using (var enumerator = enumerable.GetEnumerator())
+            using (var enumerator = source.GetEnumerator())
             {
                 if (!enumerator.MoveNext())
                     throw new InvalidOperationException("Sequence contains no elements");
@@ -293,25 +280,25 @@ namespace lib12.Collections
         /// <summary>
         /// Get item with minimum value of given property
         /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
         /// <typeparam name="TKey">The type of the key.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="source">The source.</param>
         /// <param name="selector">The selector to get value by which minimum is searched</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">
-        /// enumerable
+        /// source
         /// or
         /// selector
         /// </exception>
         /// <exception cref="InvalidOperationException">Sequence contains no elements</exception>
-        public static TItem MinBy<TItem, TKey>(this IEnumerable<TItem> enumerable, Func<TItem, TKey> selector) where TKey : IComparable
+        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector) where TKey : IComparable
         {
-            if (enumerable == null)
-                throw new ArgumentNullException(nameof(enumerable));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (selector == null)
                 throw new ArgumentNullException(nameof(selector));
 
-            using (var enumerator = enumerable.GetEnumerator())
+            using (var enumerator = source.GetEnumerator())
             {
                 if (!enumerator.MoveNext())
                     throw new InvalidOperationException("Sequence contains no elements");
@@ -334,23 +321,23 @@ namespace lib12.Collections
         /// <summary>
         /// Computes the collection of distinct elements by specific property
         /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
         /// <typeparam name="TKey">The type of the key.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="source">The source.</param>
         /// <param name="selector">The selector.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">
-        /// enumerable
+        /// source
         /// or
         /// selector
         /// </exception>
-        public static IEnumerable<TItem> DistinctBy<TItem, TKey>(this IEnumerable<TItem> enumerable, Func<TItem, TKey> selector)
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector)
         {
             if (selector == null)
                 throw new ArgumentNullException(nameof(selector));
 
             var set = new HashSet<TKey>();
-            foreach (var item in enumerable.Recover())
+            foreach (var item in source.Recover())
             {
                 var value = selector(item);
                 if (set.Add(value))
@@ -361,22 +348,22 @@ namespace lib12.Collections
         /// <summary>
         /// Finds the index using predicate
         /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <param name="source">The source.</param>
         /// <param name="predicate">The predicate.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">
-        /// enumerable
+        /// source
         /// or
         /// predicate
         /// </exception>
-        public static int FindIndex<TItem>(this IEnumerable<TItem> enumerable, Predicate<TItem> predicate)
+        public static int FindIndex<TSource>(this IEnumerable<TSource> source, Predicate<TSource> predicate)
         {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
             var index = 0;
-            using (var enumerator = enumerable.Recover().GetEnumerator())
+            using (var enumerator = source.Recover().GetEnumerator())
             {
                 if (!enumerator.MoveNext())
                     return -1;
@@ -396,19 +383,19 @@ namespace lib12.Collections
         /// <summary>
         /// Splits collection into two collections based on whether or not they pass the condition provided
         /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <param name="source">The source.</param>
         /// <param name="predicate">The predicate.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">predicate</exception>
-        public static (List<TItem> True, List<TItem> False) Partition<TItem>(this IEnumerable<TItem> enumerable, Predicate<TItem> predicate)
+        public static (List<TSource> True, List<TSource> False) Partition<TSource>(this IEnumerable<TSource> source, Predicate<TSource> predicate)
         {
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            var trueList = new List<TItem>();
-            var falseList = new List<TItem>();
-            using (var enumerator = enumerable.Recover().GetEnumerator())
+            var trueList = new List<TSource>();
+            var falseList = new List<TSource>();
+            using (var enumerator = source.Recover().GetEnumerator())
             {
                 if (!enumerator.MoveNext())
                     return (trueList, falseList);
@@ -426,24 +413,24 @@ namespace lib12.Collections
         }
 
         /// <summary>
-        /// Returns items from enumerable batched in arrays with given size
+        /// Returns items from source batched in arrays with given size
         /// </summary>
-        /// <typeparam name="TItem">The type of the item.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <param name="source">The source.</param>
         /// <param name="size">The size of batch</param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException">size - The batch must have at least 1 length</exception>
-        public static IEnumerable<TItem[]> Batch<TItem>(this IEnumerable<TItem> enumerable, int size)
+        public static IEnumerable<TSource[]> Batch<TSource>(this IEnumerable<TSource> source, int size)
         {
             if (size <= 0)
                 throw new ArgumentOutOfRangeException(nameof(size), "The batch must have at least 1 length");
 
             var count = 0;
-            TItem[] batch = null;
-            foreach (var item in enumerable.Recover())
+            TSource[] batch = null;
+            foreach (var item in source.Recover())
             {
                 if (batch == null)
-                    batch = new TItem[size];
+                    batch = new TSource[size];
 
                 batch[count++] = item;
                 if (count == size)
