@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using lib12.Collections;
+using lib12.Extensions;
 using lib12.FunctionalFlow;
 using lib12.Misc;
 

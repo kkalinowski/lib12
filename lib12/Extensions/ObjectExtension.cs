@@ -2,10 +2,58 @@
 using System.Linq;
 using lib12.Misc;
 
-namespace lib12.FunctionalFlow
+namespace lib12.Extensions
 {
-    public static class CollectionObjectCheckExtension
+    public static class ObjectExtension
     {
+        /// <summary>
+        /// Determines whether given source equals another
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <param name="source">First source</param>
+        /// <param name="value">Second source</param>
+        /// <returns></returns>
+        public static bool Is<TSource>(this TSource source, TSource value)
+        {
+            return source.Equals(value);
+        }
+
+        /// <summary>
+        /// Determines whether given source is in given source collection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <param name="source">First source</param>
+        /// <param name="values">source collection to check</param>
+        /// <returns></returns>
+        public static bool Is<TSource>(this TSource source, params TSource[] values)
+        {
+            return values.Any(x => source.Equals(x));
+        }
+
+        /// <summary>
+        /// Determines whether given source does not equals another
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <param name="source">First source</param>
+        /// <param name="value">Second source</param>
+        /// <returns></returns>
+        public static bool IsNot<TSource>(this TSource source, TSource value)
+        {
+            return !source.Equals(value);
+        }
+
+        /// <summary>
+        /// Determines whether given source is not in given source collection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <param name="source">First source</param>
+        /// <param name="values">source collection to check</param>
+        /// <returns></returns>
+        public static bool IsNot<TSource>(this TSource source, params TSource[] values)
+        {
+            return values.All(x => !source.Equals(x));
+        }
+
         /// <summary>
         /// Packs given object into array
         /// </summary>
