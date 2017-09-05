@@ -49,7 +49,7 @@ namespace lib12.Misc
                 file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
 
                 var inner = ex.InnerException;
-                while (inner.NotNull())
+                while (inner.IsNotNull())
                 {
                     file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
                     inner = inner.InnerException;

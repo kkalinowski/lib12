@@ -6,7 +6,7 @@
         /// Check if given object is null
         /// </summary>
         /// <returns></returns>
-        public static bool Null<TSource>(this TSource source) where TSource : class
+        public static bool IsNull<TSource>(this TSource source) where TSource : class
         {
             return source == null;
         }
@@ -16,7 +16,7 @@
         ///// </summary>
         ///// <param name="source"></param>
         ///// <returns></returns>
-        public static bool NotNull<TSource>(this TSource source) where TSource : class
+        public static bool IsNotNull<TSource>(this TSource source) where TSource : class
         {
             return source != null;
         }

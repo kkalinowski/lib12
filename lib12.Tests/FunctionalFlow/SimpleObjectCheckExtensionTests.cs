@@ -12,13 +12,13 @@ namespace lib12.Tests.FunctionalFlow
         [Fact]
         public void null_returns_true_if_object_is_null()
         {
-            nullObject.Null().ShouldBeTrue();
+            nullObject.IsNull().ShouldBeTrue();
         }
 
         [Fact]
         public void null_returns_false_if_object_is_not_null()
         {
-            notNullObject.Null().ShouldBeFalse();
+            notNullObject.IsNull().ShouldBeFalse();
         }
     }
 }

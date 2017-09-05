@@ -40,7 +40,7 @@ namespace lib12.Mathematics.Formulas
         {
             Text = text;
             var tokens = Parse(Text);
-            if (tokens.NotNull())
+            if (tokens.IsNotNull())
             {
                 Tokens = new ReadOnlyCollection<Token>(tokens);
                 IsValid = true;
@@ -201,12 +201,12 @@ namespace lib12.Mathematics.Formulas
             if (!IsValid)
                 throw new MathException("Formula is not valid, cannot evaluate it");
 
-            if (argument.Null() && Tokens.Any(x => x.Type.Is(TokenType.Variable)))
+            if (argument.IsNull() && Tokens.Any(x => x.Type.Is(TokenType.Variable)))
                 throw new MathException("Encountered variable, yet argument is empty");
 
             var stack = new Stack<double>();
             var negateNextStatement = false;
-            var argumentProperties = argument.NotNull() ? argument.GetType().GetTypeInfo().DeclaredProperties : null;
+            var argumentProperties = argument.IsNotNull() ? argument.GetType().GetTypeInfo().DeclaredProperties : null;
 
             foreach (var token in Tokens)
             {
@@ -247,7 +247,7 @@ namespace lib12.Mathematics.Formulas
         private double GetValueForVariable(VariableToken token, object argument, IEnumerable<PropertyInfo> argumentProperties)
         {
             var prop = argumentProperties.FirstOrDefault(x => x.Name == token.Variable);
-            if (prop.Null())
+            if (prop.IsNull())
                 throw new MathException("Given argument doesn't have property with name - " + token.Variable);
 
             return Convert.ToDouble(prop.GetValue(argument, null));

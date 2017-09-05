@@ -25,7 +25,7 @@ namespace lib12.Misc
         public T Get()
         {
             var @object = getFromStore();
-            if (@object.Null())
+            if (@object.IsNull())
             {
                 addToStore();
                 @object = getFromStore();

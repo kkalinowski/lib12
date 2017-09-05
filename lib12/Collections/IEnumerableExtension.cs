@@ -442,7 +442,7 @@ namespace lib12.Collections
                 }
             }
 
-            if (batch.NotNull() && count > 0)
+            if (batch.IsNotNull() && count > 0)
             {
                 Array.Resize(ref batch, count);
                 yield return batch;
