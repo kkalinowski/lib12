@@ -15,19 +15,19 @@ namespace lib12.Data.Random
             return item;
         }
 
+        public static object Next(Type type)
+        {
+            var item = Activator.CreateInstance(type);
+            SetProperties(type, item);
+            return item;
+        }
+
         public static T[] NextArrayOf<T>(int count) where T : class
         {
             return Enumerable
                 .Range(0, count)
                 .Select(x => Next<T>())
                 .ToArray();
-        }
-
-        public static object Next(Type type)
-        {
-            var item = Activator.CreateInstance(type);
-            SetProperties(type, item);
-            return item;
         }
 
         private static void SetProperties(Type type, object item)
