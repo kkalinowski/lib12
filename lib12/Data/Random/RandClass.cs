@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using lib12.Collections;
 using lib12.Extensions;
 using lib12.Reflection;
 using ConstrainCollection = System.Collections.Generic.Dictionary<string, lib12.Data.Random.RandDataConstrain>;
@@ -12,14 +13,14 @@ namespace lib12.Data.Random
         public static object Next(Type type, ConstrainCollection constrains = null)
         {
             var item = Activator.CreateInstance(type);
-            SetProperties(type, item);
+            SetProperties(type, item, constrains ?? new ConstrainCollection());
             return item;
         }
 
         public static T Next<T>(ConstrainCollection constrains = null) where T : class
         {
             var item = Activator.CreateInstance<T>();
-            SetProperties(typeof(T), item);
+            SetProperties(typeof(T), item, constrains ?? new ConstrainCollection());
             return item;
         }
 
@@ -31,7 +32,7 @@ namespace lib12.Data.Random
                 .ToArray();
         }
 
-        private static void SetProperties(Type type, object item, ConstrainCollection constrains = null)
+        private static void SetProperties(Type type, object item, ConstrainCollection constrains)
         {
             var props = type.GetTypeInfo().DeclaredProperties;
             foreach (var prop in props)
@@ -40,12 +41,44 @@ namespace lib12.Data.Random
                 if (setMethod == null || setMethod.IsPrivate)
                     continue;
 
-                var value = GenerateValue(prop.PropertyType, prop.Name);
+                var propertyConstrain = constrains.GetValueOrDefault(prop.Name);
+                var value = GeneratePropertyValue(prop.PropertyType, prop.Name, propertyConstrain);
                 item.SetProperty(prop.Name, value);
             }
         }
 
-        private static object GenerateValue(Type propertyType, string propertyName)
+        private static object GeneratePropertyValue(Type type, string name, RandDataConstrain constrain)
+        {
+            object value;
+            if (constrain is ValueSetConstrain valueSetConstrain)
+                value = GenerateRandValueFromSetConstrain(valueSetConstrain);
+            else if (constrain is IntConstrain intConstrain)
+                value = GenerateRandValueFromIntConstrain(intConstrain);
+            else if (constrain is DoubleConstrain doubleConstrain)
+                value = GenerateRandValueFromDoubleConstrain(doubleConstrain);
+            else
+                value = GenerateRandValueWithoutConstrain(type, name);
+            return value;
+        }
+
+        private static object GenerateRandValueFromSetConstrain(ValueSetConstrain valuesConstrain)
+        {
+            return valuesConstrain.AvailableValues
+                .Cast<object>()
+                .GetRandomItem();
+        }
+
+        private static object GenerateRandValueFromIntConstrain(IntConstrain intConstrain)
+        {
+            return NextInt(intConstrain.MinValue, intConstrain.MaxValue);
+        }
+
+        private static object GenerateRandValueFromDoubleConstrain(DoubleConstrain doubleConstrain)
+        {
+            return NextDouble(doubleConstrain.MinValue, doubleConstrain.MaxValue);
+        }
+
+        private static object GenerateRandValueWithoutConstrain(Type propertyType, string propertyName)
         {
             if (propertyType.GetTypeInfo().IsEnum)
                 return NextEnum(propertyType);

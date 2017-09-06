@@ -20,7 +20,7 @@ namespace lib12.Data.Random
                 params TKey[] availableValues)
             {
                 var propertyName = selector.GetName();
-                result.Add(propertyName, new ValueSetConstrain<TKey> { AvailableValues = availableValues });
+                result.Add(propertyName, new ValueSetConstrain { AvailableValues = availableValues });
 
                 return this;
             }
@@ -33,7 +33,7 @@ namespace lib12.Data.Random
                 return this;
             }
 
-            public ConstrainFactoryOf<TSource> AddDoubleConstrain(Expression<Func<TSource, int>> selector, double minValue, double maxValue)
+            public ConstrainFactoryOf<TSource> AddDoubleConstrain(Expression<Func<TSource, double>> selector, double minValue, double maxValue)
             {
                 var propertyName = selector.GetName();
                 result.Add(propertyName, new DoubleConstrain { MinValue = minValue, MaxValue = maxValue });

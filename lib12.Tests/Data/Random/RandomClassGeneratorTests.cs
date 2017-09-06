@@ -28,14 +28,11 @@ namespace lib12.Tests.Data.Random
         [Fact]
         public void string_generation_test()
         {
-            const int minLength = 3;
-            const int maxLength = 7;
             var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 
             foreach (var item in generated)
             {
                 item.Text.ShouldNotBeEmpty();
-                //item.Text.Length.ShouldBeInRange(minLength, maxLength);
             }
         }
 
@@ -57,20 +54,26 @@ namespace lib12.Tests.Data.Random
         [Fact]
         public void double_generation_test()
         {
-            var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
+            var constrains = ConstrainFactory.For<ClassToGenerate>()
+                .AddDoubleConstrain(x => x.Double, 70, 120)
+                .Build();
+            var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize, constrains);
 
             foreach (var item in generated)
             {
                 item.ShouldNotBeNull();
-                //item.Double.ShouldBeInRange(70, 120);
+                item.Double.ShouldBeInRange(70, 120);
             }
         }
 
         [Fact]
         public void creation_of_complex_class_test()
         {
-            var generated = Rand.NextArrayOf<Account>(CollectionSize);
+            var constrains = ConstrainFactory.For<Account>()
+                .AddDoubleConstrain(x => x.Number, 10, 12)
+                .Build();
 
+            var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
             foreach (var item in generated)
             {
                 item.Name.ShouldNotBeEmpty();
@@ -86,11 +89,15 @@ namespace lib12.Tests.Data.Random
             generated.Any(x => Math.Abs(x.Number) > double.Epsilon).ShouldBeTrue();
         }
 
-        [Fact(Skip = "Viable after adding again generation options")]
+        [Fact]
         public void available_values_generator()
         {
             var names = new[] { "name1", "name2", "name3" };
-            var generated = Rand.NextArrayOf<Account>(CollectionSize);
+            var constrains = ConstrainFactory.For<Account>()
+                .AddValueSetConstrain(x=>x.Name, names)
+                .Build();
+
+            var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
 
             foreach (var item in generated)
             {

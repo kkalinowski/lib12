@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 
 namespace lib12.Data.Random
 {
-    public class ValueSetConstrain<TKey> : RandDataConstrain
+    public class ValueSetConstrain: RandDataConstrain
     {
-        public IEnumerable<TKey> AvailableValues { get; set; }
+        public IEnumerable AvailableValues { get; set; }
     }
 }
