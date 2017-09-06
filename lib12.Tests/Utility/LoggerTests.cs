@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using lib12.Misc;
 using lib12.Utility;
 using Shouldly;
 using Xunit;
@@ -10,6 +11,8 @@ namespace lib12.Tests.Utility
         [Fact]
         public void logger_properly_logs_messages()
         {
+            IoHelper.DeleteIfExists("log.txt");
+
             Logger.AppendTimeStampToFileName = false;
             Logger.Info("some info text");
             Logger.Error("some error text");
@@ -19,7 +22,7 @@ namespace lib12.Tests.Utility
             logContent[0].ShouldContain("some info text");
             logContent[1].ShouldContain("some error text");
 
-            File.Delete("log.txt");
+            IoHelper.DeleteIfExists("log.txt");
         }
     }
 }

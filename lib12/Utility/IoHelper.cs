@@ -26,5 +26,17 @@ namespace lib12.Misc
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
+
+        /// <summary>
+        /// Safely deletes file if it exists
+        /// </summary>
+        /// <returns></returns>
+        public static void DeleteIfExists(string path)
+        {
+            if (File.Exists(path))
+                File.Delete(path);
+            else if (Directory.Exists(path))
+                Directory.Delete(path);
+        }
     }
 }
