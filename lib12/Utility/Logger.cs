@@ -9,12 +9,28 @@ namespace lib12.Misc
     /// </summary>
     public static class Logger
     {
-        private const string Format = "{0} {1} => {2}";
-
         /// <summary>
         /// File name of log file
         /// </summary>
-        public static string FileName { get; set; } = "log.txt";
+        public static string FileName { get; set; } = "log";
+
+        /// <summary>
+        /// Whether or not append time stamp to filename describing when it was created.
+        /// </summary>
+        public static bool AppendTimeStampToFileName { get; set; } = true;
+
+        private static string ComputeFileName()
+        {
+            if (AppendTimeStampToFileName)
+                return $"{FileName}_{DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss.fff")}.txt";
+            else
+                return $"{FileName}.txt";
+        }
+
+        private static string GetFormatedLine(string level, string text)
+        {
+            return $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} {level} => {text}";
+        }
 
         /// <summary>
         /// Log info message
@@ -22,9 +38,20 @@ namespace lib12.Misc
         /// <param name="text"></param>
         public static void Info(string text)
         {
-            using (var file = File.AppendText(FileName))
+            using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(Format, DateTime.UtcNow, "INFO", text);
+                file.WriteLine(GetFormatedLine("INFO", text));
+            }
+        }
+
+        /// <summary>
+        /// Log warning message
+        /// </summary>
+        public static void Warning(string text)
+        {
+            using (var file = File.AppendText(ComputeFileName()))
+            {
+                file.WriteLine(GetFormatedLine("WARNING", text));
             }
         }
 
@@ -33,9 +60,9 @@ namespace lib12.Misc
         /// </summary>
         public static void Error(string text)
         {
-            using (var file = File.AppendText(FileName))
+            using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(Format, DateTime.UtcNow, "ERROR", text);
+                file.WriteLine(GetFormatedLine("ERROR", text));
             }
         }
 
@@ -44,14 +71,14 @@ namespace lib12.Misc
         /// </summary>
         public static void Error(Exception ex)
         {
-            using (var file = File.AppendText(FileName))
+            using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Exception occured - " + ex.Message);
+                file.WriteLine(GetFormatedLine("ERROR", "Exception occured - " + ex.Message));
 
                 var inner = ex.InnerException;
                 while (inner.IsNotNull())
                 {
-                    file.WriteLine(Format, DateTime.UtcNow, "ERROR", "Inner exception - " + inner.Message);
+                    file.WriteLine(GetFormatedLine("ERROR", "Inner exception - " + ex.Message));
                     inner = inner.InnerException;
                 }
             }
