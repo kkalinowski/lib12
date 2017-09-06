@@ -1,5 +1,5 @@
 ﻿
-namespace lib12.Misc
+namespace lib12.Utility
 {
     public class UnknownEnumException<TEnum> : lib12Exception
     {

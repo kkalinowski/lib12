@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace lib12.Misc
+namespace lib12.Utility
 {
     /// <summary>
     /// Helper class for checking performance

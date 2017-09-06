@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using lib12.Extensions;
 
-namespace lib12.Misc
+namespace lib12.Utility
 {
     public static class Check
     {

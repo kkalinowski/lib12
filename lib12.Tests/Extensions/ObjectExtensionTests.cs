@@ -3,7 +3,7 @@ using lib12.Extensions;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Tests.FunctionalFlow
+namespace lib12.Tests.Extensions
 {
     enum TestEnum
     {

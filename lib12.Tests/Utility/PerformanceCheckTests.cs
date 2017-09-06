@@ -1,9 +1,9 @@
 ﻿using System.Threading;
-using lib12.Misc;
+using lib12.Utility;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Tests.Misc
+namespace lib12.Tests.Utility
 {
     public class PerformanceCheckTests
     {
