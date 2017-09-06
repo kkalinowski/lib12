@@ -3,34 +3,35 @@ using System.Linq;
 using System.Reflection;
 using lib12.Extensions;
 using lib12.Reflection;
+using ConstrainCollection = System.Collections.Generic.Dictionary<string, lib12.Data.Random.RandDataConstrain>;
 
 namespace lib12.Data.Random
 {
     public static partial class Rand
     {
-        public static T Next<T>() where T : class
-        {
-            var item = Activator.CreateInstance<T>();
-            SetProperties(typeof(T), item);
-            return item;
-        }
-
-        public static object Next(Type type)
+        public static object Next(Type type, ConstrainCollection constrains = null)
         {
             var item = Activator.CreateInstance(type);
             SetProperties(type, item);
             return item;
         }
 
-        public static T[] NextArrayOf<T>(int count) where T : class
+        public static T Next<T>(ConstrainCollection constrains = null) where T : class
+        {
+            var item = Activator.CreateInstance<T>();
+            SetProperties(typeof(T), item);
+            return item;
+        }
+
+        public static T[] NextArrayOf<T>(int count, ConstrainCollection constrains = null) where T : class
         {
             return Enumerable
                 .Range(0, count)
-                .Select(x => Next<T>())
+                .Select(x => Next<T>(constrains))
                 .ToArray();
         }
 
-        private static void SetProperties(Type type, object item)
+        private static void SetProperties(Type type, object item, ConstrainCollection constrains = null)
         {
             var props = type.GetTypeInfo().DeclaredProperties;
             foreach (var prop in props)
@@ -48,13 +49,13 @@ namespace lib12.Data.Random
         {
             if (propertyType.GetTypeInfo().IsEnum)
                 return NextEnum(propertyType);
-            else if (propertyType == typeof (string))
+            else if (propertyType == typeof(string))
                 return GenerateStringProperty(propertyName);
-            else if (propertyType == typeof (int))
+            else if (propertyType == typeof(int))
                 return NextInt(1, 1000);
-            else if (propertyType == typeof (double))
+            else if (propertyType == typeof(double))
                 return NextDouble(-1000, 1000);
-            else if (propertyType == typeof (DateTime))
+            else if (propertyType == typeof(DateTime))
                 return NextDateTime(DateTime.Now.AddYears(-10), DateTime.Now);
             else if (propertyType.GetTypeInfo().IsClass)
                 return Next(propertyType);

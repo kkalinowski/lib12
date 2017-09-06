@@ -16,7 +16,7 @@ namespace lib12.Tests.Data.Random
         public void Generate_returns_not_null_items_of_correct_type()
         {
             var generated = Rand.NextArrayOf<Account>(CollectionSize);
-            generated.Count().ShouldBe(CollectionSize);
+            generated.Length.ShouldBe(CollectionSize);
 
             foreach (var item in generated)
             {
@@ -42,12 +42,15 @@ namespace lib12.Tests.Data.Random
         [Fact]
         public void int_generation_test()
         {
-            var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
+            var constrains = ConstrainFactory.For<ClassToGenerate>()
+                .AddIntConstrain(x => x.Int, 50, 100)
+                .Build();
+            var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize, constrains);
 
             foreach (var item in generated)
             {
                 item.ShouldNotBeNull();
-                //item.Int.ShouldBeInRange(50, 100);
+                item.Int.ShouldBeInRange(50, 100);
             }
         }
 
