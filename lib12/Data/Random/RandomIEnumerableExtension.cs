@@ -6,6 +6,12 @@ namespace lib12.Data.Random
 {
     public static class RandomIEnumerableExtension
     {
+        /// <summary>
+        /// Returns a random item from given collection
+        /// </summary>
+        /// <typeparam name="T">Type of objects in collection</typeparam>
+        /// <param name="enumerable">The collection to return from</param>
+        /// <returns></returns>
         public static T GetRandomItem<T>(this IEnumerable<T> enumerable)
         {
             if (enumerable.IsNullOrEmpty())

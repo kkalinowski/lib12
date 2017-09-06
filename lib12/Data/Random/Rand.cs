@@ -4,6 +4,9 @@ using lib12.Collections;
 
 namespace lib12.Data.Random
 {
+    /// <summary>
+    /// Generates random data
+    /// </summary>
     public static partial class Rand
     {
         private static readonly System.Random random;
@@ -23,16 +26,31 @@ namespace lib12.Data.Random
             return random.Next(1, 101) < percentForTrue;
         }
 
+        /// <summary>
+        /// Returns a random int value
+        /// </summary>
+        /// <returns></returns>
         public static int NextInt()
         {
             return random.Next();
         }
 
+        /// <summary>
+        /// Returns a random int value
+        /// </summary>
+        /// <param name="max">The maximum.</param>
+        /// <returns></returns>
         public static int NextInt(int max)
         {
             return random.Next(max);
         }
 
+        /// <summary>
+        /// Returns a random int value
+        /// </summary>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
+        /// <returns></returns>
         public static int NextInt(int min, int max)
         {
             return random.Next(min, max);
@@ -91,66 +109,118 @@ namespace lib12.Data.Random
             return from.AddDays(NextDouble(0, days));
         }
 
+        /// <summary>
+        /// Returns a random Male Name
+        /// </summary>
+        /// <returns></returns>
         public static string NextMaleName()
         {
             return FakeData.MaleNames.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random Female Name
+        /// </summary>
+        /// <returns></returns>
         public static string NextFemaleName()
         {
             return FakeData.FemaleNames.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random Name
+        /// </summary>
+        /// <returns></returns>
         public static string NextName()
         {
             return FakeData.MaleNames.Concat(FakeData.FemaleNames).GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random surname
+        /// </summary>
+        /// <returns></returns>
         public static string NextSurname()
         {
             return FakeData.Surnames.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random name and surname
+        /// </summary>
+        /// <returns></returns>
         public static string NextFullName()
         {
             return $"{NextName()} {NextSurname()}";
         }
 
+        /// <summary>
+        /// Returns a random country
+        /// </summary>
+        /// <returns></returns>
         public static string NextCountry()
         {
             return FakeData.Countries.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random city
+        /// </summary>
+        /// <returns></returns>
         public static string NextCity()
         {
             return FakeData.Cities.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random zip code
+        /// </summary>
+        /// <returns></returns>
         public static string NextZipCode()
         {
             return $"{NextInt(1, 99):00}-{NextInt(1, 999):000}";
         }
 
+        /// <summary>
+        /// Returns a random street
+        /// </summary>
+        /// <returns></returns>
         public static string NextStreet()
         {
             return FakeData.Streets.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random adress - street with number
+        /// </summary>
+        /// <returns></returns>
         public static string NextAddress()
         {
             return $"{NextStreet()} {NextInt(1, 125)}";
         }
 
+        /// <summary>
+        /// Returns a random company
+        /// </summary>
+        /// <returns></returns>
         public static string NextCompany()
         {
             return FakeData.Companies.GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random email
+        /// </summary>
+        /// <returns></returns>
         public static string NextEmail()
         {
             return $"{NextName()}@{NextCompany().Replace(" ", "_")}.com";
         }
 
+        /// <summary>
+        /// Returns a random enum of given type
+        /// </summary>
+        /// <returns></returns>
         public static object NextEnum(Type enumType)
         {
             var values = Enum.GetValues(enumType);
@@ -159,6 +229,10 @@ namespace lib12.Data.Random
                 .GetRandomItem();
         }
 
+        /// <summary>
+        /// Returns a random enum of given type
+        /// </summary>
+        /// <returns></returns>
         public static TEnum NextEnum<TEnum>()
         {
             return (TEnum)NextEnum(typeof(TEnum));

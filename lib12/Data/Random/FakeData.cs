@@ -2,7 +2,7 @@
 namespace lib12.Data.Random
 {
     /// <summary>
-    /// Lorem ipsum text
+    /// Contains fake data
     /// </summary>
     public static class FakeData
     {

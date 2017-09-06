@@ -10,6 +10,12 @@ namespace lib12.Data.Random
 {
     public static partial class Rand
     {
+        /// <summary>
+        /// Returns a random object of given type
+        /// </summary>
+        /// <param name="type">The type to generate</param>
+        /// <param name="constrains">The constrains for generating properties</param>
+        /// <returns></returns>
         public static object Next(Type type, ConstrainCollection constrains = null)
         {
             var item = Activator.CreateInstance(type);
@@ -17,6 +23,12 @@ namespace lib12.Data.Random
             return item;
         }
 
+        /// <summary>
+        /// Returns a random object of given type
+        /// </summary>
+        /// <typeparam name="T">The type to generate</typeparam>
+        /// <param name="constrains">The constrains for generating properties</param>
+        /// <returns></returns>
         public static T Next<T>(ConstrainCollection constrains = null) where T : class
         {
             var item = Activator.CreateInstance<T>();
@@ -24,6 +36,13 @@ namespace lib12.Data.Random
             return item;
         }
 
+        /// <summary>
+        /// Returns an array of random objects of given type
+        /// </summary>
+        /// <typeparam name="T">The type to generate</typeparam>
+        /// <param name="count">The count of objects to generate</param>
+        /// <param name="constrains">The constrains for generating properties</param>
+        /// <returns></returns>
         public static T[] NextArrayOf<T>(int count, ConstrainCollection constrains = null) where T : class
         {
             return Enumerable
