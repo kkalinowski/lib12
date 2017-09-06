@@ -2,7 +2,7 @@
 using System.IO;
 using lib12.Extensions;
 
-namespace lib12.Misc
+namespace lib12.Utility
 {
     /// <summary>
     /// Simple logger
@@ -18,6 +18,11 @@ namespace lib12.Misc
         /// Whether or not append time stamp to filename describing when it was created.
         /// </summary>
         public static bool AppendTimeStampToFileName { get; set; } = true;
+
+        /// <summary>
+        /// Whether or not append display logged message also on Console
+        /// </summary>
+        public static bool DisplayAlsoOnConsole { get; set; } = false;
 
         private static string ComputeFileName()
         {
@@ -40,7 +45,10 @@ namespace lib12.Misc
         {
             using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(GetFormatedLine("INFO", text));
+                var line = GetFormatedLine("INFO", text);
+                file.WriteLine(line);
+                if (DisplayAlsoOnConsole)
+                    Console.WriteLine(line);
             }
         }
 
@@ -51,7 +59,10 @@ namespace lib12.Misc
         {
             using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(GetFormatedLine("WARNING", text));
+                var line = GetFormatedLine("WARNING", text);
+                file.WriteLine(line);
+                if (DisplayAlsoOnConsole)
+                    Console.WriteLine(line);
             }
         }
 
@@ -62,7 +73,10 @@ namespace lib12.Misc
         {
             using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(GetFormatedLine("ERROR", text));
+                var line = GetFormatedLine("ERROR", text);
+                file.WriteLine(line);
+                if (DisplayAlsoOnConsole)
+                    Console.WriteLine(line);
             }
         }
 
@@ -73,12 +87,19 @@ namespace lib12.Misc
         {
             using (var file = File.AppendText(ComputeFileName()))
             {
-                file.WriteLine(GetFormatedLine("ERROR", "Exception occured - " + ex.Message));
+                var line = GetFormatedLine("ERROR", "Exception occured - " + ex.Message);
+                file.WriteLine(line);
+                if (DisplayAlsoOnConsole)
+                    Console.WriteLine(line);
 
                 var inner = ex.InnerException;
                 while (inner.IsNotNull())
                 {
-                    file.WriteLine(GetFormatedLine("ERROR", "Inner exception - " + ex.Message));
+                    line = GetFormatedLine("ERROR", "Inner exception - " + ex.Message);
+                    file.WriteLine(line);
+                    if (DisplayAlsoOnConsole)
+                        Console.WriteLine(line);
+
                     inner = inner.InnerException;
                 }
             }
