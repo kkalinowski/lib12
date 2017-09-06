@@ -36,7 +36,7 @@ namespace lib12.Data.Random
             /// <param name="selector">The selector for property</param>
             /// <param name="availableValues">The available values for property</param>
             /// <returns></returns>
-            public ConstrainFactoryOf<TSource> AddValueSetConstrain<TKey>(Expression<Func<TSource, TKey>> selector,
+            public ConstrainFactoryOf<TSource> AddValuesConstrain<TKey>(Expression<Func<TSource, TKey>> selector,
                 params TKey[] availableValues)
             {
                 var propertyName = selector.GetName();
@@ -52,7 +52,7 @@ namespace lib12.Data.Random
             /// <param name="minValue">The minimum value of property</param>
             /// <param name="maxValue">The maximum value of property</param>
             /// <returns></returns>
-            public ConstrainFactoryOf<TSource> AddIntConstrain(Expression<Func<TSource, int>> selector, int minValue, int maxValue)
+            public ConstrainFactoryOf<TSource> AddNumericConstrain(Expression<Func<TSource, int>> selector, int minValue, int maxValue)
             {
                 var propertyName = selector.GetName();
                 result.Add(propertyName, new IntConstrain { MinValue = minValue, MaxValue = maxValue });
@@ -67,7 +67,7 @@ namespace lib12.Data.Random
             /// <param name="minValue">The minimum value of property</param>
             /// <param name="maxValue">The maximum value of property</param>
             /// <returns></returns>
-            public ConstrainFactoryOf<TSource> AddDoubleConstrain(Expression<Func<TSource, double>> selector, double minValue, double maxValue)
+            public ConstrainFactoryOf<TSource> AddNumericConstrain(Expression<Func<TSource, double>> selector, double minValue, double maxValue)
             {
                 var propertyName = selector.GetName();
                 result.Add(propertyName, new DoubleConstrain { MinValue = minValue, MaxValue = maxValue });

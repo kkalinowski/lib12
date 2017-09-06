@@ -40,7 +40,7 @@ namespace lib12.Tests.Data.Random
         public void int_generation_test()
         {
             var constrains = ConstrainFactory.For<ClassToGenerate>()
-                .AddIntConstrain(x => x.Int, 50, 100)
+                .AddNumericConstrain(x => x.Int, 50, 100)
                 .Build();
             var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize, constrains);
 
@@ -55,14 +55,14 @@ namespace lib12.Tests.Data.Random
         public void double_generation_test()
         {
             var constrains = ConstrainFactory.For<ClassToGenerate>()
-                .AddDoubleConstrain(x => x.Double, 70, 120)
+                .AddNumericConstrain(x => x.Double, 70, 120.5)
                 .Build();
             var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize, constrains);
 
             foreach (var item in generated)
             {
                 item.ShouldNotBeNull();
-                item.Double.ShouldBeInRange(70, 120);
+                item.Double.ShouldBeInRange(70, 120.5);
             }
         }
 
@@ -70,7 +70,7 @@ namespace lib12.Tests.Data.Random
         public void creation_of_complex_class_test()
         {
             var constrains = ConstrainFactory.For<Account>()
-                .AddDoubleConstrain(x => x.Number, 10, 12)
+                .AddNumericConstrain(x => x.Number, 10, 12)
                 .Build();
 
             var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
@@ -94,7 +94,7 @@ namespace lib12.Tests.Data.Random
         {
             var names = new[] { "name1", "name2", "name3" };
             var constrains = ConstrainFactory.For<Account>()
-                .AddValueSetConstrain(x=>x.Name, names)
+                .AddValuesConstrain(x=>x.Name, names)
                 .Build();
 
             var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
