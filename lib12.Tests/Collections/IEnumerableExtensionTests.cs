@@ -303,7 +303,7 @@ namespace lib12.Tests.Collections
         {
             List<Item> list = null;
             var result = list.Partition(x => x.Value < 6);
-            
+
             result.True.ShouldBeEmpty();
             result.False.ShouldBeEmpty();
         }
@@ -400,6 +400,54 @@ namespace lib12.Tests.Collections
                 new Item { Value = 3 } };
 
             list.SequenceContentEqual(list2).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void intersectby_happy_path()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            var result = list1.IntersectBy(list2, l1 => l1.Value, l2 => l2.Value).ToArray();
+            result.Length.ShouldBe(2);
+            result[0].Value.ShouldBe(4);
+            result[1].Value.ShouldBe(12);
+        }
+
+        [Fact]
+        public void intersectby_throws_exception_if_first_selector_is_null()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            Assert.Throws<ArgumentNullException>(() => list1.IntersectBy(list2, (Func<Item, int>)null, x => x.Value).ToArray());
+        }
+
+        [Fact]
+        public void intersectby_throws_exception_if_second_selector_is_null()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            Assert.Throws<ArgumentNullException>(() => list1.IntersectBy(list2, x => x.Value, (Func<Item, int>)null).ToArray());
         }
     }
 }
