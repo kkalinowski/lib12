@@ -452,24 +452,24 @@ namespace lib12.Collections
         /// <summary>
         /// Returns items existing both in first and in second collection. Using selectors to get property by which to compare, so you can compare collections of different types.
         /// </summary>
-        /// <typeparam name="TSource">The type of the items in first collection</typeparam>
-        /// <typeparam name="TIntersection">The type of the items in second collection</typeparam>
+        /// <typeparam name="TFirst">The type of the items in first collection</typeparam>
+        /// <typeparam name="TSecond">The type of the items in second collection</typeparam>
         /// <typeparam name="TKey">The type of key by which compare occurs</typeparam>
-        /// <param name="source">The source.</param>
-        /// <param name="intersection">Collection to intersect with</param>
-        /// <param name="sourceSelector">The selector for first collection</param>
-        /// <param name="intersectionSelector">The selector for second collection</param>
+        /// <param name="first">The source collection</param>
+        /// <param name="second">Collection to intersect with</param>
+        /// <param name="firstSelector">The selector for first collection</param>
+        /// <param name="secondSelector">The selector for second collection</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IEnumerable<TSource> IntersectBy<TSource, TIntersection, TKey>(this IEnumerable<TSource> source,
-            IEnumerable<TIntersection> intersection, Func<TSource, TKey> sourceSelector, Func<TIntersection, TKey> intersectionSelector)
+        public static IEnumerable<TFirst> IntersectBy<TFirst, TSecond, TKey>(this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second, Func<TFirst, TKey> firstSelector, Func<TSecond, TKey> secondSelector)
         {
-            if (sourceSelector == null)
-                throw new ArgumentNullException(nameof(sourceSelector));
-            if (intersectionSelector == null)
-                throw new ArgumentNullException(nameof(intersectionSelector));
+            if (firstSelector == null)
+                throw new ArgumentNullException(nameof(firstSelector));
+            if (secondSelector == null)
+                throw new ArgumentNullException(nameof(secondSelector));
 
-            return source.Join(intersection, sourceSelector, intersectionSelector, (s, i) => s);
+            return first.Join(second, firstSelector, secondSelector, (s, i) => s);
         }
     }
 }
