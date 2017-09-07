@@ -448,5 +448,12 @@ namespace lib12.Collections
                 yield return batch;
             }
         }
+
+        public static IEnumerable<TSource> IntersectBy<TSource, TIntersection, TKey>(this IEnumerable<TSource> source,
+            IEnumerable<TIntersection> intersection,
+            Func<TSource, TKey> sourceSelector, Func<TIntersection, TKey> intersectionSelector)
+        {
+            return source.Join(intersection, sourceSelector, intersectionSelector, (s, i) => s);
+        }
     }
 }
