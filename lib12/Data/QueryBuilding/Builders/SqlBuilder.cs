@@ -11,7 +11,7 @@ namespace lib12.Data.QueryBuilding.Builders
     public class SqlBuilder
     {
         /// <summary>
-        /// Builds select query
+        /// Builds SELECT query
         /// </summary>
         public static ISelect Select
         {
@@ -22,7 +22,7 @@ namespace lib12.Data.QueryBuilding.Builders
         }
 
         /// <summary>
-        /// Builds update command
+        /// Builds UPDATE command
         /// </summary>
         public static IUpdate Update
         {
@@ -33,7 +33,7 @@ namespace lib12.Data.QueryBuilding.Builders
         }
 
         /// <summary>
-        /// Builds delete command
+        /// Builds DELETE command
         /// </summary>
         public static IDelete Delete
         {
@@ -45,7 +45,7 @@ namespace lib12.Data.QueryBuilding.Builders
 
 
         /// <summary>
-        /// Builds insert command
+        /// Builds INSERT command
         /// </summary>
         public static IInsert Insert
         {

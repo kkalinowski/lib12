@@ -2,6 +2,11 @@
 {
     public interface IDelete
     {
+        /// <summary>
+        /// Adds FROM statement
+        /// </summary>
+        /// <param name="table">The source table</param>
+        /// <returns></returns>
         IDeleteFrom From(string table);
     }
 

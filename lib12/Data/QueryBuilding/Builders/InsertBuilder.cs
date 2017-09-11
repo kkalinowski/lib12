@@ -37,7 +37,7 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
-        public IBuild Batch(IEnumerable<object> values)
+        public IBuild ValuesBatch(IEnumerable<object> values)
         {
             if (values.IsNullOrEmpty())
                 throw new QueryBuilderException("Collection of values to batch insert cannot be null or empty");
