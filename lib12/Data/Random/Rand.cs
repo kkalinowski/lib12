@@ -92,9 +92,7 @@ namespace lib12.Data.Random
         /// <returns>Random string with provided length</returns>
         public static string NextString(int length)
         {
-            return new string(CollectionFactory
-                .CreateEnumerable(i => NextLowercaseLetter(), i => i++, 0)
-                .Take(length).ToArray());
+            return new string(CollectionFactory.CreateArray(10, i => NextLowercaseLetter()));
         }
 
         /// <summary>

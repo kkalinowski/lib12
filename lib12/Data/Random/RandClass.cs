@@ -45,10 +45,8 @@ namespace lib12.Data.Random
         /// <returns></returns>
         public static T[] NextArrayOf<T>(int count, ConstrainCollection constrains = null) where T : class
         {
-            return Enumerable
-                .Range(0, count)
-                .Select(x => Next<T>(constrains))
-                .ToArray();
+            return CollectionFactory
+                .CreateArray(count, i => Next<T>(constrains));
         }
 
         private static void SetProperties(Type type, object item, ConstrainCollection constrains)
