@@ -472,6 +472,18 @@ namespace lib12.Collections
             return first.Recover().Join(second.Recover(), firstSelector, secondSelector, (s, i) => s);
         }
 
+        /// <summary>
+        /// Returns items existing in first sequence but not in second sequence. Using selectors to get property by which to compare, so you can compare collections of different types.
+        /// </summary>
+        /// <typeparam name="TFirst">The type of the items in first collection</typeparam>
+        /// <typeparam name="TSecond">The type of the items in second collection</typeparam>
+        /// <typeparam name="TKey">The type of key by which compare occurs</typeparam>
+        /// <param name="first">The source collection</param>
+        /// <param name="second">Collection to compare with</param>
+        /// <param name="firstSelector">The selector for first collection</param>
+        /// <param name="secondSelector">The selector for second collection</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static IEnumerable<TFirst> ExceptBy<TFirst, TSecond, TKey>(this IEnumerable<TFirst> first,
             IEnumerable<TSecond> second, Func<TFirst, TKey> firstSelector, Func<TSecond, TKey> secondSelector)
         {
@@ -490,6 +502,38 @@ namespace lib12.Collections
                 yield return element;
                 keys.Add(key);
             }
+        }
+
+        /// <summary>
+        /// Do left join with another collection. If the isn't a item to join with, default value is returned.
+        /// </summary>
+        /// <typeparam name="TFirst">The type of the items in first collection</typeparam>
+        /// <typeparam name="TSecond">The type of the items in second collection</typeparam>
+        /// <typeparam name="TKey">The type of key by which compare occurs</typeparam>
+        /// <typeparam name="TResult">The result of join</typeparam>
+        /// <param name="first">The source collection</param>
+        /// <param name="second">Collection to join</param>
+        /// <param name="firstSelector">The selector for first collection</param>
+        /// <param name="secondSelector">The selector for second collection</param>
+        /// <param name="resultSelector">The selector of colection join</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static IEnumerable<TResult> LeftJoin<TFirst, TSecond, TKey, TResult>(this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second, Func<TFirst, TKey> firstSelector, Func<TSecond, TKey> secondSelector,
+            Func<TFirst, TSecond, TResult> resultSelector)
+        {
+            //from https://stackoverflow.com/a/584840
+
+            if (firstSelector == null)
+                throw new ArgumentNullException(nameof(firstSelector));
+            if (secondSelector == null)
+                throw new ArgumentNullException(nameof(secondSelector));
+            if (resultSelector == null)
+                throw new ArgumentNullException(nameof(resultSelector));
+
+            return first.Recover()
+                .GroupJoin(second.Recover(), firstSelector, secondSelector, (f, s) => new { First = f, Second = s })
+                .SelectMany(x => x.Second.DefaultIfEmpty(), (f, s) => resultSelector(f.First, s));
         }
     }
 }

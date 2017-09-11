@@ -496,5 +496,72 @@ namespace lib12.Tests.Collections
 
             Assert.Throws<ArgumentNullException>(() => list1.ExceptBy(list2, x => x.Value, (Func<Item, int>)null).ToArray());
         }
+
+        [Fact]
+        public void leftjoin_happy_path()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            var result = list1.LeftJoin(list2, l1 => l1.Value, l2 => l2.Value, (l1, l2) => (l1, l2)).ToArray();
+            result.Length.ShouldBe(3);
+            result[0].Item1.Value.ShouldBe(3);
+            result[0].Item2.ShouldBeNull();
+            result[1].Item1.Value.ShouldBe(4);
+            result[1].Item2.Value.ShouldBe(4);
+            result[2].Item1.Value.ShouldBe(12);
+            result[2].Item2.Value.ShouldBe(12);
+        }
+
+        [Fact]
+        public void leftjoin_throws_exception_if_first_selector_is_null()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            Assert.Throws<ArgumentNullException>(() => list1.LeftJoin(list2, (Func<Item, int>)null, y => y.Value, (x, y) => (x, y)).ToArray());
+        }
+
+        [Fact]
+        public void leftjoin_throws_exception_if_second_selector_is_null()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            Assert.Throws<ArgumentNullException>(() => list1.LeftJoin(list2, x => x.Value, (Func<Item, int>)null, (x, y) => (x, y)).ToArray());
+        }
+
+        [Fact]
+        public void leftjoin_throws_exception_if_result_selector_is_null()
+        {
+            var list1 = new List<Item> {
+                new Item { Value = 3 },
+                new Item { Value = 4 },
+                new Item { Value = 12 } };
+            var list2 = new List<Item> {
+                new Item { Value = 4 },
+                new Item { Value = 12 },
+                new Item { Value = 20 } };
+
+            Assert.Throws<ArgumentNullException>(() => list1.LeftJoin(list2, x => x.Value, y => y.Value, (Func<Item, Item, Tuple<Item, Item>>)null).ToArray());
+        }
     }
 }
