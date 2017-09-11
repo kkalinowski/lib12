@@ -3,11 +3,13 @@ using lib12.Extensions;
 
 namespace lib12.Utility
 {
+    //internal, because I'm thinking about Memoization for next version
+
     /// <summary>
     /// Container for easier accessing cached values
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CachedObject<T> where T : class
+    internal class CachedObject<T> where T : class
     {
         private readonly Action addToStore;
         private readonly Func<T> getFromStore;

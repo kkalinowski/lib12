@@ -71,6 +71,15 @@ namespace lib12.Reflection
             return type.GetTypeInfo().GetConstructor(Type.EmptyTypes);
         }
 
+        /// <summary>
+        /// Gets the property value
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get value from</param>
+        /// <param name="propertyName">Name of the property to get value from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Provided property name cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
         public static object GetPropertyValue(this Type type, object source, string propertyName)
         {
             if (propertyName.IsNullOrEmpty())
