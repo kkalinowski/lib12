@@ -1,4 +1,5 @@
-﻿using lib12.Utility;
+﻿using lib12.Collections;
+using lib12.Utility;
 using Shouldly;
 using Xunit;
 

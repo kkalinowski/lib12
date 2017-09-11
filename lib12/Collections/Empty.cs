@@ -1,12 +1,20 @@
 ﻿using System.Collections.Generic;
 
-namespace lib12.Utility
+namespace lib12.Collections
 {
     /// <summary>
     /// Handles empty objects creation
     /// </summary>
     public static class Empty
     {
+        /// <summary>
+        /// Returns empty enumerable of given type
+        /// </summary>
+        public static IEnumerable<T> Enumerable<T>()
+        {
+            return System.Linq.Enumerable.Empty<T>();
+        }
+
         /// <summary>
         /// Returns empty array of given type
         /// </summary>
@@ -37,14 +45,5 @@ namespace lib12.Utility
         {
             return new Dictionary<TKey, TValue>(0);
         }
-
-        /// <summary>
-        /// Returns empty enumerable of given type
-        /// </summary>
-        public static IEnumerable<T> Enumerable<T>()
-        {
-            return System.Linq.Enumerable.Empty<T>();
-        }
-
     }
 }
