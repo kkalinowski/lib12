@@ -94,7 +94,7 @@ namespace lib12.Collections
 
             // Declare a dictionary to count the occurence of the items in the collection
             var itemCounts = new Dictionary<TSource, int>();
-            
+
             // Increase the count for each occurence of the item in the first collection
             foreach (TSource item in first)
             {
@@ -469,7 +469,27 @@ namespace lib12.Collections
             if (secondSelector == null)
                 throw new ArgumentNullException(nameof(secondSelector));
 
-            return first.Join(second, firstSelector, secondSelector, (s, i) => s);
+            return first.Recover().Join(second.Recover(), firstSelector, secondSelector, (s, i) => s);
+        }
+
+        public static IEnumerable<TFirst> ExceptBy<TFirst, TSecond, TKey>(this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second, Func<TFirst, TKey> firstSelector, Func<TSecond, TKey> secondSelector)
+        {
+            if (firstSelector == null)
+                throw new ArgumentNullException(nameof(firstSelector));
+            if (secondSelector == null)
+                throw new ArgumentNullException(nameof(secondSelector));
+
+            var keys = new HashSet<TKey>(second.Recover().Select(secondSelector));
+            foreach (var element in first.Recover())
+            {
+                var key = firstSelector(element);
+                if (keys.Contains(key))
+                    continue;
+
+                yield return element;
+                keys.Add(key);
+            }
         }
     }
 }
