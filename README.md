@@ -1,6 +1,6 @@
 ![alt tag](https://raw.github.com/kkalinowski/lib12/master/lib12.png)
 
-lib12 is set of useful classes and extension created for .NET framework. During my work with .NET framework I created many classes and function that can be reused across different projects. lib12 is using .NET Standard 2.9
+lib12 is set of useful classes and extension created for .NET framework. During my work with .NET framework I created many classes and function that can be reused across different projects. lib12 is using .NET Standard 2.0
 
 Current version 2.0 available on nuget - https://www.nuget.org/packages/lib12
 
