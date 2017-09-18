@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace lib12.Misc
+namespace lib12.Utility
 {
     /// <summary>
     /// Helper functions for IO

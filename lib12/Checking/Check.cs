@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using lib12.Extensions;
 
-namespace lib12.Utility
+namespace lib12.Checking
 {
     /// <summary>
     /// Check condition on set of objects
