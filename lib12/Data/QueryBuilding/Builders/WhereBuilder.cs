@@ -71,7 +71,7 @@ namespace lib12.Data.QueryBuilding.Builders
             else if (cnd.Comparison == Compare.In || cnd.Comparison == Compare.NotIn)
             {
                 var args = cnd.Argument as IEnumerable;
-                if (args.IsNull())
+                if (args == null)
                     throw new lib12Exception("You have to pass IEnumerable to condition with IN statement");
 
                 var argsArray = args.Cast<object>().ToArray();

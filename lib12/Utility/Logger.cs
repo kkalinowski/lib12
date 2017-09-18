@@ -93,7 +93,7 @@ namespace lib12.Utility
                     Console.WriteLine(line);
 
                 var inner = ex.InnerException;
-                while (inner.IsNotNull())
+                while (inner != null)
                 {
                     line = GetFormatedLine("ERROR", "Inner exception - " + ex.Message);
                     file.WriteLine(line);

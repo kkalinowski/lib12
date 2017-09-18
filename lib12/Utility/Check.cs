@@ -15,7 +15,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public static bool AllAreNull(params object[] toCheck)
         {
-            return toCheck.All(x => x.IsNull());
+            return toCheck.All(x => x == null);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public static bool AllAreNotNull(params object[] toCheck)
         {
-            return toCheck.All(x => x.IsNotNull());
+            return toCheck.All(x => x != null);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public static bool AnyIsNull(params object[] toCheck)
         {
-            return toCheck.Any(x => x.IsNull());
+            return toCheck.Any(x => x == null);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public static bool AnyIsNotNull(params object[] toCheck)
         {
-            return toCheck.Any(x => x.IsNotNull());
+            return toCheck.Any(x => x != null);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace lib12.Reflection
         public static void SetProperty(this object @object, string propertyName, object value)
         {
             var prop = @object.GetType().GetTypeInfo().DeclaredProperties.FirstOrDefault(x => x.Name == propertyName);
-            if (prop.IsNull())
+            if (prop == null)
                 throw new lib12Exception("Given object doesn't have property " + propertyName);
 
             prop.SetValue(@object, value, null);

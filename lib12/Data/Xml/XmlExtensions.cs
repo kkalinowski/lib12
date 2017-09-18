@@ -24,7 +24,7 @@ namespace lib12.Data.Xml
         public static XElement SetAttributeValue(this XElement element, string name, object value)
         {
             var attribute = element.Attribute(name);
-            if(attribute.IsNull())
+            if (attribute == null)
                 throw new lib12Exception($"There is no attribute named {name}");
 
             attribute.SetValue(value);
