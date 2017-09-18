@@ -1,9 +1,8 @@
 ﻿using lib12.Collections;
-using lib12.Utility;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Tests.Utility
+namespace lib12.Tests.Collections
 {
     public sealed class EmptyTests
     {
