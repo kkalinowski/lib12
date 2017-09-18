@@ -43,7 +43,7 @@ namespace lib12.Tests.Data.QueryBuilding
         public void batch_insert_test()
         {
             const string expected = "INSERT INTO product(Prop1, Prop2) VALUES('test', '21'), ('test2', '8')";
-            SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").Batch(
+            SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").ValuesBatch(
                 new[]{
                     new Values{Prop1 = "test", Prop2 = 21},
                     new Values{Prop1 = "test2", Prop2 = 8}
@@ -54,7 +54,7 @@ namespace lib12.Tests.Data.QueryBuilding
         public void batch_insert_test_using_anonymous_object()
         {
             const string expected = "INSERT INTO product(Prop1, Prop2) VALUES('test', '21'), ('test2', '8')";
-            SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").Batch(
+            SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").ValuesBatch(
                 new[]{
                     new {Prop1 = "test", Prop2 = 21},
                     new {Prop1 = "test2", Prop2 = 8}
@@ -65,21 +65,21 @@ namespace lib12.Tests.Data.QueryBuilding
         public void throw_exception_if_given_collection_for_batch_insert_is_null()
         {
             List<Values> list = null;
-            Assert.Throws<QueryBuilderException>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").Batch(list).Build());
+            Assert.Throws<QueryBuilderException>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").ValuesBatch(list).Build());
         }
 
         [Fact]
         public void throw_exception_if_given_collection_for_batch_insert_is_empty()
         {
             var list = new List<Values>();
-            Assert.Throws<QueryBuilderException>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").Batch(list).Build());
+            Assert.Throws<QueryBuilderException>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2").ValuesBatch(list).Build());
         }
 
         [Fact]
         public void throw_exception_if_accessing_not_existing_property_in_batch_insert()
         {
             var collection = new[] { new Values { Prop1 = "test", Prop2 = 21 } };
-            Assert.Throws<lib12Exception>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2", "Prop3").Batch(collection).Build());
+            Assert.Throws<lib12Exception>(() => SqlBuilder.Insert.Into("product").Columns("Prop1", "Prop2", "Prop3").ValuesBatch(collection).Build());
         }
 
         [Fact]

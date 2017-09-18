@@ -7,9 +7,9 @@ namespace lib12.Reflection
     public static class FieldInfoExtension
     {
         /// <summary>
-        /// Gets the attribute decorating given property
+        /// Gets the attribute decorating given field
         /// </summary>
-        /// <param name="propertyinfo">The property to check</param>
+        /// <param name="field">The field to check</param>
         /// <returns></returns>
         public static T GetAttribute<T>(this FieldInfo field) where T : Attribute
         {
