@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Reflection;
-using lib12.Extensions;
 
 namespace lib12.Reflection
 {

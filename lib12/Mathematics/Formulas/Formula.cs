@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Text;
 using lib12.Checking;
 using lib12.Collections;
-using lib12.Extensions;
 using lib12.Utility;
 
 namespace lib12.Mathematics.Formulas
