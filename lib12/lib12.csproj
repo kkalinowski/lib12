@@ -15,10 +15,15 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageTags>extensions helpers collections linq dummy data lorem ipsum generate fake query building sql fluent attribute datetime random string mathematics rnp reverse polish notacion onp formula performance counter time stopwatch empty logger range enum reflection utility</PackageTags>
     <PackageIconUrl>https://raw.github.com/kkalinowski/lib12/master/lib12_small.png</PackageIconUrl>
+    <Copyright>Krzysztof Kalinowski</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\lib12.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\lib12.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
