@@ -1,156 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B1ECAE76-99C3-41A1-8CCE-0C1D1FCA4099}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>lib12</RootNamespace>
-    <AssemblyName>lib12</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Krzysztof Kalinowski</Authors>
+    <Company />
+    <Description>lib12 is set of useful classes and extension created for .NET framework</Description>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/kkalinowski/lib12/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/kkalinowski/lib12</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kkalinowski/lib12</RepositoryUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageTags>extensions helpers collections linq dummy data lorem ipsum generate fake query building sql fluent attribute datetime random string mathematics rnp reverse polish notacion onp formula performance counter time stopwatch empty logger range enum reflection utility</PackageTags>
+    <PackageIconUrl>https://raw.github.com/kkalinowski/lib12/master/lib12_small.png</PackageIconUrl>
+    <Copyright>Krzysztof Kalinowski</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\lib12.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\lib12.XML</DocumentationFile>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\lib12.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Collections\DictionaryExtension.cs" />
-    <Compile Include="Collections\IEnumerableDefaultExtension.cs" />
-    <Compile Include="Collections\IListExtension.cs" />
-    <Compile Include="Collections\IEnumerableExtension.cs" />
-    <Compile Include="Collections\ITreeBranch.cs" />
-    <Compile Include="Collections\ITreeBranchExtension.cs" />
-    <Compile Include="Collections\TreeHelper.cs" />
-    <Compile Include="Data\Xml\XmlExtensions.cs" />
-    <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="FunctionalFlow\CollectionObjectCheckExtension.cs" />
-    <Compile Include="FunctionalFlow\MaybeExtension.cs" />
-    <Compile Include="Misc\CachedObject.cs" />
-    <Compile Include="Misc\Empty.cs" />
-    <Compile Include="Misc\Logger.cs" />
-    <Compile Include="Misc\PerformanceCheck.cs" />
-    <Compile Include="Misc\PropertyComparer.cs" />
-    <Compile Include="Crypto\SaltedHash.cs" />
-    <Compile Include="Data\Random\Rand.cs" />
-    <Compile Include="Data\Random\RandClass.cs">
-      <DependentUpon>Rand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\QueryBuilding\Builders\InsertBuilder.cs" />
-    <Compile Include="Data\QueryBuilding\Builders\QueryBuilderBase.cs" />
-    <Compile Include="Data\QueryBuilding\Builders\DeleteBuilder.cs" />
-    <Compile Include="Data\QueryBuilding\Builders\UpdateBuilder.cs" />
-    <Compile Include="Data\QueryBuilding\Builders\WhereBuilder.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\BaseQueryInterfaces.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\BaseQueryStructure.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Delete\DeleteStructure.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Delete\DeleteInterfaces.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\IBuild.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Insert\InsertInterfaces.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Insert\InsertStructure.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Update\UpdateInterfaces.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Update\SetField.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Update\UpdateStructure.cs" />
-    <Compile Include="DependencyInjection\CircularDependencyException.cs" />
-    <Compile Include="DependencyInjection\LazyProperty.cs" />
-    <Compile Include="Mathematics\Formula.cs" />
-    <Compile Include="Mathematics\MathException.cs" />
-    <Compile Include="Mathematics\NegationToken.cs" />
-    <Compile Include="Mathematics\NumberToken.cs" />
-    <Compile Include="Mathematics\OperatorToken.cs" />
-    <Compile Include="Mathematics\OperatorType.cs" />
-    <Compile Include="Mathematics\QuadraticEquation.cs" />
-    <Compile Include="Mathematics\QuadraticEquationResultType.cs" />
-    <Compile Include="Mathematics\Token.cs" />
-    <Compile Include="Mathematics\TokenType.cs" />
-    <Compile Include="Mathematics\VariableToken.cs" />
-    <Compile Include="Misc\Range.cs" />
-    <Compile Include="FunctionalFlow\ParamsObjectCheckExtension.cs" />
-    <Compile Include="Reflection\CreateTypeAttribute.cs" />
-    <Compile Include="Reflection\EnumReflectionExtension.cs" />
-    <Compile Include="Extensions\DateTimeExtension.cs" />
-    <Compile Include="Extensions\EventHandlerExtension.cs" />
-    <Compile Include="Mathematics\MathExt.cs" />
-    <Compile Include="Reflection\ExpressionExtension.cs" />
-    <Compile Include="Reflection\FieldInfoExtension.cs" />
-    <Compile Include="Extensions\NullableBoolExtension.cs" />
-    <Compile Include="FunctionalFlow\SimpleObjectCheckExtension.cs" />
-    <Compile Include="Reflection\PropertyInfoExtension.cs" />
-    <Compile Include="Misc\TimesLoop.cs" />
-    <Compile Include="Reflection\ReflectionObjectExtension.cs" />
-    <Compile Include="Reflection\TypeExtension.cs" />
-    <Compile Include="Misc\UnknownEnumException.cs" />
-    <Compile Include="Data\Random\FakeData.cs" />
-    <Compile Include="Data\Random\RandomIEnumerableExtension.cs" />
-    <Compile Include="Data\QueryBuilding\Builders\SelectBuilder.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Compare.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Condition.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\DBType.cs" />
-    <Compile Include="Data\QueryBuilding\Builders\SqlBuilder.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Select\SelectInterfaces.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Select\Join.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Select\JoinType.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\LogicOperator.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Select\OrderBy.cs" />
-    <Compile Include="Data\QueryBuilding\QueryBuilderException.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Select\SelectField.cs" />
-    <Compile Include="Data\QueryBuilding\Structures\Select\SelectStructure.cs" />
-    <Compile Include="DependencyInjection\AttributesHelper.cs" />
-    <Compile Include="DependencyInjection\DependencyInjectionException.cs" />
-    <Compile Include="DependencyInjection\DoNotWireUpAttribute.cs" />
-    <Compile Include="DependencyInjection\InstanceFactory.cs" />
-    <Compile Include="DependencyInjection\Instances.cs" />
-    <Compile Include="DependencyInjection\InstancesContainer.cs" />
-    <Compile Include="DependencyInjection\NotRegisteredTypeException.cs" />
-    <Compile Include="DependencyInjection\SingletonAttribute.cs" />
-    <Compile Include="DependencyInjection\TransientAttribute.cs" />
-    <Compile Include="DependencyInjection\TypeDecoration.cs" />
-    <Compile Include="DependencyInjection\TypeRegistration.cs" />
-    <Compile Include="DependencyInjection\WireUpAllPropertiesAttribute.cs" />
-    <Compile Include="DependencyInjection\WireUpAttribute.cs" />
-    <Compile Include="lib12Exception.cs" />
-    <Compile Include="Misc\IoHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\SerializationHelper.cs" />
-    <Compile Include="Serialization\SerializationStartedEventArgs.cs" />
-    <Compile Include="Serialization\Serializer.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

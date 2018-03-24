@@ -1,6 +1,9 @@
 ﻿
 namespace lib12.Data.QueryBuilding.Structures
 {
+    /// <summary>
+    /// Types of comparison
+    /// </summary>
     public enum Compare
     {
         Equals,

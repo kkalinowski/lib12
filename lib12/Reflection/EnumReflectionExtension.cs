@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace lib12.Reflection
 {
@@ -14,7 +15,7 @@ namespace lib12.Reflection
         public static T CreateType<T>(this Enum enumValue)
         {
             var type = enumValue.GetType();
-            var fieldInfo = type.GetField(enumValue.ToString());
+            var fieldInfo = type.GetTypeInfo().GetDeclaredField(enumValue.ToString());
             var typeToCreate = fieldInfo.GetAttribute<CreateTypeAttribute>();
             if (typeToCreate == null)
                 throw new lib12Exception("Given enum isn't decorated by CreateTypeAttribute");

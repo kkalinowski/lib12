@@ -4,7 +4,6 @@ using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures;
 using lib12.Data.QueryBuilding.Structures.Insert;
 using lib12.Extensions;
-using lib12.FunctionalFlow;
 using lib12.Reflection;
 
 namespace lib12.Data.QueryBuilding.Builders
@@ -38,12 +37,10 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
-        public IBuild Batch(IEnumerable<object> values)
+        public IBuild ValuesBatch(IEnumerable<object> values)
         {
-            if (values.Null())
-                throw new QueryBuilderException("Collection of values to batch insert cannot be null");
-            if (values.IsEmpty())
-                throw new QueryBuilderException("Collection of values to batch insert cannot be empty");
+            if (values.IsNullOrEmpty())
+                throw new QueryBuilderException("Collection of values to batch insert cannot be null or empty");
 
             Structure.BatchValues = values;
             return this;
@@ -52,9 +49,9 @@ namespace lib12.Data.QueryBuilding.Builders
         public override string BuildQuery()
         {
             if (Structure.Select.IsNotNullAndNotEmpty() && Structure.Columns.IsNullOrEmpty())
-                return "INSERT INTO {0} {1}".FormatWith(Structure.Table, Structure.Select);
+                return $"INSERT INTO {Structure.Table} {Structure.Select}";
             else if (Structure.Select.IsNotNullAndNotEmpty())
-                return "INSERT INTO {0}({1}) {2}".FormatWith(Structure.Table, BuildColumns(), Structure.Select);
+                return $"INSERT INTO {Structure.Table}({BuildColumns()}) {Structure.Select}";
 
             if (!Structure.IsBatchInsert && Structure.Columns.Length != Structure.Values.Length)
                 throw new QueryBuilderException("Columns count differs from values count");

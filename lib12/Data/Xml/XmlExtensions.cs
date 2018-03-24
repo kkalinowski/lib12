@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using lib12.FunctionalFlow;
 
 namespace lib12.Data.Xml
 {
@@ -24,7 +23,8 @@ namespace lib12.Data.Xml
         public static XElement SetAttributeValue(this XElement element, string name, object value)
         {
             var attribute = element.Attribute(name);
-            attribute.ThrowExceptionIfNull();
+            if (attribute == null)
+                throw new lib12Exception($"There is no attribute named {name}");
 
             attribute.SetValue(value);
             return element;

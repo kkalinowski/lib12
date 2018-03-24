@@ -10,10 +10,9 @@ namespace lib12.Collections
         /// <param name="dict">Dictionary</param>
         /// <param name="key">The key</param>
         /// <returns></returns>
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
+        public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
         {
-            TValue result;
-            return dict.TryGetValue(key, out result) ? result : default(TValue);
+            return dict.TryGetValue(key, out TValue result) ? result : default(TValue);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures;
@@ -57,7 +56,7 @@ namespace lib12.Data.QueryBuilding.Builders
                 BuildFields(sbuilder);
 
             //from
-            if (!Structure.MainTable.Contains(' '))
+            if (!Structure.MainTable.Contains(" "))
                 sbuilder.AppendFormat("FROM {0}", Structure.MainTable);
             else
                 sbuilder.AppendFormat("FROM \"{0}\"", Structure.MainTable);

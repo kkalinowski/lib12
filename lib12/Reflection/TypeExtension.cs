@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-using lib12.Collections;
+using System.Reflection;
+using lib12.Extensions;
 
 namespace lib12.Reflection
 {
@@ -13,7 +14,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static bool IsTypeNumericOrNullableNumeric(this Type type)
         {
-            return type.IsTypeNumeric() || (type.IsNullable() && Nullable.GetUnderlyingType(type).IsTypeNumeric());
+            return type.IsTypeNumeric() || type.IsNullable() && Nullable.GetUnderlyingType(type).IsTypeNumeric();
         }
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static bool IsTypeNumeric(this Type type)
         {
-            return type.IsPrimitive || Type.GetTypeCode(type) == TypeCode.Decimal;
+            return type.GetTypeInfo().IsPrimitive || type.FullName == "System.Decimal";
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static bool IsNullable(this Type type)
         {
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static T GetAttribute<T>(this Type type) where T : Attribute
         {
-            var attribute = type.GetCustomAttributes(typeof(T), false).SingleOrDefault();
+            var attribute = type.GetTypeInfo().GetCustomAttributes(typeof(T), false).SingleOrDefault();
             return attribute != null ? (T)attribute : default(T);
         }
 
@@ -54,28 +55,37 @@ namespace lib12.Reflection
         /// <returns></returns>
         public static object GetDefault(this Type type)
         {
-            if (type.IsValueType)
+            if (type.GetTypeInfo().IsValueType)
                 return Activator.CreateInstance(type);
             else
                 return null;
         }
 
         /// <summary>
-        /// Gets the default, parameterless constructor of given type or null if this not exist
+        /// Gets the default, parameterless constructor of given type or null if this not exists
         /// </summary>
         /// <param name="type">The type to operate</param>
         /// <returns></returns>
         public static object GetDefaultConstructor(this Type type)
         {
-            return type.GetConstructor(Type.EmptyTypes);
+            return type.GetTypeInfo().GetConstructor(Type.EmptyTypes);
         }
 
+        /// <summary>
+        /// Gets the property value
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get value from</param>
+        /// <param name="propertyName">Name of the property to get value from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Provided property name cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
         public static object GetPropertyValue(this Type type, object source, string propertyName)
         {
             if (propertyName.IsNullOrEmpty())
                 throw new ArgumentException("Provided property name cannot be null or empty", propertyName);
 
-            var prop = type.GetProperty(propertyName);
+            var prop = type.GetTypeInfo().GetDeclaredProperty(propertyName);
             if (prop == null)
                 throw new lib12Exception(string.Format("Type {0} don't have property named {1}", type.Name, propertyName));
 

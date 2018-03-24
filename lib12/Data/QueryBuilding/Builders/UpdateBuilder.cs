@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using lib12.Collections;
 using lib12.Data.QueryBuilding.Structures.Update;
+using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {

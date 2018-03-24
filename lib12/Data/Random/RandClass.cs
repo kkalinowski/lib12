@@ -1,64 +1,113 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using lib12.Collections;
 using lib12.Extensions;
 using lib12.Reflection;
+using ConstrainCollection = System.Collections.Generic.Dictionary<string, lib12.Data.Random.RandDataConstrain>;
 
 namespace lib12.Data.Random
 {
     public static partial class Rand
     {
-        public static T Next<T>() where T : class
-        {
-            var item = Activator.CreateInstance<T>();
-            SetProperties(typeof(T), item);
-            return item;
-        }
-
-        public static T[] NextArrayOf<T>(int count) where T : class
-        {
-            return Enumerable
-                .Range(0, count)
-                .Select(x => Next<T>())
-                .ToArray();
-        }
-
-        public static object Next(Type type)
+        /// <summary>
+        /// Returns a random object of given type
+        /// </summary>
+        /// <param name="type">The type to generate</param>
+        /// <param name="constrains">The constrains for generating properties</param>
+        /// <returns></returns>
+        public static object Next(Type type, ConstrainCollection constrains = null)
         {
             var item = Activator.CreateInstance(type);
-            SetProperties(type, item);
+            SetProperties(type, item, constrains ?? new ConstrainCollection());
             return item;
         }
 
-        private static void SetProperties(Type type, object item)
+        /// <summary>
+        /// Returns a random object of given type
+        /// </summary>
+        /// <typeparam name="T">The type to generate</typeparam>
+        /// <param name="constrains">The constrains for generating properties</param>
+        /// <returns></returns>
+        public static T Next<T>(ConstrainCollection constrains = null) where T : class
         {
-            var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            var item = Activator.CreateInstance<T>();
+            SetProperties(typeof(T), item, constrains ?? new ConstrainCollection());
+            return item;
+        }
+
+        /// <summary>
+        /// Returns an array of random objects of given type
+        /// </summary>
+        /// <typeparam name="T">The type to generate</typeparam>
+        /// <param name="count">The count of objects to generate</param>
+        /// <param name="constrains">The constrains for generating properties</param>
+        /// <returns></returns>
+        public static T[] NextArrayOf<T>(int count, ConstrainCollection constrains = null) where T : class
+        {
+            return CollectionFactory
+                .CreateArray(count, i => Next<T>(constrains));
+        }
+
+        private static void SetProperties(Type type, object item, ConstrainCollection constrains)
+        {
+            var props = type.GetTypeInfo().DeclaredProperties;
             foreach (var prop in props)
             {
-                var setMethod = prop.GetSetMethod();
+                var setMethod = prop.SetMethod;
                 if (setMethod == null || setMethod.IsPrivate)
                     continue;
 
-                var value = GenerateValue(prop.PropertyType, prop.Name);
+                var propertyConstrain = constrains.GetValueOrDefault(prop.Name);
+                var value = GeneratePropertyValue(prop.PropertyType, prop.Name, propertyConstrain);
                 item.SetProperty(prop.Name, value);
             }
         }
 
-        private static object GenerateValue(Type propertyType, string propertyName)
+        private static object GeneratePropertyValue(Type type, string name, RandDataConstrain constrain)
         {
-            if (propertyType.IsEnum)
+            object value;
+            if (constrain is ValueSetConstrain valueSetConstrain)
+                value = GenerateRandValueFromSetConstrain(valueSetConstrain);
+            else if (constrain is IntConstrain intConstrain)
+                value = GenerateRandValueFromIntConstrain(intConstrain);
+            else if (constrain is DoubleConstrain doubleConstrain)
+                value = GenerateRandValueFromDoubleConstrain(doubleConstrain);
+            else
+                value = GenerateRandValueWithoutConstrain(type, name);
+            return value;
+        }
+
+        private static object GenerateRandValueFromSetConstrain(ValueSetConstrain valuesConstrain)
+        {
+            return valuesConstrain.AvailableValues
+                .Cast<object>()
+                .GetRandomItem();
+        }
+
+        private static object GenerateRandValueFromIntConstrain(IntConstrain intConstrain)
+        {
+            return NextInt(intConstrain.MinValue, intConstrain.MaxValue);
+        }
+
+        private static object GenerateRandValueFromDoubleConstrain(DoubleConstrain doubleConstrain)
+        {
+            return NextDouble(doubleConstrain.MinValue, doubleConstrain.MaxValue);
+        }
+
+        private static object GenerateRandValueWithoutConstrain(Type propertyType, string propertyName)
+        {
+            if (propertyType.GetTypeInfo().IsEnum)
                 return NextEnum(propertyType);
-            else if (propertyType == typeof (string))
+            else if (propertyType == typeof(string))
                 return GenerateStringProperty(propertyName);
-            else if (propertyType == typeof (int))
+            else if (propertyType == typeof(int))
                 return NextInt(1, 1000);
-            else if (propertyType == typeof (double))
+            else if (propertyType == typeof(double))
                 return NextDouble(-1000, 1000);
-            else if (propertyType == typeof (DateTime))
+            else if (propertyType == typeof(DateTime))
                 return NextDateTime(DateTime.Now.AddYears(-10), DateTime.Now);
-            else if (propertyType.IsClass)
+            else if (propertyType.GetTypeInfo().IsClass)
                 return Next(propertyType);
             else
                 return propertyType.GetDefault();
