@@ -38,6 +38,18 @@ namespace lib12.Reflection
         }
 
         /// <summary>
+        /// Determines whether the specified type is static
+        /// </summary>
+        /// <param name="type">The type to check</param>
+        /// <returns></returns>
+        public static bool IsStatic(this Type type)
+        {
+            //according to https://stackoverflow.com/questions/1175888/determine-if-a-type-is-static
+            var typeInfo = type.GetTypeInfo();
+            return typeInfo.IsAbstract && typeInfo.IsSealed;
+        }
+
+        /// <summary>
         /// Gets the attribute decorating given type
         /// </summary>
         /// <param name="type">The type to check</param>
