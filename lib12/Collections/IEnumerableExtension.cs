@@ -11,9 +11,13 @@ namespace lib12.Collections
         /// Determines whether the specified enumerable is empty.
         /// </summary>
         /// <param name="source">The source to check</param>
+        /// <exception cref="ArgumentNullException">If source is null</exception>
         /// <returns>True if enumerable is empty</returns>
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
+            if(source == null)
+                throw new ArgumentNullException(nameof(source));
+
             return !source.Any();
         }
 
@@ -31,9 +35,13 @@ namespace lib12.Collections
         /// Determines whether enumerable is not empty
         /// </summary>
         /// <param name="source">The source to check</param>
+        /// <exception cref="ArgumentNullException">If source is null</exception>
         /// <returns>True if enumerable is not empty</returns>
         public static bool IsNotEmpty<TSource>(this IEnumerable<TSource> source)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
             return source.Any();
         }
 
