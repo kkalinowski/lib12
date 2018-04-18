@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using lib12.Extensions;
 using Shouldly;
 using Xunit;
@@ -156,7 +157,23 @@ namespace lib12.Tests.Extensions
         [InlineData("It will be long and harsh winter! Better be prepared!", "be", 2)]
         public void get_number_of_occurences_theory(string source, string text, int expectedResult)
         {
-            
+            source.GetNumberOfOccurrences(text).ShouldBe(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData("", null)]
+        [InlineData(null, "")]
+        [InlineData("", "")]
+        [InlineData("", "")]
+        [InlineData("test", "t", 0, 3)]
+        [InlineData("test", "ch")]
+        [InlineData("_be be", "be", 1, 4)]
+        public void get_all_occurences_theory(string source, string text, params int[] expectedResult)
+        {
+            var result = source.GetAllOccurrences(text);
+            var arr = result.ToArray();
+            result.ShouldBe(expectedResult);
         }
     }
 }

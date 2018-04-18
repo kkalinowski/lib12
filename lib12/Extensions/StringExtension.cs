@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -107,7 +108,7 @@ namespace lib12.Extensions
         }
 
         /// <summary>
-        /// Get numbers the of occurrences of given string in source
+        /// Get number of the occurrences of given string in source
         /// </summary>
         /// <param name="source">The source string</param>
         /// <param name="text">The text to search for</param>
@@ -127,6 +128,26 @@ namespace lib12.Extensions
             }
 
             return count;
+        }
+
+        /// <summary>
+        /// Get all  occurrences of given string in source
+        /// </summary>
+        /// <param name="source">The source string</param>
+        /// <param name="text">The text to search for</param>
+        /// <param name="stringComparison">The string comparison method</param>
+        /// <returns></returns>
+        public static IEnumerable<int> GetAllOccurrences(this string source, string text, StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty() || text.IsNullOrEmpty())
+                yield break;
+
+            var position = 0;
+            while ((position = source.IndexOf(text, position, stringComparison)) != -1)
+            {
+                yield return position;
+                position += text.Length;
+            }
         }
     }
 }
