@@ -144,5 +144,19 @@ namespace lib12.Tests.Extensions
 
             withDiacritics.RemoveDiacritics().ShouldBe(withoutDiacritics);
         }
+
+        [Theory]
+        [InlineData(null, null, 0)]
+        [InlineData("", null, 0)]
+        [InlineData(null, "", 0)]
+        [InlineData("", "", 0)]
+        [InlineData("", "", 0)]
+        [InlineData("test", "t", 2)]
+        [InlineData("test", "ch", 0)]
+        [InlineData("It will be long and harsh winter! Better be prepared!", "be", 2)]
+        public void get_number_of_occurences_theory(string source, string text, int expectedResult)
+        {
+            
+        }
     }
 }
