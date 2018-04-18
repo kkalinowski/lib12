@@ -14,7 +14,7 @@ namespace lib12.Checking
         /// <returns></returns>
         public static bool Is<TSource>(this TSource source, TSource value)
         {
-            return source.Equals(value);
+            return Equals(source, value);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace lib12.Checking
         /// <returns></returns>
         public static bool Is<TSource>(this TSource source, params TSource[] values)
         {
-            return values.Any(x => source.Equals(x));
+            return values.Any(x => Equals(source, x));
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace lib12.Checking
         /// <returns></returns>
         public static bool IsNot<TSource>(this TSource source, TSource value)
         {
-            return !source.Equals(value);
+            return !Equals(source, value);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace lib12.Checking
         /// <returns></returns>
         public static bool IsNot<TSource>(this TSource source, params TSource[] values)
         {
-            return values.All(x => !source.Equals(x));
+            return values.All(x => !Equals(source, x));
         }
 
         /// <summary>

@@ -86,6 +86,30 @@ namespace lib12.Tests.Checking
         }
 
         [Fact]
+        public void is_string_test()
+        {
+            "test".Is("test").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void is_handles_null_as_target_to_compare_test()
+        {
+            "test".Is((string)null).ShouldBeFalse();
+        }
+
+        [Fact]
+        public void is_handles_null_as_source_test()
+        {
+            ((string)null).Is("test").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void is_returns_true_if_both_source_and_target_are_null_test()
+        {
+            ((string)null).Is((string)null).ShouldBeTrue();
+        }
+
+        [Fact]
         public void in_test()
         {
             var array = new[] { 3, 4, 12 };
