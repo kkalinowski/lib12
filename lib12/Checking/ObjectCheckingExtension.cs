@@ -60,6 +60,9 @@ namespace lib12.Checking
         /// <returns></returns>
         public static bool In<TSource>(this TSource source, IEnumerable<TSource> collection)
         {
+            if (collection == null)
+                return false;
+
             return collection.Contains(source);
         }
 
@@ -70,6 +73,9 @@ namespace lib12.Checking
         /// <returns></returns>
         public static bool NotIn<TSource>(this TSource source, IEnumerable<TSource> collection)
         {
+            if (collection == null)
+                return true;
+
             return !collection.Contains(source);
         }
     }
