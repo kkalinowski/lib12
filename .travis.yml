@@ -1,8 +1,7 @@
 language: csharp
-solution: lib12.sln
-install:
-  - nuget restore lib12.sln
-  
+mono: none
+dotnet: 2.0.0
+dist: trusty
 script:
-  - xbuild /p:Configuration=Release lib12.sln
-  
+ - cd lib12.Tests
+ - dotnet test
