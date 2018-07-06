@@ -1,9 +1,8 @@
 language: csharp
 solution: lib12.sln
-mono: none
-dotnet: 2.0.0
-solution: lib12
+install:
+  - nuget restore lib12.sln
+  
 script:
-  - cd lib12
-  - dotnet restore
-  - dotnet build -c Release
+  - xbuild /p:Configuration=Release lib12.sln
+  
