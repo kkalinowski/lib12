@@ -12,3 +12,4 @@ deploy:
   script: dotnet nuget push lib12/bin/Release/lib12.*.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY
   on:
     branch: master
+    tags: true
