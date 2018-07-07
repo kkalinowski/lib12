@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -104,6 +105,49 @@ namespace lib12.Extensions
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
+        /// <summary>
+        /// Get number of the occurrences of given string in source
+        /// </summary>
+        /// <param name="source">The source string</param>
+        /// <param name="text">The text to search for</param>
+        /// <param name="stringComparison">The string comparison method</param>
+        /// <returns></returns>
+        public static int GetNumberOfOccurrences(this string source, string text, StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty() || text.IsNullOrEmpty())
+                return 0;
+
+            var count = 0;
+            var position = 0;
+            while ((position = source.IndexOf(text, position, stringComparison)) != -1)
+            {
+                position += text.Length;
+                count += 1;
+            }
+
+            return count;
+        }
+
+        /// <summary>
+        /// Get all  occurrences of given string in source
+        /// </summary>
+        /// <param name="source">The source string</param>
+        /// <param name="text">The text to search for</param>
+        /// <param name="stringComparison">The string comparison method</param>
+        /// <returns></returns>
+        public static IEnumerable<int> GetAllOccurrences(this string source, string text, StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty() || text.IsNullOrEmpty())
+                yield break;
+
+            var position = 0;
+            while ((position = source.IndexOf(text, position, stringComparison)) != -1)
+            {
+                yield return position;
+                position += text.Length;
+            }
         }
     }
 }
