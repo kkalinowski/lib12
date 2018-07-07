@@ -6,7 +6,7 @@ script:
  - dotnet build -c Release
  - dotnet test
  - dotnet pack -c Release
- deploy:
+deploy:
   skip_cleanup: true
   provider: script
   script: dotnet nuget push lib12/bin/Release/lib12.*.nupkg --api-key $NUGET_API_KEY
