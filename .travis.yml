@@ -4,9 +4,7 @@ dotnet: 2.0.0
 dist: trusty
 script:
  - dotnet build -c Release
- - cd .\lib12.Tests\
- - dotnet test
- - cd ..
+ - dotnet test lib12.Tests
  - dotnet pack -c Release
 deploy:
   skip_cleanup: true
