@@ -3,5 +3,12 @@ mono: none
 dotnet: 2.0.0
 dist: trusty
 script:
- - cd lib12.Tests
+ - dotnet build -c Release
  - dotnet test
+ - dotnet pack -c Release
+ deploy:
+  skip_cleanup: true
+  provider: script
+  script: dotnet nuget push lib12/bin/Release/lib12.*.nupkg --api-key $NUGET_API_KEY
+  on:
+    branch: master
