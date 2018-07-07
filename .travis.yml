@@ -9,6 +9,6 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: dotnet nuget push lib12/bin/Release/lib12.*.nupkg --api-key $NUGET_API_KEY
+  script: dotnet nuget push lib12/bin/Release/lib12.*.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY
   on:
     branch: master
