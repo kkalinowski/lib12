@@ -1,5 +1,8 @@
 ﻿namespace lib12.Data.QueryBuilding.Structures
 {
+    /// <summary>
+    /// IWherePossible
+    /// </summary>
     public interface IWherePossible
     {
         /// <summary>

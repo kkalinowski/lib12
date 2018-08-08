@@ -8,20 +8,43 @@ using lib12.Reflection;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
+    /// <summary>
+    /// InsertBuilder
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Builders.QueryBuilderBase{lib12.Data.QueryBuilding.Structures.Insert.InsertStructure}" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Insert.IInsert" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Insert.IColumns" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Insert.IValues" />
     public class InsertBuilder : QueryBuilderBase<InsertStructure>, IInsert, IColumns, IValues
     {
+        /// <summary>
+        /// Adds INTO statement to INSERT
+        /// </summary>
+        /// <param name="table">The table to insert into</param>
+        /// <returns></returns>
         public IColumns Into(string table)
         {
             Structure.Table = table;
             return this;
         }
 
+        /// <summary>
+        /// Adds the set of columns to insert into
+        /// </summary>
+        /// <param name="columns">The columns to insert</param>
+        /// <returns></returns>
         public IValues Columns(params string[] columns)
         {
             Structure.Columns = columns;
             return this;
         }
 
+        /// <summary>
+        /// Adds the sub SELECT statement to INSERT
+        /// </summary>
+        /// <param name="select">The sub select statement</param>
+        /// <returns></returns>
+        /// <exception cref="QueryBuilderException">Select statement cannot be null or empty</exception>
         public IBuild Select(string select)
         {
             if (select.IsNullOrEmpty())
@@ -31,12 +54,23 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        /// <summary>
+        /// Adds the VALUES statement to INSERT
+        /// </summary>
+        /// <param name="values">The set of values for INSERT</param>
+        /// <returns></returns>
         public IBuild Values(params object[] values)
         {
             Structure.Values = values;
             return this;
         }
 
+        /// <summary>
+        /// Adds several batches of VALUES statements to INSERT
+        /// </summary>
+        /// <param name="values">The values to add</param>
+        /// <returns></returns>
+        /// <exception cref="QueryBuilderException">Collection of values to batch insert cannot be null or empty</exception>
         public IBuild ValuesBatch(IEnumerable<object> values)
         {
             if (values.IsNullOrEmpty())
@@ -46,6 +80,11 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        /// <summary>
+        /// Builds the query.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="QueryBuilderException">Columns count differs from values count</exception>
         public override string BuildQuery()
         {
             if (Structure.Select.IsNotNullAndNotEmpty() && Structure.Columns.IsNullOrEmpty())

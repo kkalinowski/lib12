@@ -4,6 +4,14 @@ using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
+    /// <summary>
+    /// QueryBuilderBase
+    /// </summary>
+    /// <typeparam name="TStructure">The type of the structure.</typeparam>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IOpenBracket" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.ICloseBracket" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IWhere" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IConcat" />
     public abstract class QueryBuilderBase<TStructure> : IOpenBracket, ICloseBracket, IWhere, IConcat
         where TStructure : BaseQueryStructure, new()
     {

@@ -8,8 +8,16 @@ using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
+    /// <summary>
+    /// WhereBuilder
+    /// </summary>
     public class WhereBuilder
     {
+        /// <summary>
+        /// Builds the specified sbuilder.
+        /// </summary>
+        /// <param name="sbuilder">The sbuilder.</param>
+        /// <param name="condition">The condition.</param>
         public void Build(StringBuilder sbuilder, Condition condition)
         {
             sbuilder.Append(" WHERE ");

@@ -2,6 +2,9 @@
 
 namespace lib12.Collections.Packing
 {
+    /// <summary>
+    /// ObjectPackingExtension
+    /// </summary>
     public static class ObjectPackingExtension
     {
         /// <summary>

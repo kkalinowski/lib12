@@ -3,6 +3,9 @@ using lib12.Collections;
 
 namespace lib12.Data.QueryBuilding.Structures
 {
+    /// <summary>
+    /// Condition
+    /// </summary>
     public class Condition
     {
         #region Props
@@ -30,12 +33,21 @@ namespace lib12.Data.QueryBuilding.Structures
         }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Condition"/> class.
+        /// </summary>
         public Condition()
         {
             Children = new List<Condition>(2);
             Concat = LogicOperator.And;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Condition"/> class.
+        /// </summary>
+        /// <param name="field">The field.</param>
+        /// <param name="comparison">The comparison.</param>
+        /// <param name="argument">The argument.</param>
         public Condition(string field, Compare comparison, object argument)
         {
             Children = new List<Condition>(0);
@@ -45,6 +57,10 @@ namespace lib12.Data.QueryBuilding.Structures
             Argument = argument;
         }
 
+        /// <summary>
+        /// Adds the child.
+        /// </summary>
+        /// <param name="cnd">The CND.</param>
         public void AddChild(Condition cnd)
         {
             Children.Add(cnd);

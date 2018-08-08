@@ -6,14 +6,31 @@ using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
+    /// <summary>
+    /// UpdateBuilder
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Builders.QueryBuilderBase{lib12.Data.QueryBuilding.Structures.Update.UpdateQueryStructure}" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdate" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdateSet" />
     public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdate, IUpdateSet
     {
+        /// <summary>
+        /// Adds the TABLE statement to UPDATE
+        /// </summary>
+        /// <param name="table">The table name from DB for statement</param>
+        /// <returns></returns>
         public IUpdateSet Table(string table)
         {
             Structure.Table = table;
             return this;
         }
 
+        /// <summary>
+        /// Adds the SET statement for UPDATe
+        /// </summary>
+        /// <param name="field">The field name to set</param>
+        /// <param name="value">The value to set</param>
+        /// <returns></returns>
         public IUpdateSet Set(string field, object value)
         {
             Structure.SetFields.Add(new SetField(field, value));

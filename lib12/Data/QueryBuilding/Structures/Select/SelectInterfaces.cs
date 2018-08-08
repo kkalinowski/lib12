@@ -2,6 +2,9 @@
 
 namespace lib12.Data.QueryBuilding.Structures.Select
 {
+    /// <summary>
+    /// ISelect
+    /// </summary>
     public interface ISelect
     {
         /// <summary>

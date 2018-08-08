@@ -1,5 +1,8 @@
 ﻿namespace lib12.Data.QueryBuilding.Structures
 {
+    /// <summary>
+    /// BaseQueryStructure
+    /// </summary>
     public abstract class BaseQueryStructure
     {
         /// <summary>
@@ -18,6 +21,9 @@
         /// </value>
         public Condition MainCondition { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseQueryStructure"/> class.
+        /// </summary>
         protected BaseQueryStructure()
         {
             MainCondition = new Condition();

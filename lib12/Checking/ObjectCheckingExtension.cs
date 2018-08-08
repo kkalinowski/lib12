@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace lib12.Checking
 {
+    /// <summary>
+    /// ObjectCheckingExtension
+    /// </summary>
     public static class ObjectCheckingExtension
     {
         /// <summary>

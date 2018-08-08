@@ -2,6 +2,9 @@
 
 namespace lib12.Collections
 {
+    /// <summary>
+    /// DictionaryExtension
+    /// </summary>
     public static class DictionaryExtension
     {
         /// <summary>

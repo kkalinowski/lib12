@@ -5,6 +5,9 @@ using System.Text;
 
 namespace lib12.Collections
 {
+    /// <summary>
+    /// IEnumerableExtension
+    /// </summary>
     public static class IEnumerableExtension
     {
         /// <summary>

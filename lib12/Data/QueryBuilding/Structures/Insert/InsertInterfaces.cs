@@ -2,6 +2,9 @@
 
 namespace lib12.Data.QueryBuilding.Structures.Insert
 {
+    /// <summary>
+    /// IInsert
+    /// </summary>
     public interface IInsert
     {
         /// <summary>
@@ -12,6 +15,9 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
         IColumns Into(string table);
     }
 
+    /// <summary>
+    /// IColumns
+    /// </summary>
     public interface IColumns
     {
         /// <summary>
@@ -30,6 +36,9 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
         IBuild Select(string select);
     }
 
+    /// <summary>
+    /// IValues
+    /// </summary>
     public interface IValues
     {
         /// <summary>
