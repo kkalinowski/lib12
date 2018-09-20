@@ -36,5 +36,29 @@ namespace lib12.Mathematics
         {
             return b != 0 ? a / b : 0;
         }
+
+        /// <summary>
+        /// Determines whether the specified number is even.
+        /// </summary>
+        /// <param name="number">The number to check</param>
+        /// <returns>
+        ///   <c>true</c> if the specified number is even; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsEven(int number)
+        {
+            return number % 2 == 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified number is odd.
+        /// </summary>
+        /// <param name="number">The number to check</param>
+        /// <returns>
+        ///   <c>true</c> if the specified number is odd; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsOdd(int number)
+        {
+            return !IsEven(number);
+        }
     }
 }
