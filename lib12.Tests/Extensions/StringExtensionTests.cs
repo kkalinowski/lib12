@@ -120,8 +120,7 @@ namespace lib12.Tests.Extensions
         [InlineData("sample Text", "text", true)]
         public void contains_ignore_case_theory(string source, string toCheck, bool expectedResult)
         {
-            const string text = "text5";
-            text.Truncate(2).ShouldBe("te");
+            source.ContainsIgnoreCase(toCheck).ShouldBe(expectedResult);
         }
 
         [Fact]

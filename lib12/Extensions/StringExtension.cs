@@ -84,7 +84,10 @@ namespace lib12.Extensions
         /// <returns></returns>
         public static bool ContainsIgnoreCase(this string text, string toCheck)
         {
-            return text.Recover().IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
+            if (text == null || toCheck == null)
+                return false;
+
+            return text.IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>
