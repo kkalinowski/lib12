@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace lib12.Extensions
@@ -148,6 +149,19 @@ namespace lib12.Extensions
                 yield return position;
                 position += text.Length;
             }
+        }
+
+        /// <summary>
+        /// Capitalizes the strings, specificly the first letter of it.
+        /// </summary>
+        /// <param name="source">The source string to capitalize</param>
+        /// <returns></returns>
+        public static string Capitalize(this string source)
+        {
+            if (source.IsNullOrEmpty())
+                return source;
+
+            return source.First().ToString().ToUpper() + source.Substring(1);
         }
     }
 }

@@ -173,5 +173,16 @@ namespace lib12.Tests.Extensions
             var arr = result.ToArray();
             result.ShouldBe(expectedResult);
         }
+
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData("", "")]
+        [InlineData("sample text", "Sample text")]
+        [InlineData("sample Text", "Sample Text")]
+        [InlineData("Sample Text", "Sample Text")]
+        public void capitalize_is_correct(string text, string expectedResult)
+        {
+            text.Capitalize().ShouldBe(expectedResult);
+        }
     }
 }
