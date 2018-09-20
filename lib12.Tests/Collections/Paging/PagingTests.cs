@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using lib12.Collections;
+using lib12.Collections.Packing;
 using lib12.Collections.Paging;
 using lib12.Data.Random;
 using Shouldly;
@@ -64,13 +65,13 @@ namespace lib12.Tests.Collections.Paging
             const int pageNumber = 1;
             const int itemsPerPage = 2;
 
-            var collection = new[] { 23, 4, 5, 6, 98 };
+            var collection = Pack.IntoEnumerable(23, 4, 5, 6, 98);
             var result = collection.GetPage(pageNumber, itemsPerPage);
 
             result.ItemsPerPage.ShouldBe(itemsPerPage);
             result.PageNumber.ShouldBe(pageNumber);
             result.TotalPages.ShouldBe(3);
-            result.Items.ShouldBe(new []{ 23, 4 });
+            result.Items.ShouldBe(new[] { 23, 4 });
         }
 
         [Fact]
@@ -79,7 +80,7 @@ namespace lib12.Tests.Collections.Paging
             const int pageNumber = 2;
             const int itemsPerPage = 2;
 
-            var collection = new[] { 23, 4, 5, 98 };
+            var collection = Pack.IntoEnumerable(23, 4, 5, 98);
             var result = collection.GetPage(pageNumber, itemsPerPage);
 
             result.ItemsPerPage.ShouldBe(itemsPerPage);
@@ -94,7 +95,7 @@ namespace lib12.Tests.Collections.Paging
             const int pageNumber = 3;
             const int itemsPerPage = 2;
 
-            var collection = new[] { 23, 4, 5, 6, 98 };
+            var collection = Pack.IntoEnumerable(23, 4, 5, 6, 98);
             var result = collection.GetPage(pageNumber, itemsPerPage);
 
             result.ItemsPerPage.ShouldBe(itemsPerPage);
@@ -109,7 +110,7 @@ namespace lib12.Tests.Collections.Paging
             const int pageNumber = 2;
             const int itemsPerPage = 2;
 
-            var collection = new[] { 23, 4, 5, 6, 98 };
+            var collection = Pack.IntoEnumerable(23, 4, 5, 6, 98);
             var result = collection.GetPage(pageNumber, itemsPerPage);
 
             result.ItemsPerPage.ShouldBe(itemsPerPage);
