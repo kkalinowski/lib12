@@ -10,29 +10,112 @@ namespace lib12.Tests.Collections.Paging
     public class PagingTests
     {
         [Fact]
-        public void get_number_of_pages_returns_zero_for_null()
+        public void get_page_returns_correct_values_for_null_collection()
         {
-            ((IEnumerable<int>)null).GetNumberOfPages(10).ShouldBe(0);
+            const int pageNumber = 1;
+            const int itemsPerPage = 10;
+
+            var result = ((IEnumerable<int>)null).GetPage(pageNumber, itemsPerPage);
+
+            result.ItemsPerPage.ShouldBe(itemsPerPage);
+            result.PageNumber.ShouldBe(pageNumber);
+            result.TotalPages.ShouldBe(0);
+            result.Items.ShouldBeEmpty();
         }
 
         [Fact]
-        public void get_number_of_pages_returns_zero_for_empty_collection()
+        public void get_page_returns_correct_values_for_empty_collection()
         {
-            Empty.Enumerable<int>().GetNumberOfPages(10).ShouldBe(0);
+            const int pageNumber = 1;
+            const int itemsPerPage = 10;
+
+            var result = Empty.Enumerable<int>().GetPage(pageNumber, itemsPerPage);
+
+            result.ItemsPerPage.ShouldBe(itemsPerPage);
+            result.PageNumber.ShouldBe(pageNumber);
+            result.TotalPages.ShouldBe(0);
+            result.Items.ShouldBeEmpty();
         }
 
         [Fact]
-        public void get_number_of_pages_throws_exception_if_number_of_items_per_page_is_less_than_one()
+        public void get_page_throws_exception_if_number_of_items_per_page_is_less_than_one()
         {
             var collection = CollectionFactory.CreateArray(10, x => Rand.NextInt());
-            Assert.Throws<lib12Exception>(() => collection.GetNumberOfPages(0));
+            Assert.Throws<lib12Exception>(() => collection.GetPage(1, 0));
         }
 
         [Fact]
-        public void get_number_of_pages_happy_path()
+        public void get_page_throws_exception_if_number_of_page_is_less_than_one()
         {
             var collection = CollectionFactory.CreateArray(10, x => Rand.NextInt());
-            collection.GetNumberOfPages(4).ShouldBe(3);
+            Assert.Throws<lib12Exception>(() => collection.GetPage(0, 5));
+        }
+
+        [Fact]
+        public void get_page_throws_exception_when_asking_for_page_higher_than_page_count()
+        {
+            var collection = CollectionFactory.CreateArray(10, x => Rand.NextInt());
+            Assert.Throws<lib12Exception>(() => collection.GetPage(3, 5));
+        }
+
+        [Fact]
+        public void get_page_returns_correct_first_page()
+        {
+            const int pageNumber = 1;
+            const int itemsPerPage = 2;
+
+            var collection = new[] { 23, 4, 5, 6, 98 };
+            var result = collection.GetPage(pageNumber, itemsPerPage);
+
+            result.ItemsPerPage.ShouldBe(itemsPerPage);
+            result.PageNumber.ShouldBe(pageNumber);
+            result.TotalPages.ShouldBe(3);
+            result.Items.ShouldBe(new []{ 23, 4 });
+        }
+
+        [Fact]
+        public void get_page_returns_correct_last_page()
+        {
+            const int pageNumber = 2;
+            const int itemsPerPage = 2;
+
+            var collection = new[] { 23, 4, 5, 98 };
+            var result = collection.GetPage(pageNumber, itemsPerPage);
+
+            result.ItemsPerPage.ShouldBe(itemsPerPage);
+            result.PageNumber.ShouldBe(pageNumber);
+            result.TotalPages.ShouldBe(2);
+            result.Items.ShouldBe(new[] { 5, 98 });
+        }
+
+        [Fact]
+        public void get_page_returns_correct_not_full_last_page()
+        {
+            const int pageNumber = 3;
+            const int itemsPerPage = 2;
+
+            var collection = new[] { 23, 4, 5, 6, 98 };
+            var result = collection.GetPage(pageNumber, itemsPerPage);
+
+            result.ItemsPerPage.ShouldBe(itemsPerPage);
+            result.PageNumber.ShouldBe(pageNumber);
+            result.TotalPages.ShouldBe(3);
+            result.Items.ShouldBe(new[] { 98 });
+        }
+
+        [Fact]
+        public void get_page_returns_correct_middle_page()
+        {
+            const int pageNumber = 2;
+            const int itemsPerPage = 2;
+
+            var collection = new[] { 23, 4, 5, 6, 98 };
+            var result = collection.GetPage(pageNumber, itemsPerPage);
+
+            result.ItemsPerPage.ShouldBe(itemsPerPage);
+            result.PageNumber.ShouldBe(pageNumber);
+            result.TotalPages.ShouldBe(3);
+            result.Items.ShouldBe(new[] { 5, 6 });
         }
     }
 }
