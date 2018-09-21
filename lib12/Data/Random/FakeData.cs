@@ -622,11 +622,12 @@ namespace lib12.Data.Random
             #endregion
 
             #region Companies
+
             Companies = new[]
             {
-                "Acme", "Macrohard", "Pear", "Gogles", "Tanmung", "Intellico", "Specific Motors", "Testral",
+                "Acme", "Macrohard", "Pear Foods", "Gogles", "Tanmung", "Intellico", "Specific Motors", "Testral",
                 "SpaceZ", "TonyX", "Cantuso", "DealMan", "Shoping Co", "United Motors", "Express Deliveries",
-                "Valid Info", "Investment Searcher", "Banking Unlimited","Gruthorp","Watch Maker"
+                "Validity Corp.", "Investment Searcher", "Banking Unlimited", "Gruthorp", "Watch Maker"
             };
             #endregion
         }
