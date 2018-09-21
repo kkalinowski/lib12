@@ -146,8 +146,8 @@ namespace lib12.Mathematics.Formulas
                 return null;
 
             //in order to evaluate reverse polish notation it must be exactly one more literal than operator
-            var operators = output.Where(x => x.Type.Is(TokenType.Operator)).Cast<OperatorToken>().ToArray();
-            if (operators.Count(x => x.Operator.IsNot(OperatorType.LeftBraket, OperatorType.RightBraket)) != output.Count(x => x.Type.Is(TokenType.Number, TokenType.Variable)) - 1)
+            var operators = output.Where(x => x.Type.IsAnyOf(TokenType.Operator)).Cast<OperatorToken>().ToArray();
+            if (operators.Count(x => x.Operator.IsNotAnyOf(OperatorType.LeftBraket, OperatorType.RightBraket)) != output.Count(x => x.Type.IsAnyOf(TokenType.Number, TokenType.Variable)) - 1)
                 return null;
 
             return output;
@@ -200,7 +200,7 @@ namespace lib12.Mathematics.Formulas
             if (!IsValid)
                 throw new MathException("Formula is not valid, cannot evaluate it");
 
-            if (argument == null && Tokens.Any(x => x.Type.Is(TokenType.Variable)))
+            if (argument == null && Tokens.Any(x => x.Type == TokenType.Variable))
                 throw new MathException("Encountered variable, yet argument is empty");
 
             var stack = new Stack<double>();

@@ -71,9 +71,9 @@ namespace lib12.Utility
         public bool InRange(T item, bool inclusiveStartAndEnd = true)
         {
             if (inclusiveStartAndEnd)
-                return LocateInRange(item).Is(LocationInRange.OnStart, LocationInRange.InRange, LocationInRange.OnEnd);
+                return LocateInRange(item).IsAnyOf(LocationInRange.OnStart, LocationInRange.InRange, LocationInRange.OnEnd);
             else
-                return LocateInRange(item).Is(LocationInRange.InRange);
+                return LocateInRange(item).IsAnyOf(LocationInRange.InRange);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public bool LessThanStart(T item)
         {
-            return LocateInRange(item).Is(LocationInRange.LessThanStart);
+            return LocateInRange(item) == LocationInRange.LessThanStart;
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public bool GreaterThanEnd(T item)
         {
-            return LocateInRange(item).Is(LocationInRange.GreaterThanEnd);
+            return LocateInRange(item) == LocationInRange.GreaterThanEnd;
         }
     }
 }

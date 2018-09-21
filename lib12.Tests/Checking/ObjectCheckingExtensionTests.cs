@@ -1,4 +1,5 @@
-﻿using lib12.Checking;
+﻿using System.Collections.Generic;
+using lib12.Checking;
 using Shouldly;
 using Xunit;
 
@@ -16,123 +17,123 @@ namespace lib12.Tests.Checking
     public class ObjectCheckingExtensionTests
     {
         [Fact]
-        public void is_one_element_true()
+        public void is_any_of_one_element_true()
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.First).ShouldBeTrue();
+            value.IsAnyOf(TestEnum.First).ShouldBeTrue();
         }
 
         [Fact]
-        public void is_one_element_false()
+        public void is_any_of_one_element_false()
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.Second).ShouldBeFalse();
+            value.IsAnyOf(TestEnum.Second).ShouldBeFalse();
         }
 
         [Fact]
-        public void is_in_collection_true()
+        public void is_any_of_collection_true()
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
+            value.IsAnyOf(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
         }
 
         [Fact]
-        public void is_in_collection_false()
+        public void is_any_of_collection_false()
         {
             var value = TestEnum.First;
 
-            value.Is(TestEnum.Fourth, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
+            value.IsAnyOf(TestEnum.Fourth, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
         }
 
         [Fact]
-        public void is_not_one_element_true()
+        public void is_not_any_of_one_element_true()
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.Second).ShouldBeTrue();
+            value.IsNotAnyOf(TestEnum.Second).ShouldBeTrue();
         }
 
         [Fact]
-        public void is_not_one_element_false()
+        public void is_not_any_of_one_element_false()
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.First).ShouldBeFalse();
+            value.IsNotAnyOf(TestEnum.First).ShouldBeFalse();
         }
 
         [Fact]
-        public void is_not_in_collection_true()
+        public void is_not_any_of_collection_true()
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.Third, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
+            value.IsNotAnyOf(TestEnum.Third, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
         }
 
         [Fact]
-        public void is_not_in_collection_false()
+        public void is_not_any_of_collection_false()
         {
             var value = TestEnum.First;
 
-            value.IsNot(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
+            value.IsNotAnyOf(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
         }
 
         [Fact]
-        public void is_int_test()
+        public void is_not_any_of_int_test()
         {
-            4.IsNot(5, 6, 6).ShouldBeTrue();
+            4.IsNotAnyOf(5, 6, 6).ShouldBeTrue();
         }
 
         [Fact]
-        public void is_string_test()
+        public void is_any_of_string_test()
         {
-            "test".Is("test").ShouldBeTrue();
+            "test".IsAnyOf("test").ShouldBeTrue();
         }
 
         [Fact]
-        public void is_handles_null_as_target_to_compare_test()
+        public void is_any_of_handles_null_as_target_to_compare_test()
         {
-            "test".Is((string)null).ShouldBeFalse();
+            "test".IsAnyOf((string)null).ShouldBeFalse();
         }
 
         [Fact]
-        public void is_handles_null_as_source_test()
+        public void is_any_of_handles_null_as_source_test()
         {
-            ((string)null).Is("test").ShouldBeFalse();
+            ((string)null).IsAnyOf("test").ShouldBeFalse();
         }
 
         [Fact]
-        public void is_returns_true_if_both_source_and_target_are_null_test()
+        public void is_any_of_returns_true_if_both_source_and_target_are_null_test()
         {
-            ((string)null).Is((string)null).ShouldBeTrue();
+            ((string)null).IsAnyOf((string)null).ShouldBeTrue();
         }
 
         [Fact]
-        public void in_test()
+        public void is_any_of_collection_test()
         {
             var array = new[] { 3, 4, 12 };
-            12.In(array).ShouldBeTrue();
+            12.IsAnyOf(array).ShouldBeTrue();
         }
 
         [Fact]
-        public void if_in_collection_is_null_return_false_test()
+        public void is_any_ofcollection_is_null_return_false_test()
         {
-            12.In(null).ShouldBeFalse();
+            12.IsAnyOf((IEnumerable<int>)null).ShouldBeFalse();
         }
 
         [Fact]
-        public void not_in_test()
+        public void is_not_any_of_collection_test()
         {
             var array = new[] { 3, 4, 12 };
-            11.NotIn(array).ShouldBeTrue();
+            11.IsNotAnyOf(array).ShouldBeTrue();
         }
 
         [Fact]
-        public void if_notin_collection_is_null_return_true_test()
+        public void is_not_any_of_collection_is_null_return_true_test()
         {
-            12.NotIn(null).ShouldBeTrue();
+            12.IsNotAnyOf((IEnumerable<int>)null).ShouldBeTrue();
         }
     }
 }
