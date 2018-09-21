@@ -1,13 +1,9 @@
-﻿
-using System;
-
-namespace lib12.Mathematics
+﻿namespace lib12.Mathematics
 {
     /// <summary>
     /// Set of various math functions
     /// </summary>
-    [Obsolete("Use Math2 instead")]
-    public static class MathExt
+    public static class Math2
     {
         /// <summary>
         /// Returns next number from specified set
@@ -38,6 +34,30 @@ namespace lib12.Mathematics
         public static double DivWithZero(double a, double b)
         {
             return b != 0 ? a / b : 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified number is even.
+        /// </summary>
+        /// <param name="number">The number to check</param>
+        /// <returns>
+        ///   <c>true</c> if the specified number is even; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsEven(int number)
+        {
+            return number % 2 == 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified number is odd.
+        /// </summary>
+        /// <param name="number">The number to check</param>
+        /// <returns>
+        ///   <c>true</c> if the specified number is odd; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsOdd(int number)
+        {
+            return !IsEven(number);
         }
     }
 }
