@@ -73,6 +73,8 @@ namespace lib12.Data.Random
                 value = GenerateRandValueFromIntConstrain(intConstrain);
             else if (constrain is DoubleConstrain doubleConstrain)
                 value = GenerateRandValueFromDoubleConstrain(doubleConstrain);
+            else if (constrain is FactoryMethodConstrain factoryMethodConstrain)
+                value = GenerateRandValueFromFactoryMethodConstrain(factoryMethodConstrain);
             else
                 value = GenerateRandValueWithoutConstrain(type, name);
             return value;
@@ -93,6 +95,11 @@ namespace lib12.Data.Random
         private static object GenerateRandValueFromDoubleConstrain(DoubleConstrain doubleConstrain)
         {
             return NextDouble(doubleConstrain.MinValue, doubleConstrain.MaxValue);
+        }
+
+        private static object GenerateRandValueFromFactoryMethodConstrain(FactoryMethodConstrain factoryMethodConstrain)
+        {
+            return factoryMethodConstrain.FactoryMethod();
         }
 
         private static object GenerateRandValueWithoutConstrain(Type propertyType, string propertyName)

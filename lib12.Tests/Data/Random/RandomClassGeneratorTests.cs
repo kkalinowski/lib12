@@ -94,7 +94,7 @@ namespace lib12.Tests.Data.Random
         {
             var names = new[] { "name1", "name2", "name3" };
             var constrains = ConstrainFactory.For<Account>()
-                .AddValuesConstrain(x=>x.Name, names)
+                .AddValuesConstrain(x => x.Name, names)
                 .Build();
 
             var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
@@ -106,7 +106,26 @@ namespace lib12.Tests.Data.Random
         }
 
         [Fact]
-        public void private_properties_arent_override() 
+        public void factory_method_generator()
+        {
+            const string name = "test-name";
+
+            var constrains = ConstrainFactory.For<Account>()
+                .AddFactoryMethodConstrain(x => x.Name, () => name)
+                .AddFactoryMethodConstrain(x => x.Number, () => Rand.NextDouble(5, 10))
+                .Build();
+
+            var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
+
+            foreach (var item in generated)
+            {
+                item.Name.ShouldBe(name);
+                item.Number.ShouldBeInRange(5, 10);
+            }
+        }
+
+        [Fact]
+        public void private_properties_arent_override()
         {
             var generated = Rand.Next<ClassToGenerate>();
             generated.NumberThatShouldntBeSet.ShouldBe(12);
