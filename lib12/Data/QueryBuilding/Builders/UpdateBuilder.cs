@@ -14,23 +14,14 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <seealso cref="Structures.Update.IUpdateSet" />
     public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdate, IUpdateSet
     {
-        /// <summary>
-        /// Adds the TABLE statement to UPDATE
-        /// </summary>
-        /// <param name="table">The table name from DB for statement</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IUpdateSet Table(string table)
         {
             Structure.Table = table;
             return this;
         }
 
-        /// <summary>
-        /// Adds the SET statement for UPDATe
-        /// </summary>
-        /// <param name="field">The field name to set</param>
-        /// <param name="value">The value to set</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IUpdateSet Set(string field, object value)
         {
             Structure.SetFields.Add(new SetField(field, value));
@@ -38,6 +29,7 @@ namespace lib12.Data.QueryBuilding.Builders
         }
 
         #region Build
+        /// <inheritdoc />
         public override string BuildQuery()
         {
             if (Structure.SetFields.Any(x => x.Field.IsNullOrEmpty()))

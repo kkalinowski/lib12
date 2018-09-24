@@ -52,6 +52,9 @@
         IWhere WhereIsNotNull(string field);
     }
 
+    /// <summary>
+    /// IBracketPossible
+    /// </summary>
     public interface IBracketPossible
     {
         /// <summary>
@@ -61,6 +64,9 @@
         IOpenBracket OpenBracket();
     }
 
+    /// <summary>
+    /// IConcatPossible
+    /// </summary>
     public interface IConcatPossible
     {
         /// <summary>
@@ -74,21 +80,38 @@
         IConcat Or { get; }
     }
 
+    /// <inheritdoc />
+    /// <seealso cref="T:lib12.Data.QueryBuilding.Structures.IWherePossible" />
     public interface IOpenBracket : IWherePossible
     {
 
     }
 
+    /// <summary>
+    /// ICloseBracket
+    /// </summary>
+    /// <seealso cref="T:lib12.Data.QueryBuilding.Structures.IConcatPossible" />
+    /// <seealso cref="T:lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface ICloseBracket : IConcatPossible, IBuild
     {
 
     }
 
+    /// <summary>
+    /// IConcat
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBracketPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IWherePossible" />
     public interface IConcat : IBracketPossible, IWherePossible
     {
 
     }
 
+    /// <summary>
+    /// IWhere
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IConcatPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface IWhere : IConcatPossible, IBuild
     {
         /// <summary>

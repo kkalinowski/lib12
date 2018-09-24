@@ -30,11 +30,26 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Props
+        /// <summary>
+        /// Gets or sets the select structure being build
+        /// </summary>
+        /// <value>
+        /// The structure.
+        /// </value>
         public SelectStructure Structure { get; set; }
+        /// <summary>
+        /// Gets or sets the type of the database.
+        /// </summary>
+        /// <value>
+        /// The type of the database.
+        /// </value>
         public DBType DBType { get; set; }
         #endregion
 
         #region ctor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectBuilder"/> class.
+        /// </summary>
         public SelectBuilder()
         {
             DBType = DBType.MsSql;
@@ -46,6 +61,8 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Build query
+
+        /// <inheritdoc />
         public string Build()
         {
             if (openBrackets > 0)
@@ -166,6 +183,11 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Fluent implementation
+        /// <summary>
+        /// Set the type of database
+        /// </summary>
+        /// <param name="dbType">Type of the database.</param>
+        /// <returns></returns>
         public SelectBuilder DB(DBType dbType)
         {
             DBType = dbType;
@@ -173,6 +195,12 @@ namespace lib12.Data.QueryBuilding.Builders
         }
 
         #region Fields
+        /// <summary>
+        /// Is query distinct
+        /// </summary>
+        /// <value>
+        /// The distinct.
+        /// </value>
         public SelectBuilder Distinct
         {
             get
@@ -182,6 +210,7 @@ namespace lib12.Data.QueryBuilding.Builders
             }
         }
 
+        /// <inheritdoc />
         public IFields AllFields
         {
             get
@@ -191,17 +220,20 @@ namespace lib12.Data.QueryBuilding.Builders
             }
         }
 
+        /// <inheritdoc />
         public IFields Fields(IEnumerable<SelectField> fields)
         {
             Structure.Fields.AddRange(fields);
             return this;
         }
 
+        /// <inheritdoc />
         public IFields Fields(params string[] fields)
         {
             return Fields(false, fields);
         }
 
+        /// <inheritdoc />
         public IFields Fields(bool withAlias, params string[] fields)
         {
             if (withAlias && fields.Length % 2 != 0)
@@ -220,18 +252,22 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region From
+
+        /// <inheritdoc />
         public ITop Top(int count)
         {
             Structure.TopCount = count;
             return this;
         }
 
+        /// <inheritdoc />
         public ISelectFrom From(string table)
         {
             Structure.MainTable = table;
             return this;
         }
 
+        /// <inheritdoc />
         public ISelectFrom From(string table, string alias)
         {
             Structure.MainTable = table;
@@ -241,18 +277,21 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Join
+        /// <inheritdoc />
         public ISelectFrom Join(Join join)
         {
             Structure.Joins.Add(join);
             return this;
         }
 
+        /// <inheritdoc />
         public ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField)
         {
             var join = new Join(rightTable, rightTableAlias, leftField, rightField, JoinType.Standard);
             return ((ISelectFrom)this).Join(join);
         }
 
+        /// <inheritdoc />
         public ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type)
         {
             var join = new Join(rightTable, rightTableAlias, leftField, rightField, type);
@@ -261,6 +300,7 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Where
+        /// <inheritdoc />
         public IOpenSelectBracket OpenBracket()
         {
             openBrackets++;
@@ -270,6 +310,7 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        /// <inheritdoc />
         public ICloseSelectBracket CloseBracket()
         {
             openBrackets--;
@@ -278,6 +319,7 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        /// <inheritdoc />
         public ISelectWhere Where(Condition cnd)
         {
             parent.AddChild(cnd);
@@ -285,42 +327,42 @@ namespace lib12.Data.QueryBuilding.Builders
             return this;
         }
 
+        /// <inheritdoc />
         public ISelectWhere Where(string field, Compare comparison, object argument)
         {
             var cnd = new Condition(field, comparison, argument);
             return ((ISelectFrom)this).Where(cnd);
         }
 
+        /// <inheritdoc />
         public ISelectWhere Where(string condition)
         {
             var cnd = new Condition { ExplicitCondition = condition };
             return ((ISelectFrom)this).Where(cnd);
         }
 
+        /// <inheritdoc />
         public ISelectWhere WhereBetween(string field, object argument1, object argument2)
         {
             var cnd = new Condition(field, Compare.Between, new Tuple<object, object>(argument1, argument2));
             return ((ISelectFrom)this).Where(cnd);
         }
 
-        public ISelectWhere WhereBetween(string field, Tuple<object, object> argument)
-        {
-            var cnd = new Condition(field, Compare.Between, argument);
-            return ((ISelectFrom)this).Where(cnd);
-        }
-
+        /// <inheritdoc />
         public ISelectWhere WhereIsNull(string field)
         {
             var cnd = new Condition(field, Compare.IsNull, null);
             return ((ISelectFrom)this).Where(cnd);
         }
 
+        /// <inheritdoc />
         public ISelectWhere WhereIsNotNull(string field)
         {
             var cnd = new Condition(field, Compare.IsNotNull, null);
             return ((ISelectFrom)this).Where(cnd);
         }
 
+        /// <inheritdoc />
         public ISelectConcat And
         {
             get
@@ -330,6 +372,7 @@ namespace lib12.Data.QueryBuilding.Builders
             }
         }
 
+        /// <inheritdoc />
         public ISelectConcat Or
         {
             get
@@ -341,30 +384,35 @@ namespace lib12.Data.QueryBuilding.Builders
         #endregion
 
         #region Group, having, order
+        /// <inheritdoc />
         public IGroupBy GroupBy(string field)
         {
             Structure.GroupByFields.Add(field);
             return this;
         }
 
+        /// <inheritdoc />
         public IHaving Having(string cnd)
         {
             Structure.Having = cnd;
             return this;
         }
 
+        /// <inheritdoc />
         public IOrderBy OrderBy(string field)
         {
             Structure.OrderByFields.Add(new OrderBy(field, false));
             return this;
         }
 
+        /// <inheritdoc />
         public IOrderBy OrderBy(OrderBy orderBy)
         {
             Structure.OrderByFields.Add(orderBy);
             return this;
         }
 
+        /// <inheritdoc />
         public IOrderBy OrderByDesc(string field)
         {
             Structure.OrderByFields.Add(new OrderBy(field, true));
