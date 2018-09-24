@@ -16,9 +16,9 @@
     /// <summary>
     /// IDeleteFrom
     /// </summary>
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBracketPossible" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IWherePossible" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
+    /// <seealso cref="Structures.IBracketPossible" />
+    /// <seealso cref="Structures.IWherePossible" />
+    /// <seealso cref="Structures.IBuild" />
     public interface IDeleteFrom : IBracketPossible, IWherePossible, IBuild
     {
 

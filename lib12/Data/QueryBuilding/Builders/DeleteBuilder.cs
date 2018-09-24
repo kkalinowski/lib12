@@ -6,16 +6,12 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// DeleteBuilder
     /// </summary>
-    /// <seealso cref="lib12.Data.QueryBuilding.Builders.QueryBuilderBase{lib12.Data.QueryBuilding.Structures.Delete.DeleteQueryStructure}" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Delete.IDelete" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Delete.IDeleteFrom" />
+    /// <seealso cref="Builders.QueryBuilderBase{Structures.Delete.DeleteQueryStructure}" />
+    /// <seealso cref="Structures.Delete.IDelete" />
+    /// <seealso cref="Structures.Delete.IDeleteFrom" />
     public class DeleteBuilder : QueryBuilderBase<DeleteQueryStructure>, IDelete, IDeleteFrom
     {
-        /// <summary>
-        /// Adds FROM statement
-        /// </summary>
-        /// <param name="table">The source table</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public IDeleteFrom From(string table)
         {
             Structure.Table = table;

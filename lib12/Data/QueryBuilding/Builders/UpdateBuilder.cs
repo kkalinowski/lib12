@@ -9,9 +9,9 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// UpdateBuilder
     /// </summary>
-    /// <seealso cref="lib12.Data.QueryBuilding.Builders.QueryBuilderBase{lib12.Data.QueryBuilding.Structures.Update.UpdateQueryStructure}" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdate" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdateSet" />
+    /// <seealso cref="Builders.QueryBuilderBase{Structures.Update.UpdateQueryStructure}" />
+    /// <seealso cref="Structures.Update.IUpdate" />
+    /// <seealso cref="Structures.Update.IUpdateSet" />
     public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdate, IUpdateSet
     {
         /// <summary>

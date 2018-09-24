@@ -10,16 +10,16 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// SelectBuilder
     /// </summary>
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelect" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IFields" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectFrom" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOpenSelectBracket" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ICloseSelectBracket" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectWhere" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectConcat" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IGroupBy" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IHaving" />
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOrderBy" />
+    /// <seealso cref="Structures.Select.ISelect" />
+    /// <seealso cref="Structures.Select.IFields" />
+    /// <seealso cref="Structures.Select.ISelectFrom" />
+    /// <seealso cref="Structures.Select.IOpenSelectBracket" />
+    /// <seealso cref="Structures.Select.ICloseSelectBracket" />
+    /// <seealso cref="Structures.Select.ISelectWhere" />
+    /// <seealso cref="Structures.Select.ISelectConcat" />
+    /// <seealso cref="Structures.Select.IGroupBy" />
+    /// <seealso cref="Structures.Select.IHaving" />
+    /// <seealso cref="Structures.Select.IOrderBy" />
     public class SelectBuilder : ISelect, IFields, ISelectFrom, IOpenSelectBracket, ICloseSelectBracket, ISelectWhere, ISelectConcat, IGroupBy, IHaving, IOrderBy
     {
         #region Fields

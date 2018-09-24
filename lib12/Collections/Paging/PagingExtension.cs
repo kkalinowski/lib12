@@ -4,8 +4,21 @@ using System.Linq;
 
 namespace lib12.Collections.Paging
 {
+    /// <summary>
+    /// PagingExtension
+    /// </summary>
     public static class PagingExtension
     {
+        /// <summary>
+        /// Gets the page from the collection with paging statistics
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source collection</param>
+        /// <param name="pageNumber">The page number</param>
+        /// <param name="itemsPerPage">Items per page</param>
+        /// <returns></returns>
+        /// <exception cref="lib12Exception">
+        /// </exception>
         public static PagingResult<T> GetPage<T>(this IEnumerable<T> source, int pageNumber, int itemsPerPage)
         {
             if (pageNumber < 1)
@@ -22,12 +35,27 @@ namespace lib12.Collections.Paging
             return new PagingResult<T>(pageNumber, itemsPerPage, numberOfPages, pageItems);
         }
 
+        /// <summary>
+        /// Gets the number of pages from the collection given specific itemsPerPage count
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source collection</param>
+        /// <param name="itemsPerPage">Items per page</param>
+        /// <returns></returns>
         public static int GetNumberOfPages<T>(IEnumerable<T> source, int itemsPerPage)
         {
             var itemsCount = (double)source.Recover().Count();
             return (int)Math.Ceiling(itemsCount / itemsPerPage);
         }
 
+        /// <summary>
+        /// Gets only the page content without computing paging statistics
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source collection</param>
+        /// <param name="pageNumber">The page number</param>
+        /// <param name="itemsPerPage">Items per page</param>
+        /// <returns></returns>
         public static T[] GetPageItems<T>(IEnumerable<T> source, int pageNumber, int itemsPerPage)
         {
             return source

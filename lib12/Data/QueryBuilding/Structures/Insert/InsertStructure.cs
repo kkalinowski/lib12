@@ -6,7 +6,7 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
     /// <summary>
     /// InsertStructure
     /// </summary>
-    /// <seealso cref="lib12.Data.QueryBuilding.Structures.BaseQueryStructure" />
+    /// <seealso cref="Structures.BaseQueryStructure" />
     public class InsertStructure : BaseQueryStructure
     {
         /// <summary>
