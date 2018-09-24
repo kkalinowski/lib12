@@ -11,7 +11,6 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// InsertBuilder
     /// </summary>
-    /// <seealso cref="Builders.QueryBuilderBase{Structures.Insert.InsertStructure}" />
     /// <seealso cref="Structures.Insert.IInsert" />
     /// <seealso cref="Structures.Insert.IColumns" />
     /// <seealso cref="Structures.Insert.IValues" />

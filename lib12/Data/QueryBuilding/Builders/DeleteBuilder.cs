@@ -6,7 +6,6 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// DeleteBuilder
     /// </summary>
-    /// <seealso cref="Builders.QueryBuilderBase{Structures.Delete.DeleteQueryStructure}" />
     /// <seealso cref="Structures.Delete.IDelete" />
     /// <seealso cref="Structures.Delete.IDeleteFrom" />
     public class DeleteBuilder : QueryBuilderBase<DeleteQueryStructure>, IDelete, IDeleteFrom

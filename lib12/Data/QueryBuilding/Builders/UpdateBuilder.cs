@@ -7,11 +7,10 @@ using lib12.Extensions;
 namespace lib12.Data.QueryBuilding.Builders
 {
     /// <summary>
-    /// UpdateBuilder
+    /// Update statement builder
     /// </summary>
-    /// <seealso cref="Builders.QueryBuilderBase{Structures.Update.UpdateQueryStructure}" />
-    /// <seealso cref="Structures.Update.IUpdate" />
-    /// <seealso cref="Structures.Update.IUpdateSet" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdate" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdateSet" />
     public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdate, IUpdateSet
     {
         /// <inheritdoc />
