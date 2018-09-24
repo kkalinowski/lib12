@@ -4,6 +4,9 @@ using lib12.Collections;
 
 namespace lib12.Data.Random
 {
+    /// <summary>
+    /// RandomIEnumerableExtension
+    /// </summary>
     public static class RandomIEnumerableExtension
     {
         /// <summary>

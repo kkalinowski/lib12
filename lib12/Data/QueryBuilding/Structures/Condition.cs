@@ -9,13 +9,61 @@ namespace lib12.Data.QueryBuilding.Structures
     public class Condition
     {
         #region Props
+        /// <summary>
+        /// Gets or sets the field name
+        /// </summary>
+        /// <value>
+        /// The field.
+        /// </value>
         public string Field { get; set; }
+        /// <summary>
+        /// Gets or sets the comparison type
+        /// </summary>
+        /// <value>
+        /// The comparison.
+        /// </value>
         public Compare Comparison { get; set; }
+        /// <summary>
+        /// Gets or sets the argument object
+        /// </summary>
+        /// <value>
+        /// The argument.
+        /// </value>
         public object Argument { get; set; }
+        /// <summary>
+        /// Gets or sets the sub-conditions
+        /// </summary>
+        /// <value>
+        /// The children.
+        /// </value>
         public IList<Condition> Children { get; set; }
+        /// <summary>
+        /// Gets or sets the parent condition
+        /// </summary>
+        /// <value>
+        /// The parent.
+        /// </value>
         public Condition Parent { get; set; }
+        /// <summary>
+        /// Gets or sets the concat operator for joinging conditions
+        /// </summary>
+        /// <value>
+        /// The concat.
+        /// </value>
         public LogicOperator Concat { get; set; }
+        /// <summary>
+        /// Gets or sets the explicit string condition.
+        /// </summary>
+        /// <value>
+        /// The explicit condition.
+        /// </value>
         public string ExplicitCondition { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether this instance has children.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has children; otherwise, <c>false</c>.
+        /// </value>
         public bool HasChildren
         {
             get
@@ -24,6 +72,12 @@ namespace lib12.Data.QueryBuilding.Structures
             }
         }
 
+        /// <summary>
+        /// Returns true if condition is valid.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
+        /// </value>
         public bool IsValid
         {
             get

@@ -5,6 +5,9 @@ using lib12.Extensions;
 
 namespace lib12.Reflection
 {
+    /// <summary>
+    /// TypeExtension
+    /// </summary>
     public static class TypeExtension
     {
         /// <summary>

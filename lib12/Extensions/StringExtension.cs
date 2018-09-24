@@ -6,6 +6,9 @@ using System.Text;
 
 namespace lib12.Extensions
 {
+    /// <summary>
+    /// StringExtension
+    /// </summary>
     public static class StringExtension
     {
         /// <summary>

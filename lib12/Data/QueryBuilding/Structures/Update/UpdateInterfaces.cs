@@ -1,5 +1,8 @@
 ﻿namespace lib12.Data.QueryBuilding.Structures.Update
 {
+    /// <summary>
+    /// UPDATE statement table interface
+    /// </summary>
     public interface IUpdate
     {
         /// <summary>
@@ -10,6 +13,12 @@
         IUpdateSet Table(string table);
     }
 
+    /// <summary>
+    /// UPDATE statement SET interface
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBracketPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IWherePossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface IUpdateSet : IBracketPossible, IWherePossible, IBuild
     {
         /// <summary>

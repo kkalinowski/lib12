@@ -2,6 +2,9 @@
 
 namespace lib12.Extensions
 {
+    /// <summary>
+    /// FuncExtension
+    /// </summary>
     public static class FuncExtension
     {
         /// <summary>

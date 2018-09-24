@@ -181,7 +181,7 @@ namespace lib12.Collections
         /// <summary>
         /// Gets the next element after given or default
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source">The enumerable to search</param>
         /// <param name="currentElement">The current element</param>
         /// <returns></returns>

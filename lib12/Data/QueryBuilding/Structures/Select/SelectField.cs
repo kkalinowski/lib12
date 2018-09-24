@@ -7,9 +7,27 @@ namespace lib12.Data.QueryBuilding.Structures.Select
     public class SelectField
     {
         #region Props
+        /// <summary>
+        /// Gets or sets the field.
+        /// </summary>
+        /// <value>
+        /// The field.
+        /// </value>
         public string Field { get; set; }
+        /// <summary>
+        /// Gets or sets the alias.
+        /// </summary>
+        /// <value>
+        /// The alias.
+        /// </value>
         public string Alias { get; set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance has alias.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has alias; otherwise, <c>false</c>.
+        /// </value>
         public bool HasAlias
         {
             get

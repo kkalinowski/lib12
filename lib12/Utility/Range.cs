@@ -8,10 +8,25 @@ namespace lib12.Utility
     /// </summary>
     public enum LocationInRange
     {
+        /// <summary>
+        /// The less than start
+        /// </summary>
         LessThanStart,
+        /// <summary>
+        /// The on start
+        /// </summary>
         OnStart,
+        /// <summary>
+        /// The in range
+        /// </summary>
         InRange,
+        /// <summary>
+        /// The on end
+        /// </summary>
         OnEnd,
+        /// <summary>
+        /// The greater than end
+        /// </summary>
         GreaterThanEnd
     }
 
@@ -21,7 +36,13 @@ namespace lib12.Utility
     /// <typeparam name="T">The type of Range</typeparam>
     public struct Range<T> where T : IComparable
     {
+        /// <summary>
+        /// The range start
+        /// </summary>
         public T Start;
+        /// <summary>
+        /// The range end
+        /// </summary>
         public T End;
 
         /// <summary>

@@ -21,6 +21,10 @@ namespace lib12.Data.Random
             return new ConstrainFactoryOf<TSource>();
         }
 
+        /// <summary>
+        /// Constrain factory subclass
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
         public class ConstrainFactoryOf<TSource>
         {
             private readonly ConstrainCollection result = new ConstrainCollection();

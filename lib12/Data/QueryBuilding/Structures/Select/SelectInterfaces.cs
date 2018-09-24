@@ -35,6 +35,10 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         IFields Fields(bool withAlias, params string[] fields);
     }
 
+    /// <summary>
+    /// IFields
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ITop" />
     public interface IFields : ITop
     {
         /// <summary>
@@ -45,6 +49,9 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         ITop Top(int count);
     }
 
+    /// <summary>
+    /// ITop
+    /// </summary>
     public interface ITop
     {
         /// <summary>
@@ -66,6 +73,9 @@ namespace lib12.Data.QueryBuilding.Structures.Select
     #region Possibilites
 
 
+    /// <summary>
+    /// ISelectWherePossible
+    /// </summary>
     public interface ISelectWherePossible
     {
         /// <summary>
@@ -115,6 +125,9 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         ISelectWhere WhereIsNotNull(string field);
     }
 
+    /// <summary>
+    /// ISelectBracketPossible
+    /// </summary>
     public interface ISelectBracketPossible
     {
         /// <summary>
@@ -124,6 +137,9 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         IOpenSelectBracket OpenBracket();
     }
 
+    /// <summary>
+    /// ISelectConcatPossible
+    /// </summary>
     public interface ISelectConcatPossible
     {
         /// <summary>
@@ -137,6 +153,9 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         ISelectConcat Or { get; }
     }
 
+    /// <summary>
+    /// IGroupByPossible
+    /// </summary>
     public interface IGroupByPossible
     {
         /// <summary>
@@ -147,6 +166,9 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         IGroupBy GroupBy(string field);
     }
 
+    /// <summary>
+    /// IOrderByPossible
+    /// </summary>
     public interface IOrderByPossible
     {
         /// <summary>
@@ -172,6 +194,14 @@ namespace lib12.Data.QueryBuilding.Structures.Select
     }
     #endregion
 
+    /// <summary>
+    /// ISelectFrom
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectBracketPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectWherePossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IGroupByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOrderByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface ISelectFrom : ISelectBracketPossible, ISelectWherePossible, IGroupByPossible, IOrderByPossible, IBuild
     {
         /// <summary>
@@ -203,21 +233,44 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         ISelectFrom Join(string rightTable, string rightTableAlias, string leftField, string rightField, JoinType type);
     }
 
+    /// <summary>
+    /// IOpenSelectBracket
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectWherePossible" />
     public interface IOpenSelectBracket : ISelectWherePossible
     {
 
     }
 
+    /// <summary>
+    /// ICloseSelectBracket
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectConcatPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IGroupByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOrderByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface ICloseSelectBracket : ISelectConcatPossible, IGroupByPossible, IOrderByPossible, IBuild
     {
 
     }
 
+    /// <summary>
+    /// ISelectConcat
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectBracketPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectWherePossible" />
     public interface ISelectConcat : ISelectBracketPossible, ISelectWherePossible
     {
 
     }
 
+    /// <summary>
+    /// ISelectWhere
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.ISelectConcatPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IGroupByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOrderByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface ISelectWhere : ISelectConcatPossible, IGroupByPossible, IOrderByPossible, IBuild
     {
         /// <summary>
@@ -227,6 +280,12 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         ICloseSelectBracket CloseBracket();
     }
 
+    /// <summary>
+    /// IGroupBy
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IGroupByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOrderByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface IGroupBy : IGroupByPossible, IOrderByPossible, IBuild
     {
         /// <summary>
@@ -237,11 +296,20 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         IHaving Having(string cnd);
     }
 
+    /// <summary>
+    /// IHaving
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Select.IOrderByPossible" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface IHaving : IOrderByPossible, IBuild
     {
 
     }
 
+    /// <summary>
+    /// IOrderBy
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.IBuild" />
     public interface IOrderBy : IBuild
     {
 

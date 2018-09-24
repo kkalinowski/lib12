@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace lib12.Reflection
 {
+    /// <summary>
+    /// ReflectionObjectExtension
+    /// </summary>
     public static class ReflectionObjectExtension
     {
         /// <summary>
