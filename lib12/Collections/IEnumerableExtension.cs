@@ -238,7 +238,7 @@ namespace lib12.Collections
         /// <summary>
         /// If enumerable is null convert it into empty collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source">The enumerable to recover</param>
         /// <returns></returns>
         public static IEnumerable<TSource> Recover<TSource>(this IEnumerable<TSource> source)
