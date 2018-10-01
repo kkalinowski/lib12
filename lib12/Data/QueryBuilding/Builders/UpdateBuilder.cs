@@ -54,6 +54,6 @@ namespace lib12.Data.QueryBuilding.Builders
 
             sbuilder.Remove(sbuilder.Length - 2, 2);
         }
-        #endregion
+        #endregion Build
     }
 }

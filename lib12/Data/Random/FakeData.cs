@@ -85,7 +85,7 @@ namespace lib12.Data.Random
         /// The companies.
         /// </value>
         public static string[] Companies { get; set; }
-        #endregion
+        #endregion Props
 
         #region sctor
         static FakeData()
@@ -337,7 +337,7 @@ namespace lib12.Data.Random
                 "Zambia",
                 "Zimbabwe"
             };
-            #endregion
+            #endregion Countries
 
             #region CountryCodes
             CountryCodes = new[]
@@ -582,7 +582,7 @@ namespace lib12.Data.Random
                 "ZM",
                 "ZW"
             };
-            #endregion
+            #endregion CountryCodes
 
             #region Cities and streets
             Cities = new[]
@@ -596,7 +596,7 @@ namespace lib12.Data.Random
                 "First", "Second", "Third", "Forth", "Five", "Main", "Oak", "Pine",
                 "Elm", "View", "Lake", "Hill", "Church", "Prospect"
             };
-            #endregion
+            #endregion Cities and streets
 
             #region Names
             MaleNames = new[]
@@ -619,7 +619,7 @@ namespace lib12.Data.Random
                 "Wilson", "House", "Potter", "Anderson", "Taylor", "Moore", "Jackson", "White", "Black", "Walker",
                 "Allen", "King", "Wright", "Scott", "Green", "Baker", "Murphy", "Edwards", "Steward", "Collins", "Evans"
             };
-            #endregion
+            #endregion Names
 
             #region Companies
 
@@ -629,8 +629,8 @@ namespace lib12.Data.Random
                 "SpaceZ", "TonyX", "Cantuso", "DealMan", "Shoping Co", "United Motors", "Express Deliveries",
                 "Validity Corp.", "Investment Searcher", "Banking Unlimited", "Gruthorp", "Watch Maker"
             };
-            #endregion
+            #endregion Companies
         }
-        #endregion
+        #endregion sctor
     }
 }

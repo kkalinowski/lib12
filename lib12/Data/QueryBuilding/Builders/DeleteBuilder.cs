@@ -27,9 +27,7 @@ namespace lib12.Data.QueryBuilding.Builders
             sbuilder.AppendFormat("DELETE FROM {0}", Structure.Table);
 
             if (Structure.MainCondition.IsValid)
-            {
                 whereBuilder.Build(sbuilder, Structure.MainCondition);
-            }
 
             return sbuilder.ToString();
         }

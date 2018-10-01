@@ -20,7 +20,7 @@
         ///   <c>true</c> if desc; otherwise, <c>false</c>.
         /// </value>
         public bool Desc { get; set; }
-        #endregion
+        #endregion Props
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderBy"/> class.

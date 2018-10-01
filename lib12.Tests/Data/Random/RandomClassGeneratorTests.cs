@@ -10,7 +10,7 @@ namespace lib12.Tests.Data.Random
     {
         #region Const
         private const int CollectionSize = 12;
-        #endregion
+        #endregion Const
 
         [Fact]
         public void Generate_returns_not_null_items_of_correct_type()

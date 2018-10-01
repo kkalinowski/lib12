@@ -84,9 +84,7 @@ namespace lib12.Collections
 
             var sbuilder = new StringBuilder();
             foreach (var item in source)
-            {
                 sbuilder.AppendFormat("{0}{1}", item, delimiter);
-            }
 
             sbuilder.Remove(sbuilder.Length - delimiter.Length, delimiter.Length);
             return sbuilder.ToString();
@@ -452,11 +450,11 @@ namespace lib12.Collections
                 }
             }
 
-            if (batch != null && count > 0)
-            {
-                Array.Resize(ref batch, count);
-                yield return batch;
-            }
+            if (batch == null || count <= 0)
+                yield break;
+
+            Array.Resize(ref batch, count);
+            yield return batch;
         }
 
         /// <summary>

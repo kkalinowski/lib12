@@ -8,7 +8,7 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// Fluent sql commands builder
     /// </summary>
-    public class SqlBuilder
+    public static class SqlBuilder
     {
         /// <summary>
         /// Builds SELECT query

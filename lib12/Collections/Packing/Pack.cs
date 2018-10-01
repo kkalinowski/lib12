@@ -17,9 +17,7 @@ namespace lib12.Collections.Packing
         public static IEnumerable<T> IntoEnumerable<T>(params T[] items)
         {
             foreach (var item in items)
-            {
                 yield return item;
-            }
         }
 
         /// <summary>

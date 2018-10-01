@@ -39,11 +39,11 @@ namespace lib12.Mathematics.Formulas
         {
             Text = text;
             var tokens = Parse(Text);
-            if (tokens != null)
-            {
-                Tokens = new ReadOnlyCollection<Token>(tokens);
-                IsValid = true;
-            }
+            if (tokens == null)
+                return;
+
+            Tokens = new ReadOnlyCollection<Token>(tokens);
+            IsValid = true;
         }
 
         /// <summary>

@@ -85,7 +85,7 @@ namespace lib12.Data.QueryBuilding.Structures
                 return HasChildren || !(string.IsNullOrEmpty(Field) || Argument == null);
             }
         }
-        #endregion
+        #endregion Props
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Condition"/> class.

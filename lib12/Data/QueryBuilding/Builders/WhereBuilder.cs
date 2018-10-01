@@ -28,7 +28,7 @@ namespace lib12.Data.QueryBuilding.Builders
         {
             if (cnd.Children.Count == 1)
             {
-                BuildCondition(sbuilder, cnd.Children.First());
+                BuildCondition(sbuilder, cnd.Children[0]);
             }
             else
             {

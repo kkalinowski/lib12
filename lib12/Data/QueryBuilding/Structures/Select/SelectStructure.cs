@@ -85,7 +85,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// The order by fields.
         /// </value>
         public List<OrderBy> OrderByFields { get; private set; }
-        #endregion
+        #endregion Props
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectStructure"/> class.

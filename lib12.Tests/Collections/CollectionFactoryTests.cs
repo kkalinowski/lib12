@@ -13,9 +13,9 @@ namespace lib12.Tests.Collections
         {
             var result = CollectionFactory.CreateArray(3, i => i);
             result.Length.ShouldBe(3);
-            result.ElementAt(0).ShouldBe(0);
-            result.ElementAt(1).ShouldBe(1);
-            result.ElementAt(2).ShouldBe(2);
+            result[0].ShouldBe(0);
+            result[1].ShouldBe(1);
+            result[2].ShouldBe(2);
         }
 
         [Fact]

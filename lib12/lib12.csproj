@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -24,5 +24,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\lib12.xml</DocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>lib12.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Roslynator.Analyzers" Version="1.9.0" />
+  </ItemGroup>
 
 </Project>

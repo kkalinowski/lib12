@@ -167,7 +167,7 @@ namespace lib12.Extensions
             if (source.IsNullOrEmpty())
                 return source;
 
-            return source.First().ToString().ToUpper() + source.Substring(1);
+            return source[0].ToString().ToUpper() + source.Substring(1);
         }
     }
 }

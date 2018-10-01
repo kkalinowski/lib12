@@ -16,7 +16,7 @@ namespace lib12.Reflection
         /// The type.
         /// </value>
         public Type Type { get; set; }
-        #endregion
+        #endregion Props
 
         #region ctor
         /// <summary>
@@ -27,6 +27,6 @@ namespace lib12.Reflection
         {
             Type = type;
         }
-        #endregion
+        #endregion ctor
     }
 }

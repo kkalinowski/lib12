@@ -42,7 +42,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// The type.
         /// </value>
         public JoinType Type { get; set; }
-        #endregion
+        #endregion Props
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Join"/> class.

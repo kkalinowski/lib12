@@ -27,7 +27,7 @@ namespace lib12.Data.QueryBuilding.Builders
         private Condition parent;
         private Condition lastCnd;
         private readonly WhereBuilder whereBuilder;
-        #endregion
+        #endregion Fields
 
         #region Props
         /// <summary>
@@ -44,7 +44,7 @@ namespace lib12.Data.QueryBuilding.Builders
         /// The type of the database.
         /// </value>
         public DBType DBType { get; set; }
-        #endregion
+        #endregion Props
 
         #region ctor
         /// <summary>
@@ -58,7 +58,7 @@ namespace lib12.Data.QueryBuilding.Builders
             parent = Structure.MainCondition;
             lastCnd = parent;
         }
-        #endregion
+        #endregion ctor
 
         #region Build query
 
@@ -180,7 +180,7 @@ namespace lib12.Data.QueryBuilding.Builders
                     sbuilder.Append(", ");
             }
         }
-        #endregion
+        #endregion Build query
 
         #region Fluent implementation
         /// <summary>
@@ -249,7 +249,7 @@ namespace lib12.Data.QueryBuilding.Builders
 
             return this;
         }
-        #endregion
+        #endregion Fields
 
         #region From
 
@@ -274,7 +274,7 @@ namespace lib12.Data.QueryBuilding.Builders
             Structure.MainTableAlias = alias;
             return this;
         }
-        #endregion
+        #endregion From
 
         #region Join
         /// <inheritdoc />
@@ -297,7 +297,7 @@ namespace lib12.Data.QueryBuilding.Builders
             var join = new Join(rightTable, rightTableAlias, leftField, rightField, type);
             return ((ISelectFrom)this).Join(join);
         }
-        #endregion
+        #endregion Join
 
         #region Where
         /// <inheritdoc />
@@ -381,7 +381,7 @@ namespace lib12.Data.QueryBuilding.Builders
                 return this;
             }
         }
-        #endregion
+        #endregion Where
 
         #region Group, having, order
         /// <inheritdoc />
@@ -418,7 +418,7 @@ namespace lib12.Data.QueryBuilding.Builders
             Structure.OrderByFields.Add(new OrderBy(field, true));
             return this;
         }
-        #endregion
-        #endregion
+        #endregion Group, having, order
+        #endregion Fluent implementation
     }
 }

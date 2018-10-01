@@ -35,7 +35,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
                 return !string.IsNullOrEmpty(Alias);
             }
         }
-        #endregion
+        #endregion Props
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectField"/> class.

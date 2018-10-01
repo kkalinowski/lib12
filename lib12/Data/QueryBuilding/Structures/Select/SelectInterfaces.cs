@@ -192,7 +192,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// <returns></returns>
         IOrderBy OrderByDesc(string field);
     }
-    #endregion
+    #endregion Possibilites
 
     /// <summary>
     /// ISelectFrom
