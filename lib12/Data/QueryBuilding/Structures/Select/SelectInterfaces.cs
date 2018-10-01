@@ -71,8 +71,6 @@ namespace lib12.Data.QueryBuilding.Structures.Select
     }
 
     #region Possibilites
-
-
     /// <summary>
     /// ISelectWherePossible
     /// </summary>

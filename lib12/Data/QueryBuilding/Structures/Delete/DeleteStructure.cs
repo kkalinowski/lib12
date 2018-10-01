@@ -6,6 +6,5 @@
     /// <seealso cref="Structures.BaseQueryStructure" />
     public class DeleteQueryStructure : BaseQueryStructure
     {
-         
     }
 }

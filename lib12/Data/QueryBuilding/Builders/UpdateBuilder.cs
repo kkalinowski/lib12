@@ -40,9 +40,7 @@ namespace lib12.Data.QueryBuilding.Builders
             BuildSet(sbuilder);
 
             if (Structure.MainCondition.IsValid)
-            {
                 whereBuilder.Build(sbuilder, Structure.MainCondition);
-            }
 
             return sbuilder.ToString();
         }

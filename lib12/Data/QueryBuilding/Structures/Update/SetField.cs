@@ -26,7 +26,6 @@ namespace lib12.Data.QueryBuilding.Structures.Update
         /// </summary>
         public SetField()
         {
-            
         }
 
         /// <summary>

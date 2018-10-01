@@ -66,18 +66,19 @@ namespace lib12.Data.Random
 
         private static object GeneratePropertyValue(Type type, string name, RandDataConstrain constrain)
         {
-            object value;
-            if (constrain is ValueSetConstrain valueSetConstrain)
-                value = GenerateRandValueFromSetConstrain(valueSetConstrain);
-            else if (constrain is IntConstrain intConstrain)
-                value = GenerateRandValueFromIntConstrain(intConstrain);
-            else if (constrain is DoubleConstrain doubleConstrain)
-                value = GenerateRandValueFromDoubleConstrain(doubleConstrain);
-            else if (constrain is FactoryMethodConstrain factoryMethodConstrain)
-                value = GenerateRandValueFromFactoryMethodConstrain(factoryMethodConstrain);
-            else
-                value = GenerateRandValueWithoutConstrain(type, name);
-            return value;
+            switch (constrain)
+            {
+                case ValueSetConstrain valueSetConstrain:
+                    return GenerateRandValueFromSetConstrain(valueSetConstrain);
+                case IntConstrain intConstrain:
+                    return GenerateRandValueFromIntConstrain(intConstrain);
+                case DoubleConstrain doubleConstrain:
+                    return GenerateRandValueFromDoubleConstrain(doubleConstrain);
+                case FactoryMethodConstrain factoryMethodConstrain:
+                    return GenerateRandValueFromFactoryMethodConstrain(factoryMethodConstrain);
+                default:
+                    return GenerateRandValueWithoutConstrain(type, name);
+            }
         }
 
         private static object GenerateRandValueFromSetConstrain(ValueSetConstrain valuesConstrain)

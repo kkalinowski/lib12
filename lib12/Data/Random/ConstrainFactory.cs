@@ -9,7 +9,7 @@ namespace lib12.Data.Random
     /// <summary>
     /// Factory for creating constrains for random data creation
     /// </summary>
-    public class ConstrainFactory
+    public static class ConstrainFactory
     {
         /// <summary>
         /// Starts creating constrain for given type

@@ -131,7 +131,7 @@ namespace lib12.Extensions
             while ((position = source.IndexOf(text, position, stringComparison)) != -1)
             {
                 position += text.Length;
-                count += 1;
+                count++;
             }
 
             return count;
