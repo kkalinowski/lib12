@@ -35,7 +35,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// <value>
         /// The fields.
         /// </value>
-        public List<SelectField> Fields { get; private set; }
+        public List<SelectField> Fields { get; }
         /// <summary>
         /// Gets or sets the main table.
         /// </summary>
@@ -56,7 +56,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// <value>
         /// The joins.
         /// </value>
-        public List<Join> Joins { get; private set; }
+        public List<Join> Joins { get; }
         /// <summary>
         /// Gets or sets the main condition.
         /// </summary>
@@ -70,7 +70,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// <value>
         /// The group by fields.
         /// </value>
-        public List<string> GroupByFields { get; private set; }
+        public List<string> GroupByFields { get; }
         /// <summary>
         /// Gets or sets the having.
         /// </summary>
@@ -84,7 +84,7 @@ namespace lib12.Data.QueryBuilding.Structures.Select
         /// <value>
         /// The order by fields.
         /// </value>
-        public List<OrderBy> OrderByFields { get; private set; }
+        public List<OrderBy> OrderByFields { get; }
         #endregion Props
 
         /// <summary>

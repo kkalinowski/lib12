@@ -99,9 +99,7 @@ namespace lib12.Data.QueryBuilding.Builders
 
             //where
             if (Structure.MainCondition.IsValid)
-            {
                 whereBuilder.Build(sbuilder, Structure.MainCondition);
-            }
 
             //group by
             if (Structure.GroupByFields.IsNotEmpty())
@@ -113,9 +111,7 @@ namespace lib12.Data.QueryBuilding.Builders
 
             //order by
             if (Structure.OrderByFields.IsNotEmpty())
-            {
                 BuildOrderBy(sbuilder);
-            }
 
             if (DBType != DBType.MsSql && Structure.TopCount > 0)
                 sbuilder.AppendFormat(" LIMIT {0}", Structure.TopCount);
@@ -126,9 +122,8 @@ namespace lib12.Data.QueryBuilding.Builders
         private void BuildFields(StringBuilder sbuilder)
         {
             foreach (var field in Structure.Fields)
-            {
                 sbuilder.AppendFormat("{0}, ", field.Build());
-            }
+
             sbuilder.Remove(sbuilder.Length - 2, 1);
         }
 

@@ -10,17 +10,17 @@ namespace lib12.Data.Random
         /// <summary>
         /// Gets one paragraph of Lorem ipsum text
         /// </summary>
-        public static string LoremIpsumParagraph { get; private set; }
+        public static string LoremIpsumParagraph { get; }
 
         /// <summary>
         /// Gets two paragraphs of Lorem ipsum text
         /// </summary>
-        public static string LoremIpsumTwoParagraphs { get; private set; }
+        public static string LoremIpsumTwoParagraphs { get; }
 
         /// <summary>
         /// Gets five paragraphs of Lorem ipsum text
         /// </summary>
-        public static string LoremIpsumFiveParagraphs { get; private set; }
+        public static string LoremIpsumFiveParagraphs { get; }
 
         /// <summary>
         /// List of countries
@@ -28,7 +28,7 @@ namespace lib12.Data.Random
         /// <value>
         /// The countries.
         /// </value>
-        public static string[] Countries { get; private set; }
+        public static string[] Countries { get; }
 
         /// <summary>
         /// List of country codes.
@@ -36,7 +36,7 @@ namespace lib12.Data.Random
         /// <value>
         /// The country codes.
         /// </value>
-        public static string[] CountryCodes { get; private set; }
+        public static string[] CountryCodes { get; }
 
         /// <summary>
         /// List of cities

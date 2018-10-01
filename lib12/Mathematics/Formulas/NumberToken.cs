@@ -8,7 +8,7 @@ namespace lib12.Mathematics.Formulas
         /// <summary>
         /// Gets or sets the number.
         /// </summary>
-        public double Number { get; private set; }
+        public double Number { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberToken"/> class.

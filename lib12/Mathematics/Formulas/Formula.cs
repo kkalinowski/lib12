@@ -19,17 +19,17 @@ namespace lib12.Mathematics.Formulas
         /// <summary>
         /// Gets the formula's text.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; }
 
         /// <summary>
         /// Gets the reverse polish notation tokens.
         /// </summary>
-        public ReadOnlyCollection<Token> Tokens { get; private set; }
+        public ReadOnlyCollection<Token> Tokens { get; }
 
         /// <summary>
         /// Gets a value indicating whether formula is vali
         /// </summary>
-        public bool IsValid { get; private set; }
+        public bool IsValid { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Formula"/> class.

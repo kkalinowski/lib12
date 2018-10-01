@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets the variable.
         /// </summary>
-        public string Variable { get; private set; }
+        public string Variable { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableToken"/> class.

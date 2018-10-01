@@ -8,12 +8,12 @@ namespace lib12.Mathematics.Formulas
         /// <summary>
         /// Gets the operator type.
         /// </summary>
-        public OperatorType Operator { get; private set; }
+        public OperatorType Operator { get; }
 
         /// <summary>
         /// Gets the operator priority.
         /// </summary>
-        public int Priority { get; private set; }
+        public int Priority { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperatorToken"/> class.

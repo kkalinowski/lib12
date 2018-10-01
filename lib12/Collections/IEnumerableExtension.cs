@@ -107,13 +107,9 @@ namespace lib12.Collections
             foreach (TSource item in first)
             {
                 if (itemCounts.ContainsKey(item))
-                {
                     itemCounts[item]++;
-                }
                 else
-                {
                     itemCounts[item] = 1;
-                }
             }
 
             // Wrap the keys in a searchable list
@@ -127,11 +123,7 @@ namespace lib12.Collections
                 // find the original key that is equivalent to the "item"
                 // You may want to override ".Equals" to define what it means for
                 // two "T" objects to be equal
-                var key = keys.Find(
-                    delegate (TSource listKey)
-                    {
-                        return listKey.Equals(item);
-                    });
+                var key = keys.Find(x => x.Equals(item));
 
                 // Check if a key was found
                 if (key != null)
@@ -149,9 +141,7 @@ namespace lib12.Collections
             foreach (int value in itemCounts.Values)
             {
                 if (value != 0)
-                {
                     return false;
-                }
             }
 
             // The collections are equal
