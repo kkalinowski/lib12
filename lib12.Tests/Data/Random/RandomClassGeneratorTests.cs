@@ -31,9 +31,7 @@ namespace lib12.Tests.Data.Random
             var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 
             foreach (var item in generated)
-            {
                 item.Text.ShouldNotBeEmpty();
-            }
         }
 
         [Fact]
@@ -100,9 +98,7 @@ namespace lib12.Tests.Data.Random
             var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
 
             foreach (var item in generated)
-            {
                 names.ShouldContain(item.Name);
-            }
         }
 
         [Fact]

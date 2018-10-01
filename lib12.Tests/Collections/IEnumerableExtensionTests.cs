@@ -264,7 +264,7 @@ namespace lib12.Tests.Collections
         [Fact]
         public void findindex_returns_negative_one_if_collection_is_empty()
         {
-            List<Item> list = new List<Item>();
+            var list = new List<Item>();
 
             list.Select(x => x)
                 .FindIndex(x => x.Value == 12)

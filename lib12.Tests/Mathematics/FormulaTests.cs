@@ -76,7 +76,6 @@ namespace lib12.Tests.Mathematics
             Assert.Throws<MathException>(() => formula.Evaluate());
         }
 
-
         [Fact]
         public void invalid_formula_operator_in_wrong_place()
         {
@@ -111,7 +110,7 @@ namespace lib12.Tests.Mathematics
 
             formula.IsValid.ShouldBeFalse();
             Assert.Throws<MathException>(() => formula.Evaluate());
-        } 
+        }
 
         [Fact]
         public void equation_with_variable()

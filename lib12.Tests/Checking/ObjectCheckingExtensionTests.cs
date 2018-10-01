@@ -5,7 +5,7 @@ using Xunit;
 
 namespace lib12.Tests.Checking
 {
-    enum TestEnum
+    internal enum TestEnum
     {
         First,
         Second,
@@ -19,7 +19,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_any_of_one_element_true()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsAnyOf(TestEnum.First).ShouldBeTrue();
         }
@@ -27,7 +27,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_any_of_one_element_false()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsAnyOf(TestEnum.Second).ShouldBeFalse();
         }
@@ -35,7 +35,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_any_of_collection_true()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsAnyOf(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
         }
@@ -43,7 +43,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_any_of_collection_false()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsAnyOf(TestEnum.Fourth, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
         }
@@ -51,7 +51,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_not_any_of_one_element_true()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsNotAnyOf(TestEnum.Second).ShouldBeTrue();
         }
@@ -59,7 +59,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_not_any_of_one_element_false()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsNotAnyOf(TestEnum.First).ShouldBeFalse();
         }
@@ -67,7 +67,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_not_any_of_collection_true()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsNotAnyOf(TestEnum.Third, TestEnum.Second, TestEnum.Fifth).ShouldBeTrue();
         }
@@ -75,7 +75,7 @@ namespace lib12.Tests.Checking
         [Fact]
         public void is_not_any_of_collection_false()
         {
-            var value = TestEnum.First;
+            const TestEnum value = TestEnum.First;
 
             value.IsNotAnyOf(TestEnum.First, TestEnum.Second, TestEnum.Fifth).ShouldBeFalse();
         }

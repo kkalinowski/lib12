@@ -85,7 +85,7 @@ namespace lib12.Tests.Extensions
         [Fact]
         public void truncate_on_null_returns_empty_string()
         {
-            string text = null;
+            const string text = null;
             text.Truncate(12).ShouldBeEmpty();
         }
 
@@ -126,7 +126,7 @@ namespace lib12.Tests.Extensions
         [Fact]
         public void remove_diacritics_on_null_string_returns_empty_string()
         {
-            string text = null;
+            const string text = null;
             text.RemoveDiacritics().ShouldBeEmpty();
         }
 

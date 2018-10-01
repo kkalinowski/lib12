@@ -34,7 +34,6 @@ namespace lib12.Tests.Data.QueryBuilding
         [Fact]
         public void throw_exception_if_columns_count_differs_from_values_count()
         {
-
             Action action = () => SqlBuilder.Insert.Into("product").Columns("type", "price", "name").Values(4).Build();
             action.ShouldThrow<QueryBuilderException>();
         }

@@ -132,9 +132,13 @@ namespace lib12.Mathematics.Formulas
                     negationPossible = false;
                 }
                 else if (char.IsWhiteSpace(text[i]))
+                {
                     continue;
+                }
                 else // unknown symbol in formula
+                {
                     return null;
+                }
             }
 
             //clear stack from operators
