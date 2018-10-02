@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using lib12.Checking;
 using lib12.Extensions;
 
 namespace lib12.Reflection
@@ -25,9 +26,27 @@ namespace lib12.Reflection
         /// </summary>
         /// <param name="type">The type to check</param>
         /// <returns></returns>
+        [Obsolete("Use IsNumber instead")]
         public static bool IsTypeNumeric(this Type type)
         {
             return type.GetTypeInfo().IsPrimitive || type.FullName == "System.Decimal";
+        }
+
+        public static bool IsNumber(this Type type)
+        {
+            return type.IsIntegralNumber() || type.IsFloatingPointNumber();
+        }
+
+        public static bool IsIntegralNumber(this Type type)
+        {
+            return Type.GetTypeCode(type)
+                .IsAnyOf(TypeCode.Byte, TypeCode.SByte, TypeCode.Int16, TypeCode.UInt16, TypeCode.Int32, TypeCode.UInt32, TypeCode.Int64, TypeCode.UInt64);
+        }
+
+        public static bool IsFloatingPointNumber(this Type type)
+        {
+            return Type.GetTypeCode(type)
+                .IsAnyOf(TypeCode.Decimal, TypeCode.Double, TypeCode.Single);
         }
 
         /// <summary>
