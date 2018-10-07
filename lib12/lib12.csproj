@@ -5,8 +5,8 @@
     <Authors>Krzysztof Kalinowski</Authors>
     <Company />
     <Description>lib12 is set of useful classes and extension created for .NET framework</Description>
-    <Version>2.1.0.0</Version>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <Version>2.2.0.0</Version>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/kkalinowski/lib12/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/kkalinowski/lib12</PackageProjectUrl>
