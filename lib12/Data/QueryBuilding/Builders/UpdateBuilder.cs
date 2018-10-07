@@ -6,14 +6,21 @@ using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
+    /// <summary>
+    /// Update statement builder
+    /// </summary>
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdate" />
+    /// <seealso cref="lib12.Data.QueryBuilding.Structures.Update.IUpdateSet" />
     public class UpdateBuilder : QueryBuilderBase<UpdateQueryStructure>, IUpdate, IUpdateSet
     {
+        /// <inheritdoc />
         public IUpdateSet Table(string table)
         {
             Structure.Table = table;
             return this;
         }
 
+        /// <inheritdoc />
         public IUpdateSet Set(string field, object value)
         {
             Structure.SetFields.Add(new SetField(field, value));
@@ -21,6 +28,7 @@ namespace lib12.Data.QueryBuilding.Builders
         }
 
         #region Build
+        /// <inheritdoc />
         public override string BuildQuery()
         {
             if (Structure.SetFields.Any(x => x.Field.IsNullOrEmpty()))
@@ -32,9 +40,7 @@ namespace lib12.Data.QueryBuilding.Builders
             BuildSet(sbuilder);
 
             if (Structure.MainCondition.IsValid)
-            {
                 whereBuilder.Build(sbuilder, Structure.MainCondition);
-            }
 
             return sbuilder.ToString();
         }
@@ -46,6 +52,6 @@ namespace lib12.Data.QueryBuilding.Builders
 
             sbuilder.Remove(sbuilder.Length - 2, 2);
         }
-        #endregion
+        #endregion Build
     }
 }

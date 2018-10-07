@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace lib12.Reflection
 {
+    /// <summary>
+    /// EnumReflectionExtension
+    /// </summary>
     public static class EnumReflectionExtension
     {
         /// <summary>

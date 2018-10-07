@@ -1,5 +1,8 @@
 ﻿namespace lib12.Mathematics.Extensions
 {
+    /// <summary>
+    /// IntExtension
+    /// </summary>
     public static class IntExtension
     {
         /// <summary>

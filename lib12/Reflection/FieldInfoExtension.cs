@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace lib12.Reflection
 {
+    /// <summary>
+    /// FieldInfoExtension
+    /// </summary>
     public static class FieldInfoExtension
     {
         /// <summary>

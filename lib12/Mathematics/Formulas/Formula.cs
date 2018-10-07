@@ -19,17 +19,17 @@ namespace lib12.Mathematics.Formulas
         /// <summary>
         /// Gets the formula's text.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; }
 
         /// <summary>
         /// Gets the reverse polish notation tokens.
         /// </summary>
-        public ReadOnlyCollection<Token> Tokens { get; private set; }
+        public ReadOnlyCollection<Token> Tokens { get; }
 
         /// <summary>
         /// Gets a value indicating whether formula is vali
         /// </summary>
-        public bool IsValid { get; private set; }
+        public bool IsValid { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Formula"/> class.
@@ -39,11 +39,11 @@ namespace lib12.Mathematics.Formulas
         {
             Text = text;
             var tokens = Parse(Text);
-            if (tokens != null)
-            {
-                Tokens = new ReadOnlyCollection<Token>(tokens);
-                IsValid = true;
-            }
+            if (tokens == null)
+                return;
+
+            Tokens = new ReadOnlyCollection<Token>(tokens);
+            IsValid = true;
         }
 
         /// <summary>
@@ -132,9 +132,13 @@ namespace lib12.Mathematics.Formulas
                     negationPossible = false;
                 }
                 else if (char.IsWhiteSpace(text[i]))
+                {
                     continue;
+                }
                 else // unknown symbol in formula
+                {
                     return null;
+                }
             }
 
             //clear stack from operators
@@ -146,8 +150,8 @@ namespace lib12.Mathematics.Formulas
                 return null;
 
             //in order to evaluate reverse polish notation it must be exactly one more literal than operator
-            var operators = output.Where(x => x.Type.Is(TokenType.Operator)).Cast<OperatorToken>().ToArray();
-            if (operators.Count(x => x.Operator.IsNot(OperatorType.LeftBraket, OperatorType.RightBraket)) != output.Count(x => x.Type.Is(TokenType.Number, TokenType.Variable)) - 1)
+            var operators = output.Where(x => x.Type.IsAnyOf(TokenType.Operator)).Cast<OperatorToken>().ToArray();
+            if (operators.Count(x => x.Operator.IsNotAnyOf(OperatorType.LeftBraket, OperatorType.RightBraket)) != output.Count(x => x.Type.IsAnyOf(TokenType.Number, TokenType.Variable)) - 1)
                 return null;
 
             return output;
@@ -200,7 +204,7 @@ namespace lib12.Mathematics.Formulas
             if (!IsValid)
                 throw new MathException("Formula is not valid, cannot evaluate it");
 
-            if (argument == null && Tokens.Any(x => x.Type.Is(TokenType.Variable)))
+            if (argument == null && Tokens.Any(x => x.Type == TokenType.Variable))
                 throw new MathException("Encountered variable, yet argument is empty");
 
             var stack = new Stack<double>();

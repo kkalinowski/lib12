@@ -41,6 +41,7 @@ namespace lib12.Tests.Reflection
             expression.GetValue(source).ShouldBe(text);
         }
 
+        [Fact]
         public void set_value_works()
         {
             const string text = "Winter is coming...";

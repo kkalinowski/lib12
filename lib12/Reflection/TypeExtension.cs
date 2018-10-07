@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using lib12.Checking;
 using lib12.Extensions;
 
 namespace lib12.Reflection
 {
+    /// <summary>
+    /// TypeExtension
+    /// </summary>
     public static class TypeExtension
     {
         /// <summary>
@@ -22,9 +26,48 @@ namespace lib12.Reflection
         /// </summary>
         /// <param name="type">The type to check</param>
         /// <returns></returns>
+        [Obsolete("Use IsNumber instead")]
         public static bool IsTypeNumeric(this Type type)
         {
             return type.GetTypeInfo().IsPrimitive || type.FullName == "System.Decimal";
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is number.
+        /// </summary>
+        /// <param name="type">The type to check</param>
+        /// <returns>
+        ///   <c>true</c> if the specified type is number; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsNumber(this Type type)
+        {
+            return type.IsIntegralNumber() || type.IsFloatingPointNumber();
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is integral number.
+        /// </summary>
+        /// <param name="type">The type to check</param>
+        /// <returns>
+        ///   <c>true</c> if [is integral number] [the specified type]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsIntegralNumber(this Type type)
+        {
+            return Type.GetTypeCode(type)
+                .IsAnyOf(TypeCode.Byte, TypeCode.SByte, TypeCode.Int16, TypeCode.UInt16, TypeCode.Int32, TypeCode.UInt32, TypeCode.Int64, TypeCode.UInt64);
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is floating point number.
+        /// </summary>
+        /// <param name="type">The type to check</param>
+        /// <returns>
+        ///   <c>true</c> if [is floating point number] [the specified type]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFloatingPointNumber(this Type type)
+        {
+            return Type.GetTypeCode(type)
+                .IsAnyOf(TypeCode.Decimal, TypeCode.Double, TypeCode.Single);
         }
 
         /// <summary>

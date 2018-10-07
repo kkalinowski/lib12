@@ -85,7 +85,7 @@ namespace lib12.Tests.Extensions
         [Fact]
         public void truncate_on_null_returns_empty_string()
         {
-            string text = null;
+            const string text = null;
             text.Truncate(12).ShouldBeEmpty();
         }
 
@@ -120,14 +120,13 @@ namespace lib12.Tests.Extensions
         [InlineData("sample Text", "text", true)]
         public void contains_ignore_case_theory(string source, string toCheck, bool expectedResult)
         {
-            const string text = "text5";
-            text.Truncate(2).ShouldBe("te");
+            source.ContainsIgnoreCase(toCheck).ShouldBe(expectedResult);
         }
 
         [Fact]
         public void remove_diacritics_on_null_string_returns_empty_string()
         {
-            string text = null;
+            const string text = null;
             text.RemoveDiacritics().ShouldBeEmpty();
         }
 
@@ -151,7 +150,6 @@ namespace lib12.Tests.Extensions
         [InlineData("", null, 0)]
         [InlineData(null, "", 0)]
         [InlineData("", "", 0)]
-        [InlineData("", "", 0)]
         [InlineData("test", "t", 2)]
         [InlineData("test", "ch", 0)]
         [InlineData("It will be long and harsh winter! Better be prepared!", "be", 2)]
@@ -165,7 +163,6 @@ namespace lib12.Tests.Extensions
         [InlineData("", null)]
         [InlineData(null, "")]
         [InlineData("", "")]
-        [InlineData("", "")]
         [InlineData("test", "t", 0, 3)]
         [InlineData("test", "ch")]
         [InlineData("_be be", "be", 1, 4)]
@@ -174,6 +171,17 @@ namespace lib12.Tests.Extensions
             var result = source.GetAllOccurrences(text);
             var arr = result.ToArray();
             result.ShouldBe(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData("", "")]
+        [InlineData("sample text", "Sample text")]
+        [InlineData("sample Text", "Sample Text")]
+        [InlineData("Sample Text", "Sample Text")]
+        public void capitalize_is_correct(string text, string expectedResult)
+        {
+            text.Capitalize().ShouldBe(expectedResult);
         }
     }
 }

@@ -21,12 +21,12 @@ namespace lib12.Utility
         /// <summary>
         /// Whether or not append display logged message also on Console
         /// </summary>
-        public static bool DisplayAlsoOnConsole { get; set; } = false;
+        public static bool DisplayAlsoOnConsole { get; set; }
 
         private static string ComputeFileName()
         {
             if (AppendTimeStampToFileName)
-                return $"{FileName}_{DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss.fff")}.txt";
+                return $"{FileName}_{DateTime.Now:yyyy-MM-dd_HH:mm:ss.fff}.txt";
             else
                 return $"{FileName}.txt";
         }

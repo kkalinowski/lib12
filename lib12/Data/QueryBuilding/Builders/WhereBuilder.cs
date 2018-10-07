@@ -8,8 +8,16 @@ using lib12.Extensions;
 
 namespace lib12.Data.QueryBuilding.Builders
 {
+    /// <summary>
+    /// WhereBuilder
+    /// </summary>
     public class WhereBuilder
     {
+        /// <summary>
+        /// Builds the specified sbuilder.
+        /// </summary>
+        /// <param name="sbuilder">The sbuilder.</param>
+        /// <param name="condition">The condition.</param>
         public void Build(StringBuilder sbuilder, Condition condition)
         {
             sbuilder.Append(" WHERE ");
@@ -20,7 +28,7 @@ namespace lib12.Data.QueryBuilding.Builders
         {
             if (cnd.Children.Count == 1)
             {
-                BuildCondition(sbuilder, cnd.Children.First());
+                BuildCondition(sbuilder, cnd.Children[0]);
             }
             else
             {
@@ -70,8 +78,7 @@ namespace lib12.Data.QueryBuilding.Builders
             }
             else if (cnd.Comparison == Compare.In || cnd.Comparison == Compare.NotIn)
             {
-                var args = cnd.Argument as IEnumerable;
-                if (args == null)
+                if (!(cnd.Argument is IEnumerable args))
                     throw new lib12Exception("You have to pass IEnumerable to condition with IN statement");
 
                 var argsArray = args.Cast<object>().ToArray();
@@ -84,14 +91,14 @@ namespace lib12.Data.QueryBuilding.Builders
                 sbuilder.AppendFormat("{0}{1}(", cnd.Field, BuildComparison(cnd.Comparison));
 
                 foreach (var arg in argsArray)
-                {
                     sbuilder.AppendFormat("{0}{1}{0}, ", quote, arg);
-                }
                 sbuilder.Remove(sbuilder.Length - 2, 2);
                 sbuilder.Append(")");
             }
             else
+            {
                 sbuilder.AppendFormat("{0}{1}{2}{3}{2}", cnd.Field, BuildComparison(cnd.Comparison), quote, cnd.Argument);
+            }
         }
 
         private string BuildComparison(Compare comparison)

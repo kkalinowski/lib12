@@ -2,8 +2,17 @@
 
 namespace lib12.Data.Xml
 {
+    /// <summary>
+    /// XmlExtensions
+    /// </summary>
     public static class XmlExtensions
     {
+        /// <summary>
+        /// Adds the child element
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         public static XElement AddChild(this XElement parent, string name)
         {
             var element = new XElement(name);
@@ -12,6 +21,13 @@ namespace lib12.Data.Xml
             return element;
         }
 
+        /// <summary>
+        /// Adds the attribute element
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static XElement AddAttribute(this XElement element, string name, object value)
         {
             var attribute = new XAttribute(name, value);
@@ -20,6 +36,14 @@ namespace lib12.Data.Xml
             return element;
         }
 
+        /// <summary>
+        /// Sets the attribute value.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        /// <exception cref="lib12Exception"></exception>
         public static XElement SetAttributeValue(this XElement element, string name, object value)
         {
             var attribute = element.Attribute(name);
@@ -30,6 +54,11 @@ namespace lib12.Data.Xml
             return element;
         }
 
+        /// <summary>
+        /// Removes all children from element
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <returns></returns>
         public static XElement RemoveAllChildren(this XElement parent)
         {
             parent.RemoveAll();

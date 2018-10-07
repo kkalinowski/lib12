@@ -22,7 +22,7 @@ namespace lib12.Tests.Data.Random
         public bool Bool { get; set; }
         public int Int { get; set; }
         public double Double { get; set; }
-        public int NumberThatShouldntBeSet { get; private set; } = 12;
+        public int NumberThatShouldntBeSet { get; } = 12;
         public int NumberImpossibleToSet { get { return 12; } }
         public Nested NestedClass { get; set; }
     }

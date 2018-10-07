@@ -1,5 +1,8 @@
 namespace lib12.Data.QueryBuilding.Structures
 {
+    /// <summary>
+    /// IBuild
+    /// </summary>
     public interface IBuild
     {
         /// <summary>

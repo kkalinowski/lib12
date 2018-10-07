@@ -2,6 +2,9 @@
 
 namespace lib12.Data.QueryBuilding.Structures.Insert
 {
+    /// <summary>
+    /// IInsert
+    /// </summary>
     public interface IInsert
     {
         /// <summary>
@@ -12,6 +15,9 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
         IColumns Into(string table);
     }
 
+    /// <summary>
+    /// IColumns
+    /// </summary>
     public interface IColumns
     {
         /// <summary>
@@ -21,7 +27,6 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
         /// <returns></returns>
         IValues Columns(params string[] columns);
 
-
         /// <summary>
         /// Adds the sub SELECT statement to INSERT
         /// </summary>
@@ -30,6 +35,9 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
         IBuild Select(string select);
     }
 
+    /// <summary>
+    /// IValues
+    /// </summary>
     public interface IValues
     {
         /// <summary>
@@ -38,7 +46,6 @@ namespace lib12.Data.QueryBuilding.Structures.Insert
         /// <param name="values">The set of values for INSERT</param>
         /// <returns></returns>
         IBuild Values(params object[] values);
-
 
         /// <summary>
         /// Adds several batches of VALUES statements to INSERT

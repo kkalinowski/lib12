@@ -2,6 +2,9 @@
 
 namespace lib12.Collections
 {
+    /// <summary>
+    /// IListExtension
+    /// </summary>
     public static class IListExtension
     {
         /// <summary>

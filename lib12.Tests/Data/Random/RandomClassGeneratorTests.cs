@@ -10,7 +10,7 @@ namespace lib12.Tests.Data.Random
     {
         #region Const
         private const int CollectionSize = 12;
-        #endregion
+        #endregion Const
 
         [Fact]
         public void Generate_returns_not_null_items_of_correct_type()
@@ -31,9 +31,7 @@ namespace lib12.Tests.Data.Random
             var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 
             foreach (var item in generated)
-            {
                 item.Text.ShouldNotBeEmpty();
-            }
         }
 
         [Fact]
@@ -94,19 +92,36 @@ namespace lib12.Tests.Data.Random
         {
             var names = new[] { "name1", "name2", "name3" };
             var constrains = ConstrainFactory.For<Account>()
-                .AddValuesConstrain(x=>x.Name, names)
+                .AddValuesConstrain(x => x.Name, names)
+                .Build();
+
+            var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
+
+            foreach (var item in generated)
+                names.ShouldContain(item.Name);
+        }
+
+        [Fact]
+        public void factory_method_generator()
+        {
+            const string name = "test-name";
+
+            var constrains = ConstrainFactory.For<Account>()
+                .AddFactoryMethodConstrain(x => x.Name, () => name)
+                .AddFactoryMethodConstrain(x => x.Number, () => Rand.NextDouble(5, 10))
                 .Build();
 
             var generated = Rand.NextArrayOf<Account>(CollectionSize, constrains);
 
             foreach (var item in generated)
             {
-                names.ShouldContain(item.Name);
+                item.Name.ShouldBe(name);
+                item.Number.ShouldBeInRange(5, 10);
             }
         }
 
         [Fact]
-        public void private_properties_arent_override() 
+        public void private_properties_arent_override()
         {
             var generated = Rand.Next<ClassToGenerate>();
             generated.NumberThatShouldntBeSet.ShouldBe(12);

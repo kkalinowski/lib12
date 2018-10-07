@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using lib12.Extensions;
 using lib12.Reflection;
 using ConstrainCollection = System.Collections.Generic.Dictionary<string, lib12.Data.Random.RandDataConstrain>;
 
@@ -8,7 +9,7 @@ namespace lib12.Data.Random
     /// <summary>
     /// Factory for creating constrains for random data creation
     /// </summary>
-    public class ConstrainFactory
+    public static class ConstrainFactory
     {
         /// <summary>
         /// Starts creating constrain for given type
@@ -20,6 +21,10 @@ namespace lib12.Data.Random
             return new ConstrainFactoryOf<TSource>();
         }
 
+        /// <summary>
+        /// Constrain factory subclass
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
         public class ConstrainFactoryOf<TSource>
         {
             private readonly ConstrainCollection result = new ConstrainCollection();
@@ -71,6 +76,21 @@ namespace lib12.Data.Random
             {
                 var propertyName = selector.GetName();
                 result.Add(propertyName, new DoubleConstrain { MinValue = minValue, MaxValue = maxValue });
+
+                return this;
+            }
+
+            /// <summary>
+            /// Adds the constrain with the factory method, where you can easily create custom values for property
+            /// </summary>
+            /// <typeparam name="TValue">The type of the property</typeparam>
+            /// <param name="selector">The selector for property</param>
+            /// <param name="factoryMethod">The factory method to construct new values</param>
+            /// <returns></returns>
+            public ConstrainFactoryOf<TSource> AddFactoryMethodConstrain<TValue>(Expression<Func<TSource, TValue>> selector, Func<TValue> factoryMethod)
+            {
+                var propertyName = selector.GetName();
+                result.Add(propertyName, new FactoryMethodConstrain{ FactoryMethod = factoryMethod.ConvertToNonGeneric() });
 
                 return this;
             }

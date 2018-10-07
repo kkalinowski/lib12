@@ -9,14 +9,24 @@ namespace lib12.Reflection
     public sealed class CreateTypeAttribute : Attribute
     {
         #region Props
-        public Type Type { get; set; } 
-        #endregion
+        /// <summary>
+        /// Gets or sets the type to create
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        public Type Type { get; set; }
+        #endregion Props
 
         #region ctor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateTypeAttribute"/> class.
+        /// </summary>
+        /// <param name="type">The type.</param>
         public CreateTypeAttribute(Type type)
         {
             Type = type;
         }
-        #endregion
+        #endregion ctor
     }
 }

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace lib12.Collections
 {
+    /// <summary>
+    /// IEnumerableExtension
+    /// </summary>
     public static class IEnumerableExtension
     {
         /// <summary>
@@ -81,9 +84,7 @@ namespace lib12.Collections
 
             var sbuilder = new StringBuilder();
             foreach (var item in source)
-            {
                 sbuilder.AppendFormat("{0}{1}", item, delimiter);
-            }
 
             sbuilder.Remove(sbuilder.Length - delimiter.Length, delimiter.Length);
             return sbuilder.ToString();
@@ -106,13 +107,9 @@ namespace lib12.Collections
             foreach (TSource item in first)
             {
                 if (itemCounts.ContainsKey(item))
-                {
                     itemCounts[item]++;
-                }
                 else
-                {
                     itemCounts[item] = 1;
-                }
             }
 
             // Wrap the keys in a searchable list
@@ -126,11 +123,7 @@ namespace lib12.Collections
                 // find the original key that is equivalent to the "item"
                 // You may want to override ".Equals" to define what it means for
                 // two "T" objects to be equal
-                var key = keys.Find(
-                    delegate (TSource listKey)
-                    {
-                        return listKey.Equals(item);
-                    });
+                var key = keys.Find(x => x.Equals(item));
 
                 // Check if a key was found
                 if (key != null)
@@ -148,9 +141,7 @@ namespace lib12.Collections
             foreach (int value in itemCounts.Values)
             {
                 if (value != 0)
-                {
                     return false;
-                }
             }
 
             // The collections are equal
@@ -178,7 +169,7 @@ namespace lib12.Collections
         /// <summary>
         /// Gets the next element after given or default
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source">The enumerable to search</param>
         /// <param name="currentElement">The current element</param>
         /// <returns></returns>
@@ -235,7 +226,7 @@ namespace lib12.Collections
         /// <summary>
         /// If enumerable is null convert it into empty collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source">The enumerable to recover</param>
         /// <returns></returns>
         public static IEnumerable<TSource> Recover<TSource>(this IEnumerable<TSource> source)
@@ -449,11 +440,11 @@ namespace lib12.Collections
                 }
             }
 
-            if (batch != null && count > 0)
-            {
-                Array.Resize(ref batch, count);
-                yield return batch;
-            }
+            if (batch == null || count <= 0)
+                yield break;
+
+            Array.Resize(ref batch, count);
+            yield return batch;
         }
 
         /// <summary>

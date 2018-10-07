@@ -1,5 +1,8 @@
 ﻿namespace lib12.Data.QueryBuilding.Structures.Delete
 {
+    /// <summary>
+    /// IDelete
+    /// </summary>
     public interface IDelete
     {
         /// <summary>
@@ -10,6 +13,12 @@
         IDeleteFrom From(string table);
     }
 
+    /// <summary>
+    /// IDeleteFrom
+    /// </summary>
+    /// <seealso cref="Structures.IBracketPossible" />
+    /// <seealso cref="Structures.IWherePossible" />
+    /// <seealso cref="Structures.IBuild" />
     public interface IDeleteFrom : IBracketPossible, IWherePossible, IBuild
     {
 

@@ -1,9 +1,12 @@
 ﻿
+using System;
+
 namespace lib12.Mathematics
 {
     /// <summary>
     /// Set of various math functions
     /// </summary>
+    [Obsolete("Use Math2 instead")]
     public static class MathExt
     {
         /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace lib12.Mathematics.Extensions
 {
+    /// <summary>
+    /// BoolExtension
+    /// </summary>
     public static class BoolExtension
     {
         /// <summary>

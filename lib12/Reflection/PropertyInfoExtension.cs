@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace lib12.Reflection
 {
+    /// <summary>
+    /// PropertyInfoExtension
+    /// </summary>
     public static class PropertyInfoExtension
     {
         /// <summary>

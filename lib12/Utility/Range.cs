@@ -8,10 +8,25 @@ namespace lib12.Utility
     /// </summary>
     public enum LocationInRange
     {
+        /// <summary>
+        /// The less than start
+        /// </summary>
         LessThanStart,
+        /// <summary>
+        /// The on start
+        /// </summary>
         OnStart,
+        /// <summary>
+        /// The in range
+        /// </summary>
         InRange,
+        /// <summary>
+        /// The on end
+        /// </summary>
         OnEnd,
+        /// <summary>
+        /// The greater than end
+        /// </summary>
         GreaterThanEnd
     }
 
@@ -21,7 +36,13 @@ namespace lib12.Utility
     /// <typeparam name="T">The type of Range</typeparam>
     public struct Range<T> where T : IComparable
     {
+        /// <summary>
+        /// The range start
+        /// </summary>
         public T Start;
+        /// <summary>
+        /// The range end
+        /// </summary>
         public T End;
 
         /// <summary>
@@ -71,9 +92,9 @@ namespace lib12.Utility
         public bool InRange(T item, bool inclusiveStartAndEnd = true)
         {
             if (inclusiveStartAndEnd)
-                return LocateInRange(item).Is(LocationInRange.OnStart, LocationInRange.InRange, LocationInRange.OnEnd);
+                return LocateInRange(item).IsAnyOf(LocationInRange.OnStart, LocationInRange.InRange, LocationInRange.OnEnd);
             else
-                return LocateInRange(item).Is(LocationInRange.InRange);
+                return LocateInRange(item).IsAnyOf(LocationInRange.InRange);
         }
 
         /// <summary>
@@ -94,7 +115,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public bool LessThanStart(T item)
         {
-            return LocateInRange(item).Is(LocationInRange.LessThanStart);
+            return LocateInRange(item) == LocationInRange.LessThanStart;
         }
 
         /// <summary>
@@ -104,7 +125,7 @@ namespace lib12.Utility
         /// <returns></returns>
         public bool GreaterThanEnd(T item)
         {
-            return LocateInRange(item).Is(LocationInRange.GreaterThanEnd);
+            return LocateInRange(item) == LocationInRange.GreaterThanEnd;
         }
     }
 }

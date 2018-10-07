@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace lib12.Extensions
 {
+    /// <summary>
+    /// StringExtension
+    /// </summary>
     public static class StringExtension
     {
         /// <summary>
@@ -83,7 +87,10 @@ namespace lib12.Extensions
         /// <returns></returns>
         public static bool ContainsIgnoreCase(this string text, string toCheck)
         {
-            return text.Recover().IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
+            if (text == null || toCheck == null)
+                return false;
+
+            return text.IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>
@@ -124,7 +131,7 @@ namespace lib12.Extensions
             while ((position = source.IndexOf(text, position, stringComparison)) != -1)
             {
                 position += text.Length;
-                count += 1;
+                count++;
             }
 
             return count;
@@ -148,6 +155,19 @@ namespace lib12.Extensions
                 yield return position;
                 position += text.Length;
             }
+        }
+
+        /// <summary>
+        /// Capitalizes the strings, specificly the first letter of it.
+        /// </summary>
+        /// <param name="source">The source string to capitalize</param>
+        /// <returns></returns>
+        public static string Capitalize(this string source)
+        {
+            if (source.IsNullOrEmpty())
+                return source;
+
+            return source[0].ToString().ToUpper() + source.Substring(1);
         }
     }
 }

@@ -8,51 +8,26 @@ namespace lib12.Data.QueryBuilding.Builders
     /// <summary>
     /// Fluent sql commands builder
     /// </summary>
-    public class SqlBuilder
+    public static class SqlBuilder
     {
         /// <summary>
         /// Builds SELECT query
         /// </summary>
-        public static ISelect Select
-        {
-            get
-            {
-                return new SelectBuilder();
-            }
-        }
+        public static ISelect Select => new SelectBuilder();
 
         /// <summary>
         /// Builds UPDATE command
         /// </summary>
-        public static IUpdate Update
-        {
-            get
-            {
-                return new UpdateBuilder();
-            }
-        }
+        public static IUpdate Update => new UpdateBuilder();
 
         /// <summary>
         /// Builds DELETE command
         /// </summary>
-        public static IDelete Delete
-        {
-            get
-            {
-                return new DeleteBuilder();
-            }
-        }
-
+        public static IDelete Delete => new DeleteBuilder();
 
         /// <summary>
         /// Builds INSERT command
         /// </summary>
-        public static IInsert Insert
-        {
-            get
-            {
-                return new InsertBuilder();
-            }
-        }
+        public static IInsert Insert => new InsertBuilder();
     }
 }
