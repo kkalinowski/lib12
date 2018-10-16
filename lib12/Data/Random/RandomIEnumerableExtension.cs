@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using lib12.Collections;
 
@@ -13,14 +14,14 @@ namespace lib12.Data.Random
         /// Returns a random item from given collection
         /// </summary>
         /// <typeparam name="T">Type of objects in collection</typeparam>
-        /// <param name="enumerable">The collection to return from</param>
+        /// <param name="source">The collection to return from</param>
         /// <returns></returns>
-        public static T GetRandomItem<T>(this IEnumerable<T> enumerable)
+        public static T GetRandomItem<T>(this IEnumerable<T> source)
         {
-            if (enumerable.IsNullOrEmpty())
-                return default(T);
+            if (source.IsNullOrEmpty())
+                throw new ArgumentException("Source collection cannot be null or empty");
 
-            return enumerable.ElementAt(Rand.NextInt(enumerable.Count()));
+            return source.ElementAt(Rand.NextInt(source.Count()));
         }
     }
 }
