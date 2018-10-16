@@ -42,7 +42,7 @@ namespace lib12.Collections.Paging
         /// <param name="source">The source collection</param>
         /// <param name="itemsPerPage">Items per page</param>
         /// <returns></returns>
-        public static int GetNumberOfPages<T>(IEnumerable<T> source, int itemsPerPage)
+        public static int GetNumberOfPages<T>(this IEnumerable<T> source, int itemsPerPage)
         {
             var itemsCount = (double)source.Recover().Count();
             return (int)Math.Ceiling(itemsCount / itemsPerPage);
@@ -56,7 +56,7 @@ namespace lib12.Collections.Paging
         /// <param name="pageNumber">The page number</param>
         /// <param name="itemsPerPage">Items per page</param>
         /// <returns></returns>
-        public static T[] GetPageItems<T>(IEnumerable<T> source, int pageNumber, int itemsPerPage)
+        public static T[] GetPageItems<T>(this IEnumerable<T> source, int pageNumber, int itemsPerPage)
         {
             return source
                 .Recover()
