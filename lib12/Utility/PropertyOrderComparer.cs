@@ -6,47 +6,36 @@ namespace lib12.Utility
     /// <summary>
     /// Compares two objects for order based on single property value
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    public class PropertyOrderComparer<TSource> : IComparer<TSource> where TSource : class
+    public static class PropertyOrderComparer
     {
-        private readonly Func<TSource, object> _selector;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyOrderComparer{TSource}"/> class.
+        /// Creates comparer for given type and its property
         /// </summary>
-        /// <param name="selector">The key extractor.</param>
-        public PropertyOrderComparer(Func<TSource, object> selector)
-        {
-            _selector = selector;
-        }
-
-        /// <summary>
-        /// Creates order comparer for given type using selector
-        /// </summary>
-        /// <typeparam name="TSource">Type of object to compare</typeparam>
-        /// <param name="selector">Selector of value to compare</param>
+        /// <typeparam name="TSource">The source type</typeparam>
+        /// <param name="selector">The selector for property to compare</param>
         /// <returns></returns>
-        public static PropertyOrderComparer<TSource> For<TSource>(Func<TSource, object> selector) where TSource : class
+        public static IComparer<TSource> For<TSource>(Func<TSource, object> selector)
+            where TSource : class
         {
             if (selector == null)
                 throw new ArgumentNullException(nameof(selector));
 
-            return new PropertyOrderComparer<TSource>(selector);
-        }
-
-        /// <inheritdoc />
-        public int Compare(TSource x, TSource y)
-        {
-            return Comparer<object>.Default.Compare(_selector(x), _selector(y));
+            return new PropertyOrderComparerImplementation<TSource>(selector);
         }
     }
 
-    public class Factory
+    internal class PropertyOrderComparerImplementation<TSource> : IComparer<TSource> where TSource : class
     {
-        public static IComparer<TSource> For<TSource>(Func<TSource, object> selector)
-            where TSource : class
+        private readonly Func<TSource, object> _selector;
+
+        public PropertyOrderComparerImplementation(Func<TSource, object> selector)
         {
-            return new PropertyOrderComparer<TSource>(selector);
+            _selector = selector;
+        }
+
+        public int Compare(TSource x, TSource y)
+        {
+            return Comparer<object>.Default.Compare(_selector(x), _selector(y));
         }
     }
 }

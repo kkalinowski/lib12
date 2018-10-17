@@ -16,13 +16,22 @@ namespace lib12.Tests.Utility
         }
 
         [Fact]
+        public void throws_exception_if_selector_is_null()
+        {
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                PropertyOrderComparer.For<string>(null);
+            });
+        }
+
+        [Fact]
         public void compare_two_string_by_length()
         {
             const string string1 = "lorem xyz";
             const string string2 = "ipsum";
-            var comparer = new PropertyOrderComparer<string>(x => x.Length);
+            var comparer = PropertyOrderComparer.For<string>(x => x.Length);
 
-            Factory.For<string>(x => x.Length);
             comparer.Compare(string1, string2).ShouldBe(1);
         }
 
@@ -38,7 +47,7 @@ namespace lib12.Tests.Utility
                 Nested = new CompareTarget { Value = 12 }
             };
 
-            var comparer = new PropertyOrderComparer<CompareTarget>(x => x.Nested);
+            var comparer = PropertyOrderComparer.For<CompareTarget>(x => x.Nested);
 
             Assert.Throws<ArgumentException>(() => comparer.Compare(obj1, obj2));
         }
@@ -52,7 +61,7 @@ namespace lib12.Tests.Utility
             var unordered = Pack.IntoArray(string1, string2, string3);
             
             var ordered = unordered
-                .OrderBy(x => x, Factory.For<string>(x => x.Length))
+                .OrderBy(x => x, PropertyOrderComparer.For<string>(x => x.Length))
                 .ToArray();
 
             ordered[0].ShouldBe(string2);
