@@ -7,29 +7,23 @@ namespace lib12.Utility
     /// Compares two objects for equality based on single property value
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PropertyEqualityComparer<T> : IEqualityComparer<T> where T : class
+    public class PropertyOrderComparer<T> : IComparer<T> where T : class
     {
         private readonly Func<T, object> _keyExtractor;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyEqualityComparer{T}"/> class.
+        /// Initializes a new instance of the <see cref="PropertyOrderComparer{T}"/> class.
         /// </summary>
         /// <param name="keyExtractor">The key extractor.</param>
-        public PropertyEqualityComparer(Func<T, object> keyExtractor)
+        public PropertyOrderComparer(Func<T, object> keyExtractor)
         {
             _keyExtractor = keyExtractor;
         }
 
         /// <inheritdoc />
-        public bool Equals(T x, T y)
+        public int Compare(T x, T y)
         {
-            return _keyExtractor(x).Equals(_keyExtractor(y));
-        }
-
-        /// <inheritdoc />        
-        public int GetHashCode(T obj)
-        {
-            return _keyExtractor(obj).GetHashCode();
+            return Comparer<T>.Default.Compare(x, y);
         }
     }
 }
