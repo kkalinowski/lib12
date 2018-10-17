@@ -6,27 +6,42 @@ namespace lib12.Utility
     /// <summary>
     /// Compares two objects for equality based on single property value
     /// </summary>
+    public static class PropertyEqualityComparer
+    {
+        /// <summary>
+        /// Creates comparer for given type and its property
+        /// </summary>
+        /// <typeparam name="TSource">The source type</typeparam>
+        /// <param name="selector">The selector for property to compare</param>
+        /// <returns></returns>
+        public static IEqualityComparer<TSource> For<TSource>(Func<TSource, object> selector)
+            where TSource : class
+        {
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
+
+            return new PropertyEqualityComparerImplementation<TSource>(selector);
+        }
+    }
+
+    /// <summary>
+    /// Compares two objects for equality based on single property value
+    /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PropertyEqualityComparer<T> : IEqualityComparer<T> where T : class
+    internal class PropertyEqualityComparerImplementation<T> : IEqualityComparer<T> where T : class
     {
         private readonly Func<T, object> _keyExtractor;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyEqualityComparer{T}"/> class.
-        /// </summary>
-        /// <param name="keyExtractor">The key extractor.</param>
-        public PropertyEqualityComparer(Func<T, object> keyExtractor)
+        public PropertyEqualityComparerImplementation(Func<T, object> keyExtractor)
         {
             _keyExtractor = keyExtractor;
         }
 
-        /// <inheritdoc />
         public bool Equals(T x, T y)
         {
             return _keyExtractor(x).Equals(_keyExtractor(y));
         }
 
-        /// <inheritdoc />        
         public int GetHashCode(T obj)
         {
             return _keyExtractor(obj).GetHashCode();
