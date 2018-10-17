@@ -7,6 +7,7 @@ namespace lib12.Utility
     /// Compares two objects based on property value
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Obsolete("Use PropertyEqualityComparer instead")]
     public class PropertyComparer<T> : IEqualityComparer<T> where T : class
     {
         private readonly Func<T, object> keyExtractor;
