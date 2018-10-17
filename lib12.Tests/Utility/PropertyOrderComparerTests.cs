@@ -2,6 +2,7 @@
 using System.Linq;
 using lib12.Collections.Packing;
 using lib12.Utility;
+using lib12.Utility.Compare;
 using Shouldly;
 using Xunit;
 
@@ -18,7 +19,6 @@ namespace lib12.Tests.Utility
         [Fact]
         public void throws_exception_if_selector_is_null()
         {
-
             Assert.Throws<ArgumentNullException>(() =>
             {
                 PropertyOrderComparer.For<string>(null);

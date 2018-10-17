@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lib12.Utility
+namespace lib12.Utility.Compare
 {
     /// <summary>
     /// Compares two objects for order based on single property value
