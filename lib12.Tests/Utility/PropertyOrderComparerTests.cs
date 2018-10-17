@@ -10,7 +10,9 @@ namespace lib12.Tests.Utility
         {
             const string string1 = "lorem";
             const string string2 = "ipsum";
-            var comparer = PropertyOrderComparer<string, int>.For<string>(x => x.Length);
+            var comparer = PropertyOrderComparer<string, int>.For<string, int>(x => x.Length);
+            var comparer2 = Factory.For<string, int>(x => x.Length);
+            var comparer3 = new PropertyOrderComparer<string, int>(x=>x.Length);
 
             //Assert.True(comparer.Equals(string1, string2));
         }

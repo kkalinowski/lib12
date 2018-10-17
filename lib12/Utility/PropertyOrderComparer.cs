@@ -27,7 +27,7 @@ namespace lib12.Utility
         /// <typeparam name="TSource">Type of object to compare</typeparam>
         /// <param name="selector">Selector of value to compare</param>
         /// <returns></returns>
-        public static PropertyOrderComparer<TSource, TKey> For<TSource>(Func<TSource, TKey> selector) where TSource : class
+        public static PropertyOrderComparer<TSource, TKey> For<TSource, TKey>(Func<TSource, TKey> selector) where TSource : class
         {
             if (selector == null)
                 throw new ArgumentNullException(nameof(selector));
@@ -39,6 +39,15 @@ namespace lib12.Utility
         public int Compare(TSource x, TSource y)
         {
             return Comparer<TKey>.Default.Compare(_selector(x), _selector(y));
+        }
+    }
+
+    public class Factory
+    {
+        public static PropertyOrderComparer<TSource, TKey> For<TSource, TKey>(Func<TSource, TKey> selector)
+            where TSource : class
+        {
+            return new PropertyOrderComparer<TSource, TKey>(selector);
         }
     }
 }
