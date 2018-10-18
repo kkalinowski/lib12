@@ -17,9 +17,21 @@ namespace lib12.Extensions
         /// <param name="target"></param>
         /// <param name="toCompare"></param>
         /// <returns></returns>
+        [Obsolete("Use EqualsInsensitiveCase instead")]
         public static bool EqualsIgnoreCase(this string target, string toCompare)
         {
             return target.Equals(toCompare, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Check if strings are equal using ordinal comparison ignoring case
+        /// </summary>
+        /// <param name="source">Source string</param>
+        /// <param name="toCompare">String to compare</param>
+        /// <returns></returns>
+        public static bool EqualsInsensitiveCase(this string source, string toCompare)
+        {
+            return string.Equals(source, toCompare, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -28,9 +40,21 @@ namespace lib12.Extensions
         /// <param name="target"></param>
         /// <param name="toCompare"></param>
         /// <returns></returns>
+        [Obsolete("Use EqualsSensitiveCase instead")]
         public static bool EqualsMatchCase(this string target, string toCompare)
         {
             return string.Equals(target, toCompare, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Check if strings are equal using ordinal comparison taking case into account
+        /// </summary>
+        /// <param name="source">Source string</param>
+        /// <param name="toCompare">String to compare</param>
+        /// <returns></returns>
+        public static bool EqualsSensitiveCase(this string source, string toCompare)
+        {
+            return string.Equals(source, toCompare, StringComparison.Ordinal);
         }
 
         /// <summary>

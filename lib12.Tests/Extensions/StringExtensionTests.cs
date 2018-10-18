@@ -21,6 +21,34 @@ namespace lib12.Tests.Extensions
             test.Recover().ShouldBe(test);
         }
 
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData(null, "abc", false)]
+        [InlineData("abc", null, false)]
+        [InlineData(null, "", false)]
+        [InlineData("", null, false)]
+        [InlineData("", "", true)]
+        [InlineData("abc", "abc", true)]
+        [InlineData("abc", "aBc", true)]
+        public void EqualsInsensitiveCase_is_correct(string first, string second, bool expectedResult)
+        {
+            first.EqualsInsensitiveCase(second).ShouldBe(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData(null, "abc", false)]
+        [InlineData("abc", null, false)]
+        [InlineData(null, "", false)]
+        [InlineData("", null, false)]
+        [InlineData("", "", true)]
+        [InlineData("abc", "abc", true)]
+        [InlineData("abc", "aBc", false)]
+        public void EqualsSensitiveCase_is_correct(string first, string second, bool expectedResult)
+        {
+            first.EqualsSensitiveCase(second).ShouldBe(expectedResult);
+        }
+
         [Fact]
         public void equalsignorecase_two_equal_same_case_returns_true()
         {
