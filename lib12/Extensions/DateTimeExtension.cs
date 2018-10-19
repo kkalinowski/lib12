@@ -60,5 +60,15 @@ namespace lib12.Extensions
         {
             return source.AddMonths(3 * value);
         }
+
+        /// <summary>
+        /// Gets standard calendar quarter number
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns></returns>
+        public static int GetQuarter(this DateTime source)
+        {
+            return (int)Math.Ceiling(source.Month / 3.0);
+        }
     }
 }

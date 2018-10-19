@@ -56,5 +56,13 @@ namespace lib12.Tests.Extensions
             new DateTime(2018, 10, 16).AddQuarters(-1).ShouldBe(new DateTime(2018, 7, 16));
             new DateTime(2018, 10, 17).AddQuarters(0).ShouldBe(new DateTime(2018, 10, 17));
         }
+
+        [Fact]
+        public void GetQuarter_is_correct()
+        {
+            new DateTime(2018, 10, 19).GetQuarter().ShouldBe(4);
+            new DateTime(2019, 1, 10).GetQuarter().ShouldBe(1);
+            new DateTime(2018, 6, 17).GetQuarter().ShouldBe(2);
+        }
     }
 }
