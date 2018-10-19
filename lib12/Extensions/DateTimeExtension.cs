@@ -1,4 +1,5 @@
 ﻿using System;
+using lib12.Checking;
 
 namespace lib12.Extensions
 {
@@ -93,6 +94,30 @@ namespace lib12.Extensions
         public static bool IsInTheFuture(this DateTime source)
         {
             return source > DateTime.Now;
+        }
+
+        /// <summary>
+        /// Determines whether given datetime is workday.
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns>
+        ///   <c>true</c> if the specified source is workday; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsWorkday(this DateTime source)
+        {
+            return source.DayOfWeek.IsNotAnyOf(DayOfWeek.Saturday, DayOfWeek.Sunday);
+        }
+
+        /// <summary>
+        /// Determines whether given datetime is weekend.
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns>
+        ///   <c>true</c> if the specified source is weekend; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsWeekend(this DateTime source)
+        {
+            return source.DayOfWeek.IsAnyOf(DayOfWeek.Saturday, DayOfWeek.Sunday);
         }
     }
 }

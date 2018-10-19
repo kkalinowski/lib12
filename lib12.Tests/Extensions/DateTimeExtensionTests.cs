@@ -11,7 +11,7 @@ namespace lib12.Tests.Extensions
         public void datetime_converts_properly_to_unix_timestamp()
         {
             var dateTime = new DateTime(2014, 01, 30, 12, 0, 0);
-
+            
             dateTime.ToUnixTimeStamp().ShouldBe(1391083200);
         }
 
@@ -77,6 +77,20 @@ namespace lib12.Tests.Extensions
         {
             new DateTime(2018, 10, 18).IsInTheFuture().ShouldBeFalse();
             new DateTime(2118, 11, 12).IsInTheFuture().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void IsWorkday_is_correct()
+        {
+            new DateTime(2018, 10, 18).IsWorkday().ShouldBeTrue();
+            new DateTime(2018, 10, 21).IsWorkday().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void IsWeekend_is_correct()
+        {
+            new DateTime(2018, 10, 18).IsWeekend().ShouldBeFalse();
+            new DateTime(2018, 10, 21).IsWeekend().ShouldBeTrue();
         }
     }
 }
