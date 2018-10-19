@@ -70,5 +70,29 @@ namespace lib12.Extensions
         {
             return (int)Math.Ceiling(source.Month / 3.0);
         }
+
+        /// <summary>
+        /// Checks if given datetime contains past datetime
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns>
+        ///   <c>true</c> if [is in the past] [the specified source]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsInThePast(this DateTime source)
+        {
+            return source < DateTime.Now;
+        }
+
+        /// <summary>
+        /// Checks if given datetime contains future datetime
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns>
+        ///   <c>true</c> if [is in the future] [the specified source]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsInTheFuture(this DateTime source)
+        {
+            return source > DateTime.Now;
+        }
     }
 }

@@ -64,5 +64,19 @@ namespace lib12.Tests.Extensions
             new DateTime(2019, 1, 10).GetQuarter().ShouldBe(1);
             new DateTime(2018, 6, 17).GetQuarter().ShouldBe(2);
         }
+
+        [Fact]
+        public void IsInThePast_is_correct()
+        {
+            new DateTime(2018, 10, 18).IsInThePast().ShouldBeTrue();
+            new DateTime(2118, 11, 12).IsInThePast().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void IsInTheFuture_is_correct()
+        {
+            new DateTime(2018, 10, 18).IsInTheFuture().ShouldBeFalse();
+            new DateTime(2118, 11, 12).IsInTheFuture().ShouldBeTrue();
+        }
     }
 }
