@@ -49,5 +49,16 @@ namespace lib12.Extensions
         {
             return source.AddDays(7 * value);
         }
+
+        /// <summary>
+        /// Returns a new DateTime objects with added quarters
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <param name="value">The value of quarters to add, can be negative</param>
+        /// <returns></returns>
+        public static DateTime AddQuarters(this DateTime source, int value)
+        {
+            return source.AddMonths(3 * value);
+        }
     }
 }
