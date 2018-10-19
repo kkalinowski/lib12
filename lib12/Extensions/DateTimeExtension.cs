@@ -38,5 +38,16 @@ namespace lib12.Extensions
         {
             return target == default(DateTime);
         }
+
+        /// <summary>
+        /// Returns a new DateTime objects with added weeks
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <param name="value">The value of weeks to add, can be negative</param>
+        /// <returns></returns>
+        public static DateTime AddWeeks(this DateTime source, double value)
+        {
+            return source.AddDays(7 * value);
+        }
     }
 }

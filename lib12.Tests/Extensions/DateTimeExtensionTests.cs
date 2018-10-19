@@ -39,5 +39,14 @@ namespace lib12.Tests.Extensions
         {
             new DateTime(1900, 3, 25).IsDefault().ShouldBeFalse();
         }
+
+        [Fact]
+        public void AddWeeks_is_correct()
+        {
+            new DateTime(2018, 10, 19).AddWeeks(2).ShouldBe(new DateTime(2018, 11, 2));
+            new DateTime(2018, 10, 16).AddWeeks(-1).ShouldBe(new DateTime(2018, 10, 9));
+            new DateTime(2018, 10, 17).AddWeeks(0).ShouldBe(new DateTime(2018, 10, 17));
+            new DateTime(2018, 10, 19).AddWeeks(1.5).ShouldBe(new DateTime(2018, 10, 29, 12, 0, 0));
+        }
     }
 }
