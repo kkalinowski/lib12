@@ -96,7 +96,7 @@ namespace lib12.Extensions
         /// <returns>
         ///   <c>true</c> if [is in the past] [the specified source]; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsInThePast(this DateTime source)
+        public static bool IsInPast(this DateTime source)
         {
             return source < DateTime.Now;
         }
@@ -108,7 +108,7 @@ namespace lib12.Extensions
         /// <returns>
         ///   <c>true</c> if [is in the future] [the specified source]; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsInTheFuture(this DateTime source)
+        public static bool IsInFuture(this DateTime source)
         {
             return source > DateTime.Now;
         }

@@ -76,17 +76,17 @@ namespace lib12.Tests.Extensions
         }
 
         [Fact]
-        public void IsInThePast_is_correct()
+        public void IsInPast_is_correct()
         {
-            new DateTime(2018, 10, 18).IsInThePast().ShouldBeTrue();
-            new DateTime(2118, 11, 12).IsInThePast().ShouldBeFalse();
+            new DateTime(2018, 10, 18).IsInPast().ShouldBeTrue();
+            new DateTime(2118, 11, 12).IsInPast().ShouldBeFalse();
         }
 
         [Fact]
-        public void IsInTheFuture_is_correct()
+        public void IsInFuture_is_correct()
         {
-            new DateTime(2018, 10, 18).IsInTheFuture().ShouldBeFalse();
-            new DateTime(2118, 11, 12).IsInTheFuture().ShouldBeTrue();
+            new DateTime(2018, 10, 18).IsInFuture().ShouldBeFalse();
+            new DateTime(2118, 11, 12).IsInFuture().ShouldBeTrue();
         }
 
         [Fact]
