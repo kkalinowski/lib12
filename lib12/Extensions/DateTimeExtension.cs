@@ -136,5 +136,26 @@ namespace lib12.Extensions
         {
             return source.DayOfWeek.IsAnyOf(DayOfWeek.Saturday, DayOfWeek.Sunday);
         }
+
+        /// <summary>
+        /// Get the start of month from given date. Takes time into account.
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns></returns>
+        public static DateTime GetStartOfMonth(this DateTime source)
+        {
+            return new DateTime(source.Year, source.Month, 1);
+        }
+
+        /// <summary>
+        /// Get the end of month from given date. Takes time into account.
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns></returns>
+        public static DateTime GetEndOfMonth(this DateTime source)
+        {
+            var lastDayInMonth = DateTime.DaysInMonth(source.Year, source.Month);
+            return new DateTime(source.Year, source.Month, lastDayInMonth, 23, 59, 59);
+        }
     }
 }

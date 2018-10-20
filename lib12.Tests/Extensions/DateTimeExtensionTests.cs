@@ -102,5 +102,19 @@ namespace lib12.Tests.Extensions
             new DateTime(2018, 10, 18).IsWeekend().ShouldBeFalse();
             new DateTime(2018, 10, 21).IsWeekend().ShouldBeTrue();
         }
+
+        [Fact]
+        public void GetStartOfMonth_is_correct()
+        {
+            new DateTime(2018, 10, 18).GetStartOfMonth().ShouldBe(new DateTime(2018, 10, 1));
+            new DateTime(2019, 2, 21).GetStartOfMonth().ShouldBe(new DateTime(2019, 2, 1));
+        }
+
+        [Fact]
+        public void GetEndOfMonth_is_correct()
+        {
+            new DateTime(2018, 10, 18).GetEndOfMonth().ShouldBe(new DateTime(2018, 10, 31, 23, 59, 59));
+            new DateTime(2000, 2, 21).GetEndOfMonth().ShouldBe(new DateTime(2000, 2, 29, 23, 59, 59));
+        }
     }
 }
