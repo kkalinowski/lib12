@@ -50,6 +50,16 @@ namespace lib12.Tests.Extensions
         }
 
         [Fact]
+        public void GetWeek_is_correct()
+        {
+            new DateTime(2018, 10, 19).GetWeek().ShouldBe(42);
+            new DateTime(2019, 1, 10).GetWeek().ShouldBe(2);
+            new DateTime(2019, 1, 3).GetWeek().ShouldBe(1);
+            new DateTime(2012, 12, 31).GetWeek().ShouldBe(1);
+            new DateTime(2016, 1, 2).GetWeek().ShouldBe(53);
+        }
+
+        [Fact]
         public void AddQuarters_is_correct()
         {
             new DateTime(2018, 10, 19).AddQuarters(2).ShouldBe(new DateTime(2019, 4, 19));

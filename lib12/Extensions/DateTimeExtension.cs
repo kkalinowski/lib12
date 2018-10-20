@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using lib12.Checking;
 
 namespace lib12.Extensions
@@ -49,6 +50,22 @@ namespace lib12.Extensions
         public static DateTime AddWeeks(this DateTime source, double value)
         {
             return source.AddDays(7 * value);
+        }
+
+        /// <summary>
+        /// Get the week number according to ISO8601 standard
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns></returns>
+        public static int GetWeek(this DateTime source)
+        {
+            //credits to https://stackoverflow.com/a/11155102/578560
+            var day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(source);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+                source = source.AddDays(3);
+
+            return CultureInfo.InvariantCulture.Calendar
+                .GetWeekOfYear(source, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
 
         /// <summary>
