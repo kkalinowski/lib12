@@ -104,16 +104,37 @@ namespace lib12.Tests.Extensions
         }
 
         [Fact]
+        public void GetStartOfWeek_is_correct()
+        {
+            new DateTime(2018, 10, 18, 14, 56, 10).GetStartOfWeek().ShouldBe(new DateTime(2018, 10, 15));
+            new DateTime(2018, 10, 8).GetStartOfWeek().ShouldBe(new DateTime(2018, 10, 8));
+            new DateTime(2018, 10, 14).GetStartOfWeek().ShouldBe(new DateTime(2018, 10, 8));
+            new DateTime(2012, 12, 31).GetStartOfWeek().ShouldBe(new DateTime(2012, 12, 31));
+            new DateTime(2016, 1, 2).GetStartOfWeek().ShouldBe(new DateTime(2015, 12, 28));
+        }
+
+        [Fact]
+        public void GetEndOfWeek_is_correct()
+        {
+            new DateTime(2018, 10, 18, 14, 56, 10).GetEndOfWeek().ShouldBe(new DateTime(2018, 10, 21, 23, 59, 59));
+            new DateTime(2000, 2, 21).GetEndOfWeek().ShouldBe(new DateTime(2000, 2, 27, 23, 59, 59));
+            new DateTime(2018, 10, 8).GetEndOfWeek().ShouldBe(new DateTime(2018, 10, 14, 23, 59, 59));
+            new DateTime(2018, 10, 14).GetEndOfWeek().ShouldBe(new DateTime(2018, 10, 14, 23, 59, 59));
+            new DateTime(2012, 12, 31).GetEndOfWeek().ShouldBe(new DateTime(2013, 1, 6, 23, 59, 59));
+            new DateTime(2016, 1, 2).GetEndOfWeek().ShouldBe(new DateTime(2016, 1, 3, 23, 59, 59));
+        }
+
+        [Fact]
         public void GetStartOfMonth_is_correct()
         {
-            new DateTime(2018, 10, 18).GetStartOfMonth().ShouldBe(new DateTime(2018, 10, 1));
+            new DateTime(2018, 10, 18, 14, 56, 10).GetStartOfMonth().ShouldBe(new DateTime(2018, 10, 1));
             new DateTime(2019, 2, 21).GetStartOfMonth().ShouldBe(new DateTime(2019, 2, 1));
         }
 
         [Fact]
         public void GetEndOfMonth_is_correct()
         {
-            new DateTime(2018, 10, 18).GetEndOfMonth().ShouldBe(new DateTime(2018, 10, 31, 23, 59, 59));
+            new DateTime(2018, 10, 18, 14, 56, 10).GetEndOfMonth().ShouldBe(new DateTime(2018, 10, 31, 23, 59, 59));
             new DateTime(2000, 2, 21).GetEndOfMonth().ShouldBe(new DateTime(2000, 2, 29, 23, 59, 59));
         }
     }

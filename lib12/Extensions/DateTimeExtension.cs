@@ -138,6 +138,29 @@ namespace lib12.Extensions
         }
 
         /// <summary>
+        /// Get the start of week from given date. Takes time into account.
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns></returns>
+        public static DateTime GetStartOfWeek(this DateTime source)
+        {
+            //credits to https://stackoverflow.com/a/38064/578560
+            var diff = (7 + (source.DayOfWeek - DayOfWeek.Monday)) % 7;
+            return source.AddDays(-1 * diff).Date;
+        }
+
+        /// <summary>
+        /// Get the end of week from given date. Takes time into account.
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        /// <returns></returns>
+        public static DateTime GetEndOfWeek(this DateTime source)
+        {
+            var lastDay = source.GetStartOfWeek().AddDays(6);
+            return new DateTime(lastDay.Year, lastDay.Month, lastDay.Day, 23, 59, 59);
+        }
+
+        /// <summary>
         /// Get the start of month from given date. Takes time into account.
         /// </summary>
         /// <param name="source">The source datetime</param>
