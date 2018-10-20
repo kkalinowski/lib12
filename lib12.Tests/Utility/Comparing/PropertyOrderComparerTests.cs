@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
 using lib12.Collections.Packing;
-using lib12.Utility;
-using lib12.Utility.Compare;
+using lib12.Utility.Comparing;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Tests.Utility
+namespace lib12.Tests.Utility.Comparing
 {
     public class PropertyOrderComparerTests
     {
