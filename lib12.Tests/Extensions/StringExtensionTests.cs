@@ -30,9 +30,9 @@ namespace lib12.Tests.Extensions
         [InlineData("", "", true)]
         [InlineData("abc", "abc", true)]
         [InlineData("abc", "aBc", true)]
-        public void EqualsInsensitiveCase_is_correct(string first, string second, bool expectedResult)
+        public void EqualsCaseInsensitive_is_correct(string first, string second, bool expectedResult)
         {
-            first.EqualsInsensitiveCase(second).ShouldBe(expectedResult);
+            first.EqualsCaseInsensitive(second).ShouldBe(expectedResult);
         }
 
         [Theory]
@@ -44,9 +44,9 @@ namespace lib12.Tests.Extensions
         [InlineData("", "", true)]
         [InlineData("abc", "abc", true)]
         [InlineData("abc", "aBc", false)]
-        public void EqualsSensitiveCase_is_correct(string first, string second, bool expectedResult)
+        public void EqualsCaseSensitive_is_correct(string first, string second, bool expectedResult)
         {
-            first.EqualsSensitiveCase(second).ShouldBe(expectedResult);
+            first.EqualsCaseSensitive(second).ShouldBe(expectedResult);
         }
 
         [Fact]
@@ -146,9 +146,9 @@ namespace lib12.Tests.Extensions
         [InlineData("", "text", false)]
         [InlineData("sample text", "text", true)]
         [InlineData("sample Text", "text", true)]
-        public void ContainsInsensitiveCase_is_correct(string source, string toCheck, bool expectedResult)
+        public void ContainsCaseInsensitive_is_correct(string source, string toCheck, bool expectedResult)
         {
-            source.ContainsInsensitiveCase(toCheck).ShouldBe(expectedResult);
+            source.ContainsCaseInsensitive(toCheck).ShouldBe(expectedResult);
         }
 
         [Fact]

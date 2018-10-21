@@ -123,27 +123,27 @@ namespace lib12.Data.Random
 
         private static string GenerateStringProperty(string propertyName)
         {
-            if (propertyName.EqualsInsensitiveCase("Name"))
+            if (propertyName.EqualsCaseInsensitive("Name"))
                 return NextName();
-            else if (propertyName.EqualsInsensitiveCase("MaleName"))
+            else if (propertyName.EqualsCaseInsensitive("MaleName"))
                 return NextMaleName();
-            else if (propertyName.EqualsInsensitiveCase("FemaleName"))
+            else if (propertyName.EqualsCaseInsensitive("FemaleName"))
                 return NextFemaleName();
-            else if (propertyName.EqualsInsensitiveCase("Surname"))
+            else if (propertyName.EqualsCaseInsensitive("Surname"))
                 return NextSurname();
-            else if (propertyName.EqualsInsensitiveCase("Email"))
+            else if (propertyName.EqualsCaseInsensitive("Email"))
                 return NextEmail();
-            else if (propertyName.EqualsInsensitiveCase("FullName"))
+            else if (propertyName.EqualsCaseInsensitive("FullName"))
                 return NextFullName();
-            else if (propertyName.EqualsInsensitiveCase("Country"))
+            else if (propertyName.EqualsCaseInsensitive("Country"))
                 return NextCountry();
-            else if (propertyName.EqualsInsensitiveCase("City"))
+            else if (propertyName.EqualsCaseInsensitive("City"))
                 return NextCity();
-            else if (propertyName.EqualsInsensitiveCase("Address"))
+            else if (propertyName.EqualsCaseInsensitive("Address"))
                 return NextAddress();
-            else if (propertyName.EqualsInsensitiveCase("ZipCode"))
+            else if (propertyName.EqualsCaseInsensitive("ZipCode"))
                 return NextZipCode();
-            else if (propertyName.EqualsInsensitiveCase("Company"))
+            else if (propertyName.EqualsCaseInsensitive("Company"))
                 return NextCompany();
             else
                 return NextString();

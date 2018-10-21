@@ -16,7 +16,7 @@ namespace lib12.Extensions
         /// <param name="target"></param>
         /// <param name="toCompare"></param>
         /// <returns></returns>
-        [Obsolete("Use EqualsInsensitiveCase instead")]
+        [Obsolete("Use EqualsCaseInsensitive instead")]
         public static bool EqualsIgnoreCase(this string target, string toCompare)
         {
             return target.Equals(toCompare, StringComparison.OrdinalIgnoreCase);
@@ -28,7 +28,7 @@ namespace lib12.Extensions
         /// <param name="source">Source string</param>
         /// <param name="toCompare">String to compare</param>
         /// <returns></returns>
-        public static bool EqualsInsensitiveCase(this string source, string toCompare)
+        public static bool EqualsCaseInsensitive(this string source, string toCompare)
         {
             return string.Equals(source, toCompare, StringComparison.OrdinalIgnoreCase);
         }
@@ -39,7 +39,7 @@ namespace lib12.Extensions
         /// <param name="target"></param>
         /// <param name="toCompare"></param>
         /// <returns></returns>
-        [Obsolete("Use EqualsSensitiveCase instead")]
+        [Obsolete("Use EqualsCaseSensitive instead")]
         public static bool EqualsMatchCase(this string target, string toCompare)
         {
             return string.Equals(target, toCompare, StringComparison.Ordinal);
@@ -51,7 +51,7 @@ namespace lib12.Extensions
         /// <param name="source">Source string</param>
         /// <param name="toCompare">String to compare</param>
         /// <returns></returns>
-        public static bool EqualsSensitiveCase(this string source, string toCompare)
+        public static bool EqualsCaseSensitive(this string source, string toCompare)
         {
             return string.Equals(source, toCompare, StringComparison.Ordinal);
         }
@@ -108,7 +108,7 @@ namespace lib12.Extensions
         /// <param name="text"></param>
         /// <param name="toCheck">Text to search</param>
         /// <returns></returns>
-        public static bool ContainsInsensitiveCase(this string text, string toCheck)
+        public static bool ContainsCaseInsensitive(this string text, string toCheck)
         {
             if (text == null || toCheck == null)
                 return false;
@@ -122,7 +122,7 @@ namespace lib12.Extensions
         /// <param name="text"></param>
         /// <param name="toCheck">Text to search</param>
         /// <returns></returns>
-        [Obsolete("Use ContainsInsensitiveCase")]
+        [Obsolete("Use ContainsCaseInsensitive")]
         public static bool ContainsIgnoreCase(this string text, string toCheck)
         {
             if (text == null || toCheck == null)
