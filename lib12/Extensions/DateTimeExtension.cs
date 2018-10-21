@@ -134,6 +134,16 @@ namespace lib12.Extensions
         }
 
         /// <summary>
+        /// Calculate todays age of person using given birthdate
+        /// </summary>
+        /// <param name="birthdate">The birthdate.</param>
+        /// <returns></returns>
+        public static int GetAge(this DateTime birthdate)
+        {
+            return DateTime.Today.Year - birthdate.Year;
+        }
+
+        /// <summary>
         /// Checks if given datetime contains past datetime
         /// </summary>
         /// <param name="source">The source datetime</param>
