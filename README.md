@@ -103,7 +103,7 @@ Collections - lib12.Collections
 - lib12.Collections.Empty - creates empty collections using fluent syntax
 - lib12.Collections.Packing - contains class __Pack__ to quickly pack set of loose objects into collection and extension methods for single object to do that
 - lib12.Collections.Paging - contains extension methods GetPage, GetNumberOfPages and GetPageItems to simplify working with paging
-- lib12.Collections namespace contains also extensions for List and Dictionary classes
+- lib12.Collections namespace contains also extensions for ICollection and IDictionary
 
 lib12.Checking
 ---
@@ -127,3 +127,4 @@ lib12.Utility
 - lib12.Utility.IoHelper - additional methods for IO
 - lib12.Utility.Logger - simple logger, that doesn't need additional configuration
 - lib12.Utility.PerformanceCheck - shortcut for benchmarking code
+- lib12.Utility.UnknownEnumException - exception to better interpret  missing case for enum
