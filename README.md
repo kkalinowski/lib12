@@ -6,6 +6,7 @@
 lib12 is set of useful classes and extension created for .NET framework. During my work with .NET framework I created many classes and function that can be reused across different projects. lib12 is using .NET Standard 2.0
 
 Current version available on nuget - https://www.nuget.org/packages/lib12
+My blog describing library setup and content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
 
 Fluent SQL query builder - lib12.Data.QueryBuilding
 --------------------
@@ -110,8 +111,9 @@ Contains __Check__ class to quickly simplify null checking on set objects like _
 
 lib12.Extensions
 ---
-- String - methods like EqualsIgnoreCase, Truncate, ContainsIgnoreCase, RemoveDiacritics or GetNumberOfOccurrences
-- DateTime
+- String - methods like EqualsCaseInsensitive, Truncate, ContainsCaseInsensitive, RemoveDiacritics or GetNumberOfOccurrences
+- DateTime - allows to manipulate weeks and quarter, get start and end of week and month, get persons age or check date (__IsWorkday, IsWeekend, IsInPast, IsInFuture__)
+- Nullable bool - quick checks remove redundant code like __IsTrue__ or __IsNullOrFalse__
 - Func
 
 lib12.Reflection
@@ -120,8 +122,8 @@ Set of extensions to easier work with Reflection
 
 lib12.Utility
 ---
+- lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ can implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer
 - lib12.Utility.Range - generic class for dealing with ranges
-- lib12.Utility.PropertyComparer - implements IEqualityComparer using lambda expressions
 - lib12.Utility.IoHelper - additional methods for IO
 - lib12.Utility.Logger - simple logger, that doesn't need additional configuration
 - lib12.Utility.PerformanceCheck - shortcut for benchmarking code
