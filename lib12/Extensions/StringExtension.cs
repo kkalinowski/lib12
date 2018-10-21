@@ -108,6 +108,21 @@ namespace lib12.Extensions
         /// <param name="text"></param>
         /// <param name="toCheck">Text to search</param>
         /// <returns></returns>
+        public static bool ContainsInsensitiveCase(this string text, string toCheck)
+        {
+            if (text == null || toCheck == null)
+                return false;
+
+            return text.IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        /// <summary>
+        /// Check if given string contains another using OrdinalIgnoreCase comparison
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="toCheck">Text to search</param>
+        /// <returns></returns>
+        [Obsolete("Use ContainsInsensitiveCase")]
         public static bool ContainsIgnoreCase(this string text, string toCheck)
         {
             if (text == null || toCheck == null)

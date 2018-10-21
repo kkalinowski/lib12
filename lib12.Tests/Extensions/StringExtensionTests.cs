@@ -146,9 +146,9 @@ namespace lib12.Tests.Extensions
         [InlineData("", "text", false)]
         [InlineData("sample text", "text", true)]
         [InlineData("sample Text", "text", true)]
-        public void contains_ignore_case_theory(string source, string toCheck, bool expectedResult)
+        public void ContainsInsensitiveCase_is_correct(string source, string toCheck, bool expectedResult)
         {
-            source.ContainsIgnoreCase(toCheck).ShouldBe(expectedResult);
+            source.ContainsInsensitiveCase(toCheck).ShouldBe(expectedResult);
         }
 
         [Fact]
