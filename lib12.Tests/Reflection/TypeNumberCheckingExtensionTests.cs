@@ -87,6 +87,26 @@ namespace lib12.Tests.Reflection
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
+        private class NumberOrNullableNumberData : IEnumerable<object[]>
+        {
+            private readonly List<object[]> _data = new List<object[]>
+            {
+                new object[]{typeof(string), false},
+                new object[]{ typeof(char), false},
+                new object[]{ typeof(bool), false},
+                new object[]{ typeof(bool?), false},
+                new object[]{ typeof(object), false},
+                new object[]{ typeof(int), true},
+                new object[]{ typeof(int?), true},
+                new object[]{ typeof(double), true},
+                new object[]{ typeof(double?), true},
+
+            };
+
+            public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        }
+
         [Theory]
         [ClassData(typeof(FloatingPointNumberData))]
         public void IsFloatingPointNumber_is_correct(object value, bool expectedResult)
@@ -106,6 +126,13 @@ namespace lib12.Tests.Reflection
         public void IsNumber_is_correct(object value, bool expectedResult)
         {
             value.GetType().IsNumber().ShouldBe(expectedResult);
+        }
+
+        [Theory]
+        [ClassData(typeof(NumberOrNullableNumberData))]
+        public void IsNumberOrNullableNumber_is_correct(Type value, bool expectedResult)
+        {
+            value.IsNumberOrNullableNumber().ShouldBe(expectedResult);
         }
     }
 }

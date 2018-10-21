@@ -16,9 +16,20 @@ namespace lib12.Reflection
         /// </summary>
         /// <param name="type">The type to check</param>
         /// <returns></returns>
+        [Obsolete("Use IsNumberOrNullableNumber instead")]
         public static bool IsTypeNumericOrNullableNumeric(this Type type)
         {
             return type.IsTypeNumeric() || type.IsNullable() && Nullable.GetUnderlyingType(type).IsTypeNumeric();
+        }
+
+        /// <summary>
+        /// Determines whether the specified type is number or nullable number
+        /// </summary>
+        /// <param name="type">The type to check</param>
+        /// <returns></returns>
+        public static bool IsNumberOrNullableNumber(this Type type)
+        {
+            return type.IsNumber() || type.IsNullable() && Nullable.GetUnderlyingType(type).IsNumber();
         }
 
         /// <summary>

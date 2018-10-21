@@ -123,27 +123,27 @@ namespace lib12.Data.Random
 
         private static string GenerateStringProperty(string propertyName)
         {
-            if (propertyName.EqualsIgnoreCase("Name"))
+            if (propertyName.EqualsCaseInsensitive("Name"))
                 return NextName();
-            else if (propertyName.EqualsIgnoreCase("MaleName"))
+            else if (propertyName.EqualsCaseInsensitive("MaleName"))
                 return NextMaleName();
-            else if (propertyName.EqualsIgnoreCase("FemaleName"))
+            else if (propertyName.EqualsCaseInsensitive("FemaleName"))
                 return NextFemaleName();
-            else if (propertyName.EqualsIgnoreCase("Surname"))
+            else if (propertyName.EqualsCaseInsensitive("Surname"))
                 return NextSurname();
-            else if (propertyName.EqualsIgnoreCase("Email"))
+            else if (propertyName.EqualsCaseInsensitive("Email"))
                 return NextEmail();
-            else if (propertyName.EqualsIgnoreCase("FullName"))
+            else if (propertyName.EqualsCaseInsensitive("FullName"))
                 return NextFullName();
-            else if (propertyName.EqualsIgnoreCase("Country"))
+            else if (propertyName.EqualsCaseInsensitive("Country"))
                 return NextCountry();
-            else if (propertyName.EqualsIgnoreCase("City"))
+            else if (propertyName.EqualsCaseInsensitive("City"))
                 return NextCity();
-            else if (propertyName.EqualsIgnoreCase("Address"))
+            else if (propertyName.EqualsCaseInsensitive("Address"))
                 return NextAddress();
-            else if (propertyName.EqualsIgnoreCase("ZipCode"))
+            else if (propertyName.EqualsCaseInsensitive("ZipCode"))
                 return NextZipCode();
-            else if (propertyName.EqualsIgnoreCase("Company"))
+            else if (propertyName.EqualsCaseInsensitive("Company"))
                 return NextCompany();
             else
                 return NextString();

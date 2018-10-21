@@ -21,6 +21,34 @@ namespace lib12.Tests.Extensions
             test.Recover().ShouldBe(test);
         }
 
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData(null, "abc", false)]
+        [InlineData("abc", null, false)]
+        [InlineData(null, "", false)]
+        [InlineData("", null, false)]
+        [InlineData("", "", true)]
+        [InlineData("abc", "abc", true)]
+        [InlineData("abc", "aBc", true)]
+        public void EqualsCaseInsensitive_is_correct(string first, string second, bool expectedResult)
+        {
+            first.EqualsCaseInsensitive(second).ShouldBe(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(null, null, true)]
+        [InlineData(null, "abc", false)]
+        [InlineData("abc", null, false)]
+        [InlineData(null, "", false)]
+        [InlineData("", null, false)]
+        [InlineData("", "", true)]
+        [InlineData("abc", "abc", true)]
+        [InlineData("abc", "aBc", false)]
+        public void EqualsCaseSensitive_is_correct(string first, string second, bool expectedResult)
+        {
+            first.EqualsCaseSensitive(second).ShouldBe(expectedResult);
+        }
+
         [Fact]
         public void equalsignorecase_two_equal_same_case_returns_true()
         {
@@ -118,9 +146,9 @@ namespace lib12.Tests.Extensions
         [InlineData("", "text", false)]
         [InlineData("sample text", "text", true)]
         [InlineData("sample Text", "text", true)]
-        public void contains_ignore_case_theory(string source, string toCheck, bool expectedResult)
+        public void ContainsCaseInsensitive_is_correct(string source, string toCheck, bool expectedResult)
         {
-            source.ContainsIgnoreCase(toCheck).ShouldBe(expectedResult);
+            source.ContainsCaseInsensitive(toCheck).ShouldBe(expectedResult);
         }
 
         [Fact]

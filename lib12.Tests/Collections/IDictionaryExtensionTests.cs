@@ -4,7 +4,7 @@ using Xunit;
 
 namespace lib12.Tests.Collections
 {
-    public class DictionaryExtensionTests
+    public class IDictionaryExtensionTests
     {
         [Fact]
         public void GetValueOrDefault_of_string_dictionary_is_correct()

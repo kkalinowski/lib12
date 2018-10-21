@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace lib12.Extensions
@@ -17,9 +16,21 @@ namespace lib12.Extensions
         /// <param name="target"></param>
         /// <param name="toCompare"></param>
         /// <returns></returns>
+        [Obsolete("Use EqualsCaseInsensitive instead")]
         public static bool EqualsIgnoreCase(this string target, string toCompare)
         {
             return target.Equals(toCompare, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// Check if strings are equal using ordinal comparison ignoring case
+        /// </summary>
+        /// <param name="source">Source string</param>
+        /// <param name="toCompare">String to compare</param>
+        /// <returns></returns>
+        public static bool EqualsCaseInsensitive(this string source, string toCompare)
+        {
+            return string.Equals(source, toCompare, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -28,9 +39,21 @@ namespace lib12.Extensions
         /// <param name="target"></param>
         /// <param name="toCompare"></param>
         /// <returns></returns>
+        [Obsolete("Use EqualsCaseSensitive instead")]
         public static bool EqualsMatchCase(this string target, string toCompare)
         {
             return string.Equals(target, toCompare, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Check if strings are equal using ordinal comparison taking case into account
+        /// </summary>
+        /// <param name="source">Source string</param>
+        /// <param name="toCompare">String to compare</param>
+        /// <returns></returns>
+        public static bool EqualsCaseSensitive(this string source, string toCompare)
+        {
+            return string.Equals(source, toCompare, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -85,6 +108,21 @@ namespace lib12.Extensions
         /// <param name="text"></param>
         /// <param name="toCheck">Text to search</param>
         /// <returns></returns>
+        public static bool ContainsCaseInsensitive(this string text, string toCheck)
+        {
+            if (text == null || toCheck == null)
+                return false;
+
+            return text.IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        /// <summary>
+        /// Check if given string contains another using OrdinalIgnoreCase comparison
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="toCheck">Text to search</param>
+        /// <returns></returns>
+        [Obsolete("Use ContainsCaseInsensitive")]
         public static bool ContainsIgnoreCase(this string text, string toCheck)
         {
             if (text == null || toCheck == null)
