@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace lib12.Utility
 {
@@ -24,6 +25,24 @@ namespace lib12.Utility
 
             for (var i = 0; i < times; i++)
                 action();
+        }
+
+        /// <summary>
+        /// Bnechmarks performance of given action. Returns how long it took in miliseconds.
+        /// </summary>
+        /// <param name="action">The action to benchmark</param>
+        /// <exception cref="ArgumentNullException">action</exception>
+        public static long Benchmark(Action action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            action.Invoke();
+
+            stopwatch.Stop();
+            return stopwatch.ElapsedMilliseconds;
         }
     }
 }

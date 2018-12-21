@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using lib12.Utility;
 using Shouldly;
 using Xunit;
@@ -33,6 +34,14 @@ namespace lib12.Tests.Utility
         public void Repeat_throws_exception_if_action_is_null()
         {
             Assert.Throws<ArgumentNullException>(() => Execution.Repeat(12, null));
+        }
+
+        [Fact]
+        public void Benchmark_is_correct_for_lambda_expression()
+        {
+            Execution
+                .Benchmark(() => Thread.Sleep(100))
+                .ShouldBeGreaterThan(0);
         }
     }
 }
