@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace lib12.Utility
 {
@@ -28,7 +30,7 @@ namespace lib12.Utility
         }
 
         /// <summary>
-        /// Bnechmarks performance of given action. Returns how long it took in miliseconds.
+        /// Benchmarks performance of given action. Returns how long it took in miliseconds.
         /// </summary>
         /// <param name="action">The action to benchmark</param>
         /// <exception cref="ArgumentNullException">action</exception>
@@ -43,6 +45,32 @@ namespace lib12.Utility
 
             stopwatch.Stop();
             return stopwatch.ElapsedMilliseconds;
+        }
+
+        public static void Retry(Action action, int retryInterval = 5000, int maxAttempts = 3)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            var tryNumber = 1;
+            var exceptions = new List<Exception>();
+            while (true)
+            {
+                try
+                {
+                    action();
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    exceptions.Add(ex);
+
+                    tryNumber++;
+                    if (tryNumber > maxAttempts)
+                        throw new AggregateException(exceptions);
+                    Thread.Sleep(retryInterval);
+                }
+            }
         }
     }
 }
