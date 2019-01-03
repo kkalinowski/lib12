@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using lib12.Extensions;
 using lib12.Utility;
 using Shouldly;
 using Xunit;
@@ -42,6 +43,57 @@ namespace lib12.Tests.Utility
             Execution
                 .Benchmark(() => Thread.Sleep(100))
                 .ShouldBeGreaterThan(0);
+        }
+
+        [Fact]
+        public void Retry_throws_exception_if_action_is_null()
+        {
+            Assert.Throws<ArgumentNullException>(() => Execution.Retry(null));
+        }
+
+        [Fact]
+        public void Retry_works_for_non_failing_action()
+        {
+            var count = 0;
+            Execution.Retry(() => count++);
+
+            count.ShouldBe(1);
+        }
+
+        [Fact]
+        public void Retry_when_second_attempt_is_correct()
+        {
+            var count = 0;
+            Execution.Retry(() =>
+            {
+                count++;
+                if (count == 1)
+                    throw new Exception();
+            }, 0);
+
+            count.ShouldBe(2);
+        }
+
+        [Fact]
+        public void Retry_when_all_attempts_fail()
+        {
+            const int attemptsCount = 5;
+            var count = 0;
+
+            try
+            {
+                Execution.Retry(() =>
+                {
+                    count++;
+                    throw new Exception();
+                }, 0, attemptsCount);
+            }
+            catch (AggregateException ex)
+            {
+                ex.InnerExceptions.Count.ShouldBe(attemptsCount);
+            }
+
+            count.ShouldBe(attemptsCount);
         }
     }
 }
