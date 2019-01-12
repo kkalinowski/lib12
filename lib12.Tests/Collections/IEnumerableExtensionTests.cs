@@ -563,5 +563,24 @@ namespace lib12.Tests.Collections
 
             Assert.Throws<ArgumentNullException>(() => list1.LeftJoin(list2, x => x.Value, y => y.Value, (Func<Item, Item, Tuple<Item, Item>>)null).ToArray());
         }
+
+        [Fact]
+        public void WithoutNulls_return_null_if_collection_is_null()
+        {
+            int[] collection = null;
+
+            collection.WithoutNulls().ShouldBeNull();
+        }
+
+        [Fact]
+        public void WithoutNulls_return_collection_without_nulls()
+        {
+            string[] collection = new[] { "test1", null, "test2", null };
+
+            var result = collection.WithoutNulls().ToArray();
+            result.Length.ShouldBe(2);
+            result[0].ShouldBe("test1");
+            result[1].ShouldBe("test2");
+        }
     }
 }
