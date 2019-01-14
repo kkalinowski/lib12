@@ -8,8 +8,20 @@ lib12 is set of useful classes and extension created for .NET framework. During 
 Current version available on nuget - https://www.nuget.org/packages/lib12
 My blog describing library setup and content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
 
-Fluent SQL query builder - lib12.Data.QueryBuilding
+## Table of Contents
+1. [Fluent SQL query builder](#fluent-sql-query-builder)
+2. [Dummy and random data](#dummy-and-random-data)
+3. [Mathematical functions](#mathematical-functions)
+4. [Collections](#collections)
+5. [Checking utilities](#checking-utilities)
+6. [Extensions methods](#extensions-methods)
+7. [Reflection](#reflection)
+8. [Utilities](#utilities)
+
+Fluent SQL query builder 
 --------------------
+Namespace - lib12.Data.QueryBuilding
+
 In spite of overwhelming popularity of various ORMs you still have to write some SQL query from time to time. Maintaining and storing those queries can be tricky. To help with that I created fluent SQL query builder. It supports most important SQL keywords for select, insert, update and delete. Using it is quite simple:
 
 ```csharp
@@ -46,9 +58,12 @@ var delete = SqlBuilder.Delete.From("product").OpenBracket()
 	.Build()
 ```
 
-Dummy and random data - lib12.Data.Random
+Dummy and random data
 --------------------
+Namespace - lib12.Data.Random
+
 Sometimes when you start developing new project you don't have data to test your solution. lib12 contains classes that will help you to quickly solve this problem. __Rand__ contains methods to quickly generate collection of random data:
+
 ```csharp
 public class ClassToGenerate
 {
@@ -82,9 +97,12 @@ lib12.Data.Xml
 ---
 Contains extensions methods for Xml classes to create xmls in fluent way. 
 
-Mathematical functions - lib12.Mathematics
+Mathematical functions
 ---
+Namespace - lib12.Mathematics
+
 __Formula__ class use Reverse Polish Notation to parse and compute mathematical expressions:
+
 ```csharp
 var formula = new Formula("-12*3 + (5-3)*6 + 9/(4-1)");
 var result = formula.Evaluate();
@@ -96,8 +114,9 @@ formula.Evaluate(new { a = 10, b = 3 });
 ```
 Mathematics namespace contains also __Math2__ class which contains many helper functions like Next, Prev, IsEven or IsOdd.
 
-Collections - lib12.Collections
+Collections
 ---
+Namespace - lib12.Collections
 - IEnumerableExtension contains methods that easier working with standard collections like Foreach, IsNullOrEmpty, Recover (which acts as null pattern object simplifying null checking), ToDelimitedString, IntersectBy, MaxBy, LeftJoin, etc.
 - lib12.Collections.CollectionFactory - creates collections in functional way
 - lib12.Collections.Empty - creates empty collections using fluent syntax
@@ -105,22 +124,28 @@ Collections - lib12.Collections
 - lib12.Collections.Paging - contains extension methods GetPage, GetNumberOfPages and GetPageItems to simplify working with paging
 - lib12.Collections namespace contains also extensions for ICollection and IDictionary
 
-lib12.Checking
+Checking utilities
 ---
+Namespace - lib12.Checking
+
 Contains __Check__ class to quickly simplify null checking on set objects like __Check.AllAreNull__ or __Check.AnyIsNull__. This namespace also contains extensions for equality check against set of objects like __object.IsAnyOf(object1, object2, object3)__
 
-lib12.Extensions
+Extensions methods
 ---
+Namespace - lib12.Extensions
+
 - String - methods like EqualsCaseInsensitive, Truncate, ContainsCaseInsensitive, RemoveDiacritics or GetNumberOfOccurrences
 - DateTime - allows to manipulate weeks and quarter, get start and end of week and month, get persons age or check date (__IsWorkday, IsWeekend, IsInPast, IsInFuture__)
 - Nullable bool - quick checks remove redundant code like __IsTrue__ or __IsNullOrFalse__
 - Func
 
-lib12.Reflection
+Reflection
 ---
+Namespace - lib12.Reflection
+
 Set of extensions to easier work with Reflection
 
-lib12.Utility
+Utilities
 ---
 - lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ can implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer
 - lib12.Utility.Range - generic class for dealing with ranges
