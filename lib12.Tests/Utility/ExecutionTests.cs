@@ -95,5 +95,59 @@ namespace lib12.Tests.Utility
 
             count.ShouldBe(attemptsCount);
         }
+
+        [Fact]
+        public void Memoize0_is_correct()
+        {
+            const int result = 123;
+
+            var memoize0 = Execution.Memoize0(() => result);
+
+            Execution.Repeat(5, () => memoize0().ShouldBe(result));
+        }
+
+        [Fact]
+        public void Memoize1_throws_exception_when_null_is_passed_as_function()
+        {
+            Assert.Throws<ArgumentNullException>(() => Execution.Memoize1((Func<int, int>)null));
+        }
+
+        [Fact]
+        public void Memoize1_is_correct()
+        {
+            var calls = 0;
+            int func(int param)
+            {
+                calls++;
+                return param % 2;
+            }
+
+            var memoize1 = Execution.Memoize1<int, int>(func);
+
+            memoize1(2).ShouldBe(0);
+            memoize1(2).ShouldBe(0);
+            memoize1(3).ShouldBe(1);
+            memoize1(3).ShouldBe(1);
+            calls.ShouldBe(2);
+        }
+
+        [Fact]
+        public void Memoize2_is_correct()
+        {
+            var calls = 0;
+            string func2(string param1, int param2)
+            {
+                calls++;
+                return param1 + param2;
+            }
+
+            var memoize2 = Execution.Memoize2<string, int, string>(func2);
+
+            memoize2("test", 2).ShouldBe("test2");
+            memoize2("test", 2).ShouldBe("test2");
+            memoize2("hello", 58).ShouldBe("hello58");
+            memoize2("hello", 58).ShouldBe("hello58");
+            calls.ShouldBe(2);
+        }
     }
 }
