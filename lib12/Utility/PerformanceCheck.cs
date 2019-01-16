@@ -13,6 +13,7 @@ namespace lib12.Utility
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
+        [Obsolete("Use Execution.Benchmark instead")]
         public static long Check(Action action)
         {
             var stopwatch = new Stopwatch();

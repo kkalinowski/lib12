@@ -533,5 +533,20 @@ namespace lib12.Collections
                 .GroupJoin(second.Recover(), firstSelector, secondSelector, (f, s) => new { First = f, Second = s })
                 .SelectMany(x => x.Second.DefaultIfEmpty(), (f, s) => resultSelector(f.First, s));
         }
+
+        /// <summary>
+        /// Returns collection without null object in it. If collection itself is null returns null.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <param name="source">The source collection</param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> WithoutNulls<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source == null)
+                return source;
+
+            return source
+                .Where(x => x != null);
+        }
     }
 }
