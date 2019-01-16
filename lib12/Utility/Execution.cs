@@ -86,5 +86,75 @@ namespace lib12.Utility
                 }
             }
         }
+
+        /// <summary>
+        /// Create memoization function which will store results and return it instead of
+        /// calling method again for the same parameters
+        /// </summary>
+        /// <param name="func">The function to memoize</param>
+        /// <exception cref="ArgumentNullException">func</exception>
+        public static Func<TResult> Memoize0<TParam1, TResult>(Func<TResult> func)
+        {
+            if (func == null)
+                throw new ArgumentNullException(nameof(func));
+
+            object result = null;
+            return () =>
+            {
+                if (result == null)
+                    result = func();
+
+                return (TResult)result;
+            };
+        }
+
+        /// <summary>
+        /// Create memoization function which will store results and return it instead of
+        /// calling method again for the same parameters
+        /// </summary>
+        /// <param name="func">The function to memoize</param>
+        /// <exception cref="ArgumentNullException">func</exception>
+        public static Func<TParam1, TResult> Memoize1<TParam1, TResult>(Func<TParam1, TResult> func)
+        {
+            if(func == null)
+                throw new ArgumentNullException(nameof(func));
+
+            var results = new Dictionary<TParam1, TResult>();
+            return param1 =>
+            {
+                if (results.TryGetValue(param1, out var result))
+                    return result;
+
+                result = func(param1);
+                results.Add(param1, result);
+
+                return result;
+            };
+        }
+
+        /// <summary>
+        /// Create memoization function which will store results and return it instead of
+        /// calling method again for the same parameters
+        /// </summary>
+        /// <param name="func">The function to memoize</param>
+        /// <exception cref="ArgumentNullException">func</exception>
+        public static Func<TParam1, TParam2, TResult> Memoize2<TParam1, TParam2, TResult>(Func<TParam1, TParam2, TResult> func)
+        {
+            if (func == null)
+                throw new ArgumentNullException(nameof(func));
+
+            var results = new Dictionary<Tuple<TParam1, TParam2>, TResult>();
+            return (param1, param2) =>
+            {
+                var key = new Tuple<TParam1, TParam2>(param1, param2);
+                if (results.TryGetValue(key, out var result))
+                    return result;
+
+                result = func(param1, param2);
+                results.Add(key, result);
+
+                return result;
+            };
+        }
     }
 }
