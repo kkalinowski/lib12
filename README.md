@@ -122,7 +122,7 @@ Namespace - lib12.Collections
 - lib12.Collections.Empty - creates empty collections using fluent syntax
 - lib12.Collections.Packing - contains class __Pack__ to quickly pack set of loose objects into collection and extension methods for single object to do that
 - lib12.Collections.Paging - contains extension methods GetPage, GetNumberOfPages and GetPageItems to simplify working with paging
-- lib12.Collections namespace contains also extensions for ICollection and IDictionary
+- lib12.Collections namespace contains also extensions for ICollection, IDictionary and array
 
 Checking utilities
 ---
@@ -137,6 +137,7 @@ Namespace - lib12.Extensions
 - String - methods like EqualsCaseInsensitive, Truncate, ContainsCaseInsensitive, RemoveDiacritics or GetNumberOfOccurrences
 - DateTime - allows to manipulate weeks and quarter, get start and end of week and month, get persons age or check date (__IsWorkday, IsWeekend, IsInPast, IsInFuture__)
 - Nullable bool - quick checks remove redundant code like __IsTrue__ or __IsNullOrFalse__
+- Exception - __GetInnerExceptions__ and __GetMostInnerException__
 - Func
 
 Reflection
@@ -148,8 +149,8 @@ Set of extensions to easier work with Reflection
 Utilities
 ---
 - lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ can implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer
+- lib12.Utility.Execution - utilities to work with function calls - __Repeat__, __Benchmark__, __Retry__ and __Memoize__
 - lib12.Utility.Range - generic class for dealing with ranges
 - lib12.Utility.IoHelper - additional methods for IO
 - lib12.Utility.Logger - simple logger, that doesn't need additional configuration
-- lib12.Utility.PerformanceCheck - shortcut for benchmarking code
 - lib12.Utility.UnknownEnumException - exception to better interpret  missing case for enum
