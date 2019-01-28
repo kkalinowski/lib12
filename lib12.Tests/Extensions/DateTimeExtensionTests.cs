@@ -137,5 +137,12 @@ namespace lib12.Tests.Extensions
             new DateTime(2018, 10, 18, 14, 56, 10).GetEndOfMonth().ShouldBe(new DateTime(2018, 10, 31, 23, 59, 59));
             new DateTime(2000, 2, 21).GetEndOfMonth().ShouldBe(new DateTime(2000, 2, 29, 23, 59, 59));
         }
+
+        [Fact]
+        public void GetYesterday_is_correct()
+        {
+            new DateTime(2019, 1, 28).GetYesterday().ShouldBe(new DateTime(2019, 1, 27, 0, 0, 0));
+            new DateTime(2019, 1, 1).GetYesterday().ShouldBe(new DateTime(2018, 12, 31, 0, 0, 0));
+        }
     }
 }
