@@ -18,6 +18,12 @@ namespace lib12.Tests.Reflection
             }
         }
 
+        private class TypeWithConst
+        {
+            public const string Text = "string_const";
+            public const string PrivateText = "private_string_const";
+        }
+
         [Fact]
         public void is_type_numeric_test()
         {
@@ -74,6 +80,12 @@ namespace lib12.Tests.Reflection
         public void is_static_returns_false_for_non_static_class()
         {
             typeof(NonStaticClass).IsStatic().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void GetConstants_is_correct()
+        {
+            typeof(TypeWithConst).GetConstants().Length.ShouldBe(2);
         }
     }
 }

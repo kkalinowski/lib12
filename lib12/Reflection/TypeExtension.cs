@@ -157,5 +157,24 @@ namespace lib12.Reflection
 
             return prop.GetValue(source, null);
         }
+
+        /// <summary>
+        /// Gets all public constants from type
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static FieldInfo[] GetConstants(this Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            var fieldInfos = type.GetFields(BindingFlags.Public |
+                BindingFlags.Static | BindingFlags.FlattenHierarchy);
+
+            return fieldInfos
+                .Where(fi => fi.IsLiteral && !fi.IsInitOnly)
+                .ToArray();
+        }
     }
 }
