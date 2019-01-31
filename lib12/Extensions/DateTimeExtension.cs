@@ -199,5 +199,14 @@ namespace lib12.Extensions
         {
             return source.AddDays(-1).Date;
         }
+
+        /// <summary>
+        /// Returns tomorrow date to given. Time is 00:00
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        public static DateTime GetTomorrow(this DateTime source)
+        {
+            return source.AddDays(1).Date;
+        }
     }
 }
