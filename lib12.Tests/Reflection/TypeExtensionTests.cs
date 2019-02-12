@@ -104,5 +104,19 @@ namespace lib12.Tests.Reflection
             dict["Text"].ShouldBe("string_const");
             dict["PrivateText"].ShouldBe("private_string_const");
         }
+
+        [Fact]
+        public void GetConstantValueByName_is_correct()
+        {
+            typeof(TypeWithConst)
+                .GetConstantValueByName("PrivateText")
+                .ShouldBe("private_string_const");
+        }
+
+        [Fact]
+        public void GetConstantValueByName_throws_exception_if_cannot_find_constant()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(TypeWithConst).GetConstantValueByName("not_existing_constant"));
+        }
     }
 }

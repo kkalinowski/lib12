@@ -191,5 +191,24 @@ namespace lib12.Reflection
                 .GetConstants()
                 .ToDictionary(x => x.Name, x => x.GetRawConstantValue());
         }
+
+        /// <summary>
+        /// Returns constant value of given type by name. Throws exception if type doesn't contain constant with given name.
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="constantName">Constant name</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static object GetConstantValueByName(this Type type, string constantName)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            var constantField = type.GetField(constantName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            if(constantField == null)
+                throw new lib12Exception($"Cannot find constant named {constantName}");
+
+            return constantField.GetRawConstantValue();
+        }
     }
 }
