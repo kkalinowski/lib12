@@ -21,7 +21,7 @@ namespace lib12.Tests.Reflection
         private class TypeWithConst
         {
             public const string Text = "string_const";
-            public const string PrivateText = "private_string_const";
+            private const string PrivateText = "private_string_const";
         }
 
         [Fact]
@@ -86,6 +86,12 @@ namespace lib12.Tests.Reflection
         public void GetConstants_is_correct()
         {
             typeof(TypeWithConst).GetConstants().Length.ShouldBe(2);
+        }
+
+        [Fact]
+        public void GetConstants_throws_exception_if_given_null()
+        {
+            Assert.Throws<ArgumentNullException>(() => ((Type)null).GetConstants());
         }
     }
 }

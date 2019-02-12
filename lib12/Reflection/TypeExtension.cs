@@ -159,7 +159,7 @@ namespace lib12.Reflection
         }
 
         /// <summary>
-        /// Gets all public constants from type
+        /// Gets all constants from type
         /// </summary>
         /// <param name="type">The source type</param>
         /// <returns></returns>
@@ -169,9 +169,7 @@ namespace lib12.Reflection
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
-            var fieldInfos = type.GetFields(BindingFlags.Public |
-                BindingFlags.Static | BindingFlags.FlattenHierarchy);
-
+            var fieldInfos = type.GetFields( BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
             return fieldInfos
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly)
                 .ToArray();
