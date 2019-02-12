@@ -590,13 +590,29 @@ namespace lib12.Tests.Collections
 
             var result = collection.ToReadOnlyCollection();
             result.Count.ShouldBe(2);
-            collection[0].ShouldBe("test1");
+            result[0].ShouldBe("test1");
         }
 
         [Fact]
         public void ToReadOnlyCollection_handles_null()
         {
             ((List<int>)null).ToReadOnlyCollection().ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void ToReadOnlyDictionary_is_correct()
+        {
+            var collection = new[] { "abc", "test" };
+
+            var result = collection.ToReadOnlyDictionary(x => x.Length, x => x);
+            result.Count.ShouldBe(2);
+            result[3].ShouldBe("abc");
+        }
+
+        [Fact]
+        public void ToReadOnlyDictionary_handles_null()
+        {
+            ((List<int>)null).ToReadOnlyDictionary(x => x, x => x).ShouldBeEmpty();
         }
     }
 }
