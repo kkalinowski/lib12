@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace lib12.Collections.Packing
@@ -40,6 +41,17 @@ namespace lib12.Collections.Packing
         public static List<T> IntoList<T>(params T[] items)
         {
             return items.ToList();
+        }
+
+        /// <summary>
+        /// Packs objects into read only collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items">The items.</param>
+        /// <returns></returns>
+        public static ReadOnlyCollection<T> IntoReadOnlyCollection<T>(params T[] items)
+        {
+            return items.ToReadOnlyCollection();
         }
     }
 }
