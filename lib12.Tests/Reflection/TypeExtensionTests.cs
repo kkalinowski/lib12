@@ -93,5 +93,16 @@ namespace lib12.Tests.Reflection
         {
             Assert.Throws<ArgumentNullException>(() => ((Type)null).GetConstants());
         }
+
+        [Fact]
+        public void GetConstantValues_is_correct()
+        {
+            var dict = typeof(TypeWithConst).GetConstantValues();
+
+            dict.ShouldNotBeNull();
+            dict.Count.ShouldBe(2);
+            dict["Text"].ShouldBe("string_const");
+            dict["PrivateText"].ShouldBe("private_string_const");
+        }
     }
 }

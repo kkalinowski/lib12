@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using lib12.Checking;
@@ -173,6 +174,22 @@ namespace lib12.Reflection
             return fieldInfos
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly)
                 .ToArray();
+        }
+
+        /// <summary>
+        /// Gets all constants values from type. Returns dictionary in the form of constant name - value
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static Dictionary<string, object> GetConstantValues(this Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            return type
+                .GetConstants()
+                .ToDictionary(x => x.Name, x => x.GetRawConstantValue());
         }
     }
 }
