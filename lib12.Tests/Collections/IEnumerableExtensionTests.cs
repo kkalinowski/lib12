@@ -582,5 +582,21 @@ namespace lib12.Tests.Collections
             result[0].ShouldBe("test1");
             result[1].ShouldBe("test2");
         }
+
+        [Fact]
+        public void ToReadOnlyCollection_is_correct()
+        {
+            var collection = new[] { "test1", "test2" };
+
+            var result = collection.ToReadOnlyCollection();
+            result.Count.ShouldBe(2);
+            collection[0].ShouldBe("test1");
+        }
+
+        [Fact]
+        public void ToReadOnlyCollection_handles_null()
+        {
+            ((List<int>)null).ToReadOnlyCollection().ShouldBeEmpty();
+        }
     }
 }

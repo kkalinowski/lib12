@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -547,6 +548,20 @@ namespace lib12.Collections
 
             return source
                 .Where(x => x != null);
+        }
+
+        /// <summary>
+        /// Converts given enumerable to ReadOnlyCollection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <param name="source">The source collection</param>
+        /// <returns></returns>
+        public static ReadOnlyCollection<TSource> ToReadOnlyCollection<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source == null)
+                return Empty.ReadOnlyCollection<TSource>();
+
+            return new ReadOnlyCollection<TSource>(source as IList<TSource> ?? source.ToList());
         }
     }
 }
