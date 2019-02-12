@@ -199,6 +199,7 @@ namespace lib12.Reflection
         /// <param name="constantName">Constant name</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Source type is null</exception>
+        /// <exception cref="lib12Exception">Constant with given name doesn't exists</exception>
         public static object GetConstantValueByName(this Type type, string constantName)
         {
             if (type == null)
