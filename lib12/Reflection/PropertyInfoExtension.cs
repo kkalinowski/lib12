@@ -17,7 +17,7 @@ namespace lib12.Reflection
         public static T GetAttribute<T>(this PropertyInfo property) where T : Attribute
         {
             var attribute = property.GetCustomAttributes(typeof(T), false).SingleOrDefault();
-            return attribute != null ? (T)attribute : default(T);
+            return (T)attribute;
         }
     }
 }

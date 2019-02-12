@@ -112,7 +112,7 @@ namespace lib12.Reflection
         public static T GetAttribute<T>(this Type type) where T : Attribute
         {
             var attribute = type.GetTypeInfo().GetCustomAttributes(typeof(T), false).SingleOrDefault();
-            return attribute != null ? (T)attribute : default(T);
+            return (T)attribute;
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace lib12.Reflection
         /// </summary>
         /// <param name="type">The type to operate</param>
         /// <returns></returns>
-        public static object GetDefaultConstructor(this Type type)
+        public static ConstructorInfo GetDefaultConstructor(this Type type)
         {
             return type.GetTypeInfo().GetConstructor(Type.EmptyTypes);
         }
