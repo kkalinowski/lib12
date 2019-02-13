@@ -26,7 +26,7 @@ namespace lib12.Reflection
         /// <param name="field">The field to check</param>
         /// <typeparam name="T">Type of attribute</typeparam>
         /// <returns></returns>
-        public static bool IsMarkedWithAttribute<T>(this FieldInfo field) where T : Attribute
+        public static bool IsMarkedWithAttribute<T>(this MemberInfo field) where T : Attribute
         {
             return Attribute.IsDefined(field, typeof(T));
         }
