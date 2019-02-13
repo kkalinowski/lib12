@@ -19,5 +19,16 @@ namespace lib12.Reflection
             var attribute = field.GetCustomAttributes(typeof(T), false).SingleOrDefault();
             return (T)attribute;
         }
+
+        /// <summary>
+        /// Checks if field is marked with given attribute
+        /// </summary>
+        /// <param name="field">The field to check</param>
+        /// <typeparam name="T">Type of attribute</typeparam>
+        /// <returns></returns>
+        public static bool IsMarkedWithAttribute<T>(this FieldInfo field) where T : Attribute
+        {
+            return Attribute.IsDefined(field, typeof(T));
+        }
     }
 }
