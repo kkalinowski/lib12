@@ -61,5 +61,25 @@ namespace lib12.Tests.Reflection
                 .IsMarkedWithAttribute<AttributeWithoutParameters>()
                 .ShouldBeFalse();
         }
+
+        [Fact]
+        public void GetAttribute_for_field_is_correct()
+        {
+            var attribute = typeof(MarkedClass).GetField("field_marked_with_parameter_attribute", BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetAttribute<AttributeWithIntParameter>();
+
+            attribute.ShouldNotBeNull();
+            attribute.Parameter.ShouldBe(12);
+        }
+
+        [Fact]
+        public void GetAttribute_for_property_is_correct()
+        {
+            var attribute = typeof(MarkedClass).GetProperty(nameof(MarkedClass.Property_marked_with_parameter_attribute), BindingFlags.Public | BindingFlags.Instance)
+                .GetAttribute<AttributeWithIntParameter>();
+
+            attribute.ShouldNotBeNull();
+            attribute.Parameter.ShouldBe(5);
+        }
     }
 }
