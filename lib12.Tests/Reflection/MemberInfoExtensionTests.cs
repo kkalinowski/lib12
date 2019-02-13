@@ -6,7 +6,7 @@ using Xunit;
 
 namespace lib12.Tests.Reflection
 {
-    public class FieldInfoExtensionTests
+    public class MemberInfoExtensionTests
     {
         [AttributeUsage(AttributeTargets.All)]
         public sealed class AttributeWithIntParameter : Attribute

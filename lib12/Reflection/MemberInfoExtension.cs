@@ -5,9 +5,9 @@ using System.Reflection;
 namespace lib12.Reflection
 {
     /// <summary>
-    /// FieldInfoExtension
+    /// MemberInfoExtension
     /// </summary>
-    public static class FieldInfoExtension
+    public static class MemberInfoExtension
     {
         /// <summary>
         /// Gets the attribute decorating given field
