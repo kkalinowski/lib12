@@ -118,5 +118,26 @@ namespace lib12.Tests.Reflection
         {
             Assert.Throws<lib12Exception>(() => typeof(TypeWithConst).GetConstantValueByName("not_existing_constant"));
         }
+
+        [Fact]
+        public void GetAttribute_is_correct()
+        {
+            var attribute = typeof(TypeWithParameterAttribute).GetAttribute<AttributeWithIntParameter>();
+
+            attribute.ShouldNotBeNull();
+            attribute.Parameter.ShouldBe(20);
+        }
+
+        [Fact]
+        public void IsMarkedWithAttribute_is_correct()
+        {
+            typeof(TypeWithoutAttributes)
+                .IsMarkedWithAttribute<AttributeWithoutParameters>()
+                .ShouldBeFalse();
+
+            typeof(TypeWithParameterlessAttribute)
+                .IsMarkedWithAttribute<AttributeWithoutParameters>()
+                .ShouldBeTrue();
+        }
     }
 }

@@ -116,6 +116,17 @@ namespace lib12.Reflection
         }
 
         /// <summary>
+        /// Checks if member is marked with given attribute
+        /// </summary>
+        /// <param name="type">The type to check for attribute</param>
+        /// <typeparam name="T">Type of attribute</typeparam>
+        /// <returns></returns>
+        public static bool IsMarkedWithAttribute<T>(this Type type) where T : Attribute
+        {
+            return Attribute.IsDefined(type, typeof(T));
+        }
+
+        /// <summary>
         /// Gets the default of given type
         /// </summary>
         /// <param name="type">The type to operate</param>

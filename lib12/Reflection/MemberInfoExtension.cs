@@ -10,25 +10,25 @@ namespace lib12.Reflection
     public static class MemberInfoExtension
     {
         /// <summary>
-        /// Gets the attribute decorating given field
+        /// Gets the attribute decorating given member
         /// </summary>
-        /// <param name="field">The field to check</param>
+        /// <param name="member">The member to check</param>
         /// <returns></returns>
-        public static T GetAttribute<T>(this MemberInfo field) where T : Attribute
+        public static T GetAttribute<T>(this MemberInfo member) where T : Attribute
         {
-            var attribute = field.GetCustomAttributes(typeof(T), false).SingleOrDefault();
+            var attribute = member.GetCustomAttributes(typeof(T), false).SingleOrDefault();
             return (T)attribute;
         }
 
         /// <summary>
-        /// Checks if field is marked with given attribute
+        /// Checks if member is marked with given attribute
         /// </summary>
-        /// <param name="field">The field to check</param>
+        /// <param name="member">The member to check</param>
         /// <typeparam name="T">Type of attribute</typeparam>
         /// <returns></returns>
-        public static bool IsMarkedWithAttribute<T>(this MemberInfo field) where T : Attribute
+        public static bool IsMarkedWithAttribute<T>(this MemberInfo member) where T : Attribute
         {
-            return Attribute.IsDefined(field, typeof(T));
+            return Attribute.IsDefined(member, typeof(T));
         }
     }
 }
