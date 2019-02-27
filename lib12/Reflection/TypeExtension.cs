@@ -222,5 +222,20 @@ namespace lib12.Reflection
 
             return constantField.GetRawConstantValue();
         }
+
+        /// <summary>
+        /// Creates instance of class given its type
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="args">Arguments passed to type constructor</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static T CreateInstance<T>(this Type type, params object[] args)
+        {
+            if(type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            return (T)Activator.CreateInstance(type, args);
+        }
     }
 }

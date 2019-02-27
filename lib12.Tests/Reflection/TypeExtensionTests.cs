@@ -10,6 +10,20 @@ namespace lib12.Tests.Reflection
         private static class StaticClass { }
         private class NonStaticClass { }
 
+        private class EmptyType { }
+
+        private class TypeWithCtorAndProps
+        {
+            public int Number { get; set; }
+            public string Text { get; set; }
+
+            public TypeWithCtorAndProps(int number, string text)
+            {
+                Number = number;
+                Text = text;
+            }
+        }
+
         private class TypeWithoutParameterlessConstructor
         {
             public TypeWithoutParameterlessConstructor(int a)
@@ -138,6 +152,28 @@ namespace lib12.Tests.Reflection
             typeof(TypeWithParameterlessAttribute)
                 .IsMarkedWithAttribute<AttributeWithoutParameters>()
                 .ShouldBeTrue();
+        }
+
+        [Fact]
+        public void CreateInstance_is_correct_for_type_without_constructor()
+        {
+            typeof(EmptyType)
+                .CreateInstance<EmptyType>()
+                .ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void CreateInstance_is_correct_for_type_without_default_constructor()
+        {
+            const int number = 12;
+            const string text = "test_text";
+
+            var result = typeof(TypeWithCtorAndProps)
+                .CreateInstance<TypeWithCtorAndProps>(number, text);
+
+            result.ShouldNotBeNull();
+            result.Number.ShouldBe(number);
+            result.Text.ShouldBe(text);
         }
     }
 }
