@@ -235,6 +235,9 @@ namespace lib12.Reflection
             if(type == null)
                 throw new ArgumentNullException(nameof(type));
 
+            if(type != typeof(T))
+                throw new lib12Exception("Given type is not the same as target type");
+
             return (T)Activator.CreateInstance(type, args);
         }
     }

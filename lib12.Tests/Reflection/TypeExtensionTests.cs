@@ -175,5 +175,17 @@ namespace lib12.Tests.Reflection
             result.Number.ShouldBe(number);
             result.Text.ShouldBe(text);
         }
+
+        [Fact]
+        public void CreateInstance_throws_exception_on_types_mismatch()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(EmptyType).CreateInstance<TypeWithCtorAndProps>());
+        }
+
+        [Fact]
+        public void CreateInstance_throws_exception_on_ctor_mismatch()
+        {
+            Assert.Throws<MissingMethodException>(() => typeof(TypeWithCtorAndProps).CreateInstance<TypeWithCtorAndProps>(12));
+        }
     }
 }
