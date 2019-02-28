@@ -181,7 +181,7 @@ namespace lib12.Reflection
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
-            var fieldInfos = type.GetFields( BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
             return fieldInfos
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly)
                 .ToArray();
@@ -217,7 +217,7 @@ namespace lib12.Reflection
                 throw new ArgumentNullException(nameof(type));
 
             var constantField = type.GetField(constantName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-            if(constantField == null)
+            if (constantField == null)
                 throw new lib12Exception($"Cannot find constant named {constantName}");
 
             return constantField.GetRawConstantValue();
@@ -232,13 +232,35 @@ namespace lib12.Reflection
         /// <exception cref="ArgumentNullException">Source type is null</exception>
         public static T CreateInstance<T>(this Type type, params object[] args)
         {
-            if(type == null)
+            if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
-            if(type != typeof(T))
+            if (type != typeof(T))
                 throw new lib12Exception("Given type is not the same as target type");
 
             return (T)Activator.CreateInstance(type, args);
+        }
+
+        /// <summary>
+        /// Checks if given types implements target interface
+        /// </summary>        
+        /// <param name="type">The source type</param>
+        /// <typeparam name="TInterface">Target interface to check for implementation</typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static bool IsImplementingInterface<TInterface>(this Type type) where TInterface : class
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            var interfaceType = typeof(TInterface);
+            if (!interfaceType.IsInterface)
+                throw new lib12Exception($"{nameof(TInterface)} is not an interface");
+
+            if (type == interfaceType)
+                throw new lib12Exception("Given type is the same as interface you are checking");
+
+            return interfaceType.IsAssignableFrom(type);
         }
     }
 }

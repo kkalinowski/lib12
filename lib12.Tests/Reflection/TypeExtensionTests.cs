@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using lib12.Reflection;
 using Shouldly;
 using Xunit;
@@ -36,6 +37,16 @@ namespace lib12.Tests.Reflection
         {
             public const string Text = "string_const";
             private const string PrivateText = "private_string_const";
+        }
+
+        private interface IEmptyInterface
+        {
+            
+        }
+
+        private class TypeImplementingInterface : IEmptyInterface
+        {
+
         }
 
         [Fact]
@@ -186,6 +197,25 @@ namespace lib12.Tests.Reflection
         public void CreateInstance_throws_exception_on_ctor_mismatch()
         {
             Assert.Throws<MissingMethodException>(() => typeof(TypeWithCtorAndProps).CreateInstance<TypeWithCtorAndProps>(12));
+        }
+
+        [Fact]
+        public void IsImplementingInterface_throws_exception_when_passing_the_same_type()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(IEnumerable).IsImplementingInterface<IEnumerable>());
+        }
+
+        [Fact]
+        public void IsImplementingInterface_throws_exception_when_target_type_is_not_interface()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(IEnumerable).IsImplementingInterface<object>());
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct()
+        {
+            typeof(EmptyType).IsImplementingInterface<IEnumerable>().ShouldBeFalse();
+            typeof(TypeImplementingInterface).IsImplementingInterface<IEmptyInterface>().ShouldBeTrue();
         }
     }
 }
