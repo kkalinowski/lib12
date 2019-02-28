@@ -235,5 +235,23 @@ namespace lib12.Tests.Reflection
             typeof(TypeImplementingGenericInterface).IsImplementingInterface<IGenericInterface<string>>().ShouldBeFalse();
             typeof(TypeImplementingGenericInterface).IsImplementingInterface<IGenericInterface<int>>().ShouldBeTrue();
         }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct_for_explicit_type()
+        {
+            typeof(EmptyType).IsImplementingInterface(typeof(IEnumerable)).ShouldBeFalse();
+            typeof(TypeImplementingInterface).IsImplementingInterface(typeof(IEmptyInterface)).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct_for_generic_interface_and_explicit_type()
+        {
+            typeof(EmptyType).IsImplementingInterface(typeof(IGenericInterface<>)).ShouldBeFalse();
+            typeof(EmptyType).IsImplementingInterface(typeof(IGenericInterface<int>)).ShouldBeFalse();
+
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<>)).ShouldBeTrue();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<string>)).ShouldBeFalse();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<int>)).ShouldBeTrue();
+        }
     }
 }

@@ -254,8 +254,25 @@ namespace lib12.Reflection
                 throw new ArgumentNullException(nameof(type));
 
             var interfaceType = typeof(TInterface);
+            return IsImplementingInterface(type, interfaceType);
+        }
+
+        /// <summary>
+        /// Checks if given types implements target interface
+        /// </summary>        
+        /// <param name="type">The source type</param>
+        /// <param name="interfaceType">Target interface to check for implementation</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static bool IsImplementingInterface(this Type type, Type interfaceType)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (interfaceType == null)
+                throw new ArgumentNullException(nameof(interfaceType));
+
             if (!interfaceType.IsInterface)
-                throw new lib12Exception($"{nameof(TInterface)} is not an interface");
+                throw new lib12Exception($"{interfaceType.FullName} is not an interface");
 
             if (type == interfaceType)
                 throw new lib12Exception("Given type is the same as interface you are checking");
