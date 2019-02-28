@@ -49,6 +49,16 @@ namespace lib12.Tests.Reflection
 
         }
 
+        private interface IGenericInterface<T>
+        {
+            T Property { get; set; }
+        }
+
+        private class TypeImplementingGenericInterface : IGenericInterface<int>
+        {
+            public int Property { get; set; }
+        }
+
         [Fact]
         public void is_type_numeric_test()
         {
@@ -216,6 +226,14 @@ namespace lib12.Tests.Reflection
         {
             typeof(EmptyType).IsImplementingInterface<IEnumerable>().ShouldBeFalse();
             typeof(TypeImplementingInterface).IsImplementingInterface<IEmptyInterface>().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct_for_generic_interface()
+        {
+            typeof(EmptyType).IsImplementingInterface<IGenericInterface<int>>().ShouldBeFalse();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface<IGenericInterface<string>>().ShouldBeFalse();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface<IGenericInterface<int>>().ShouldBeTrue();
         }
     }
 }
