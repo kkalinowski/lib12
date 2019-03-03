@@ -277,7 +277,10 @@ namespace lib12.Reflection
             if (type == interfaceType)
                 throw new lib12Exception("Given type is the same as interface you are checking");
 
-            return interfaceType.IsAssignableFrom(type);
+            if (interfaceType.IsGenericTypeDefinition)
+                return type.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == interfaceType);
+            else
+                return interfaceType.IsAssignableFrom(type);
         }
     }
 }
