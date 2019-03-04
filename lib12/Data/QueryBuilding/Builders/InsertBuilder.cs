@@ -133,7 +133,7 @@ namespace lib12.Data.QueryBuilding.Builders
             {
                 sbuilder.Append("(");
                 foreach (var column in Structure.Columns)
-                    sbuilder.AppendFormat("'{0}', ", item.GetType().GetPropertyValue(item, column));
+                    sbuilder.AppendFormat("'{0}', ", item.GetType().GetPropertyValueByName(item, column));
 
                 sbuilder.Remove(sbuilder.Length - 2, 2);
                 sbuilder.Append("), ");

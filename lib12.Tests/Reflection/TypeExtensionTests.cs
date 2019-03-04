@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using lib12.Reflection;
-using lib12.Utility;
 using Shouldly;
 using Xunit;
 
@@ -253,6 +252,38 @@ namespace lib12.Tests.Reflection
             typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<>)).ShouldBeTrue();
             typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<string>)).ShouldBeFalse();
             typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<int>)).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void GetPropertyByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithCtorAndProps(number, text);
+            var type = obj.GetType();
+
+            type
+                .GetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Number))
+                .ShouldBe(number);
+
+            type
+                .GetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Text))
+                .ShouldBe(text);
+        }
+
+        [Fact]
+        public void SetPropertyByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithCtorAndProps(number, text);
+            var type = obj.GetType();
+
+            type.SetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Number), number * 2);
+            type.SetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Text), text + text);
+
+            obj.Number.ShouldBe(24);
+            obj.Text.ShouldBe("test_texttest_text");
         }
     }
 }

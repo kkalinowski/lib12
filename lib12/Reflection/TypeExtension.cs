@@ -158,6 +158,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         /// <exception cref="ArgumentException">Provided property name cannot be null or empty</exception>
         /// <exception cref="lib12Exception"></exception>
+        [Obsolete("Renamed to GetPropertyValueByName")]
         public static object GetPropertyValue(this Type type, object source, string propertyName)
         {
             if (propertyName.IsNullOrEmpty())
@@ -165,9 +166,58 @@ namespace lib12.Reflection
 
             var prop = type.GetTypeInfo().GetDeclaredProperty(propertyName);
             if (prop == null)
-                throw new lib12Exception(string.Format("Type {0} don't have property named {1}", type.Name, propertyName));
+                throw new lib12Exception($"Type {type.Name} don't have property named {propertyName}");
 
             return prop.GetValue(source, null);
+        }
+
+        /// <summary>
+        /// Gets the value of property with given name
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get value from</param>
+        /// <param name="propertyName">Name of the property to get value from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Provided property name and source object cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
+        public static object GetPropertyValueByName(this Type type, object source, string propertyName)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (propertyName.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(propertyName));
+
+            var prop = type.GetProperty(propertyName);
+            if (prop == null)
+                throw new lib12Exception($"Type {type.Name} don't have property named {propertyName}");
+
+            return prop.GetValue(source, null);
+        }
+
+        /// <summary>
+        /// Sets the value of property with given name
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to set property value on</param>
+        /// <param name="propertyName">Name of the property to set value</param>
+        /// <param name="value">Value to set</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Provided property name and source object cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
+        public static void SetPropertyValueByName(this Type type, object source, string propertyName, object value)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (propertyName.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(propertyName));
+
+            var prop = type.GetProperty(propertyName);
+            if (prop == null)
+                throw new lib12Exception($"Type {type.Name} don't have property named {propertyName}");
+
+            prop.SetValue(source, value, null);
         }
 
         /// <summary>
