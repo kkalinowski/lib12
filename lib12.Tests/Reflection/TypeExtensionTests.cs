@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using lib12.Reflection;
+using lib12.Utility;
 using Shouldly;
 using Xunit;
 
@@ -41,7 +42,7 @@ namespace lib12.Tests.Reflection
 
         private interface IEmptyInterface
         {
-            
+
         }
 
         private class TypeImplementingInterface : IEmptyInterface

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using lib12.Extensions;
 using lib12.Utility;
 using Shouldly;
 using Xunit;
@@ -34,7 +33,22 @@ namespace lib12.Tests.Utility
         [Fact]
         public void Repeat_throws_exception_if_action_is_null()
         {
-            Assert.Throws<ArgumentNullException>(() => Execution.Repeat(12, null));
+            Assert.Throws<ArgumentNullException>(() => Execution.Repeat(12, (Action)null));
+        }
+
+        [Fact]
+        public void Repeat_with_index_is_correct()
+        {
+            var i = 0;
+            const int count = 5;
+
+            Execution.Repeat(count, (index) =>
+            {
+                i.ShouldBe(index);
+                i++;
+            });
+
+            i.ShouldBe(count);
         }
 
         [Fact]
