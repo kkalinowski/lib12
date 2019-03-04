@@ -221,6 +221,55 @@ namespace lib12.Reflection
         }
 
         /// <summary>
+        /// Gets the value of field with given name
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get value from</param>
+        /// <param name="fieldName">Name of the field to get value from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Provided field name and source object cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
+        public static object GetFieldValueByName(this Type type, object source, string fieldName)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (fieldName.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(fieldName));
+
+            var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            if (field == null)
+                throw new lib12Exception($"Type {type.Name} don't have field named {fieldName}");
+
+            return field.GetValue(source);
+        }
+
+        /// <summary>
+        /// Sets the value of field with given name
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to set field value on</param>
+        /// <param name="fieldName">Name of the field to set value</param>
+        /// <param name="value">Value to set</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Provided field name and source object cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
+        public static void SetFieldValueByName(this Type type, object source, string fieldName, object value)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (fieldName.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(fieldName));
+
+            var prop = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            if (prop == null)
+                throw new lib12Exception($"Type {type.Name} don't have field named {fieldName}");
+
+            prop.SetValue(source, value);
+        }
+
+        /// <summary>
         /// Gets all constants from type
         /// </summary>
         /// <param name="type">The source type</param>

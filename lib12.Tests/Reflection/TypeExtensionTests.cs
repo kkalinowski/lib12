@@ -59,6 +59,20 @@ namespace lib12.Tests.Reflection
             public int Property { get; set; }
         }
 
+        private class TypeWithFields
+        {
+            private int _number;
+            public int Number => _number;
+
+            public string _text;
+
+            public TypeWithFields(int number, string text)
+            {
+                _number = number;
+                _text = text;
+            }
+        }
+
         [Fact]
         public void is_type_numeric_test()
         {
@@ -284,6 +298,55 @@ namespace lib12.Tests.Reflection
 
             obj.Number.ShouldBe(24);
             obj.Text.ShouldBe("test_texttest_text");
+        }
+
+        [Fact]
+        public void GetFieldByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithFields(number, text);
+            var type = obj.GetType();
+
+            type
+                .GetFieldValueByName(obj, "_number")
+                .ShouldBe(number);
+            type
+                .GetFieldValueByName(obj, "_text")
+                .ShouldBe(text);
+        }
+
+        [Fact]
+        public void GetFieldByName_cant_get_constant_value()
+        {
+            var obj = new TypeWithConst();
+            var type = obj.GetType();
+
+            Assert.Throws<lib12Exception>(() => type.GetFieldValueByName(obj, nameof(TypeWithConst.Text)));
+        }
+
+        [Fact]
+        public void SetFieldByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithFields(number, text);
+            var type = obj.GetType();
+
+            type.SetFieldValueByName(obj, "_number", number * 2);
+            type.SetFieldValueByName(obj, "_text", text + text);
+
+            obj.Number.ShouldBe(24);
+            obj._text.ShouldBe("test_texttest_text");
+        }
+
+        [Fact]
+        public void SetFieldByName_cant_set_constant_value()
+        {
+            var obj = new TypeWithConst();
+            var type = obj.GetType();
+
+            Assert.Throws<lib12Exception>(() => type.SetFieldValueByName(obj, nameof(TypeWithConst.Text), "test"));
         }
     }
 }
