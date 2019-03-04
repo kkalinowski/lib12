@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using lib12.Checking;
+using lib12.Collections;
 using lib12.Extensions;
 
 namespace lib12.Reflection
@@ -233,17 +234,11 @@ namespace lib12.Reflection
                 throw new ArgumentNullException(nameof(type));
 
             if (source == null)
-                return new Dictionary<string, object>();
+                return Empty.Dictionary<string, object>();
 
-            var props = type.GetProperties();
-            var dict = new Dictionary<string, object>();
-            foreach (var prop in props)
-            {
-                var value = prop.GetValue(source, null);
-                dict.Add(prop.Name, value);
-            }
-
-            return dict;
+            return type
+                .GetProperties()
+                .ToDictionary(x => x.Name, x => x.GetValue(source, null));
         }
 
         /// <summary>
@@ -296,6 +291,26 @@ namespace lib12.Reflection
         }
 
         /// <summary>
+        /// Gets all fields values from type. Returns dictionary in the form of field name - value. If source object is null returns empty dictionary
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get fields values from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static Dictionary<string, object> GetFieldsValues(this Type type, object source)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            if (source == null)
+                return Empty.Dictionary<string, object>();
+
+            return type
+                .GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+                .ToDictionary(x => x.Name, x => x.GetValue(source));
+        }
+
+        /// <summary>
         /// Gets all constants from type
         /// </summary>
         /// <param name="type">The source type</param>
@@ -308,7 +323,7 @@ namespace lib12.Reflection
 
             var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
             return fieldInfos
-                .Where(fi => fi.IsLiteral && !fi.IsInitOnly)
+                .Where(x => x.IsLiteral && !x.IsInitOnly)
                 .ToArray();
         }
 

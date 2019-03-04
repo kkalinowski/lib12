@@ -362,5 +362,19 @@ namespace lib12.Tests.Reflection
 
             Assert.Throws<lib12Exception>(() => type.SetFieldValueByName(obj, nameof(TypeWithConst.Text), "test"));
         }
+
+        [Fact]
+        public void GetFieldsValues_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithFields(number, text);
+            var type = obj.GetType();
+
+            var fields = type.GetFieldsValues(obj);
+            fields.Count.ShouldBe(2);
+            fields["_number"].ShouldBe(number);
+            fields["_text"].ShouldBe(text);
+        }
     }
 }
