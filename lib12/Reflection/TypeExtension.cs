@@ -13,6 +13,8 @@ namespace lib12.Reflection
     /// </summary>
     public static class TypeExtension
     {
+        private const string BackingFieldSuffix = "k__BackingField";
+
         /// <summary>
         /// Determines whether the specified type is numeric or nullable numeric
         /// </summary>
@@ -307,6 +309,7 @@ namespace lib12.Reflection
 
             return type
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+                .Where(x => !x.Name.EndsWith(BackingFieldSuffix))
                 .ToDictionary(x => x.Name, x => x.GetValue(source));
         }
 
@@ -361,6 +364,28 @@ namespace lib12.Reflection
                 throw new lib12Exception($"Cannot find constant named {constantName}");
 
             return constantField.GetRawConstantValue();
+        }
+
+        /// <summary>
+        /// Gets all constants, fields and properties values from type. Returns dictionary in the form of field name - value. If source object is null returns empty dictionary
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get fields values from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static Dictionary<string, object> GetAllObjectData(this Type type, object source)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            if (source == null)
+                return Empty.Dictionary<string, object>();
+
+            return type
+                .GetConstantValues()
+                .Concat(type.GetFieldsValues(source))
+                .Concat(type.GetPropertiesValues(source))
+                .ToDictionary(x => x.Key, x => x.Value);
         }
 
         /// <summary>

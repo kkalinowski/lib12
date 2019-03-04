@@ -73,6 +73,19 @@ namespace lib12.Tests.Reflection
             }
         }
 
+        private class ComplexType
+        {
+            public const int Const = 20;
+            private int _number;
+            public string Text { get; set; }
+
+            public ComplexType(int number, string text)
+            {
+                _number = number;
+                Text = text;
+            }
+        }
+
         [Fact]
         public void is_type_numeric_test()
         {
@@ -375,6 +388,21 @@ namespace lib12.Tests.Reflection
             fields.Count.ShouldBe(2);
             fields["_number"].ShouldBe(number);
             fields["_text"].ShouldBe(text);
+        }
+
+        [Fact]
+        public void GetAllObjectData_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new ComplexType(number, text);
+            var type = obj.GetType();
+
+            var data = type.GetAllObjectData(obj);
+            data.Count.ShouldBe(3);
+            data["Const"].ShouldBe(ComplexType.Const);
+            data["_number"].ShouldBe(number);
+            data["Text"].ShouldBe(text);
         }
     }
 }
