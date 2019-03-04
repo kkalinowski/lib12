@@ -221,6 +221,32 @@ namespace lib12.Reflection
         }
 
         /// <summary>
+        /// Gets all properties values from type. Returns dictionary in the form of property name - value. If source object is null returns empty dictionary
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to get properties values from</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Source type is null</exception>
+        public static Dictionary<string, object> GetPropertiesValues(this Type type, object source)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            if (source == null)
+                return new Dictionary<string, object>();
+
+            var props = type.GetProperties();
+            var dict = new Dictionary<string, object>();
+            foreach (var prop in props)
+            {
+                var value = prop.GetValue(source, null);
+                dict.Add(prop.Name, value);
+            }
+
+            return dict;
+        }
+
+        /// <summary>
         /// Gets the value of field with given name
         /// </summary>
         /// <param name="type">The source type</param>

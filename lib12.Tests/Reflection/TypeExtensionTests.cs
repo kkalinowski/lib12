@@ -286,6 +286,20 @@ namespace lib12.Tests.Reflection
         }
 
         [Fact]
+        public void GetPropertiesValues_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithCtorAndProps(number, text);
+            var type = obj.GetType();
+
+            var props = type.GetPropertiesValues(obj);
+            props.Count.ShouldBe(2);
+            props[nameof(TypeWithCtorAndProps.Number)].ShouldBe(number);
+            props[nameof(TypeWithCtorAndProps.Text)].ShouldBe(text);
+        }
+
+        [Fact]
         public void SetPropertyByName_is_correct()
         {
             const int number = 12;
