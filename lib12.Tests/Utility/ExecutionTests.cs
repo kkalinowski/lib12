@@ -132,6 +132,23 @@ namespace lib12.Tests.Utility
         }
 
         [Fact]
+        public void Retry_with_func_returns_result_of_successful_call()
+        {
+            var count = 0;
+            var result = Execution.Retry(() =>
+            {
+                count++;
+                if (count == 1)
+                    throw new Exception();
+                else
+                    return count;
+            }, null, 0);
+
+            count.ShouldBe(2);
+            result.ShouldBe(2);
+        }
+
+        [Fact]
         public void Memoize0_is_correct()
         {
             const int result = 123;
