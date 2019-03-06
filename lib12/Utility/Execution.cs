@@ -70,18 +70,21 @@ namespace lib12.Utility
         /// Retry action if it fails. If action cannot succeed throws all encountered exceptions in pack.
         /// </summary>
         /// <param name="action">The action to benchmark</param>
+        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
         /// <param name="retryInterval">The interval between another action call</param>
         /// <param name="maxAttempts">The maximum number of attempts to call function</param>
         /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="ArgumentException">maxAttempts</exception>
         /// <exception cref="ArgumentException">retryInterval</exception>
         /// <exception cref="AggregateException">All aggregated exceptions if all attempts to call function fail</exception>
-        public static void Retry(Action action, int retryInterval = 5000, int maxAttempts = 3)
+        public static void Retry(Action action, Action<Exception, int> onError = null, int retryInterval = 5000, int maxAttempts = 3)
         {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
+
             if (maxAttempts < 1)
                 throw new ArgumentException("Must be at least one attempt to call action", nameof(maxAttempts));
+
             if (retryInterval < 0)
                 throw new ArgumentException("Interval between attempts must be non negative", nameof(retryInterval));
 
@@ -96,6 +99,9 @@ namespace lib12.Utility
                 }
                 catch (Exception ex)
                 {
+                    if (onError != null)
+                        onError(ex, tryNumber);
+
                     exceptions.Add(ex);
 
                     tryNumber++;

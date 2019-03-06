@@ -75,6 +75,27 @@ namespace lib12.Tests.Utility
         }
 
         [Fact]
+        public void Retry_calls_onError_action()
+        {
+            var count = 0;
+            var exception = new Exception("test-exception");
+
+            Execution.Retry(() =>
+            {
+                count++;
+                if (count == 1)
+                    throw exception;
+            },
+            (ex, i) =>
+            {
+                ex.ShouldBe(exception);
+                i.ShouldBe(1);
+            }, 0, 2);
+
+            count.ShouldBe(2);
+        }
+
+        [Fact]
         public void Retry_when_second_attempt_is_correct()
         {
             var count = 0;
@@ -83,7 +104,7 @@ namespace lib12.Tests.Utility
                 count++;
                 if (count == 1)
                     throw new Exception();
-            }, 0);
+            }, null, 0);
 
             count.ShouldBe(2);
         }
@@ -100,7 +121,7 @@ namespace lib12.Tests.Utility
                 {
                     count++;
                     throw new Exception();
-                }, 0, attemptsCount);
+                }, null, 0, attemptsCount);
             }
             catch (AggregateException ex)
             {
