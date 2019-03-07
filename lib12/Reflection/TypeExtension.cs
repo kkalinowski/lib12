@@ -111,6 +111,7 @@ namespace lib12.Reflection
         /// Gets the attribute decorating given type
         /// </summary>
         /// <param name="type">The type to check</param>
+        /// <typeparam name="T">Type of attribute</typeparam>
         /// <returns></returns>
         public static T GetAttribute<T>(this Type type) where T : Attribute
         {

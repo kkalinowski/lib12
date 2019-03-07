@@ -13,6 +13,7 @@ namespace lib12.Reflection
         /// Gets the attribute decorating given member
         /// </summary>
         /// <param name="member">The member to check</param>
+        /// <typeparam name="T">Type of attribute</typeparam>
         /// <returns></returns>
         public static T GetAttribute<T>(this MemberInfo member) where T : Attribute
         {
