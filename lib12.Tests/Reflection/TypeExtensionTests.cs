@@ -86,6 +86,18 @@ namespace lib12.Tests.Reflection
             }
         }
 
+        private class TypeWithMethod
+        {
+            public int Add(int a, int b)
+            {
+                return a + b;
+            }
+
+            public void Empty()
+            {
+            }
+        }
+
         [Fact]
         public void is_type_numeric_test()
         {
@@ -403,6 +415,31 @@ namespace lib12.Tests.Reflection
             data["Const"].ShouldBe(ComplexType.Const);
             data["_number"].ShouldBe(number);
             data["Text"].ShouldBe(text);
+        }
+
+        [Fact]
+        public void CallMethodByName_is_correct_for_method_with_result()
+        {
+            const int number1 = 5;
+            const int number2 = 7;
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+
+            var result = type.CallMethodByName(obj, nameof(TypeWithMethod.Add), number1, number2);
+
+            result.ShouldBeOfType<int>();
+            ((int)result).ShouldBe(12);
+        }
+
+        [Fact]
+        public void CallMethodByName_is_correct_for_method_without_result()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+
+            var result = type.CallMethodByName(obj, nameof(TypeWithMethod.Empty));
+
+            result.ShouldBe(null);
         }
     }
 }
