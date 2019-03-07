@@ -101,6 +101,11 @@ namespace lib12.Tests.Reflection
             {
                 return 12;
             }
+
+            public T GenericCast<T>(object toCast)
+            {
+                return (T)toCast;
+            }
         }
 
         [Fact]
@@ -457,6 +462,16 @@ namespace lib12.Tests.Reflection
 
             result.ShouldBeOfType<int>();
             result.ShouldBe(12);
+        }
+
+        [Fact]
+        public void CallMethodByName_throws_exception_for_generic_method()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+            const string text = "test";
+
+            Assert.Throws<InvalidOperationException>(() => type.CallMethodByName(obj, nameof(TypeWithMethod.GenericCast), text));
         }
     }
 }
