@@ -96,6 +96,11 @@ namespace lib12.Tests.Reflection
             public void Empty()
             {
             }
+
+            private static int PrivateStatic()
+            {
+                return 12;
+            }
         }
 
         [Fact]
@@ -428,7 +433,7 @@ namespace lib12.Tests.Reflection
             var result = type.CallMethodByName(obj, nameof(TypeWithMethod.Add), number1, number2);
 
             result.ShouldBeOfType<int>();
-            ((int)result).ShouldBe(12);
+            result.ShouldBe(12);
         }
 
         [Fact]
@@ -440,6 +445,18 @@ namespace lib12.Tests.Reflection
             var result = type.CallMethodByName(obj, nameof(TypeWithMethod.Empty));
 
             result.ShouldBe(null);
+        }
+
+        [Fact]
+        public void CallMethodByName_is_correct_for_private_static_method()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+
+            var result = type.CallMethodByName(obj, "PrivateStatic");
+
+            result.ShouldBeOfType<int>();
+            result.ShouldBe(12);
         }
     }
 }

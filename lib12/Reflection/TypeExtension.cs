@@ -466,7 +466,7 @@ namespace lib12.Reflection
             if (methodName.IsNullOrEmpty())
                 throw new ArgumentNullException(nameof(methodName));
 
-            var method = type.GetMethod(methodName);
+            var method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
             if (method == null)
                 throw new lib12Exception($"Type {type.Name} don't have method named {methodName}");
 
