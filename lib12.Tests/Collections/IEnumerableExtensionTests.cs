@@ -70,7 +70,10 @@ namespace lib12.Tests.Collections
         public void recover_on_not_null_collection()
         {
             var list = new List<int> { 3, 4, 12 };
-            list.Recover().Count().ShouldBe(3);
+            var result = list.Recover();
+
+            result.ShouldBeSameAs(list);
+            result.Count().ShouldBe(3);
         }
 
         [Fact]

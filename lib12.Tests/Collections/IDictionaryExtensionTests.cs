@@ -76,7 +76,7 @@ namespace lib12.Tests.Collections
                 {3, "third"}
             };
 
-            dict.Recover().ShouldBe(dict);
+            dict.Recover().ShouldBeSameAs(dict);
         }
 
         [Fact]

@@ -44,10 +44,7 @@ namespace lib12.Collections
         /// <returns></returns>
         public static IDictionary<TKey, TValue> Recover<TKey, TValue>(this IDictionary<TKey, TValue> dict)
         {
-            if (dict == null)
-                return Empty.Dictionary<TKey, TValue>();
-
-            return new ReadOnlyDictionary<TKey, TValue>(dict);
+            return dict ?? Empty.Dictionary<TKey, TValue>();
         }
 
         /// <summary>
