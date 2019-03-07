@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shouldly;
 using Xunit;
 using lib12.Collections;
@@ -76,6 +77,54 @@ namespace lib12.Tests.Collections
             };
 
             dict.Recover().ShouldBe(dict);
+        }
+
+        [Fact]
+        public void Concat_is_correct()
+        {
+            var dict = new Dictionary<int, string>
+            {
+                {1, "first"},
+                {2, "second"},
+                {3, "third"}
+            };
+
+            var secondDict = new Dictionary<int, string>
+            {
+                {4, "fourth"},
+                {5, "fifth"}
+            };
+
+            var result = dict.Concat(secondDict);
+
+            result.ShouldNotBeEmpty();
+            result.Count.ShouldBe(5);
+            result[3].ShouldBe("third");
+            result[5].ShouldBe("fifth");
+        }
+
+        [Fact]
+        public void Concat_works_for_nulls()
+        {
+            ((Dictionary<int, string>)null)
+                .Concat((Dictionary<int, string>)null)
+                .ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void Concat_throws_exception_when_encountering_duplicates()
+        {
+            var dict = new Dictionary<int, string>
+            {
+                {1, "first"},
+            };
+
+            var secondDict = new Dictionary<int, string>
+            {
+                {1, "first"},
+            };
+
+            Assert.Throws<ArgumentException>(() => dict.Concat(secondDict));
         }
     }
 }

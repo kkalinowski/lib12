@@ -384,8 +384,7 @@ namespace lib12.Reflection
             return type
                 .GetConstantValues()
                 .Concat(type.GetFieldsValues(source))
-                .Concat(type.GetPropertiesValues(source))
-                .ToDictionary(x => x.Key, x => x.Value);
+                .Concat(type.GetPropertiesValues(source));
         }
 
         /// <summary>
