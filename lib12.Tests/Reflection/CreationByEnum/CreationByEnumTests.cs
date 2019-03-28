@@ -4,7 +4,7 @@ using lib12.Reflection.CreationByEnum;
 using Shouldly;
 using Xunit;
 
-namespace lib12.Tests.Reflection.CreateTypeFromEnumTests
+namespace lib12.Tests.Reflection.CreationByEnum
 {
     public sealed class CreationByEnumTests
     {
