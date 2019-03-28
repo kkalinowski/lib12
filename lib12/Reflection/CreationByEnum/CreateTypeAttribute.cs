@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lib12.Reflection
+namespace lib12.Reflection.CreationByEnum
 {
     /// <summary>
     /// Describes which type is associated with enum

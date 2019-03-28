@@ -1,11 +1,12 @@
 ﻿using System;
 using lib12.Reflection;
+using lib12.Reflection.CreationByEnum;
 using Shouldly;
 using Xunit;
 
 namespace lib12.Tests.Reflection.CreateTypeFromEnumTests
 {
-    public sealed class EnumLogicTests
+    public sealed class CreationByEnumTests
     {
         public enum SampleEnum
         {
