@@ -10,14 +10,16 @@ Current version available on nuget - https://www.nuget.org/packages/lib12
 My blog describing how I work on library and its content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
 
 ## Table of Contents
-1. [Fluent SQL query builder](#fluent-sql-query-builder)
-2. [Dummy and random data](#dummy-and-random-data)
-3. [Mathematical functions](#mathematical-functions)
-4. [Collections](#collections)
-5. [Checking utilities](#checking-utilities)
-6. [Extensions methods](#extensions-methods)
-7. [Reflection](#reflection)
-8. [Utilities](#utilities)
+1. [Data](#data)
+	1. [Fluent SQL query builder](#fluent-sql-query-builder)
+	2. [Dummy and random data](#dummy-and-random-data)
+	3. [XML extensions](#xml-extensions)
+2. [Mathematical functions](#mathematical-functions)
+3. [Collections](#collections)
+4. [Reflection](#reflection)
+5. [Extensions methods](#extensions-methods)
+6. [Utilities](#utilities)
+7. [Checking utilities](#checking-utilities)
 
 Fluent SQL query builder 
 --------------------
@@ -94,7 +96,7 @@ var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 ```
 __lib12.Data.Random__ contains also methods from System.Random class and additional methods for generating bool, char, string, enums and DateTime in one easy to use static __Rand__ class. Also __FakeData__ class contains preprogramed set of names, companies, geodata to quickly generate useful data for your application tests.
 
-lib12.Data.Xml
+XML extensions
 ---
 Contains extensions methods for Xml classes to create xmls in fluent way. 
 
@@ -125,11 +127,11 @@ Namespace - lib12.Collections
 - lib12.Collections.Paging - contains extension methods GetPage, GetNumberOfPages and GetPageItems to simplify working with paging
 - lib12.Collections namespace contains also extensions for ICollection, IDictionary and array
 
-Checking utilities
+Reflection
 ---
-Namespace - lib12.Checking
+Namespace - lib12.Reflection
 
-Contains __Check__ class to quickly simplify null checking on set objects like __Check.AllAreNull__ or __Check.AnyIsNull__. This namespace also contains extensions for equality check against set of objects like __object.IsAnyOf(object1, object2, object3)__
+Set of extensions to easier work with Reflection
 
 Extensions methods
 ---
@@ -141,12 +143,6 @@ Namespace - lib12.Extensions
 - Exception - __GetInnerExceptions__ and __GetMostInnerException__
 - Func
 
-Reflection
----
-Namespace - lib12.Reflection
-
-Set of extensions to easier work with Reflection
-
 Utilities
 ---
 - lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ that implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer class
@@ -155,3 +151,9 @@ Utilities
 - lib12.Utility.IoHelper - additional methods for IO
 - lib12.Utility.Logger - simple logger, that doesn't need additional configuration
 - lib12.Utility.UnknownEnumException - exception to better interpret  missing case for enum
+
+Checking utilities
+---
+Namespace - lib12.Checking
+
+Contains __Check__ class to quickly simplify null checking on set objects like __Check.AllAreNull__ or __Check.AnyIsNull__. This namespace also contains extensions for equality check against set of objects like __object.IsAnyOf(object1, object2, object3)__
