@@ -6,7 +6,8 @@
 lib12 is set of useful classes and extension created for .NET framework. During my work with .NET framework I created many classes and function that can be reused across different projects. lib12 is using .NET Standard 2.0
 
 Current version available on nuget - https://www.nuget.org/packages/lib12
-My blog describing library setup and content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
+
+My blog describing how I work on library and its content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
 
 ## Table of Contents
 1. [Fluent SQL query builder](#fluent-sql-query-builder)
@@ -148,7 +149,7 @@ Set of extensions to easier work with Reflection
 
 Utilities
 ---
-- lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ can implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer
+- lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ that implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer class
 - lib12.Utility.Execution - utilities to work with function calls - __Repeat__, __Benchmark__, __Retry__ and __Memoize__
 - lib12.Utility.Range - generic class for dealing with ranges
 - lib12.Utility.IoHelper - additional methods for IO
