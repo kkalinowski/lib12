@@ -123,11 +123,13 @@ Collections
 ---
 Namespace - lib12.Collections
 - IEnumerableExtension contains methods that easier working with standard collections like Foreach, IsNullOrEmpty, Recover (which acts as null pattern object simplifying null checking), ToDelimitedString, IntersectBy, MaxBy, LeftJoin, etc.
+- lib12.Collections.ICollectionExtension - AddRange, RemoveRange, RemoveBy
+- lib12.Collections.IDictionaryExtension - GetValueOrDefault, Recover, Concat and ToReadOnlyDictionary
+- lib12.Collections.ArrayExtension - methods to Flatten multi dimensional arrays
 - lib12.Collections.CollectionFactory - creates collections in functional way
 - lib12.Collections.Empty - creates empty collections using fluent syntax
 - lib12.Collections.Packing - contains class __Pack__ to quickly pack set of loose objects into collection and extension methods for single object to do that
 - lib12.Collections.Paging - contains extension methods GetPage, GetNumberOfPages and GetPageItems to simplify working with paging
-- lib12.Collections namespace contains also extensions for ICollection, IDictionary and array
 
 Reflection
 ---
@@ -182,7 +184,7 @@ Namespace - lib12.Extensions
 - DateTime - allows to manipulate weeks and quarter, get start and end of week and month, get persons age or check date (__IsWorkday, IsWeekend, IsInPast, IsInFuture__)
 - Nullable bool - quick checks remove redundant code like __IsTrue__ or __IsNullOrFalse__
 - Exception - __GetInnerExceptions__ and __GetMostInnerException__
-- Func
+- Func - method to convert function to non generic version
 
 Utilities
 ---
