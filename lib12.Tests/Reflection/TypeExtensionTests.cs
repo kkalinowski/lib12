@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using lib12.Collections.Packing;
 using lib12.Reflection;
 using Shouldly;
 using Xunit;
@@ -471,7 +472,28 @@ namespace lib12.Tests.Reflection
             var type = obj.GetType();
             const string text = "test";
 
-            Assert.Throws<InvalidOperationException>(() => type.CallMethodByName(obj, nameof(TypeWithMethod.GenericCast), text));
+            Assert.Throws<lib12Exception>(() => type.CallMethodByName(obj, nameof(TypeWithMethod.GenericCast), text));
+        }
+
+        [Fact]
+        public void CallGenericMethodByName_is_correct()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+            const string text = "test";
+
+            type.CallGenericMethodByName(obj, nameof(TypeWithMethod.GenericCast), typeof(string).PackIntoArray(), text);
+        }
+
+        [Fact]
+        public void CallGenericMethodByName_throws_exception_when_incorrect_number_of_type_arguments_is_provided()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+            const string text = "test";
+
+            var typeArgs = Pack.IntoArray(typeof(string), typeof(int));
+            Assert.Throws<ArgumentException>(() => type.CallGenericMethodByName(obj, nameof(TypeWithMethod.GenericCast), typeArgs, text));
         }
     }
 }

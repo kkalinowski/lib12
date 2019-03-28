@@ -457,7 +457,7 @@ namespace lib12.Reflection
         /// <param name="args">List of arguments to pass to method</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Provided method name and source object cannot be null or empty</exception>
-        /// <exception cref="lib12Exception"></exception>
+        /// <exception cref="lib12Exception">Provided type doesn't have the method with given name or trying to call generic method</exception>
         public static object CallMethodByName(this Type type, object source, string methodName, params object[] args)
         {
             if (source == null)
@@ -470,7 +470,39 @@ namespace lib12.Reflection
             if (method == null)
                 throw new lib12Exception($"Type {type.Name} don't have method named {methodName}");
 
+            if(method.IsGenericMethod)
+                throw new lib12Exception($"Method {methodName} is generic. Use CallGenericMethodByName instead. You'll have to provide type parameter");
+
             return method.Invoke(source, args);
+        }
+
+        /// <summary>
+        /// Calls the generic method with given name
+        /// </summary>
+        /// <param name="type">The source type</param>
+        /// <param name="source">The source object to call method on</param>
+        /// <param name="methodName">Name of the method to call</param>
+        /// <param name="args">List of arguments to pass to method</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Provided method name and source object cannot be null or empty</exception>
+        /// <exception cref="lib12Exception"></exception>
+        public static object CallGenericMethodByName(this Type type, object source, string methodName, Type[] typeArgs,  params object[] args)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (methodName.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(methodName));
+
+            if (typeArgs.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(typeArgs));
+
+            var method = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            if (method == null)
+                throw new lib12Exception($"Type {type.Name} don't have method named {methodName}");
+
+            var genericMethod = method.MakeGenericMethod(typeArgs);
+            return genericMethod.Invoke(source, args);
         }
     }
 }
