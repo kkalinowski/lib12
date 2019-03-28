@@ -162,7 +162,7 @@ namespace lib12.Reflection
         /// <returns></returns>
         /// <exception cref="ArgumentException">Provided property name cannot be null or empty</exception>
         /// <exception cref="lib12Exception"></exception>
-        [Obsolete("Renamed to GetPropertyValueByName")]
+        [Obsolete("Use GetPropertyValueByName instead")]
         public static object GetPropertyValue(this Type type, object source, string propertyName)
         {
             if (propertyName.IsNullOrEmpty())
