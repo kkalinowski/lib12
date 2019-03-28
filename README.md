@@ -151,29 +151,29 @@ Namespace - lib12.Reflection.CreationByEnum
 This unique mechanism allows you to create whole objects based on current data state. It could be useful to i.e. create strategies to handle data based on single value:
 
 ```csharp
-        public enum OrderState
-        {
-            [CreateType(typeof(SendNotificationStrategy))]
-            Created,
-            [CreateType(typeof(CreatePaymentStrategy))]
-            Ordered,
-	    [CreateType(typeof(AlterInventoryStrategy))]
-            Payed,
-	    [CreateType(typeof(AddToReportStrategy))]
-            Archived,
-        }
-	
-	public class Order
-        {
-            //...
-	    public OrderStatus Status {get; set;}
-	    //...
-        }
-	
-	//...
-	
-	var strategy = order.Status.CreateType<IStrategy>();
-	strategy.Execute();
+public enum OrderState
+{
+    [CreateType(typeof(SendNotificationStrategy))]
+    Created,
+    [CreateType(typeof(CreatePaymentStrategy))]
+    Ordered,
+    [CreateType(typeof(AlterInventoryStrategy))]
+    Payed,
+    [CreateType(typeof(AddToReportStrategy))]
+    Archived,
+}
+
+public class Order
+{
+    //...
+    public OrderStatus Status { get; set; }
+    //...
+}
+
+//...
+
+var strategy = order.Status.CreateType<IStrategy>();
+strategy.Execute();
 ```
 
 Extensions methods
