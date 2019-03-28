@@ -17,6 +17,8 @@ My blog describing how I work on library and its content - https://kkalinowski.n
 2. [Mathematical functions](#mathematical-functions)
 3. [Collections](#collections)
 4. [Reflection](#reflection)
+	1. [Extensions](#extensions)
+	2. [Creation by enum](#creation-by-enum)
 5. [Extensions methods](#extensions-methods)
 6. [Utilities](#utilities)
 7. [Checking utilities](#checking-utilities)
@@ -129,9 +131,48 @@ Namespace - lib12.Collections
 
 Reflection
 ---
+
+Extensions
+---
 Namespace - lib12.Reflection
 
-Set of extensions to easier work with Reflection
+Reflection namespace contains a lot of useful extension methods that make working with .NET reflection mechanism easier and more straightforward:
+- easier work with attributes - all reflection entities like __Type__, __FieldInfo__, __PropertyInfo__, etc. and also __enum__ fields contains method __GetAttribute<>__ for retrieving decorating attribute and also __IsMarkedWithAttribute<>__ to check if entity is decorated with given attribute
+- checking properties of constructs - with methods like __IsStatic__, __IsNullable__, __IsNumber__, __IsImplementingInterface__ and more you can quickly check more advance properties of types, fields and properties
+- accessing object data through reflection - with methods like __GetConstants__, __GetPropertyValueByName__ or __GetFieldValueValueByName__
+- manipulating objects - creating objects with __CreateInstance<>__, calling methods with __CallMethodByName__ or setting object state with __SetPropertyValueByName__
+
+Creation by enum
+---
+Namespace - lib12.Reflection.CreationByEnum
+
+This unique mechanism allows you to create whole objects based on current data state. It could be useful to i.e. create strategies to handle data based on single value:
+
+```csharp
+        public enum OrderState
+        {
+            [CreateType(typeof(SendNotificationStrategy))]
+            Created,
+            [CreateType(typeof(CreatePaymentStrategy))]
+            Ordered,
+	    [CreateType(typeof(AlterInventoryStrategy))]
+            Payed,
+	    [CreateType(typeof(AddToReportStrategy))]
+            Archived,
+        }
+	
+	public class Order
+        {
+            //...
+	    public OrderStatus Status {get; set;}
+	    //...
+        }
+	
+	//...
+	
+	var strategy = order.Status.CreateType<IStrategy>();
+	strategy.Execute();
+```
 
 Extensions methods
 ---
