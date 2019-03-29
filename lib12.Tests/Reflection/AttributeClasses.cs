@@ -1,4 +1,6 @@
 ﻿using System;
+// ReSharper disable InconsistentNaming
+#pragma warning disable 169
 
 namespace lib12.Tests.Reflection
 {

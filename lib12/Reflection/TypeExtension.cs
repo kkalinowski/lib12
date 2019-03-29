@@ -482,6 +482,7 @@ namespace lib12.Reflection
         /// <param name="type">The source type</param>
         /// <param name="source">The source object to call method on</param>
         /// <param name="methodName">Name of the method to call</param>
+        /// <param name="typeArgs">Generic type arguments for the method</param>
         /// <param name="args">List of arguments to pass to method</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Provided method name and source object cannot be null or empty</exception>
