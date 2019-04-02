@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace lib12.Reflection
@@ -9,21 +10,31 @@ namespace lib12.Reflection
     public static class EnumReflectionExtension
     {
         /// <summary>
-        /// Creates the type from given enum decorated with CreatedTypeAttribute
+        /// Gets the attribute decorating given enum value
         /// </summary>
-        /// <typeparam name="T">Created type</typeparam>
-        /// <param name="enumValue">The enum value to create type from</param>
+        /// <param name="enumValue">The enum value to check</param>
+        /// <typeparam name="T">Type of attribute</typeparam>
         /// <returns></returns>
-        /// <exception cref="lib12Exception">Given enum isn't decorated by CreateTypeAttribute</exception>
-        public static T CreateType<T>(this Enum enumValue)
+        public static T GetAttribute<T>(this Enum enumValue) where T : Attribute
         {
             var type = enumValue.GetType();
-            var fieldInfo = type.GetTypeInfo().GetDeclaredField(enumValue.ToString());
-            var typeToCreate = fieldInfo.GetAttribute<CreateTypeAttribute>();
-            if (typeToCreate == null)
-                throw new lib12Exception("Given enum isn't decorated by CreateTypeAttribute");
+            var fieldInfo = type.GetField(enumValue.ToString());
+            var attribute = fieldInfo.GetCustomAttributes(typeof(T), false).SingleOrDefault();
 
-            return (T)Activator.CreateInstance(typeToCreate.Type);
+            return (T)attribute;
+        }
+
+        /// <summary>
+        /// Checks if enum value is marked with given attribute
+        /// </summary>
+        /// <param name="enumValue">The enum value to check</param>
+        /// <typeparam name="T">Type of attribute</typeparam>
+        /// <returns></returns>
+        public static bool IsMarkedWithAttribute<T>(this Enum enumValue) where T : Attribute
+        {
+            var type = enumValue.GetType();
+            var fieldInfo = type.GetField(enumValue.ToString());
+            return Attribute.IsDefined(fieldInfo, typeof(T));
         }
     }
 }

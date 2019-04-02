@@ -60,7 +60,7 @@ namespace lib12.Data.Random
 
                 var propertyConstrain = constrains.GetValueOrDefault(prop.Name);
                 var value = GeneratePropertyValue(prop.PropertyType, prop.Name, propertyConstrain);
-                item.SetProperty(prop.Name, value);
+                type.SetPropertyValueByName(item, prop.Name, value);
             }
         }
 

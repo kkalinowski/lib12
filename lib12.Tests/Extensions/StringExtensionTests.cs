@@ -18,7 +18,7 @@ namespace lib12.Tests.Extensions
         public void recover_non_empty_string_returns_same_string()
         {
             const string test = "Test string";
-            test.Recover().ShouldBe(test);
+            test.Recover().ShouldBeSameAs(test);
         }
 
         [Theory]

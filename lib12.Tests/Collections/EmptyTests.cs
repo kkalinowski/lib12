@@ -38,5 +38,21 @@ namespace lib12.Tests.Collections
             enumerable.ShouldNotBeNull();
             enumerable.ShouldBeEmpty();
         }
+
+        [Fact]
+        public void empty_read_only_collection_returns_empty_read_only_collection()
+        {
+            var collection = Empty.ReadOnlyCollection<int>();
+            collection.ShouldNotBeNull();
+            collection.ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void empty_read_only_dictionary_returns_empty_read_only_dictionary()
+        {
+            var dictionary = Empty.ReadOnlyDictionary<int, string>();
+            dictionary.ShouldNotBeNull();
+            dictionary.ShouldBeEmpty();
+        }
     }
 }

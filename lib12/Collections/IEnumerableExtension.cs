@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace lib12.Collections
         /// <returns>True if enumerable is empty</returns>
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source)
         {
-            if(source == null)
+            if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
             return !source.Any();
@@ -547,6 +548,41 @@ namespace lib12.Collections
 
             return source
                 .Where(x => x != null);
+        }
+
+        /// <summary>
+        /// Converts given enumerable to ReadOnlyCollection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <param name="source">The source collection</param>
+        /// <returns></returns>
+        public static ReadOnlyCollection<TSource> ToReadOnlyCollection<TSource>(this IEnumerable<TSource> source)
+        {
+            if (source == null)
+                return Empty.ReadOnlyCollection<TSource>();
+
+            return new ReadOnlyCollection<TSource>(source as IList<TSource> ?? source.ToList());
+        }
+
+        /// <summary>
+        /// Converts given enumerable to ReadOnlyCollection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the item.</typeparam>
+        /// <typeparam name="TKey">Resulting dictionary key type</typeparam>
+        /// <typeparam name="TValue">Resulting dictionary value type</typeparam>
+        /// <param name="source">The source collection</param>
+        /// <param name="keySelector">Selector for dictionary key</param>
+        /// <param name="valueSelector">Selector for dictionary value</param>
+        /// <returns></returns>
+        public static ReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionary<TSource, TKey, TValue>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TValue> valueSelector)
+        {
+            if (keySelector == null)
+                throw new ArgumentNullException(nameof(keySelector));
+            if (valueSelector == null)
+                throw new ArgumentNullException(nameof(valueSelector));
+
+            var dict = source.Recover().ToDictionary(keySelector, valueSelector);
+            return new ReadOnlyDictionary<TKey, TValue>(dict);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace lib12.Collections.Packing
 {
@@ -37,6 +38,16 @@ namespace lib12.Collections.Packing
         {
             if (source != null)
                 yield return source;
+        }
+
+        /// <summary>
+        /// Packs given object into read only collection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the object.</typeparam>
+        /// <returns></returns>
+        public static ReadOnlyCollection<TSource> PackIntoReadOnlyCollection<TSource>(this TSource source)
+        {
+            return source != null ? new ReadOnlyCollection<TSource>(source.PackIntoList()) : Empty.ReadOnlyCollection<TSource>();
         }
     }
 }

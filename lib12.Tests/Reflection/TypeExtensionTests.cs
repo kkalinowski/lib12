@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using lib12.Collections.Packing;
 using lib12.Reflection;
 using Shouldly;
 using Xunit;
@@ -10,11 +12,100 @@ namespace lib12.Tests.Reflection
         private static class StaticClass { }
         private class NonStaticClass { }
 
+        private class EmptyType { }
+
+        private class TypeWithCtorAndProps
+        {
+            public int Number { get; set; }
+            public string Text { get; set; }
+
+            public TypeWithCtorAndProps(int number, string text)
+            {
+                Number = number;
+                Text = text;
+            }
+        }
+
         private class TypeWithoutParameterlessConstructor
         {
             public TypeWithoutParameterlessConstructor(int a)
             {
 
+            }
+        }
+
+        private class TypeWithConst
+        {
+            public const string Text = "string_const";
+            private const string PrivateText = "private_string_const";
+        }
+
+        private interface IEmptyInterface
+        {
+
+        }
+
+        private class TypeImplementingInterface : IEmptyInterface
+        {
+
+        }
+
+        private interface IGenericInterface<T>
+        {
+            T Property { get; set; }
+        }
+
+        private class TypeImplementingGenericInterface : IGenericInterface<int>
+        {
+            public int Property { get; set; }
+        }
+
+        private class TypeWithFields
+        {
+            private int _number;
+            public int Number => _number;
+
+            public string _text;
+
+            public TypeWithFields(int number, string text)
+            {
+                _number = number;
+                _text = text;
+            }
+        }
+
+        private class ComplexType
+        {
+            public const int Const = 20;
+            private int _number;
+            public string Text { get; set; }
+
+            public ComplexType(int number, string text)
+            {
+                _number = number;
+                Text = text;
+            }
+        }
+
+        private class TypeWithMethod
+        {
+            public int Add(int a, int b)
+            {
+                return a + b;
+            }
+
+            public void Empty()
+            {
+            }
+
+            private static int PrivateStatic()
+            {
+                return 12;
+            }
+
+            public T GenericCast<T>(object toCast)
+            {
+                return (T)toCast;
             }
         }
 
@@ -74,6 +165,335 @@ namespace lib12.Tests.Reflection
         public void is_static_returns_false_for_non_static_class()
         {
             typeof(NonStaticClass).IsStatic().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void GetConstants_is_correct()
+        {
+            typeof(TypeWithConst).GetConstants().Length.ShouldBe(2);
+        }
+
+        [Fact]
+        public void GetConstants_throws_exception_if_given_null()
+        {
+            Assert.Throws<ArgumentNullException>(() => ((Type)null).GetConstants());
+        }
+
+        [Fact]
+        public void GetConstantValues_is_correct()
+        {
+            var dict = typeof(TypeWithConst).GetConstantValues();
+
+            dict.ShouldNotBeNull();
+            dict.Count.ShouldBe(2);
+            dict["Text"].ShouldBe("string_const");
+            dict["PrivateText"].ShouldBe("private_string_const");
+        }
+
+        [Fact]
+        public void GetConstantValueByName_is_correct()
+        {
+            typeof(TypeWithConst)
+                .GetConstantValueByName("PrivateText")
+                .ShouldBe("private_string_const");
+        }
+
+        [Fact]
+        public void GetConstantValueByName_throws_exception_if_cannot_find_constant()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(TypeWithConst).GetConstantValueByName("not_existing_constant"));
+        }
+
+        [Fact]
+        public void GetAttribute_is_correct()
+        {
+            var attribute = typeof(TypeWithParameterAttribute).GetAttribute<AttributeWithIntParameter>();
+
+            attribute.ShouldNotBeNull();
+            attribute.Parameter.ShouldBe(20);
+        }
+
+        [Fact]
+        public void IsMarkedWithAttribute_is_correct()
+        {
+            typeof(TypeWithoutAttributes)
+                .IsMarkedWithAttribute<AttributeWithoutParameters>()
+                .ShouldBeFalse();
+
+            typeof(TypeWithParameterlessAttribute)
+                .IsMarkedWithAttribute<AttributeWithoutParameters>()
+                .ShouldBeTrue();
+        }
+
+        [Fact]
+        public void CreateInstance_is_correct_for_type_without_constructor()
+        {
+            typeof(EmptyType)
+                .CreateInstance<EmptyType>()
+                .ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void CreateInstance_is_correct_for_type_without_default_constructor()
+        {
+            const int number = 12;
+            const string text = "test_text";
+
+            var result = typeof(TypeWithCtorAndProps)
+                .CreateInstance<TypeWithCtorAndProps>(number, text);
+
+            result.ShouldNotBeNull();
+            result.Number.ShouldBe(number);
+            result.Text.ShouldBe(text);
+        }
+
+        [Fact]
+        public void CreateInstance_throws_exception_on_types_mismatch()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(EmptyType).CreateInstance<TypeWithCtorAndProps>());
+        }
+
+        [Fact]
+        public void CreateInstance_throws_exception_on_ctor_mismatch()
+        {
+            Assert.Throws<MissingMethodException>(() => typeof(TypeWithCtorAndProps).CreateInstance<TypeWithCtorAndProps>(12));
+        }
+
+        [Fact]
+        public void IsImplementingInterface_throws_exception_when_passing_the_same_type()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(IEnumerable).IsImplementingInterface<IEnumerable>());
+        }
+
+        [Fact]
+        public void IsImplementingInterface_throws_exception_when_target_type_is_not_interface()
+        {
+            Assert.Throws<lib12Exception>(() => typeof(IEnumerable).IsImplementingInterface<object>());
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct()
+        {
+            typeof(EmptyType).IsImplementingInterface<IEnumerable>().ShouldBeFalse();
+            typeof(TypeImplementingInterface).IsImplementingInterface<IEmptyInterface>().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct_for_generic_interface()
+        {
+            typeof(EmptyType).IsImplementingInterface<IGenericInterface<int>>().ShouldBeFalse();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface<IGenericInterface<string>>().ShouldBeFalse();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface<IGenericInterface<int>>().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct_for_explicit_type()
+        {
+            typeof(EmptyType).IsImplementingInterface(typeof(IEnumerable)).ShouldBeFalse();
+            typeof(TypeImplementingInterface).IsImplementingInterface(typeof(IEmptyInterface)).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void IsImplementingInterface_is_correct_for_generic_interface_and_explicit_type()
+        {
+            typeof(EmptyType).IsImplementingInterface(typeof(IGenericInterface<>)).ShouldBeFalse();
+            typeof(EmptyType).IsImplementingInterface(typeof(IGenericInterface<int>)).ShouldBeFalse();
+
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<>)).ShouldBeTrue();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<string>)).ShouldBeFalse();
+            typeof(TypeImplementingGenericInterface).IsImplementingInterface(typeof(IGenericInterface<int>)).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void GetPropertyByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithCtorAndProps(number, text);
+            var type = obj.GetType();
+
+            type
+                .GetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Number))
+                .ShouldBe(number);
+
+            type
+                .GetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Text))
+                .ShouldBe(text);
+        }
+
+        [Fact]
+        public void GetPropertiesValues_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithCtorAndProps(number, text);
+            var type = obj.GetType();
+
+            var props = type.GetPropertiesValues(obj);
+            props.Count.ShouldBe(2);
+            props[nameof(TypeWithCtorAndProps.Number)].ShouldBe(number);
+            props[nameof(TypeWithCtorAndProps.Text)].ShouldBe(text);
+        }
+
+        [Fact]
+        public void SetPropertyByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithCtorAndProps(number, text);
+            var type = obj.GetType();
+
+            type.SetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Number), number * 2);
+            type.SetPropertyValueByName(obj, nameof(TypeWithCtorAndProps.Text), text + text);
+
+            obj.Number.ShouldBe(24);
+            obj.Text.ShouldBe("test_texttest_text");
+        }
+
+        [Fact]
+        public void GetFieldByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithFields(number, text);
+            var type = obj.GetType();
+
+            type
+                .GetFieldValueByName(obj, "_number")
+                .ShouldBe(number);
+            type
+                .GetFieldValueByName(obj, "_text")
+                .ShouldBe(text);
+        }
+
+        [Fact]
+        public void GetFieldByName_cant_get_constant_value()
+        {
+            var obj = new TypeWithConst();
+            var type = obj.GetType();
+
+            Assert.Throws<lib12Exception>(() => type.GetFieldValueByName(obj, nameof(TypeWithConst.Text)));
+        }
+
+        [Fact]
+        public void SetFieldByName_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithFields(number, text);
+            var type = obj.GetType();
+
+            type.SetFieldValueByName(obj, "_number", number * 2);
+            type.SetFieldValueByName(obj, "_text", text + text);
+
+            obj.Number.ShouldBe(24);
+            obj._text.ShouldBe("test_texttest_text");
+        }
+
+        [Fact]
+        public void SetFieldByName_cant_set_constant_value()
+        {
+            var obj = new TypeWithConst();
+            var type = obj.GetType();
+
+            Assert.Throws<lib12Exception>(() => type.SetFieldValueByName(obj, nameof(TypeWithConst.Text), "test"));
+        }
+
+        [Fact]
+        public void GetFieldsValues_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new TypeWithFields(number, text);
+            var type = obj.GetType();
+
+            var fields = type.GetFieldsValues(obj);
+            fields.Count.ShouldBe(2);
+            fields["_number"].ShouldBe(number);
+            fields["_text"].ShouldBe(text);
+        }
+
+        [Fact]
+        public void GetAllObjectData_is_correct()
+        {
+            const int number = 12;
+            const string text = "test_text";
+            var obj = new ComplexType(number, text);
+            var type = obj.GetType();
+
+            var data = type.GetAllObjectData(obj);
+            data.Count.ShouldBe(3);
+            data["Const"].ShouldBe(ComplexType.Const);
+            data["_number"].ShouldBe(number);
+            data["Text"].ShouldBe(text);
+        }
+
+        [Fact]
+        public void CallMethodByName_is_correct_for_method_with_result()
+        {
+            const int number1 = 5;
+            const int number2 = 7;
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+
+            var result = type.CallMethodByName(obj, nameof(TypeWithMethod.Add), number1, number2);
+
+            result.ShouldBeOfType<int>();
+            result.ShouldBe(12);
+        }
+
+        [Fact]
+        public void CallMethodByName_is_correct_for_method_without_result()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+
+            var result = type.CallMethodByName(obj, nameof(TypeWithMethod.Empty));
+
+            result.ShouldBe(null);
+        }
+
+        [Fact]
+        public void CallMethodByName_is_correct_for_private_static_method()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+
+            var result = type.CallMethodByName(obj, "PrivateStatic");
+
+            result.ShouldBeOfType<int>();
+            result.ShouldBe(12);
+        }
+
+        [Fact]
+        public void CallMethodByName_throws_exception_for_generic_method()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+            const string text = "test";
+
+            Assert.Throws<lib12Exception>(() => type.CallMethodByName(obj, nameof(TypeWithMethod.GenericCast), text));
+        }
+
+        [Fact]
+        public void CallGenericMethodByName_is_correct()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+            const string text = "test";
+
+            type.CallGenericMethodByName(obj, nameof(TypeWithMethod.GenericCast), typeof(string).PackIntoArray(), text);
+        }
+
+        [Fact]
+        public void CallGenericMethodByName_throws_exception_when_incorrect_number_of_type_arguments_is_provided()
+        {
+            var obj = new TypeWithMethod();
+            var type = obj.GetType();
+            const string text = "test";
+
+            var typeArgs = Pack.IntoArray(typeof(string), typeof(int));
+            Assert.Throws<ArgumentException>(() => type.CallGenericMethodByName(obj, nameof(TypeWithMethod.GenericCast), typeArgs, text));
         }
     }
 }

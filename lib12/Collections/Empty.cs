@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace lib12.Collections
 {
@@ -44,6 +45,27 @@ namespace lib12.Collections
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>()
         {
             return new Dictionary<TKey, TValue>(0);
+        }
+
+        /// <summary>
+        /// Returns read only collection of given type
+        /// </summary>
+        /// <typeparam name="T">Type of collection</typeparam>
+        /// <returns></returns>
+        public static ReadOnlyCollection<T> ReadOnlyCollection<T>()
+        {
+            return new ReadOnlyCollection<T>(Empty.List<T>());
+        }
+
+        /// <summary>
+        /// Returns read only dictionary of given type
+        /// </summary>
+        /// <typeparam name="TKey">Type of key</typeparam>
+        /// <typeparam name="TValue">Type of value</typeparam>
+        /// <returns></returns>
+        public static ReadOnlyDictionary<TKey, TValue> ReadOnlyDictionary<TKey, TValue>()
+        {
+            return new ReadOnlyDictionary<TKey, TValue>(Empty.Dictionary<TKey, TValue>());
         }
     }
 }

@@ -190,5 +190,23 @@ namespace lib12.Extensions
         {
             return source.DayOfWeek.IsAnyOf(DayOfWeek.Saturday, DayOfWeek.Sunday);
         }
+
+        /// <summary>
+        /// Returns yesterday date to given. Time is 00:00
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        public static DateTime GetYesterday(this DateTime source)
+        {
+            return source.AddDays(-1).Date;
+        }
+
+        /// <summary>
+        /// Returns tomorrow date to given. Time is 00:00
+        /// </summary>
+        /// <param name="source">The source datetime</param>
+        public static DateTime GetTomorrow(this DateTime source)
+        {
+            return source.AddDays(1).Date;
+        }
     }
 }

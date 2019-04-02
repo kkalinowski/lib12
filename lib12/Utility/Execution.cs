@@ -30,6 +30,25 @@ namespace lib12.Utility
         }
 
         /// <summary>
+        /// Repeats calls specified amount of times.
+        /// If you pass zero or negative number of calls, action isn't called at all.
+        /// </summary>
+        /// <param name="times">Number of times to call method</param>
+        /// <param name="action">The action to call, accepts number of call</param>
+        /// <exception cref="ArgumentNullException">action</exception>
+        public static void Repeat(int times, Action<int> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            if (times < 1)
+                return;
+
+            for (var i = 0; i < times; i++)
+                action(i);
+        }
+
+        /// <summary>
         /// Benchmarks performance of given action. Returns how long it took in miliseconds.
         /// </summary>
         /// <param name="action">The action to benchmark</param>
@@ -48,21 +67,24 @@ namespace lib12.Utility
         }
 
         /// <summary>
-        /// Retry action if it fails. If action cannot succeed throws all encountered exceptions in pack.
+        /// Retry method call if it fails by throwing exception. If method cannot succeed throws all encountered exceptions in pack.
         /// </summary>
-        /// <param name="action">The action to benchmark</param>
-        /// <param name="retryInterval">The interval between another action call</param>
+        /// <param name="action">The action to call</param>
+        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
+        /// <param name="retryInterval">The interval between another action call in miliseconds</param>
         /// <param name="maxAttempts">The maximum number of attempts to call function</param>
         /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="ArgumentException">maxAttempts</exception>
         /// <exception cref="ArgumentException">retryInterval</exception>
         /// <exception cref="AggregateException">All aggregated exceptions if all attempts to call function fail</exception>
-        public static void Retry(Action action, int retryInterval = 5000, int maxAttempts = 3)
+        public static void Retry(Action action, Action<Exception, int> onError = null, int retryInterval = 5000, int maxAttempts = 3)
         {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
+
             if (maxAttempts < 1)
                 throw new ArgumentException("Must be at least one attempt to call action", nameof(maxAttempts));
+
             if (retryInterval < 0)
                 throw new ArgumentException("Interval between attempts must be non negative", nameof(retryInterval));
 
@@ -77,6 +99,54 @@ namespace lib12.Utility
                 }
                 catch (Exception ex)
                 {
+                    if (onError != null)
+                        onError(ex, tryNumber);
+
+                    exceptions.Add(ex);
+
+                    tryNumber++;
+                    if (tryNumber > maxAttempts)
+                        throw new AggregateException(exceptions);
+                    Thread.Sleep(retryInterval);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Retry method call if it fails by throwing exception. If method cannot succeed throws all encountered exceptions in pack. Returns result of successful method call
+        /// </summary>
+        /// <param name="func">The function to call</param>
+        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
+        /// <param name="retryInterval">The interval between another action call in miliseconds</param>
+        /// <param name="maxAttempts">The maximum number of attempts to call function</param>
+        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentException">maxAttempts</exception>
+        /// <exception cref="ArgumentException">retryInterval</exception>
+        /// <exception cref="AggregateException">All aggregated exceptions if all attempts to call function fail</exception>
+        public static T Retry<T>(Func<T> func, Action<Exception, int> onError = null, int retryInterval = 5000, int maxAttempts = 3)
+        {
+            if (func == null)
+                throw new ArgumentNullException(nameof(func));
+
+            if (maxAttempts < 1)
+                throw new ArgumentException("Must be at least one attempt to call action", nameof(maxAttempts));
+
+            if (retryInterval < 0)
+                throw new ArgumentException("Interval between attempts must be non negative", nameof(retryInterval));
+
+            var tryNumber = 1;
+            var exceptions = new List<Exception>();
+            while (true)
+            {
+                try
+                {
+                    return func();
+                }
+                catch (Exception ex)
+                {
+                    if (onError != null)
+                        onError(ex, tryNumber);
+
                     exceptions.Add(ex);
 
                     tryNumber++;

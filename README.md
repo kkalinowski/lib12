@@ -3,20 +3,29 @@
 [![Build Status](https://travis-ci.org/kkalinowski/lib12.svg?branch=master)](https://travis-ci.org/kkalinowski/lib12)
 [![NuGet Version](https://badge.fury.io/nu/lib12.svg)](https://badge.fury.io/nu/lib12.svg)
 
-lib12 is set of useful classes and extension created for .NET framework. During my work with .NET framework I created many classes and function that can be reused across different projects. lib12 is using .NET Standard 2.0
+The purpose of lib12 is to replace common code present in any .NET project with one NuGet. This is done by extending the standard API in three ways:
+- with extensions methods to standard types like __string.IsNotNullAndNotEmpty__, __string.RemoveDiacritics__, __IEnumerable.LeftJoin__ or __DateTime.GetWeek__
+- by giving developer new constructs like __CollectionFactory__ or __Execution__ classes
+- by adding not standard utilities that could be very useful in specific circumstances like fluent SQL builder or reverse polish notation formula parser
+All of these functionalities are created with a wide array of possible use cases in mind and covered with unit tests
 
 Current version available on nuget - https://www.nuget.org/packages/lib12
-My blog describing library setup and content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
+
+My blog describing how I work on library and its content - https://kkalinowski.net/2018/10/07/lib12-my-helper-library/
 
 ## Table of Contents
-1. [Fluent SQL query builder](#fluent-sql-query-builder)
-2. [Dummy and random data](#dummy-and-random-data)
-3. [Mathematical functions](#mathematical-functions)
-4. [Collections](#collections)
-5. [Checking utilities](#checking-utilities)
-6. [Extensions methods](#extensions-methods)
-7. [Reflection](#reflection)
-8. [Utilities](#utilities)
+1. [Data](#data)
+	1. [Fluent SQL query builder](#fluent-sql-query-builder)
+	2. [Dummy and random data](#dummy-and-random-data)
+	3. [XML extensions](#xml-extensions)
+2. [Mathematical functions](#mathematical-functions)
+3. [Collections](#collections)
+4. [Reflection](#reflection)
+	1. [Extensions](#extensions)
+	2. [Creation by enum](#creation-by-enum)
+5. [Extensions methods](#extensions-methods)
+6. [Utilities](#utilities)
+7. [Checking utilities](#checking-utilities)
 
 Fluent SQL query builder 
 --------------------
@@ -93,7 +102,7 @@ var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 ```
 __lib12.Data.Random__ contains also methods from System.Random class and additional methods for generating bool, char, string, enums and DateTime in one easy to use static __Rand__ class. Also __FakeData__ class contains preprogramed set of names, companies, geodata to quickly generate useful data for your application tests.
 
-lib12.Data.Xml
+XML extensions
 ---
 Contains extensions methods for Xml classes to create xmls in fluent way. 
 
@@ -118,17 +127,58 @@ Collections
 ---
 Namespace - lib12.Collections
 - IEnumerableExtension contains methods that easier working with standard collections like Foreach, IsNullOrEmpty, Recover (which acts as null pattern object simplifying null checking), ToDelimitedString, IntersectBy, MaxBy, LeftJoin, etc.
+- lib12.Collections.ICollectionExtension - AddRange, RemoveRange, RemoveBy
+- lib12.Collections.IDictionaryExtension - GetValueOrDefault, Recover, Concat and ToReadOnlyDictionary
+- lib12.Collections.ArrayExtension - methods to Flatten multi dimensional arrays
 - lib12.Collections.CollectionFactory - creates collections in functional way
 - lib12.Collections.Empty - creates empty collections using fluent syntax
 - lib12.Collections.Packing - contains class __Pack__ to quickly pack set of loose objects into collection and extension methods for single object to do that
 - lib12.Collections.Paging - contains extension methods GetPage, GetNumberOfPages and GetPageItems to simplify working with paging
-- lib12.Collections namespace contains also extensions for ICollection, IDictionary and array
 
-Checking utilities
+Reflection
 ---
-Namespace - lib12.Checking
 
-Contains __Check__ class to quickly simplify null checking on set objects like __Check.AllAreNull__ or __Check.AnyIsNull__. This namespace also contains extensions for equality check against set of objects like __object.IsAnyOf(object1, object2, object3)__
+Extensions
+---
+Namespace - lib12.Reflection
+
+Reflection namespace contains a lot of useful extension methods that make working with .NET reflection mechanism easier and more straightforward:
+- easier work with attributes - all reflection entities like __Type__, __FieldInfo__, __PropertyInfo__, etc. and also __enum__ fields contains method __GetAttribute<>__ for retrieving decorating attribute and also __IsMarkedWithAttribute<>__ to check if entity is decorated with given attribute
+- checking properties of constructs - with methods like __IsStatic__, __IsNullable__, __IsNumber__, __IsImplementingInterface__ and more you can quickly check more advance properties of types, fields and properties
+- accessing object data through reflection - with methods like __GetConstants__, __GetPropertyValueByName__ or __GetFieldValueValueByName__
+- manipulating objects - creating objects with __CreateInstance<>__, calling methods with __CallMethodByName__ or setting object state with __SetPropertyValueByName__
+
+Creation by enum
+---
+Namespace - lib12.Reflection.CreationByEnum
+
+This unique mechanism allows you to create whole objects based on current data state. It could be useful to i.e. create strategies to handle data based on single value:
+
+```csharp
+public enum OrderState
+{
+    [CreateType(typeof(SendNotificationStrategy))]
+    Created,
+    [CreateType(typeof(CreatePaymentStrategy))]
+    Ordered,
+    [CreateType(typeof(AlterInventoryStrategy))]
+    Payed,
+    [CreateType(typeof(AddToReportStrategy))]
+    Archived,
+}
+
+public class Order
+{
+    //...
+    public OrderStatus Status { get; set; }
+    //...
+}
+
+//...
+
+var strategy = order.Status.CreateType<IStrategy>();
+strategy.Execute();
+```
 
 Extensions methods
 ---
@@ -138,19 +188,19 @@ Namespace - lib12.Extensions
 - DateTime - allows to manipulate weeks and quarter, get start and end of week and month, get persons age or check date (__IsWorkday, IsWeekend, IsInPast, IsInFuture__)
 - Nullable bool - quick checks remove redundant code like __IsTrue__ or __IsNullOrFalse__
 - Exception - __GetInnerExceptions__ and __GetMostInnerException__
-- Func
-
-Reflection
----
-Namespace - lib12.Reflection
-
-Set of extensions to easier work with Reflection
+- Func - method to convert function to non generic version
 
 Utilities
 ---
-- lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ can implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer
+- lib12.Utlity.Comparing - contains generic __PropertyOrderComparer__ and __PropertyEqualityComparer__ that implements __IComparer__ and __IEqualityComparer__ respectively so for simple one property checks you don't have to implement whole Comparer class
 - lib12.Utility.Execution - utilities to work with function calls - __Repeat__, __Benchmark__, __Retry__ and __Memoize__
 - lib12.Utility.Range - generic class for dealing with ranges
 - lib12.Utility.IoHelper - additional methods for IO
 - lib12.Utility.Logger - simple logger, that doesn't need additional configuration
 - lib12.Utility.UnknownEnumException - exception to better interpret  missing case for enum
+
+Checking utilities
+---
+Namespace - lib12.Checking
+
+Contains __Check__ class to quickly simplify null checking on set objects like __Check.AllAreNull__ or __Check.AnyIsNull__. This namespace also contains extensions for equality check against set of objects like __object.IsAnyOf(object1, object2, object3)__

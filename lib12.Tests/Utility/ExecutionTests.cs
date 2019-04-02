@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using lib12.Extensions;
 using lib12.Utility;
 using Shouldly;
 using Xunit;
@@ -34,7 +33,22 @@ namespace lib12.Tests.Utility
         [Fact]
         public void Repeat_throws_exception_if_action_is_null()
         {
-            Assert.Throws<ArgumentNullException>(() => Execution.Repeat(12, null));
+            Assert.Throws<ArgumentNullException>(() => Execution.Repeat(12, (Action)null));
+        }
+
+        [Fact]
+        public void Repeat_with_index_is_correct()
+        {
+            var i = 0;
+            const int count = 5;
+
+            Execution.Repeat(count, (index) =>
+            {
+                i.ShouldBe(index);
+                i++;
+            });
+
+            i.ShouldBe(count);
         }
 
         [Fact]
@@ -61,6 +75,27 @@ namespace lib12.Tests.Utility
         }
 
         [Fact]
+        public void Retry_calls_onError_action()
+        {
+            var count = 0;
+            var exception = new Exception("test-exception");
+
+            Execution.Retry(() =>
+            {
+                count++;
+                if (count == 1)
+                    throw exception;
+            },
+            (ex, i) =>
+            {
+                ex.ShouldBe(exception);
+                i.ShouldBe(1);
+            }, 0, 2);
+
+            count.ShouldBe(2);
+        }
+
+        [Fact]
         public void Retry_when_second_attempt_is_correct()
         {
             var count = 0;
@@ -69,7 +104,7 @@ namespace lib12.Tests.Utility
                 count++;
                 if (count == 1)
                     throw new Exception();
-            }, 0);
+            }, null, 0);
 
             count.ShouldBe(2);
         }
@@ -86,7 +121,7 @@ namespace lib12.Tests.Utility
                 {
                     count++;
                     throw new Exception();
-                }, 0, attemptsCount);
+                }, null, 0, attemptsCount);
             }
             catch (AggregateException ex)
             {
@@ -94,6 +129,23 @@ namespace lib12.Tests.Utility
             }
 
             count.ShouldBe(attemptsCount);
+        }
+
+        [Fact]
+        public void Retry_with_func_returns_result_of_successful_call()
+        {
+            var count = 0;
+            var result = Execution.Retry(() =>
+            {
+                count++;
+                if (count == 1)
+                    throw new Exception();
+                else
+                    return count;
+            }, null, 0);
+
+            count.ShouldBe(2);
+            result.ShouldBe(2);
         }
 
         [Fact]

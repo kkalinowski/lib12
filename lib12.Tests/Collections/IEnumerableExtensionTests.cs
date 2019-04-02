@@ -70,7 +70,10 @@ namespace lib12.Tests.Collections
         public void recover_on_not_null_collection()
         {
             var list = new List<int> { 3, 4, 12 };
-            list.Recover().Count().ShouldBe(3);
+            var result = list.Recover();
+
+            result.ShouldBeSameAs(list);
+            result.Count().ShouldBe(3);
         }
 
         [Fact]
@@ -581,6 +584,38 @@ namespace lib12.Tests.Collections
             result.Length.ShouldBe(2);
             result[0].ShouldBe("test1");
             result[1].ShouldBe("test2");
+        }
+
+        [Fact]
+        public void ToReadOnlyCollection_is_correct()
+        {
+            var collection = new[] { "test1", "test2" };
+
+            var result = collection.ToReadOnlyCollection();
+            result.Count.ShouldBe(2);
+            result[0].ShouldBe("test1");
+        }
+
+        [Fact]
+        public void ToReadOnlyCollection_handles_null()
+        {
+            ((List<int>)null).ToReadOnlyCollection().ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void ToReadOnlyDictionary_is_correct()
+        {
+            var collection = new[] { "abc", "test" };
+
+            var result = collection.ToReadOnlyDictionary(x => x.Length, x => x);
+            result.Count.ShouldBe(2);
+            result[3].ShouldBe("abc");
+        }
+
+        [Fact]
+        public void ToReadOnlyDictionary_handles_null()
+        {
+            ((List<int>)null).ToReadOnlyDictionary(x => x, x => x).ShouldBeEmpty();
         }
     }
 }
