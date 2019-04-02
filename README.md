@@ -3,7 +3,11 @@
 [![Build Status](https://travis-ci.org/kkalinowski/lib12.svg?branch=master)](https://travis-ci.org/kkalinowski/lib12)
 [![NuGet Version](https://badge.fury.io/nu/lib12.svg)](https://badge.fury.io/nu/lib12.svg)
 
-lib12 is set of useful classes and extension created for .NET framework. During my work with .NET framework I created many classes and function that can be reused across different projects. lib12 is using .NET Standard 2.0
+The purpose of lib12 is to replace common code present in any .NET project with one NuGet. This is done by extending the standard API in three ways:
+- with extensions methods to standard types like __string.IsNotNullAndNotEmpty__, __string.RemoveDiacritics__, __IEnumerable.LeftJoin__ or __DateTime.GetWeek__
+- by giving developer new constructs like __CollectionFactory__ or __Execution__ classes
+- by adding not standard utilities that could be very useful in specific circumstances like fluent SQL builder or reverse polish notation formula parser
+All of these functionalities are created with a wide array of possible use cases in mind and covered with unit tests
 
 Current version available on nuget - https://www.nuget.org/packages/lib12
 
