@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using lib12.Utility;
 using Newtonsoft.Json.Linq;
 using Console = System.Console;
@@ -11,6 +12,8 @@ namespace lib12.CountryGenerator
     {
         private const string UrlToCountryFile = "https://github.com/mledoze/countries/raw/master/countries.json";
         private const string CountryFilename = "countries.json";
+        private const string CountryRepositoryFilename = @"..\..\..\..\lib12\Data\Geopolitical\CountryRepository.cs";
+        private const string CountryClassText = "         public Country {0} {{ get; }} = new Country {{\r\n            Name = \"{0}\"\r\n        }};";
 
         static void Main(string[] args)
         {
@@ -48,11 +51,19 @@ namespace lib12.CountryGenerator
         private static void ParseCountryData(dynamic countryData)
         {
             Console.WriteLine("Started parsing country data");
+            var countryRepositoryBuilder = new StringBuilder();
+            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public class CountryRepository\r\n    {");
 
             foreach (var country in countryData)
             {
-                Console.WriteLine(country.name);
+                Console.WriteLine($"Saving {country.name.common}");
+                var countryName = country.name.common.ToString().Replace(" ", "");
+                countryRepositoryBuilder.AppendFormat(CountryClassText, countryName);
+                countryRepositoryBuilder.AppendLine();
             }
+
+            countryRepositoryBuilder.Append("     }\r\n}");
+            File.WriteAllText(CountryRepositoryFilename,countryRepositoryBuilder.ToString());
 
             Console.WriteLine("Country data parsed");
         }
