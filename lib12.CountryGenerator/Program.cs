@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using lib12.Utility;
@@ -13,7 +15,7 @@ namespace lib12.CountryGenerator
         private const string UrlToCountryFile = "https://github.com/mledoze/countries/raw/master/countries.json";
         private const string CountryFilename = "countries.json";
         private const string CountryRepositoryFilename = @"..\..\..\..\lib12\Data\Geopolitical\CountryRepository.cs";
-        private const string CountryClassText = "         public Country {0} {{ get; }} = new Country {{\r\n            Name = \"{0}\"\r\n        }};";
+        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country {{\r\n            Name = \"{1}\"\r\n        }};\n";
 
         static void Main(string[] args)
         {
@@ -52,13 +54,13 @@ namespace lib12.CountryGenerator
         {
             Console.WriteLine("Started parsing country data");
             var countryRepositoryBuilder = new StringBuilder();
-            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public class CountryRepository\r\n    {");
+            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public class CountryRepository\r\n    {\n");
 
-            foreach (var country in countryData)
+            foreach (var country in ((IEnumerable)countryData).Cast<dynamic>().OrderBy(x => (string)x.name.common))
             {
                 Console.WriteLine($"Saving {country.name.common}");
-                var countryName = country.name.common.ToString().Replace(" ", "");
-                countryRepositoryBuilder.AppendFormat(CountryClassText, countryName);
+                var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",","").Replace("(", "").Replace(")", "").Replace("-", "");
+                countryRepositoryBuilder.AppendFormat(CountryClassText, countryClassName, country.name.common);
                 countryRepositoryBuilder.AppendLine();
             }
 
