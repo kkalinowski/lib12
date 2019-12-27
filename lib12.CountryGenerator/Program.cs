@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using lib12.Collections;
 using lib12.Utility;
 using Newtonsoft.Json.Linq;
 using Console = System.Console;
@@ -15,7 +18,7 @@ namespace lib12.CountryGenerator
         private const string UrlToCountryFile = "https://github.com/mledoze/countries/raw/master/countries.json";
         private const string CountryFilename = "countries.json";
         private const string CountryRepositoryFilename = @"..\..\..\..\lib12\Data\Geopolitical\CountryRepository.cs";
-        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country (\"{1}\", null, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null);\n";
+        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country (\"{1}\", \"{2}\", {3}, {4}, \"{5}\", \"{6}\", \"{7}\",\"{8}\", \"{9}\", \"{10}\", \"{11}\", \"{12}\", \"{13}\", \"{14}\", \"{15}\", \"{16}\");\n";
 
         static void Main(string[] args)
         {
@@ -73,10 +76,15 @@ namespace lib12.CountryGenerator
 
         private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
         {
-            Console.WriteLine($"Saving {country.name.common}");
+            Console.Write($"Saving {country.name.common}");
+            
             var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "");
-            countryRepositoryBuilder.AppendFormat(CountryClassText, countryClassName, country.name.common);
+            countryRepositoryBuilder.AppendFormat(CultureInfo.InvariantCulture, CountryClassText, countryClassName, country.name.common, country.name.official,
+                country.latlng?[0], country.latlng?[1], ((JArray)country.tld).ElementAtOrDefault(0), ((JArray)country.capital).ElementAtOrDefault(0),
+                country.region, country.subregion, null, country.denomyn, country.flag, country.cca2, country.cca3, country.ccn3, null, null);
             countryRepositoryBuilder.AppendLine();
+            
+            Console.WriteLine(" - saved");
         }
 
         private static void SaveEndOfFile(StringBuilder countryRepositoryBuilder)
