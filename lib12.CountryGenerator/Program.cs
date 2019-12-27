@@ -78,15 +78,18 @@ namespace lib12.CountryGenerator
         private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
         {
             Console.Write($"Saving {country.name.common}");
+            if (country.name.common == "Antarctica")
+                return;
             
             var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "");
             var languages = ((JObject)country.languages).PropertyValues().Select(x=>x.Value<string>()).ToArray();
             var languagesText = ConvertArrayToString(languages);
             var currenciesText = GetCurrenciesAsText(country);
+            var dialingPrefix = country.idd.root + country.idd.suffixes[0];
 
             countryRepositoryBuilder.AppendFormat(CultureInfo.InvariantCulture, CountryClassText, countryClassName, country.name.common, country.name.official,
                 country.latlng?[0], country.latlng?[1], ((JArray)country.tld).ElementAtOrDefault(0), ((JArray)country.capital).ElementAtOrDefault(0),
-                country.region, country.subregion, languagesText, country.denomyn, country.flag, country.cca2, country.cca3, country.ccn3, currenciesText, string.Empty);
+                country.region, country.subregion, languagesText, country.denomyn, country.flag, country.cca2, country.cca3, country.ccn3, currenciesText, dialingPrefix);
             countryRepositoryBuilder.AppendLine();
             
             Console.WriteLine(" - saved");
