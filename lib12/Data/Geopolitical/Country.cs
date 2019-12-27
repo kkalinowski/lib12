@@ -7,7 +7,7 @@ namespace lib12.Data.Geopolitical
     public class Country
     {
         public string Name { get; set; }
-        public string OfficialName { get; }
+        public string OfficialName { get; set; }
         public double Latitude { get; }
         public double Longitude { get; }
         public string TopLevelDomainCode { get; }

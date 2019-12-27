@@ -24,7 +24,7 @@ namespace lib12.CountryGenerator
 
             DownloadCountryFile();
             var countryData = LoadCountryData();
-            ParseCountryData(countryData);
+            ParseAndSaveCountryData(countryData);
 
             Console.WriteLine("lib12 country generator finished working");
         }
@@ -50,24 +50,42 @@ namespace lib12.CountryGenerator
             return countryData;
         }
 
-        private static void ParseCountryData(dynamic countryData)
+        private static void ParseAndSaveCountryData(dynamic countryData)
         {
-            Console.WriteLine("Started parsing country data");
+            Console.WriteLine("Started parsing and saving country data");
             var countryRepositoryBuilder = new StringBuilder();
-            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public class CountryRepository\r\n    {\n");
+            SaveHeaderOfFile(countryRepositoryBuilder);
 
             foreach (var country in ((IEnumerable)countryData).Cast<dynamic>().OrderBy(x => (string)x.name.common))
             {
-                Console.WriteLine($"Saving {country.name.common}");
-                var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",","").Replace("(", "").Replace(")", "").Replace("-", "");
-                countryRepositoryBuilder.AppendFormat(CountryClassText, countryClassName, country.name.common);
-                countryRepositoryBuilder.AppendLine();
+                SaveCountry(country, countryRepositoryBuilder);
             }
 
-            countryRepositoryBuilder.Append("     }\r\n}");
+            SaveEndOfFile(countryRepositoryBuilder);
+            
             File.WriteAllText(CountryRepositoryFilename,countryRepositoryBuilder.ToString());
-
-            Console.WriteLine("Country data parsed");
+            Console.WriteLine("Country data parsed and saved");
         }
+
+        private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
+        {
+
+            Console.WriteLine($"Saving {country.name.common}");
+            var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "");
+            countryRepositoryBuilder.AppendFormat(CountryClassText, countryClassName, country.name.common);
+            countryRepositoryBuilder.AppendLine();
+        }
+
+        private static void SaveHeaderOfFile(StringBuilder countryRepositoryBuilder)
+        {
+            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public class CountryRepository\r\n    {\n");
+        }
+
+        private static void SaveEndOfFile(StringBuilder countryRepositoryBuilder)
+        {
+
+            countryRepositoryBuilder.Append("     }\r\n}");
+        }
+
     }
 }
