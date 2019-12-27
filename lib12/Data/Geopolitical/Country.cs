@@ -21,9 +21,9 @@ namespace lib12.Data.Geopolitical
         public string IsoAlfa3Code { get; }
         public string IsoNumeric { get; }
         public string[] Currencies { get; }
-        public string[] DialingPrefix { get; }
+        public string DialingPrefix { get; }
 
-        public Country(string name, string officialName, double latitude, double longitude, string topLevelDomainCode, string capital, string region, string subregion, string[] languages, string nameOfResidents, string emojiFlag, string isoAlfa2Code, string isoAlfa3Code, string isoNumeric, string[] currencies, string[] dialingPrefix)
+        public Country(string name, string officialName, double latitude, double longitude, string topLevelDomainCode, string capital, string region, string subregion, string[] languages, string nameOfResidents, string emojiFlag, string isoAlfa2Code, string isoAlfa3Code, string isoNumeric, string[] currencies, string dialingPrefix)
         {
             Name = name;
             OfficialName = officialName;
