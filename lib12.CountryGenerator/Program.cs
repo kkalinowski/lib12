@@ -89,7 +89,7 @@ namespace lib12.CountryGenerator
 
             countryRepositoryBuilder.AppendFormat(CultureInfo.InvariantCulture, CountryClassText, countryClassName, country.name.common, country.name.official,
                 country.latlng?[0], country.latlng?[1], ((JArray)country.tld).ElementAtOrDefault(0), ((JArray)country.capital).ElementAtOrDefault(0),
-                country.region, country.subregion, languagesText, country.denomyn, country.flag, country.cca2, country.cca3, country.ccn3, currenciesText, dialingPrefix);
+                country.region, country.subregion, languagesText, country.demonym, country.flag, country.cca2, country.cca3, country.ccn3, currenciesText, dialingPrefix);
             countryRepositoryBuilder.AppendLine();
             
             Console.WriteLine(" - saved");
