@@ -15,12 +15,10 @@ namespace lib12.CountryGenerator
         private const string UrlToCountryFile = "https://github.com/mledoze/countries/raw/master/countries.json";
         private const string CountryFilename = "countries.json";
         private const string CountryRepositoryFilename = @"..\..\..\..\lib12\Data\Geopolitical\CountryRepository.cs";
-        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country {{\r\n            Name = \"{1}\"\r\n        }};\n";
-        private const string CountryClassText2 = "        public Country {0} {{ get; }} = new Country (\"{1}\", null, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null);\n";
+        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country (\"{1}\", null, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null);\n";
 
         static void Main(string[] args)
         {
-
             Console.WriteLine("lib12 country generator started");
 
             DownloadCountryFile();
@@ -75,16 +73,14 @@ namespace lib12.CountryGenerator
 
         private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
         {
-
             Console.WriteLine($"Saving {country.name.common}");
             var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "");
-            countryRepositoryBuilder.AppendFormat(CountryClassText2, countryClassName, country.name.common);
+            countryRepositoryBuilder.AppendFormat(CountryClassText, countryClassName, country.name.common);
             countryRepositoryBuilder.AppendLine();
         }
 
         private static void SaveEndOfFile(StringBuilder countryRepositoryBuilder)
         {
-
             countryRepositoryBuilder.Append("     }\r\n}");
         }
 
