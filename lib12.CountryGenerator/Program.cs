@@ -18,10 +18,11 @@ namespace lib12.CountryGenerator
         private const string UrlToCountryFile = "https://github.com/mledoze/countries/raw/master/countries.json";
         private const string CountryFilename = "countries.json";
         private const string CountryRepositoryFilename = @"..\..\..\..\lib12\Data\Geopolitical\CountryRepository.cs";
-        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country (\"{1}\", \"{2}\", {3}, {4}, \"{5}\", \"{6}\", \"{7}\",\"{8}\", \"{9}\", \"{10}\", \"{11}\", \"{12}\", \"{13}\", \"{14}\", \"{15}\", \"{16}\");\n";
+        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country (\"{1}\", \"{2}\", {3}, {4}, \"{5}\", \"{6}\", \"{7}\",\"{8}\", {9}, \"{10}\", \"{11}\", \"{12}\", \"{13}\", \"{14}\", \"{15}\", \"{16}\");\n";
 
         static void Main(string[] args)
         {
+            Console.WriteLine("lib12 country generator started");
             Console.WriteLine("lib12 country generator started");
 
             DownloadCountryFile();
@@ -79,18 +80,38 @@ namespace lib12.CountryGenerator
             Console.Write($"Saving {country.name.common}");
             
             var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "");
+            var languages = ((JObject)country.languages).PropertyValues().Select(x=>x.Value<string>()).ToArray();
+            var languagesText = ConvertArrayToString(languages);
+            
             countryRepositoryBuilder.AppendFormat(CultureInfo.InvariantCulture, CountryClassText, countryClassName, country.name.common, country.name.official,
                 country.latlng?[0], country.latlng?[1], ((JArray)country.tld).ElementAtOrDefault(0), ((JArray)country.capital).ElementAtOrDefault(0),
-                country.region, country.subregion, null, country.denomyn, country.flag, country.cca2, country.cca3, country.ccn3, null, null);
+                country.region, country.subregion, languagesText, country.denomyn, country.flag, country.cca2, country.cca3, country.ccn3, string.Empty, string.Empty);
             countryRepositoryBuilder.AppendLine();
             
             Console.WriteLine(" - saved");
+        }
+
+        private static string ConvertArrayToString(string[] array)
+        {
+            if (array.IsNullOrEmpty())
+                return "new string[0]";
+            
+            var sbuilder = new StringBuilder();
+            sbuilder.Append("new []{");
+
+            foreach (var text in array)
+            {
+                sbuilder.Append($"\"{text}\", ");
+            }
+
+            sbuilder.Remove(sbuilder.Length - 2, 2);
+            sbuilder.Append("}");
+            return sbuilder.ToString();
         }
 
         private static void SaveEndOfFile(StringBuilder countryRepositoryBuilder)
         {
             countryRepositoryBuilder.Append("     }\r\n}");
         }
-
     }
 }
