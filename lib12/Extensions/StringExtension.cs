@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using lib12.Collections;
 
 namespace lib12.Extensions
 {
@@ -206,6 +208,26 @@ namespace lib12.Extensions
                 return source;
 
             return source[0].ToString().ToUpper() + source.Substring(1);
+        }
+
+        /// <summary>
+        /// Returns a new string in which all occurrences of any string from the given collection
+        /// in the current instance are replaced with another specified string
+        /// </summary>
+        /// <param name="source">The source string</param>
+        /// <param name="toReplace">Collection of string to replace</param>
+        /// <param name="replaceWith">String to replace with</param>
+        /// <returns>New string with replaced characters</returns>
+        /// <exception cref="ArgumentNullException">Thrown if source or replaceWith are null</exception>
+        public static string ReplaceAll(this string source, IEnumerable<string> toReplace, string replaceWith)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if(replaceWith == null)
+                throw new ArgumentNullException(nameof(replaceWith));
+
+            return toReplace.Recover()
+                .Aggregate(source, (modifiedText, textToReplace) => modifiedText.Replace(textToReplace, replaceWith));
         }
     }
 }

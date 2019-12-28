@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using lib12.Collections.Packing;
 using lib12.Extensions;
 using Shouldly;
 using Xunit;
@@ -210,6 +211,37 @@ namespace lib12.Tests.Extensions
         public void capitalize_is_correct(string text, string expectedResult)
         {
             text.Capitalize().ShouldBe(expectedResult);
+        }
+        
+        // [Theory]
+        // [InlineData(null, null, null, nu)]
+        // [InlineData("", "")]
+        // [InlineData("sample text", "Sample text")]
+        // [InlineData("sample Text", "Sample Text")]
+        // [InlineData("Sample Text", "Sample Text")]
+        // public void ReplaceAll_is_correct_for_basic_usages(string text, string replaceWith, string toReplace, string expectedResult)
+        // {
+        //     text.ReplaceAll().ShouldBe(expectedResult);
+        // }
+        
+        [Fact]
+        public void ReplaceAll_handles_nulls()
+        {
+            Assert.Throws<ArgumentNullException>(() => ((string)null).ReplaceAll("toReplace".PackIntoArray(), "replaceWith"));
+            Assert.Throws<ArgumentNullException>(() => "text".ReplaceAll("toReplace".PackIntoArray(), null));
+        }
+        
+        [Fact]
+        public void ReplaceAll_when_passing_empty_collection_with_replace_elements_returns_the_same_string()
+        {
+            "text".ReplaceAll(null,"x").ShouldBe("text");
+        }
+        
+        [Fact]
+        public void ReplaceAll_is_correct_for_valid_arguments()
+        {
+            "text".ReplaceAll("t".PackIntoEnumerable(),"x").ShouldBe("xexx");
+            "longer text".ReplaceAll(Pack.IntoEnumerable(" ", "e"), "_").ShouldBe("long_r_t_xt");
         }
     }
 }
