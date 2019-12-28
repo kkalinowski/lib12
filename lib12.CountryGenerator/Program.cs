@@ -74,7 +74,7 @@ namespace lib12.CountryGenerator
 
         private static void SaveHeaderOfFile(StringBuilder countryRepositoryBuilder)
         {
-            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public static class CountryRepository\r\n    {\n");
+            countryRepositoryBuilder.Append("#pragma warning disable 1591\r\nnamespace lib12.Data.Geopolitical\r\n{\r\n    public static class CountryRepository\r\n    {\n");
         }
 
         private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
