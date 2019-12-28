@@ -20,7 +20,7 @@ namespace lib12.CountryGenerator
         private const string UrlToCountryFile = "https://github.com/mledoze/countries/raw/master/countries.json";
         private const string CountryFilename = "countries.json";
         private const string CountryRepositoryFilename = @"..\..\..\..\lib12\Data\Geopolitical\CountryRepository.cs";
-        private const string CountryClassText = "        public Country {0} {{ get; }} = new Country (\"{1}\", \"{2}\", {3}, {4}, \"{5}\", \"{6}\", \"{7}\",\"{8}\", {9}, \"{10}\", \"{11}\", \"{12}\", \"{13}\", \"{14}\", {15}, \"{16}\");\n";
+        private const string CountryClassText = "        public static Country {0} {{ get; }} = new Country (\"{1}\", \"{2}\", {3}, {4}, \"{5}\", \"{6}\", \"{7}\",\"{8}\", {9}, \"{10}\", \"{11}\", \"{12}\", \"{13}\", \"{14}\", {15}, \"{16}\");\n";
 
         static void Main(string[] args)
         {
@@ -74,7 +74,7 @@ namespace lib12.CountryGenerator
 
         private static void SaveHeaderOfFile(StringBuilder countryRepositoryBuilder)
         {
-            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public class CountryRepository\r\n    {\n");
+            countryRepositoryBuilder.Append("namespace lib12.Data.Geopolitical\r\n{\r\n    public static class CountryRepository\r\n    {\n");
         }
 
         private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
