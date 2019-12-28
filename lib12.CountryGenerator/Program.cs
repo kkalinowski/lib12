@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using lib12.Collections;
+using lib12.Collections.Packing;
+using lib12.Extensions;
 using lib12.Utility;
 using Newtonsoft.Json.Linq;
 using Console = System.Console;
@@ -81,7 +83,7 @@ namespace lib12.CountryGenerator
             if (country.name.common == "Antarctica")
                 return;
             
-            var countryClassName = country.name.common.ToString().Replace(" ", "").Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "");
+            var countryClassName = GetCountryClassName(country.name.common.ToString());
             var languages = ((JObject)country.languages).PropertyValues().Select(x=>x.Value<string>()).ToArray();
             var languagesText = ConvertArrayToString(languages);
             var currenciesText = GetCurrenciesAsText(country);
@@ -93,6 +95,17 @@ namespace lib12.CountryGenerator
             countryRepositoryBuilder.AppendLine();
             
             Console.WriteLine(" - saved");
+        }
+
+        private static dynamic GetCountryClassName(string countryName)
+        {
+            var capitalizedAnd = countryName.Replace(" and ", " And ");
+            var capitalizedOf = capitalizedAnd.Replace(" of ", " Of ");
+            var capitalizedThe = capitalizedOf.Replace(" the ", " The ");
+            var replacedSpecialCharacters = capitalizedThe.ReplaceAll(Pack.IntoEnumerable(" ", "(", ")", "-", ","), string.Empty);
+            var withoutLanguageSpecificCharacters = replacedSpecialCharacters.RemoveDiacritics();
+
+            return withoutLanguageSpecificCharacters;
         }
 
         private static string GetCurrenciesAsText(dynamic country)
