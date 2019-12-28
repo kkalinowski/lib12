@@ -59,13 +59,15 @@ namespace lib12.CountryGenerator
         {
             Console.WriteLine("Started parsing and saving country data");
             var countryRepositoryBuilder = new StringBuilder();
+            var countryClassNames = new List<string>();
             SaveHeaderOfFile(countryRepositoryBuilder);
 
             foreach (var country in ((IEnumerable)countryData).Cast<dynamic>().OrderBy(x => (string)x.name.common))
             {
-                SaveCountry(country, countryRepositoryBuilder);
+                SaveCountry(country, countryRepositoryBuilder, countryClassNames);
             }
 
+            SaveCountryList(countryRepositoryBuilder, countryClassNames);
             SaveEndOfFile(countryRepositoryBuilder);
             
             File.WriteAllText(CountryRepositoryFilename,countryRepositoryBuilder.ToString());
@@ -76,14 +78,31 @@ namespace lib12.CountryGenerator
         {
             countryRepositoryBuilder.Append("#pragma warning disable 1591\r\n\nnamespace lib12.Data.Geopolitical\r\n{\r\n    public static class CountryRepository\r\n    {\n        public static class SingleCountries\r\n        {\n");
         }
+        
+        private static void SaveCountryList(StringBuilder countryRepositoryBuilder, List<string> countryClassNames)
+        {
+            Console.WriteLine("Saving AllCountries property");
+            countryRepositoryBuilder.Append("        }\r\n");
+            countryRepositoryBuilder.Append("        public static Country[] AllCountries = new[] {\r\n");
 
-        private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder)
+            foreach (var countryClassName in countryClassNames)
+            {
+                countryRepositoryBuilder.Append($"            SingleCountries.{countryClassName},\r\n");
+            }
+
+            countryRepositoryBuilder.Append("        };\r\n");
+            Console.WriteLine("AllCountries property saved");
+        }
+
+        private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder, List<string> countryClassNames)
         {
             Console.Write($"Saving {country.name.common}");
             if (country.name.common == "Antarctica")
                 return;
             
             var countryClassName = GetCountryClassName(country.name.common.ToString());
+            countryClassNames.Add(countryClassName);
+            
             var languages = ((JObject)country.languages).PropertyValues().Select(x=>x.Value<string>()).ToArray();
             var languagesText = ConvertArrayToString(languages);
             var currenciesText = GetCurrenciesAsText(country);
@@ -142,8 +161,7 @@ namespace lib12.CountryGenerator
 
         private static void SaveEndOfFile(StringBuilder countryRepositoryBuilder)
         {
-            countryRepositoryBuilder.Remove(countryRepositoryBuilder.Length - 2, 2);
-            countryRepositoryBuilder.Append("        }\r\n    }\r\n}");
+            countryRepositoryBuilder.Append("    }\r\n}");
         }
     }
 }
