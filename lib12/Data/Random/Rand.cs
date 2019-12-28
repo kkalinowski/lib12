@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using lib12.Collections;
+using lib12.Data.Geopolitical;
 
 namespace lib12.Data.Random
 {
@@ -158,7 +159,7 @@ namespace lib12.Data.Random
         /// <returns></returns>
         public static string NextCountry()
         {
-            return FakeData.Countries.GetRandomItem();
+            return CountryRepository.AllCountries.GetRandomItem().Name;
         }
 
         /// <summary>
