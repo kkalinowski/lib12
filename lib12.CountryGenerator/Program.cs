@@ -97,9 +97,12 @@ namespace lib12.CountryGenerator
         private static void SaveCountry(dynamic country, StringBuilder countryRepositoryBuilder, List<string> countryClassNames)
         {
             Console.Write($"Saving {country.name.common}");
-            if (country.name.common == "Antarctica")
+            if (country.independent == "false")
+            {
+                Console.WriteLine($"\nSkipping {country.name.common} as it is not independent country");
                 return;
-            
+            }
+
             var countryClassName = GetCountryClassName(country.name.common.ToString());
             countryClassNames.Add(countryClassName);
             

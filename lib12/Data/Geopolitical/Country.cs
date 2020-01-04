@@ -48,7 +48,7 @@ namespace lib12.Data.Geopolitical
         /// <summary>
         /// Name of country residents
         /// </summary>
-        public string NameOfResidents { get; }
+        //public string NameOfResidents { get; } //removed for a while due to unstable data
         /// <summary>
         /// Unicode, emoji flag
         /// </summary>
@@ -87,7 +87,7 @@ namespace lib12.Data.Geopolitical
             Region = region;
             Subregion = subregion;
             Languages = languages;
-            NameOfResidents = nameOfResidents;
+            //NameOfResidents = nameOfResidents;
             EmojiFlag = emojiFlag;
             IsoAlfa2Code = isoAlfa2Code;
             IsoAlfa3Code = isoAlfa3Code;
