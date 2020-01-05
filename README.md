@@ -17,7 +17,8 @@ My blog describing how I work on library and its content - https://kkalinowski.n
 1. [Data](#data)
 	1. [Fluent SQL query builder](#fluent-sql-query-builder)
 	2. [Dummy and random data](#dummy-and-random-data)
-	3. [XML extensions](#xml-extensions)
+	3. [Geopolitical data](#geopolitical-data)
+	4. [XML extensions](#xml-extensions)
 2. [Mathematical functions](#mathematical-functions)
 3. [Collections](#collections)
 4. [Reflection](#reflection)
@@ -101,6 +102,10 @@ public class ClassToGenerate
 var generated = Rand.NextArrayOf<ClassToGenerate>(CollectionSize);
 ```
 __lib12.Data.Random__ contains also methods from System.Random class and additional methods for generating bool, char, string, enums and DateTime in one easy to use static __Rand__ class. Also __FakeData__ class contains preprogramed set of names, companies, geodata to quickly generate useful data for your application tests.
+
+Geopolitical data
+---
+__lib12.Data.Geopolitical.CountryRepository__ contains list of countries (__AllCountries__ property) and also easily accessible objects (__SingleCountries__ property). Apart from name you can also get information about languages, capital, currencies and more.
 
 XML extensions
 ---
