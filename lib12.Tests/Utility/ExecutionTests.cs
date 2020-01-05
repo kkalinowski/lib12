@@ -81,16 +81,16 @@ namespace lib12.Tests.Utility
             var exception = new Exception("test-exception");
 
             Execution.Retry(() =>
-            {
-                count++;
-                if (count == 1)
-                    throw exception;
-            },
-            (ex, i) =>
-            {
-                ex.ShouldBe(exception);
-                i.ShouldBe(1);
-            }, 0, 2);
+                {
+                    count++;
+                    if (count == 1)
+                        throw exception;
+                }, 0, 2, 
+                (ex, i) =>
+                {
+                    ex.ShouldBe(exception);
+                    i.ShouldBe(1);
+                });
 
             count.ShouldBe(2);
         }
@@ -104,7 +104,7 @@ namespace lib12.Tests.Utility
                 count++;
                 if (count == 1)
                     throw new Exception();
-            }, null, 0);
+            }, 0);
 
             count.ShouldBe(2);
         }
@@ -121,7 +121,7 @@ namespace lib12.Tests.Utility
                 {
                     count++;
                     throw new Exception();
-                }, null, 0, attemptsCount);
+                }, 0, attemptsCount);
             }
             catch (AggregateException ex)
             {
@@ -142,7 +142,7 @@ namespace lib12.Tests.Utility
                     throw new Exception();
                 else
                     return count;
-            }, null, 0);
+            },  0);
 
             count.ShouldBe(2);
             result.ShouldBe(2);

@@ -70,14 +70,14 @@ namespace lib12.Utility
         /// Retry method call if it fails by throwing exception. If method cannot succeed throws all encountered exceptions in pack.
         /// </summary>
         /// <param name="action">The action to call</param>
-        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
         /// <param name="retryInterval">The interval between another action call in miliseconds</param>
         /// <param name="maxAttempts">The maximum number of attempts to call function</param>
+        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
         /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="ArgumentException">maxAttempts</exception>
         /// <exception cref="ArgumentException">retryInterval</exception>
         /// <exception cref="AggregateException">All aggregated exceptions if all attempts to call function fail</exception>
-        public static void Retry(Action action, Action<Exception, int> onError = null, int retryInterval = 5000, int maxAttempts = 3)
+        public static void Retry(Action action, int retryInterval = 5000, int maxAttempts = 3, Action<Exception, int> onError = null)
         {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
@@ -116,14 +116,14 @@ namespace lib12.Utility
         /// Retry method call if it fails by throwing exception. If method cannot succeed throws all encountered exceptions in pack. Returns result of successful method call
         /// </summary>
         /// <param name="func">The function to call</param>
-        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
         /// <param name="retryInterval">The interval between another action call in miliseconds</param>
         /// <param name="maxAttempts">The maximum number of attempts to call function</param>
+        /// <param name="onError">Method calls when exception is thrown. Accepts exception and attempt number (starting at 1)</param>
         /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="ArgumentException">maxAttempts</exception>
         /// <exception cref="ArgumentException">retryInterval</exception>
         /// <exception cref="AggregateException">All aggregated exceptions if all attempts to call function fail</exception>
-        public static T Retry<T>(Func<T> func, Action<Exception, int> onError = null, int retryInterval = 5000, int maxAttempts = 3)
+        public static T Retry<T>(Func<T> func, int retryInterval = 5000, int maxAttempts = 3, Action<Exception, int> onError = null)
         {
             if (func == null)
                 throw new ArgumentNullException(nameof(func));

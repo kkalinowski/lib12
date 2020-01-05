@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
+using lib12.Data.Geopolitical;
 using lib12.Data.Random;
 using Shouldly;
 using Xunit;
@@ -23,7 +24,7 @@ namespace lib12.Tests.Data.Random
         {
             var result = Rand.NextCountry();
             result.ShouldNotBeEmpty();
-            FakeData.Countries.ShouldContain(result);
+            CountryRepository.AllCountries.Any(x=>x.Name==result).ShouldBeTrue();
         }
 
         [Fact]

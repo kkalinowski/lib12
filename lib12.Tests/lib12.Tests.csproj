@@ -8,6 +8,9 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>lib12.ruleset</CodeAnalysisRuleSet>
+    <Authors>Krzysztof Kalinowski</Authors>
+    <Company />
+    <PackageProjectUrl>https://github.com/kkalinowski/lib12</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

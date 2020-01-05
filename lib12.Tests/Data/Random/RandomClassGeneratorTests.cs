@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using lib12.Data.Geopolitical;
 using lib12.Data.Random;
 using Shouldly;
 using Xunit;
@@ -78,7 +79,7 @@ namespace lib12.Tests.Data.Random
                 item.Email.ShouldContain("@");
                 FakeData.Surnames.ShouldContain(item.Surname);
                 item.Address.ShouldNotBeEmpty();
-                FakeData.Countries.ShouldContain(item.Country);
+                CountryRepository.AllCountries.Any(x=>x.Name==item.Country).ShouldBeTrue();
                 FakeData.Companies.ShouldContain(item.Company);
                 item.Info.ShouldNotBeEmpty();
                 item.Created.ShouldNotBe(new DateTime());
